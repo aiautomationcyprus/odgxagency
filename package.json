@@ -4,7 +4,7 @@
   "description": "Astro and Tailwindcss SAAS Theme",
   "author": "Themefisher",
   "license": "UNLICENSED",
-  "packageManager": "yarn@1.22.22",
+  "packageManager": "npm@10.9.8",
   "private": "true",
   "scripts": {
     "dev": "astro dev",
