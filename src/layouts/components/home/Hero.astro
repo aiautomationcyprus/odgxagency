@@ -124,20 +124,20 @@ const { hero } = Astro.props;
 </style>
 
 <script is:inline>
+  var _leadsResizeTimer;
+  var _leadsInitDone = false;
+
   function initLeadsUnderline() {
     var h1 = document.querySelector("section h1");
     if (!h1 || !h1.textContent.includes("Leads")) return;
 
-    // Remove existing SVG if already injected (e.g. on re-navigation)
-    var existing = h1.querySelector("svg[data-pen]");
-    if (existing) existing.remove();
+    // Remove ALL injected SVGs in h1 to prevent duplicates
+    h1.querySelectorAll("svg[data-leads-pen]").forEach(function(s) { s.remove(); });
 
-    // Remove existing span wrapper and unwrap text
+    // Unwrap existing span back to plain text, then re-inject
     var existingSpan = document.getElementById("leads-word");
     if (existingSpan) {
-      existingSpan.replaceWith(existingSpan.textContent);
-      // Reset h1 innerHTML so replace works again
-      h1.innerHTML = h1.innerHTML;
+      existingSpan.outerHTML = existingSpan.textContent;
     }
 
     h1.innerHTML = h1.innerHTML.replace("Leads", '<span id="leads-word">Leads</span>');
@@ -149,6 +149,7 @@ const { hero } = Astro.props;
     var ns = "http://www.w3.org/2000/svg";
     var svg = document.createElementNS(ns, "svg");
     svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("data-leads-pen", "");
     svg.setAttribute("viewBox", "0 0 120 14");
     svg.setAttribute("preserveAspectRatio", "none");
     Object.assign(svg.style, {
@@ -186,20 +187,32 @@ const { hero } = Astro.props;
     positionSvg();
     svg.style.opacity = "1";
 
-    var resizeTimer;
-    window.addEventListener("resize", function () {
-      svg.style.opacity = "0";
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function () {
-        positionSvg();
-        svg.style.opacity = "1";
-      }, 100);
-    });
+    if (!_leadsInitDone) {
+      _leadsInitDone = true;
+      window.addEventListener("resize", function () {
+        var currentSvg = document.querySelector("section h1 svg[data-leads-pen]");
+        var currentSpan = document.getElementById("leads-word");
+        if (!currentSvg || !currentSpan) return;
+        currentSvg.style.opacity = "0";
+        clearTimeout(_leadsResizeTimer);
+        _leadsResizeTimer = setTimeout(function () {
+          var sr = currentSpan.getBoundingClientRect();
+          var hr = currentSpan.closest("h1").getBoundingClientRect();
+          currentSvg.style.left  = (sr.left - hr.left - 20) + "px";
+          currentSvg.style.top   = (sr.bottom - hr.top - 4) + "px";
+          currentSvg.style.width = (sr.width + 40) + "px";
+          currentSvg.style.opacity = "1";
+        }, 100);
+      });
+    }
   }
 
   document.addEventListener("DOMContentLoaded", initLeadsUnderline);
-  document.addEventListener("astro:page-load", initLeadsUnderline);
+  document.addEventListener("astro:page-load", function() {
+    _leadsInitDone = false;
+    initLeadsUnderline();
+  });
   window.addEventListener("pageshow", function (e) {
-    if (e.persisted) initLeadsUnderline();
+    if (e.persisted) { _leadsInitDone = false; initLeadsUnderline(); }
   });
 </script>
