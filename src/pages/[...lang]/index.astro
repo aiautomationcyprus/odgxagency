@@ -20,42 +20,8 @@ export function getStaticPaths() {
 const { lang } = Astro.params;
 const language = lang || getLangFromUrl(Astro.url);
 
-// 🟢 Lade Inhalte wie vorher aus der Markdown-Datei
 const homepage = await getListPage("homepage", lang as keyof ContentEntryMap);
-const { feature, video, reason } = homepage[0].data;
-
-
-// ✅ Always fetch from the local WordPress instance
-const wpSlug = lang === "en" ? "homepage-en" : "homepage-de";
-const username = "adjective";
-const password = "marvelous";
-const auth = btoa(`${username}:${password}`);
-
-const res = await fetch(`https://next-boats.localsite.io/wp-json/wp/v2/pages?slug=${wpSlug}`, {
-  headers: {
-    Authorization: `Basic ${auth}`,
-  },
-});
-const data = await res.json();
-const wpPage = data.length > 0 ? data[0] : null;
-
-const buttons = [];
-
-if (wpPage?.acf?.hero_button_label && wpPage?.acf?.hero_button_link) {
-  buttons.push({
-    label: wpPage.acf.hero_button_label,
-    link: wpPage.acf.hero_button_link,
-  });
-}
-
-
-const hero = {
-  title: wpPage?.acf?.hero_title || "Mehr Leads für Ihr Unternehmen",
-  content: wpPage?.acf?.hero_content || "<p>Online Marketing, das bei Ihnen ankommt. Wir bringen Ihr Unternehmen dort hin, wo Ihre Kunden suchen – und sorgen dafür, dass sie bei Ihnen landen.</p>",
-  images: wpPage?.acf?.hero_images ? [wpPage.acf.hero_images.url] : ["/images/herobsp.png"],
-  buttons,
-  client_logos: homepage[0].data.hero.client_logos,
-};
+const { hero, feature, video, reason } = homepage[0].data;
 
 const testimonialData = await getSinglePage(
   "testimonialSection",
