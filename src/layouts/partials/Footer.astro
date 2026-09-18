@@ -1,5 +1,5 @@
 ---
-import ImageMod from "@/components/ImageMod.astro";
+import Logo from "@/layouts/components/Logo.astro";
 import config from "@/config/config.json";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import {
@@ -34,21 +34,14 @@ const call_to_action = await getSinglePage(
   <div class="container pt-16 pb-12">
     <div class="row justify-center xl:justify-between mb-16">
       <div class="col-12 xl:col-3" data-aos="fade-up-sm">
-        <div data-aos="zoom-in-sm">
-          <ImageMod
-            src="/images/logo.svg"
-            class="mb-6 max-xl:mx-auto"
-            width={131}
-            height={36}
-            alt="Footer log"
-            format="svg"
-          />
+        <div class="mb-6 max-xl:flex max-xl:justify-center" data-aos="zoom-in-sm">
+          <Logo dark />
         </div>
         <p
           class="mb-14 xl:mb-0 text-center text-balance sm:w-4/5 lg:w-1/2 sm:mx-auto xl:text-left xl:w-full xl:text-wrap"
           data-aos="fade-up-sm"
         >
-        Steigern Sie Ihren Erfolg im Fintech-Sektor mit datengetriebenen Strategien, individuellen Insights und maßgeschneiderter Finanzkommunikation.
+        Digital Agency für mehr Kundengewinnung – wir bringen Ihr Unternehmen dort hin, wo Ihre Kunden suchen.
         </p>
       </div>
       <div class="col-12 lg:col-8 overflow-hidden">
@@ -105,40 +98,3 @@ const call_to_action = await getSinglePage(
 
 
 
-<!-- Accessibility Font Size Controls -->
-<div class="fixed top-4 right-4 z-50 bg-white/90 p-2 rounded shadow-md font-sans text-sm flex items-center gap-2">
-  <button id="decrease-font" class="underline cursor-pointer">A−</button>
-  <span id="font-size-display">16px</span>
-  <button id="increase-font" class="underline cursor-pointer">A+</button>
-</div>
-
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    const html = document.documentElement;
-    const display = document.getElementById("font-size-display");
-    const savedSize = localStorage.getItem("fontSize");
-    let currentSize = savedSize ? parseFloat(savedSize) : 16;
-
-    const applySize = () => {
-      html.style.fontSize = currentSize + "px";
-      display.textContent = currentSize + "px";
-      localStorage.setItem("fontSize", currentSize);
-    };
-
-    applySize();
-
-    document.getElementById("increase-font").addEventListener("click", () => {
-      if (currentSize < 24) {
-        currentSize += 2;
-        applySize();
-      }
-    });
-
-    document.getElementById("decrease-font").addEventListener("click", () => {
-      if (currentSize > 12) {
-        currentSize -= 2;
-        applySize();
-      }
-    });
-  });
-</script>

@@ -32,12 +32,6 @@ const LanguageSwitcher = ({
     "/en/strategy": {
       de: "/strategie",
     },
-    "/methode": {
-      en: "/en/method",
-    },
-    "/en/method": {
-      de: "/methode",
-    },
     // weitere Seiten hier eintragen
   };
 

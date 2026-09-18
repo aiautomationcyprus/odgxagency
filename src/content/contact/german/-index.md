@@ -1,16 +1,16 @@
 ---
-title: "Contacto"
-meta_title: ""
-description: "esta es una meta descripción"
+title: "Kontakt"
+meta_title: "Kontakt – ODGX Agency"
+description: "Nehmen Sie Kontakt mit uns auf – wir freuen uns auf Ihre Anfrage."
 draft: false
 hero:
-  title: "Ponte en Contacto"
-  content: "Nuestro software inteligente proporciona información en tiempo real, automatiza tareas tediosas y te ayuda a tomar decisiones financieras informadas, todo desde una interfaz intuitiva."
+  title: "Sprechen wir miteinander"
+  content: "Sie haben ein Projekt, eine Frage oder möchten einfach wissen, was wir für Ihr Unternehmen tun können? Schreiben Sie uns oder rufen Sie direkt an."
 contact:
-  - name: "hello@calentask.app"
+  - name: "info@odgxagency.de"
     icon: "FaRegEnvelopeOpen"
-  - name: "+91 783 837 098"
+  - name: "069 1753 611 90"
     icon: "FaPhoneVolume"
-  - name: "Avenida Marquis Street, EE.UU."
+  - name: "Frankfurt am Main, Deutschland"
     icon: "FaLocationDot"
 ---

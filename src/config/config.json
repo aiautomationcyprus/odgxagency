@@ -1,14 +1,14 @@
 {
   "site": {
-    "title": "ODGX Agency - Marketing für FinTech Unternehmen",
+    "title": "ODGX Agency – Digital Agency für mehr Kundengewinnung",
     "base_url": "https://odgxagency.netlify.app/",
     "base_path": "/",
     "trailing_slash": false,
-    "favicon": "/images/favicon.png",
+    "favicon": "/images/favicon.svg",
     "logo": "/images/logoodgx.svg",
     "logo_width": "131",
     "logo_height": "36",
-    "logo_text": "Sapick"
+    "logo_text": "ODGX Agency"
   },
 
   "settings": {
@@ -24,7 +24,7 @@
 
   "params": {
     "contact_form_action": "#",
-    "copyright": "Copyright © 2025 ODGX Agency. All Rights Reserved"
+    "copyright": "Copyright © 2026 ODGX Agency. All Rights Reserved"
   },
 
   "announcement_bar": {
@@ -33,14 +33,14 @@
   },
 
   "navigation_button": {
-    "enable": true,
-    "label": "Get This Template",
-    "link": "https://themefisher.com/products/sapick-astro"
+    "enable": false,
+    "label": "Kostenlos beraten lassen",
+    "link": "/contact"
   },
 
   "metadata": {
-    "meta_author": "Themefisher",
+    "meta_author": "ODGX Agency",
     "meta_image": "/images/og-image.png",
-    "meta_description": "Sass theme for Astro"
+    "meta_description": "ODGX Agency – Digital Agency für mehr Kundengewinnung. SEO, Paid Ads, Social Media & Content Marketing."
   }
 }

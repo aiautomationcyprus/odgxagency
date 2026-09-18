@@ -1,16 +1,16 @@
 ---
 title: "Contact"
-meta_title: ""
-description: "this is meta description"
+meta_title: "Contact – ODGX Agency"
+description: "Get in touch with us – we look forward to hearing from you."
 draft: false
 hero:
-  title: "Get in Touch"
-  content: "Our intelligent software provides real-time insights, automates tedious tasks, and helps you make informed financial decisions all from one intuitive."
+  title: "Let's talk"
+  content: "Got a project, a question, or just want to know what we can do for your business? Write to us or call directly."
 contact:
-  - name: "hello@calentask.app"
+  - name: "info@odgxagency.de"
     icon: "FaRegEnvelopeOpen"
-  - name: "+91 783 837 098"
+  - name: "069 1753 611 90"
     icon: "FaPhoneVolume"
-  - name: "Marquis Street Avenue  USA."
+  - name: "Frankfurt am Main, Germany"
     icon: "FaLocationDot"
 ---

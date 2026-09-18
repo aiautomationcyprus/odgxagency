@@ -1,0 +1,285 @@
+---
+import Base from "@/layouts/Base.astro";
+import { supportedLang } from "@/lib/utils/languageParser";
+import { markdownify } from "@/lib/utils/textConverter";
+import ContactForm from "@/components/ContactForm.astro";
+import DynamicIcon from "@/helpers/DynamicIcon";
+
+export function getStaticPaths() {
+  return supportedLang.map((lang) => ({ params: { lang: lang || undefined } }));
+}
+
+const { lang } = Astro.params;
+const isDE = lang !== "en";
+
+const services = isDE ? [
+  { icon: "FaMagnifyingGlass", title: "Ihre Seite bremst sich selbst aus", text: "Langsame Ladezeiten, fehlende Struktur, technische Fehler – Google bemerkt das und schiebt Sie auf Seite 2 oder 3. Wir finden diese Barrieren und räumen sie aus dem Weg, damit Ihre Seite das Ranking bekommt, das sie verdient." },
+  { icon: "FaLink", title: "Ohne Backlinks glaubt Google Ihnen nicht", text: "Selbst das beste Angebot bleibt unsichtbar, wenn andere Websites nicht auf Sie verlinken. Wir bauen Ihnen Vertrauen bei Google auf – durch relevante Links von Quellen, die wirklich zählen." },
+  { icon: "FaFileLines", title: "Besucher kommen – und kaufen woanders", text: "Wenn Ihre Inhalte die falsche Frage beantworten oder zu spät in der Kaufentscheidung ankommen, verlieren Sie den Kunden an die Konkurrenz. Wir erstellen Inhalte, die genau dann sichtbar sind, wenn jemand kaufbereit ist." },
+  { icon: "FaBrain", title: "ChatGPT kennt Sie nicht – noch nicht", text: "Ihre Kunden fragen heute KI-Systeme nach Empfehlungen. Wer in ChatGPT, Perplexity oder Gemini nicht vorkommt, verliert Anfragen, bevor sie überhaupt auf der Website ankommen." },
+] : [
+  { icon: "FaMagnifyingGlass", title: "Your site is holding itself back", text: "Slow loading times, poor structure, technical errors – Google notices and pushes you to page 2 or 3. We find these barriers and remove them so your site gets the ranking it deserves." },
+  { icon: "FaLink", title: "Without backlinks, Google doesn't trust you", text: "Even the best offer stays invisible if no one links to you. We build your authority with Google – through relevant links from sources that actually matter." },
+  { icon: "FaFileLines", title: "Visitors arrive – and buy elsewhere", text: "If your content answers the wrong question or reaches people too late in their decision, you lose them to a competitor. We create content that appears exactly when someone is ready to buy." },
+  { icon: "FaBrain", title: "ChatGPT doesn't know you – yet", text: "Your customers are asking AI systems for recommendations. Brands not present in ChatGPT, Perplexity or Gemini lose enquiries before they ever reach the website." },
+];
+
+const steps = isDE ? [
+  { num: "01", title: "Kostenlose Erstanalyse", text: "In einem unverbindlichen Gespräch analysieren wir Ihre aktuelle Sichtbarkeit – bei Google und in KI-Systemen – und zeigen Ihnen konkrete Ansatzpunkte." },
+  { num: "02", title: "Strategie & Umsetzung", text: "Wir entwickeln Ihre individuelle SEO/GEO-Strategie und setzen sie technisch und inhaltlich um. Sie erhalten regelmäßige Berichte und wissen jederzeit, was läuft." },
+  { num: "03", title: "Kontinuierliche Weiterentwicklung", text: "SEO ist kein einmaliges Projekt. Wir begleiten Sie dauerhaft, passen die Strategie an neue Entwicklungen an und bleiben auch bei Google-Updates handlungsfähig." },
+] : [
+  { num: "01", title: "Free initial analysis", text: "In a no-obligation call we analyse your current visibility – on Google and in AI systems – and show you concrete starting points." },
+  { num: "02", title: "Strategy & execution", text: "We build your individual SEO/GEO strategy and implement it technically and content-wise. Regular reports keep you informed at all times." },
+  { num: "03", title: "Ongoing development", text: "SEO is not a one-off project. We stay by your side, adapt the strategy to new developments and remain capable of action through Google updates." },
+];
+
+const trust = isDE ? [
+  "Sie erfahren genau, warum Interessenten Ihre Konkurrenz anrufen – und nicht Sie",
+  "Sie sehen, welche Suchbegriffe Kaufabsicht haben – und ranken genau dort",
+  "Kein Ranking, das beim nächsten Google-Update wieder verschwindet – nur nachhaltige Sichtbarkeit",
+  "Sie wissen jeden Monat, wie sich bessere Sichtbarkeit in Anfragen und Umsatz niederschlägt",
+] : [
+  "You find out exactly why prospects call your competitors – and not you",
+  "You see which search terms signal buying intent – and rank precisely there",
+  "No rankings that vanish at the next Google update – sustainable visibility only",
+  "Every month you see how better visibility translates into enquiries and revenue",
+];
+
+const faqs = isDE ? [
+  { q: "Warum stehe ich bei Google auf Seite 2 oder 3, obwohl ich schon lange eine Website habe?", a: "Das hat meist drei Ursachen: technische Fehler, die Google das Crawlen erschweren; Inhalte, die nicht zu den Fragen Ihrer Kunden passen; und fehlende Backlinks, die Google als Vertrauenssignal wertet. In unserer kostenlosen Erstanalyse sehen Sie genau, was bei Ihnen das Ranking blockiert." },
+  { q: "Was bringt mir SEO – ich bekomme doch schon Empfehlungen?", a: "Empfehlungen sind wertvoll, aber begrenzt. Suchmaschinenoptimierung erschließt Kunden, die Sie noch nicht kennen – Menschen, die aktiv nach Ihrer Lösung suchen und kaufbereit sind. Das sind oft mehr potenzielle Kunden als Ihr Netzwerk hergeben kann." },
+  { q: "Wie lange dauert es, bis ich Ergebnisse sehe?", a: "Erste Verbesserungen sind oft nach 4–8 Wochen messbar. Spürbare Ergebnisse in Anfragen und Sichtbarkeit entstehen typischerweise nach 3–6 Monaten. SEO ist keine kurzfristige Werbemaßnahme – dafür bleibt die Wirkung dauerhaft, auch wenn Sie die Investition später reduzieren." },
+  { q: "Meine Mitbewerber ranken seit Jahren besser. Kann ich die noch einholen?", a: "In den meisten Fällen ja – auch wenn es Zeit und die richtige Strategie braucht. Wir zeigen Ihnen in der Erstanalyse konkret, wo Ihre Chancen liegen und wie realistisch ein Aufholen in Ihrem Markt ist." },
+  { q: "Wie starte ich?", a: "Rufen Sie uns an: 069 1753 611 90 oder füllen Sie das Formular aus. Wir melden uns innerhalb eines Werktages und besprechen gemeinsam, wo Sie gerade stehen und was realistisch erreichbar ist." },
+] : [
+  { q: "Why am I on page 2 or 3 even though I've had a website for years?", a: "Usually three reasons: technical errors that make it hard for Google to crawl your site; content that doesn't match what your customers are searching for; and missing backlinks that Google uses as trust signals. Our free analysis shows you exactly what's blocking your ranking." },
+  { q: "What's the point of SEO if I already get referrals?", a: "Referrals are valuable but limited. SEO reaches customers who don't know you yet – people actively searching for your solution and ready to buy. That's often a larger pool than your network can provide." },
+  { q: "How long before I see results?", a: "Initial improvements are often measurable within 4–8 weeks. Noticeable results in enquiries and visibility typically emerge after 3–6 months. SEO isn't a short-term ad spend – but its effect is lasting, even if you reduce investment later." },
+  { q: "My competitors have ranked better for years. Can I catch up?", a: "In most cases yes – though it takes time and the right strategy. We show you in the initial analysis exactly where your opportunities lie and how realistic it is to close the gap in your market." },
+  { q: "How do I get started?", a: "Call us: 069 1753 611 90 or fill in the form. We'll get back to you within one business day and discuss where you stand and what's realistically achievable." },
+];
+---
+
+<Base
+  title={isDE ? "SEO Agentur Frankfurt – SEO & GEO" : "SEO Agency Frankfurt – SEO & GEO"}
+  meta_title={isDE ? "SEO Agentur Frankfurt – Mehr Sichtbarkeit bei Google und KI" : "SEO Agency Frankfurt – More visibility on Google and AI"}
+  description={isDE ? "SEO + GEO aus Frankfurt. Wir bringen Sie bei Google nach oben – und sorgen dafür, dass KI-Systeme wie ChatGPT Sie empfehlen." : "SEO + GEO from Frankfurt. We get you to the top of Google – and make sure AI systems like ChatGPT recommend you."}
+>
+
+  <!-- Hero -->
+  <div class="relative overflow-hidden">
+  <img src="/images/homepage/patternBg.svg" alt="" class="absolute top-0 left-0 -z-10 object-cover w-[168%] h-full pointer-events-none" />
+
+  <div class="absolute w-full lg:w-[71%] aspect-[0.618/1] opacity-20 top-0 right-[14%] -z-10 rotate-[-157deg]">
+    <div class="absolute w-[40%] aspect-[0.325/1] bg-[#a5a2ff] rounded-full blur-[200px] left-[138px] top-[31px] rotate-12"></div>
+    <div class="absolute w-[40%] aspect-[0.572/1] bg-[#29c775] rounded-full blur-[200px] left-[222px] top-[208px]"></div>
+    <div class="absolute w-[40%] aspect-[0.571/1] bg-[#ffe74b] rounded-full blur-[200px] left-[436px] top-[340px]"></div>
+  </div>
+  <section class="pt-28 pb-16">
+    <div class="container text-center md:w-3/4 xl:w-full">
+      <p class="text-primary font-semibold mb-3 tracking-wide uppercase text-sm" data-aos="fade-up-sm">
+        {isDE ? "SEO Agentur aus Frankfurt" : "SEO Agency from Frankfurt"}
+      </p>
+      <h1 class="text-[32px] md:text-[48px] lg:text-[64px] mb-6" data-aos="fade-up-sm">
+        {isDE ? "Ihre Kunden suchen – und finden Ihre Konkurrenz" : "Your customers are searching – and finding your competitors"}
+      </h1>
+      <p class="lg:w-1/2 mx-auto mb-4 text-lg text-text-gray" data-aos="fade-up-sm">
+        {isDE
+          ? "Jeden Tag verlieren Unternehmen Anfragen, weil sie bei Google nicht auf Seite 1 stehen – oder weil KI-Systeme wie ChatGPT sie schlicht nicht kennen. Beides kostet Umsatz, ohne dass man es sofort bemerkt."
+          : "Every day businesses lose enquiries because they don't rank on page 1 of Google – or because AI systems like ChatGPT simply don't know them. Both cost revenue, often without anyone noticing."}
+      </p>
+      <p class="lg:w-1/2 mx-auto mb-10 text-lg font-medium" data-aos="fade-up-sm">
+        {isDE ? "Wir sorgen dafür, dass Sie gefunden werden – bevor Ihr Wettbewerber es tut." : "We make sure you get found – before your competitor does."}
+      </p>
+      <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary" data-aos="fade-up-sm">
+        {isDE ? "Kostenlose SEO/GEO-Analyse anfragen" : "Request a free SEO/GEO analysis"}
+      </a>
+    </div>
+  </section>
+  </div>
+
+  <!-- Services -->
+  <section class="pb-20 pt-16">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        {services.map((s, i) => (
+          <div class="col-12 md:col-6 lg:col-3" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+            <div class="bg-light rounded-2xl p-8 h-full">
+              <div class="mb-4 p-4 rounded-full bg-body w-fit">
+                <DynamicIcon icon={s.icon} className="text-primary text-2xl" />
+              </div>
+              <h4 class="mb-3">{s.title}</h4>
+              <p class="text-text/80">{s.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GEO Section -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-center items-center g-4">
+        <div class="col-12 lg:col-6" data-aos="fade-up-sm">
+          <p class="text-primary font-semibold uppercase text-sm tracking-wide mb-3">
+            {isDE ? "Neu: KI-Sichtbarkeit" : "New: AI Visibility"}
+          </p>
+          <h2 class="mb-6">
+            {isDE ? "Stellen Sie sich vor: Ein Kunde fragt ChatGPT nach Ihrem Angebot" : "Imagine: a customer asks ChatGPT about what you offer"}
+          </h2>
+          <p class="text-text-gray mb-6">
+            {isDE
+              ? "ChatGPT nennt drei Anbieter. Keiner davon sind Sie. Der Kunde ruft einen Ihrer Wettbewerber an – und weiß nicht einmal, dass Sie existieren. Das passiert heute schon täglich. Klassisches SEO allein löst das nicht."
+              : "ChatGPT names three providers. None of them is you. The customer calls one of your competitors – not even knowing you exist. This is happening every day. Classic SEO alone won't fix it."}
+          </p>
+          <ul class="space-y-3">
+            {(isDE ? [
+              "Wir prüfen, ob und wie Ihre Marke heute in ChatGPT, Gemini und Perplexity vorkommt",
+              "Wir finden heraus, welche Quellen KI-Systeme über Ihre Branche zitieren – und wie Sie dort hineingelangen",
+              "Wir optimieren Ihre Inhalte so, dass KI-Systeme Sie als verlässliche, empfehlenswerte Quelle einordnen",
+              "Sie sehen messbar, wie sich Ihre KI-Sichtbarkeit Monat für Monat verbessert",
+            ] : [
+              "We check whether and how your brand appears today in ChatGPT, Gemini and Perplexity",
+              "We find out which sources AI systems cite in your industry – and how you get there",
+              "We optimise your content so AI systems classify you as a trustworthy, recommendable source",
+              "You see measurable month-by-month improvement in your AI visibility",
+            ]).map((item) => (
+              <li class="flex items-start gap-3">
+                <DynamicIcon icon="FaCircleCheck" className="text-primary text-xl mt-0.5 shrink-0" />
+                <span class="text-text-gray">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="col-12 lg:col-5 lg:col-offset-1" data-aos="zoom-in-sm">
+          <img
+            src="/images/geo-ai-example.webp"
+            alt="GEO AI Overview – KI-Sichtbarkeit Analyse"
+            class="w-full rounded-2xl shadow-lg"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we work -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center mb-14" data-aos="fade-up-sm">
+        {isDE ? "So arbeiten wir" : "How we work"}
+      </h2>
+      <div class="row g-4 justify-center">
+        {steps.map((s, i) => (
+          <div class="col-12 md:col-4" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+            <div class="bg-light rounded-2xl p-8 h-full">
+              <p class="text-5xl font-bold text-primary/20 mb-4">{s.num}</p>
+              <h4 class="mb-3">{s.title}</h4>
+              <p class="text-text/80">{s.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why ODGX -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-center items-center g-4">
+        <div class="col-12 lg:col-5" data-aos="fade-up-sm">
+          <h2 class="mb-6">
+            {isDE ? "Warum ODGX Agency?" : "Why ODGX Agency?"}
+          </h2>
+          <p class="text-text-gray mb-8">
+            {isDE
+              ? "Viele Agenturen verkaufen Reports. Wir liefern Ergebnisse. Sie arbeiten direkt mit dem Experten, der Ihre Kampagne kennt – kein Weitervermitteln, keine Standardlösungen."
+              : "Many agencies sell reports. We deliver results. You work directly with the expert who knows your campaign – no hand-offs, no one-size-fits-all solutions."}
+          </p>
+          <ul class="space-y-4">
+            {trust.map((item) => (
+              <li class="flex items-start gap-3">
+                <DynamicIcon icon="FaCircleCheck" className="text-primary text-xl mt-0.5 shrink-0" />
+                <span class="font-medium">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary mt-8 inline-block">
+            {isDE ? "Jetzt Erstgespräch buchen" : "Book a free initial call"}
+          </a>
+        </div>
+        <div class="col-12 lg:col-6 lg:col-offset-1" data-aos="zoom-in-sm">
+          <div class="bg-body rounded-2xl p-8 text-center">
+            <p class="text-6xl font-bold text-primary mb-2">15+</p>
+            <p class="text-text-gray mb-8">{isDE ? "Jahre SEO-Erfahrung" : "years SEO experience"}</p>
+            <p class="text-4xl font-bold text-primary mb-2">069 1753 611 90</p>
+            <p class="text-text-gray">{isDE ? "Direkter Draht zu Ihrem SEO-Experten" : "Direct line to your SEO expert"}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container md:w-3/4 lg:w-2/3">
+      <h2 class="text-center mb-14" data-aos="fade-up-sm">
+        {isDE ? "Häufige Fragen" : "Frequently asked questions"}
+      </h2>
+      <div class="space-y-4">
+        {faqs.map((faq, i) => (
+          <details class="bg-light rounded-2xl p-6 group" data-aos="fade-up-sm" data-aos-delay={i * 50}>
+            <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center">
+              {faq.q}
+              <DynamicIcon icon="FaChevronDown" className="text-primary text-sm transition-transform group-open:rotate-180 shrink-0 ml-4" />
+            </summary>
+            <p class="mt-4 text-text-gray leading-relaxed">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + Contact -->
+  <section class="section">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        <div class="col-12 text-center mb-6">
+          <h2 class="text-[32px] md:text-[48px] mb-4" data-aos="fade-up-sm">
+            {isDE ? "Wie viele Anfragen verlieren Sie gerade – ohne es zu wissen?" : "How many enquiries are you losing right now – without knowing it?"}
+          </h2>
+          <p class="lg:w-1/2 mx-auto text-text-gray" data-aos="fade-up-sm">
+            {isDE ? "Wir zeigen es Ihnen – kostenlos und unverbindlich." : "We'll show you – free and without obligation."}
+          </p>
+        </div>
+        <div class="col-12 md:col-10 lg:col-8 xl:col-5">
+          <div class="p-10 rounded-xl bg-light h-full flex flex-col justify-between">
+            <h3 class="mb-6" data-aos="fade-up-sm">
+              {isDE ? "Jetzt Kontakt aufnehmen" : "Get in touch"}
+            </h3>
+            <div>
+              {[
+                { icon: "FaEnvelope", name: "info@odgxagency.de" },
+                { icon: "FaPhone", name: "069 1753 611 90" },
+                { icon: "FaLocationDot", name: isDE ? "Frankfurt am Main" : "Frankfurt am Main, Germany" },
+              ].map((c, i) => (
+                <div class="flex items-center mb-4 last:mb-0" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+                  <div class="mr-4 p-5 rounded-full bg-primary w-fit">
+                    <DynamicIcon icon={c.icon} className="text-text-light text-3xl" />
+                  </div>
+                  <p class="text-xl">{c.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-10 lg:col-8 xl:col-7">
+          <ContactForm lang={lang} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>
+

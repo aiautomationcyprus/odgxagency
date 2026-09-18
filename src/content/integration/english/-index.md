@@ -1,73 +1,39 @@
 ---
-title: "Integration"
-meta_title: "this is meta title"
-description: "this is meta description"
+title: "Services"
+meta_title: "Our Services – ODGX Agency"
+description: "SEO, Paid Ads, Social Media and Podcast Creation – our services for more visibility and customer acquisition."
+
 hero:
-  title: "Connect with 100+ tools"
-  content: "Sapick seamlessly integrates with over 100+ popular tools, making financial management more efficient and streamlined."
+  title: "Our Services"
+  content: "We put your business where your customers are looking – with targeted measures that deliver measurable new leads."
 
 integrations:
-  - app: "SkyBolt"
-    icon: "/images/integration/5.svg"
-    content: "SkyBolt is a powerful team collaboration platform that facilitates form the to in communication, file sharing."
-    button:
-      enable: true
-      label: "Learn More"
-      link: "/about"
-  - app: "QuantumNest"
-    icon: "/images/integration/3.svg"
-    content: "QuantumNest is powerful team collaboration platform that facilitates form the to in communication, file sharing."
-    button:
-      enable: true
-      label: "Learn More"
-      link: "/about"
-  - app: "EchoGrid"
-    icon: "/images/integration/8.svg"
-    content: "EchoGrid is a powerful team form the collaboration platform that facilitates form the to in communication."
-    button:
-      enable: true
-      label: "Learn More"
-      link: "/about"
-  - app: "EchoGrid"
-    icon: "/images/integration/9.svg"
-    content: "EchoGrid is a powerful team collaboration platform that facilitates form the to in communication, file sharing."
-    button:
-      enable: true
-      label: "Learn More"
-      link: "/about"
-  - app: "Zypherix"
+  - app: "SEO"
     icon: "/images/integration/1.svg"
-    content: "Zypherix is powerful team form the to collaboration platform that facilitates form the to in communication."
+    content: "Sustainable visibility on Google. We optimize your website so that ready-to-buy customers find you – without ongoing ad spend."
     button:
       enable: true
-      label: "Learn More"
-      link: "/about"
-  - app: "StratosLink"
-    icon: "/images/integration/7.svg"
-    content: "StratosLink is a powerful team form the collaboration platform that facilitates form the to in communication."
-    button:
-      enable: true
-      label: "Learn More"
-      link: "/about"
-  - app: "VortexSync"
+      label: "Learn more"
+      link: "/seo"
+  - app: "Paid Ads"
     icon: "/images/integration/2.svg"
-    content: "VortexSync is a powerful team to the collaboration platform that form the to in communication."
+    content: "Google Ads & Meta Ads with a clear conversion focus. No wasted budget – every euro works for your business."
     button:
       enable: true
-      label: "Learn More"
-      link: "/about"
-  - app: "LumeonHub"
-    icon: "/images/integration/6.svg"
-    content: "LumeonHub is a powerful team collaboration platform that facilitates form the to in communication, file sharing."
+      label: "Learn more"
+      link: "/paid-ads"
+  - app: "Social Media"
+    icon: "/images/integration/3.svg"
+    content: "Reach and trust on Instagram, LinkedIn & TikTok. We handle strategy, content creation and community growth."
     button:
       enable: true
-      label: "Learn More"
-      link: "/about"
-  - app: "NebulaLink"
+      label: "Learn more"
+      link: "/social-media"
+  - app: "Podcast Creation"
     icon: "/images/integration/4.svg"
-    content: "NebulaLink is a powerful team form the collaboration platform that facilitates form the to in communication."
+    content: "Your own podcast as the expert voice in your industry. From concept to production – we make you heard."
     button:
       enable: true
-      label: "Learn More"
-      link: "/about"
+      label: "Learn more"
+      link: "/podcast"
 ---

@@ -1,6 +1,6 @@
 ---
 enable: true
-title: "¿Qué dicen sobre Sapick?"
+title: "¿Qué dicen sobre ODGX Agency?"
 
 reviews:
   - company: "/images/testimonial/8.svg"

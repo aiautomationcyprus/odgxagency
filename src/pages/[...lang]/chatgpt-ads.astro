@@ -1,0 +1,248 @@
+---
+import Base from "@/layouts/Base.astro";
+import { supportedLang } from "@/lib/utils/languageParser";
+import ContactForm from "@/components/ContactForm.astro";
+import DynamicIcon from "@/helpers/DynamicIcon";
+
+export function getStaticPaths() {
+  return supportedLang.map((lang) => ({ params: { lang: lang || undefined } }));
+}
+
+const { lang } = Astro.params;
+const isDE = lang !== "en";
+
+const services = [
+  { icon: "FaGear", title: "Kampagnen-Setup", text: "Konto-Einrichtung im OpenAI Ads Manager, Länder- und Regions-Targeting, Gebotsstrategie (CPC, CPM oder optimierter Klickpreis) – wir bauen Ihre Kampagne von Grund auf richtig auf." },
+  { icon: "FaBullseye", title: "Kontext-Targeting statt Keywords", text: "ChatGPT wirbt über Gesprächskontext, nicht über gebuchte Keywords. Wir definieren, in welchen Recherche- und Entscheidungssituationen Ihre Anzeige erscheinen soll." },
+  { icon: "FaPenNib", title: "Creative & Anzeigentext", text: "Überschrift, Beschreibungstext, Bild und Landingpage – abgestimmt auf das ChatGPT-Format und darauf, im Gesprächsfluss zu überzeugen statt zu stören." },
+  { icon: "FaChartLine", title: "Tracking & Attribution", text: "Mit der Conversions API verbinden wir ChatGPT-Impressionen mit echtem Umsatz. Sie sehen, was der Kanal wirklich bringt – nicht nur Klicks." },
+];
+
+const steps = [
+  { num: "01", title: "Kostenlose Erstanalyse", text: "In einem unverbindlichen Gespräch prüfen wir, ob und wie ChatGPT Ads zu Ihrem Geschäft passen, welche Zielgruppen erreichbar sind und mit welchem Budget ein sinnvoller Test startet." },
+  { num: "02", title: "Setup & erste Kampagne", text: "Wir richten Ihr Ads-Konto ein, entwickeln Creatives und Kontext-Signale und starten eine kontrollierte Testkampagne. Sie erhalten von Beginn an transparente Berichte." },
+  { num: "03", title: "Optimierung & Skalierung", text: "Wir werten die Ergebnisse aus, schärfen Targeting und Anzeigen nach und skalieren, was funktioniert. ChatGPT Ads entwickeln sich schnell – wir halten Ihre Kampagnen auf dem aktuellen Stand." },
+];
+
+const trust = [
+  "Über 15 Jahre Erfahrung im digitalen Marketing – von Google Ads bis KI",
+  "Frühzeitig auf ChatGPT Ads spezialisiert – wir kennen das Format und seine Grenzen",
+  "Ehrliche Beratung: Wir sagen Ihnen auch, wann ChatGPT Ads (noch) nicht der richtige Kanal sind",
+  "Transparente Berichte inklusive Umsatz-Attribution – Sie sehen jederzeit, was der Kanal leistet",
+];
+
+const details = [
+  "Wir richten Ihr Werbekonto im OpenAI Ads Manager ein und schalten erste Kampagnen",
+  "Wir definieren die passenden Gesprächs- und Absichtssignale, bei denen Ihre Anzeige erscheint",
+  "Wir entwickeln Creatives, die im ChatGPT-Format funktionieren (Überschrift, Text, Bild, Ziel-URL)",
+  "Datenschutzkonform: Im EWR läuft die Auslieferung kontextbasiert – ohne Auswertung Ihres Chatverlaufs",
+  "Transparente Messung über die Conversions API bis zum tatsächlichen Umsatz",
+];
+
+const faqs = [
+  { q: "Kann ich als deutsches Unternehmen wirklich schon ChatGPT Ads schalten?", a: "Ja. Seit dem 24. August 2026 sind ChatGPT Ads in Deutschland und 30 weiteren europäischen Märkten verfügbar, seit dem 31. August 2026 auch über den Self-Service-Ads-Manager. Wir übernehmen das Setup für Sie." },
+  { q: "Was kostet Werbung in ChatGPT?", a: "Abgerechnet wird per Klick (CPC), pro tausend Einblendungen (CPM) oder als optimierter Klickpreis. Ein festes Mindestbudget gibt es nicht mehr – ideal, um klein zu testen und dann zu skalieren." },
+  { q: "Wer sieht die Anzeigen überhaupt?", a: "Anzeigen erscheinen nur bei Nutzern der kostenlosen Free-Version und des Go-Tarifs. Wer Plus, Pro, Business oder Enterprise nutzt, sieht keine Werbung. Alle Anzeigen sind als „Gesponsert“ gekennzeichnet und von der KI-Antwort getrennt." },
+  { q: "Wie funktioniert das Targeting ohne Keywords?", a: "ChatGPT liefert Anzeigen über den Gesprächskontext aus – also die Situation und Absicht der Nutzeranfrage, nicht über gebuchte Suchbegriffe. Im EWR erfolgt das rein kontextbasiert, ohne Auswertung von Chatverlauf oder Nutzerprofil." },
+  { q: "Wie starte ich?", a: "Rufen Sie uns an: 069 1753 611 90 oder füllen Sie das Formular aus. Wir melden uns innerhalb eines Werktages und besprechen den nächsten Schritt." },
+];
+---
+
+<Base
+  title="ChatGPT Ads Agentur Frankfurt – Werbung in ChatGPT schalten"
+  meta_title="ChatGPT Ads Agentur Frankfurt – Werbung in ChatGPT schalten"
+  description="Seit August 2026 schalten wir Anzeigen direkt in ChatGPT. Als Frankfurter Agentur übernehmen wir Setup, Targeting, Creatives und Attribution – vom ersten Test bis zur skalierten Kampagne."
+>
+
+  <!-- Hero -->
+  <div class="relative overflow-hidden">
+    <img src="/images/homepage/patternBg.svg" alt="" class="absolute top-0 left-0 -z-10 object-cover w-[168%] h-full pointer-events-none" />
+    <div class="absolute w-full lg:w-[71%] aspect-[0.618/1] opacity-20 top-0 right-[14%] -z-10 rotate-[-157deg]">
+      <div class="absolute w-[40%] aspect-[0.325/1] bg-[#a5a2ff] rounded-full blur-[200px] left-[138px] top-[31px] rotate-12"></div>
+      <div class="absolute w-[40%] aspect-[0.572/1] bg-[#29c775] rounded-full blur-[200px] left-[222px] top-[208px]"></div>
+      <div class="absolute w-[40%] aspect-[0.571/1] bg-[#ffe74b] rounded-full blur-[200px] left-[436px] top-[340px]"></div>
+    </div>
+    <section class="pt-28 pb-16">
+      <div class="container text-center md:w-3/4 xl:w-full">
+        <p class="text-primary font-semibold mb-3 tracking-wide uppercase text-sm" data-aos="fade-up-sm">
+          ChatGPT Ads Agentur aus Frankfurt
+        </p>
+        <h1 class="text-[32px] md:text-[48px] lg:text-[64px] mb-6" data-aos="fade-up-sm">
+          Werben, wo Ihre Kunden fragen – Ads direkt in ChatGPT
+        </h1>
+        <p class="lg:w-1/2 mx-auto mb-4 text-lg text-text-gray" data-aos="fade-up-sm">
+          Seit August 2026 lassen sich Anzeigen direkt in ChatGPT schalten – dort, wo täglich Millionen Menschen ihre Kaufentscheidungen vorbereiten. Wir bringen Ihre Marke in genau die Momente, in denen recherchiert, verglichen und entschieden wird.
+        </p>
+        <p class="lg:w-1/2 mx-auto mb-10 text-lg font-medium" data-aos="fade-up-sm">
+          Sichtbar sein, bevor die Konkurrenz überhaupt weiß, dass es diesen Kanal gibt.
+        </p>
+        <a href="/kontakt" class="btn btn-primary" data-aos="fade-up-sm">
+          Kostenlose ChatGPT-Ads-Analyse anfragen
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Services -->
+  <section class="pb-20 pt-16">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        {services.map((s, i) => (
+          <div class="col-12 md:col-6 lg:col-3" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+            <div class="bg-light rounded-2xl p-8 h-full">
+              <div class="mb-4 p-4 rounded-full bg-body w-fit">
+                <DynamicIcon icon={s.icon} className="text-primary text-2xl" />
+              </div>
+              <h4 class="mb-3">{s.title}</h4>
+              <p class="text-text/80">{s.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail Section -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-center items-center g-4">
+        <div class="col-12 lg:col-6" data-aos="fade-up-sm">
+          <p class="text-primary font-semibold uppercase text-sm tracking-wide mb-3">
+            Neu: Werbung in der KI-Suche
+          </p>
+          <h2 class="mb-6">
+            Anzeigen direkt in ChatGPT – der neue Werbeplatz
+          </h2>
+          <p class="text-text-gray mb-6">
+            Immer mehr Kaufrecherchen starten nicht mehr bei Google, sondern im Chatfenster. Seit dem 24. August 2026 erscheinen in ChatGPT klar gekennzeichnete Anzeigen – ein komplett neuer Kanal mit hunderten Millionen Nutzern, den heute noch kaum ein Unternehmen bespielt. Wer jetzt startet, sichert sich den First-Mover-Vorteil.
+          </p>
+          <ul class="space-y-3">
+            {details.map((item) => (
+              <li class="flex items-start gap-3">
+                <DynamicIcon icon="FaCircleCheck" className="text-primary text-xl mt-0.5 shrink-0" />
+                <span class="text-text-gray">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="col-12 lg:col-5 lg:col-offset-1" data-aos="zoom-in-sm">
+          <div class="bg-body rounded-2xl p-8">
+            <p class="text-5xl font-bold text-primary/20 mb-4">ChatGPT</p>
+            <h3 class="mb-4">First-Mover-Vorteil sichern</h3>
+            <p class="text-text-gray">
+              Wer jetzt in ChatGPT Ads investiert, spielt auf einem Feld, das Wettbewerber noch nicht kennen. CPCs sind niedrig, Targeting ist präzise, Aufmerksamkeit ist hoch.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we work -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center mb-14" data-aos="fade-up-sm">So arbeiten wir</h2>
+      <div class="row g-4 justify-center">
+        {steps.map((s, i) => (
+          <div class="col-12 md:col-4" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+            <div class="bg-light rounded-2xl p-8 h-full">
+              <p class="text-5xl font-bold text-primary/20 mb-4">{s.num}</p>
+              <h4 class="mb-3">{s.title}</h4>
+              <p class="text-text/80">{s.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why ODGX -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-center items-center g-4">
+        <div class="col-12 lg:col-5" data-aos="fade-up-sm">
+          <h2 class="mb-6">Warum ODGX Agency?</h2>
+          <p class="text-text-gray mb-8">
+            Bei uns arbeiten Sie direkt mit erfahrenen Performance-Marketing-Experten – die den neuen Kanal von Anfang an begleiten, statt ihn erst kennenzulernen.
+          </p>
+          <ul class="space-y-4">
+            {trust.map((item) => (
+              <li class="flex items-start gap-3">
+                <DynamicIcon icon="FaCircleCheck" className="text-primary text-xl mt-0.5 shrink-0" />
+                <span class="font-medium">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <a href="/kontakt" class="btn btn-primary mt-8 inline-block">
+            Jetzt Erstgespräch buchen
+          </a>
+        </div>
+        <div class="col-12 lg:col-6 lg:col-offset-1" data-aos="zoom-in-sm">
+          <div class="bg-body rounded-2xl p-8 text-center">
+            <p class="text-6xl font-bold text-primary mb-2">15+</p>
+            <p class="text-text-gray mb-8">Jahre Marketing-Erfahrung</p>
+            <p class="text-4xl font-bold text-primary mb-2">069 1753 611 90</p>
+            <p class="text-text-gray">Direkter Draht zu Ihrem Ads-Experten</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container md:w-3/4 lg:w-2/3">
+      <h2 class="text-center mb-14" data-aos="fade-up-sm">Häufige Fragen</h2>
+      <div class="space-y-4">
+        {faqs.map((faq, i) => (
+          <details class="bg-light rounded-2xl p-6 group" data-aos="fade-up-sm" data-aos-delay={i * 50}>
+            <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center">
+              {faq.q}
+              <DynamicIcon icon="FaChevronDown" className="text-primary text-sm transition-transform group-open:rotate-180 shrink-0 ml-4" />
+            </summary>
+            <p class="mt-4 text-text-gray leading-relaxed">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + Contact -->
+  <section class="section">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        <div class="col-12 text-center mb-6">
+          <h2 class="text-[32px] md:text-[48px] mb-4" data-aos="fade-up-sm">
+            Wissen Sie, ob Ihre Marke in ChatGPT werben könnte – und was das bringt?
+          </h2>
+          <p class="lg:w-1/2 mx-auto text-text-gray" data-aos="fade-up-sm">
+            Wir zeigen es Ihnen – kostenlos und unverbindlich.
+          </p>
+        </div>
+        <div class="col-12 md:col-10 lg:col-8 xl:col-5">
+          <div class="p-10 rounded-xl bg-light h-full flex flex-col justify-between">
+            <h3 class="mb-6" data-aos="fade-up-sm">Jetzt Kontakt aufnehmen</h3>
+            <div>
+              {[
+                { icon: "FaEnvelope", name: "info@odgxagency.de" },
+                { icon: "FaPhone", name: "069 1753 611 90" },
+                { icon: "FaLocationDot", name: "Frankfurt am Main" },
+              ].map((c, i) => (
+                <div class="flex items-center mb-4 last:mb-0" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+                  <div class="mr-4 p-5 rounded-full bg-primary w-fit">
+                    <DynamicIcon icon={c.icon} className="text-text-light text-3xl" />
+                  </div>
+                  <p class="text-xl">{c.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-10 lg:col-8 xl:col-7">
+          <ContactForm lang={lang} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>

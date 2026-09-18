@@ -1,0 +1,285 @@
+---
+import Base from "@/layouts/Base.astro";
+import { supportedLang } from "@/lib/utils/languageParser";
+import ContactForm from "@/components/ContactForm.astro";
+import DynamicIcon from "@/helpers/DynamicIcon";
+
+export function getStaticPaths() {
+  return supportedLang.map((lang) => ({ params: { lang: lang || undefined } }));
+}
+
+const { lang } = Astro.params;
+const isDE = lang !== "en";
+
+const platforms = isDE ? [
+  { icon: "FaGoogle", title: "Google Ads", text: "Suchanzeigen, Shopping und Performance Max – genau dann sichtbar, wenn Ihre Kunden aktiv nach Ihrer Leistung suchen." },
+  { icon: "FaInstagram", title: "Meta Ads", text: "Facebook & Instagram: zielgruppengenau ausgesteuert, mit Creatives die stoppen und Conversions die zählen." },
+  { icon: "FaTiktok", title: "TikTok Ads", text: "Reichweite bei jungen Zielgruppen über das am schnellsten wachsende Werbenetzwerk der Welt." },
+  { icon: "FaLinkedin", title: "LinkedIn Ads", text: "B2B-Kampagnen mit präzisem Targeting nach Branche, Position und Unternehmensgröße." },
+  { icon: "FaRobot", title: "ChatGPT Ads", text: "Werbung direkt im ChatGPT-Interface – kontextuell ausgesteuert passend zum Chatverlauf Ihrer Zielgruppe." },
+  { icon: "FaChartLine", title: "Bing Ads", text: "Microsoft Advertising mit oft günstigeren CPCs und einem wachsenden Marktanteil durch KI-Integration." },
+] : [
+  { icon: "FaGoogle", title: "Google Ads", text: "Search, Shopping and Performance Max – visible exactly when your customers are actively searching for your service." },
+  { icon: "FaInstagram", title: "Meta Ads", text: "Facebook & Instagram: precisely targeted, with creatives that stop the scroll and conversions that count." },
+  { icon: "FaTiktok", title: "TikTok Ads", text: "Reach younger audiences on the fastest-growing ad network in the world." },
+  { icon: "FaLinkedin", title: "LinkedIn Ads", text: "B2B campaigns with precise targeting by industry, job title and company size." },
+  { icon: "FaRobot", title: "ChatGPT Ads", text: "Ads directly inside ChatGPT – contextually delivered based on your audience's chat intent." },
+  { icon: "FaChartLine", title: "Bing Ads", text: "Microsoft Advertising with often lower CPCs and a growing market share through AI integration." },
+];
+
+const steps = isDE ? [
+  { num: "01", title: "Analyse & Strategie", text: "Wir analysieren Ihre Ziele, Zielgruppe und Mitbewerber. Daraus entwickeln wir die optimale Kanalstrategie und setzen klare KPIs." },
+  { num: "02", title: "Setup & Launch", text: "Kampagnenaufbau, Tracking, Creatives und Landingpage-Check. Nach Ihrer Freigabe sind wir live – oft innerhalb weniger Tage." },
+  { num: "03", title: "Optimierung & Reporting", text: "Unsere KI-gestützten Systeme optimieren 24/7. Sie erhalten transparente Berichte und wissen jederzeit, was Ihr Budget bringt." },
+] : [
+  { num: "01", title: "Analysis & strategy", text: "We analyse your goals, target audience and competitors. From that we develop the optimal channel strategy and set clear KPIs." },
+  { num: "02", title: "Setup & launch", text: "Campaign build, tracking, creatives and landing page check. After your approval we go live – often within a few days." },
+  { num: "03", title: "Optimisation & reporting", text: "Our AI-powered systems optimise 24/7. You receive transparent reports and always know what your budget delivers." },
+];
+
+const trust = isDE ? [
+  "Über 15 Jahre Erfahrung in Paid Ads – auf allen relevanten Plattformen",
+  "KI-gesteuertes Kampagnenmanagement: Optimierung bis zu 99%, rund um die Uhr",
+  "Transparente Management Fee – keine versteckten Kosten",
+  "Certified Google Ads Partner",
+] : [
+  "Over 15 years of Paid Ads experience – across all relevant platforms",
+  "AI-powered campaign management: up to 99% optimisation, around the clock",
+  "Transparent management fee – no hidden costs",
+  "Certified Google Ads Partner",
+];
+
+const faqs = isDE ? [
+  { q: "Wie schnell können Paid-Ads-Kampagnen starten?", a: "Im Gegensatz zu SEO können Kampagnen nach Setup und Ihrer Freigabe sofort starten. In der Regel sind wir innerhalb weniger Tage live." },
+  { q: "Welche Plattform ist die richtige für mein Unternehmen?", a: "Das hängt von Ihrer Zielgruppe und Ihrem Ziel ab. Wir analysieren das gemeinsam und empfehlen die Kanäle, die für Sie den höchsten Return erzielen." },
+  { q: "Was kostet die Verwaltung meiner Kampagnen?", a: "Wir arbeiten mit einer transparenten Management Fee bezogen auf Ihr Werbebudget. Performance-basierte Modelle sind ebenfalls möglich." },
+  { q: "Wie läuft das Reporting ab?", a: "Sie erhalten regelmäßige Berichte mit allen relevanten KPIs – Impressionen, Klicks, Conversions, Kosten. Jederzeit nachvollziehbar, was Ihr Budget leistet." },
+] : [
+  { q: "How quickly can Paid Ads campaigns go live?", a: "Unlike SEO, campaigns can start immediately after setup and your approval. In most cases we go live within a few days." },
+  { q: "Which platform is right for my business?", a: "It depends on your target audience and goal. We analyse this together and recommend the channels that deliver the highest return for you." },
+  { q: "What does campaign management cost?", a: "We work with a transparent management fee based on your ad budget. Performance-based models are also possible." },
+  { q: "How does reporting work?", a: "You receive regular reports with all relevant KPIs – impressions, clicks, conversions, costs. Always clear what your budget is delivering." },
+];
+---
+
+<Base
+  title={isDE ? "Paid Ads Agentur – Google, Meta, TikTok & mehr" : "Paid Ads Agency – Google, Meta, TikTok & more"}
+  meta_title={isDE ? "Paid Ads Agentur Frankfurt – Mehr Leads durch gezielte Werbung" : "Paid Ads Agency Frankfurt – More leads through targeted advertising"}
+  description={isDE ? "KI-optimierte Paid-Ads-Kampagnen auf Google, Meta, TikTok, LinkedIn und ChatGPT. Messbare Ergebnisse ab dem ersten Tag." : "AI-optimised Paid Ads campaigns on Google, Meta, TikTok, LinkedIn and ChatGPT. Measurable results from day one."}
+>
+
+  <!-- Hero -->
+  <div class="relative overflow-hidden">
+    <img src="/images/homepage/patternBg.svg" alt="" class="absolute top-0 left-0 -z-10 object-cover w-[168%] h-full pointer-events-none" />
+    <div class="absolute w-full lg:w-[71%] aspect-[0.618/1] opacity-20 top-0 right-[14%] -z-10 rotate-[-157deg]">
+      <div class="absolute w-[40%] aspect-[0.325/1] bg-[#a5a2ff] rounded-full blur-[200px] left-[138px] top-[31px] rotate-12"></div>
+      <div class="absolute w-[40%] aspect-[0.572/1] bg-[#29c775] rounded-full blur-[200px] left-[222px] top-[208px]"></div>
+      <div class="absolute w-[40%] aspect-[0.571/1] bg-[#ffe74b] rounded-full blur-[200px] left-[436px] top-[340px]"></div>
+    </div>
+    <section class="pt-28 pb-16">
+      <div class="container text-center md:w-3/4 xl:w-full">
+        <p class="text-primary font-semibold mb-3 tracking-wide uppercase text-sm" data-aos="fade-up-sm">
+          {isDE ? "Paid Ads Agentur aus Frankfurt" : "Paid Ads Agency from Frankfurt"}
+        </p>
+        <h1 class="text-[32px] md:text-[48px] lg:text-[64px] mb-6" data-aos="fade-up-sm">
+          {isDE ? "Werbung, die sofort wirkt – auf allen Kanälen" : "Ads that work immediately – across all channels"}
+        </h1>
+        <p class="lg:w-1/2 mx-auto mb-4 text-lg text-text-gray" data-aos="fade-up-sm">
+          {isDE
+            ? "Google, Meta, TikTok, LinkedIn, ChatGPT – wir planen, schalten und optimieren Ihre Paid-Ads-Kampagnen plattformübergreifend. KI-gestützt, datenbasiert, messbar."
+            : "Google, Meta, TikTok, LinkedIn, ChatGPT – we plan, run and optimise your Paid Ads campaigns across platforms. AI-powered, data-driven, measurable."}
+        </p>
+        <p class="lg:w-1/2 mx-auto mb-10 text-lg font-medium" data-aos="fade-up-sm">
+          {isDE ? "Ergebnisse ab dem ersten Tag." : "Results from day one."}
+        </p>
+        <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary" data-aos="fade-up-sm">
+          {isDE ? "Kostenlose Kampagnenanalyse" : "Free campaign analysis"}
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Platforms -->
+  <section class="pb-20 pt-16">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        {platforms.map((p, i) => (
+          <div class="col-12 md:col-6 lg:col-4" data-aos="fade-up-sm" data-aos-delay={i * 80}>
+            <div class="bg-light rounded-2xl p-8 h-full">
+              <div class="mb-4 p-4 rounded-full bg-body w-fit">
+                <DynamicIcon icon={p.icon} className="text-primary text-2xl" />
+              </div>
+              <h4 class="mb-3">{p.title}</h4>
+              <p class="text-text/80">{p.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Management -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-center items-center g-4">
+        <div class="col-12 lg:col-6" data-aos="fade-up-sm">
+          <p class="text-primary font-semibold uppercase text-sm tracking-wide mb-3">
+            {isDE ? "Unser Vorteil" : "Our edge"}
+          </p>
+          <h2 class="mb-6">
+            {isDE ? "KI-gesteuertes Kampagnenmanagement" : "AI-powered campaign management"}
+          </h2>
+          <p class="text-text-gray mb-6">
+            {isDE
+              ? "Ein Mensch kann eine Kampagne zu 50–60 % täglich optimieren. Ein KI-gesteuertes System schafft bis zu 99 % – 7 Tage, 24 Stunden. Das ergibt eine messbar höhere Performance bei Umsatz und Leadgenerierung."
+              : "A human can optimise a campaign to 50–60% daily. An AI-powered system achieves up to 99% – 7 days, 24 hours. The result: measurably higher performance in revenue and lead generation."}
+          </p>
+          <ul class="space-y-3">
+            {(isDE ? [
+              "Automatisierte Gebotsoptimierung in Echtzeit",
+              "Fehleranfälligkeit massiv reduziert",
+              "Alle KI-Aktivitäten werden von uns überwacht und gesteuert",
+              "Skalierbar auf alle Plattformen gleichzeitig",
+            ] : [
+              "Automated bid optimisation in real time",
+              "Error rate massively reduced",
+              "All AI activity monitored and controlled by our team",
+              "Scalable across all platforms simultaneously",
+            ]).map((item) => (
+              <li class="flex items-start gap-3">
+                <DynamicIcon icon="FaCircleCheck" className="text-primary text-xl mt-0.5 shrink-0" />
+                <span class="text-text-gray">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="col-12 lg:col-5 lg:col-offset-1" data-aos="zoom-in-sm">
+          <div class="bg-body rounded-2xl p-8 text-center">
+            <p class="text-6xl font-bold text-primary mb-2">99%</p>
+            <p class="text-text-gray mb-8">{isDE ? "Optimierungsgrad durch KI" : "Optimisation rate via AI"}</p>
+            <p class="text-4xl font-bold text-primary mb-2">24/7</p>
+            <p class="text-text-gray">{isDE ? "Kampagnen laufen und werden optimiert" : "Campaigns running and being optimised"}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we work -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center mb-14" data-aos="fade-up-sm">
+        {isDE ? "So arbeiten wir" : "How we work"}
+      </h2>
+      <div class="row g-4 justify-center">
+        {steps.map((s, i) => (
+          <div class="col-12 md:col-4" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+            <div class="bg-light rounded-2xl p-8 h-full">
+              <p class="text-5xl font-bold text-primary/20 mb-4">{s.num}</p>
+              <h4 class="mb-3">{s.title}</h4>
+              <p class="text-text/80">{s.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why ODGX -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-center items-center g-4">
+        <div class="col-12 lg:col-5" data-aos="fade-up-sm">
+          <h2 class="mb-6">
+            {isDE ? "Warum ODGX Agency?" : "Why ODGX Agency?"}
+          </h2>
+          <p class="text-text-gray mb-8">
+            {isDE
+              ? "Sie arbeiten direkt mit erfahrenen Paid-Ads-Experten – kein anonymes Projektteam, sondern klare Verantwortung und direkte Kommunikation."
+              : "You work directly with experienced Paid Ads experts – no anonymous project team, just clear accountability and direct communication."}
+          </p>
+          <ul class="space-y-4">
+            {trust.map((item) => (
+              <li class="flex items-start gap-3">
+                <DynamicIcon icon="FaCircleCheck" className="text-primary text-xl mt-0.5 shrink-0" />
+                <span class="font-medium">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary mt-8 inline-block">
+            {isDE ? "Jetzt Erstgespräch buchen" : "Book a free initial call"}
+          </a>
+        </div>
+        <div class="col-12 lg:col-6 lg:col-offset-1" data-aos="zoom-in-sm">
+          <div class="bg-body rounded-2xl p-8 text-center">
+            <p class="text-6xl font-bold text-primary mb-2">15+</p>
+            <p class="text-text-gray mb-8">{isDE ? "Jahre Paid-Ads-Erfahrung" : "years Paid Ads experience"}</p>
+            <p class="text-4xl font-bold text-primary mb-2">069 1753 611 90</p>
+            <p class="text-text-gray">{isDE ? "Direkter Draht zu Ihrem Ads-Experten" : "Direct line to your Ads expert"}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container md:w-3/4 lg:w-2/3">
+      <h2 class="text-center mb-14" data-aos="fade-up-sm">
+        {isDE ? "Häufige Fragen" : "Frequently asked questions"}
+      </h2>
+      <div class="space-y-4">
+        {faqs.map((faq, i) => (
+          <details class="bg-light rounded-2xl p-6 group" data-aos="fade-up-sm" data-aos-delay={i * 50}>
+            <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center">
+              {faq.q}
+              <DynamicIcon icon="FaChevronDown" className="text-primary text-sm transition-transform group-open:rotate-180 shrink-0 ml-4" />
+            </summary>
+            <p class="mt-4 text-text-gray leading-relaxed">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + Contact -->
+  <section class="section">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        <div class="col-12 text-center mb-6">
+          <h2 class="text-[32px] md:text-[48px] mb-4" data-aos="fade-up-sm">
+            {isDE ? "Bereit für Kampagnen, die wirklich liefern?" : "Ready for campaigns that actually deliver?"}
+          </h2>
+          <p class="lg:w-1/2 mx-auto text-text-gray" data-aos="fade-up-sm">
+            {isDE ? "Kostenlos und unverbindlich – wir zeigen Ihnen, welche Paid-Ads-Strategie zu Ihrem Unternehmen passt." : "Free and without obligation – we'll show you which Paid Ads strategy fits your business."}
+          </p>
+        </div>
+        <div class="col-12 md:col-10 lg:col-8 xl:col-5">
+          <div class="p-10 rounded-xl bg-light h-full flex flex-col justify-between">
+            <h3 class="mb-6" data-aos="fade-up-sm">
+              {isDE ? "Jetzt Kontakt aufnehmen" : "Get in touch"}
+            </h3>
+            <div>
+              {[
+                { icon: "FaEnvelope", name: "info@odgxagency.de" },
+                { icon: "FaPhone", name: "069 1753 611 90" },
+                { icon: "FaLocationDot", name: isDE ? "Frankfurt am Main" : "Frankfurt am Main, Germany" },
+              ].map((c, i) => (
+                <div class="flex items-center mb-4 last:mb-0" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+                  <div class="mr-4 p-5 rounded-full bg-primary w-fit">
+                    <DynamicIcon icon={c.icon} className="text-text-light text-3xl" />
+                  </div>
+                  <p class="text-xl">{c.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-10 lg:col-8 xl:col-7">
+          <ContactForm lang={lang} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>

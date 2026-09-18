@@ -1,54 +1,67 @@
 ---
-import config from "@/config/config.json";
 import { getLangFromUrl, slugSelector } from "@/lib/utils/languageParser";
-import ImageMod from "./ImageMod.astro";
-
-const { src }: { src?: string } = Astro.props;
-const {
-  logo,
-  logo_width,
-  logo_height,
-  logo_text,
-  title,
-}: {
-  logo: string;
-  logo_width: any;
-  logo_height: any;
-  logo_text: string;
-  title: string;
-} = config.site;
+import config from "@/config/config.json";
 
 const { default_language } = config.settings;
-
 let lang = getLangFromUrl(Astro.url);
-
 const disabledLanguages = config.settings.disable_languages as string[];
 if (disabledLanguages.includes(lang)) {
   lang = default_language;
 }
+
+const { dark = true } = Astro.props;
 ---
 
-<a href={slugSelector("/", lang)} class="navbar-brand inline-block">
-  {
-    src || logo ? (
-      <>
-        <ImageMod
-          src={src ? src : logo}
-          class="inline-block"
-          width={logo_width.replace("px", "") * 2}
-          height={logo_height.replace("px", "") * 2}
-          alt={title}
-          style={{
-            height: logo_height.replace("px", "") + "px",
-            width: logo_width.replace("px", "") + "px",
-          }}
-          format="webp"
-        />
-      </>
-    ) : logo_text ? (
-      logo_text
-    ) : (
-      title
-    )
-  }
+<a href={slugSelector("/", lang)} class="navbar-brand inline-block logo-wrap" aria-label="ODGX Agency">
+  <svg class={`odgx-logo ${!dark ? "odgx-logo--white" : ""}`} width="145" height="65" viewBox="0 0 145 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="logo-symbol" d="M74.76 62.98L95.65 31.55L76.81 2.28L77.66 0.659995L99.67 0.669995L109.99 18.32L119.79 0.659995L141.43 0.619995L142.49 2.28L123.81 31.87L144.25 62.86L143.36 65H121.11L109.65 46.3L98.02 65H75.77L74.76 63.31V62.98Z" fill="#B54D2C"/>
+    <path class="logo-letter l1" d="M0.800003 45.5V16.78H7.48C11.08 16.78 12.88 18.62 12.88 22.3V41.34C12.88 44.11 11.35 45.5 8.28 45.5H0.800003ZM4.64 42.02H7.52C8.53 42.02 9.04 41.59 9.04 40.74V22.34C9.04 20.95 8.47 20.26 7.32 20.26H4.64V42.02Z" fill="currentColor"/>
+    <path class="logo-letter l2" d="M16.27 45.5V16.78H20.11V45.5H16.27Z" fill="currentColor"/>
+    <path class="logo-letter l3" d="M29.61 34.98V31.5H35.45V45.5H27.93C24.97 45.5 23.49 43.89 23.49 40.66V21.7C23.49 18.42 24.97 16.78 27.93 16.78H30.57C33.82 16.78 35.45 18.45 35.45 21.78V24.9H31.61V22.34C31.61 20.95 31.06 20.26 29.97 20.26H29.01C27.89 20.26 27.33 20.95 27.33 22.34V39.94C27.33 41.33 27.89 42.02 29.01 42.02H31.61V34.98H29.61Z" fill="currentColor"/>
+    <path class="logo-letter l4" d="M38.57 45.5V16.78H42.41V45.5H38.57Z" fill="currentColor"/>
+    <path class="logo-letter l5" d="M52.12 20.26V45.5H48.28V20.26H44.6V16.78H55.8V20.26H52.12Z" fill="currentColor"/>
+    <path class="logo-letter l6" d="M61.63 45.5H57.79V21.7C57.79 18.42 59.32 16.78 62.39 16.78H65.27C68.34 16.78 69.87 18.42 69.87 21.7V45.5H66.03V34.98H61.63V45.5ZM66.03 31.5V21.94C66.03 20.82 65.47 20.26 64.35 20.26H63.31C62.19 20.26 61.63 20.82 61.63 21.94V31.5H66.03Z" fill="currentColor"/>
+    <path class="logo-letter l7" d="M82.38 45.5H73.26V16.78H77.1V42.02H82.38V45.5Z" fill="currentColor"/>
+  </svg>
 </a>
+
+<style>
+  .odgx-logo {
+    height: 46px;
+    width: auto;
+    color: #0f172a;
+    display: block;
+  }
+
+  .odgx-logo--white {
+    color: white;
+  }
+
+  @keyframes symbolIn {
+    from { opacity: 0; transform: scale(0.7) rotate(-15deg); }
+    to   { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  @keyframes letterIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .logo-symbol {
+    transform-origin: 109px 32px;
+    animation: symbolIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .logo-letter {
+    opacity: 0;
+    animation: letterIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .l1 { animation-delay: 0.35s; }
+  .l2 { animation-delay: 0.42s; }
+  .l3 { animation-delay: 0.49s; }
+  .l4 { animation-delay: 0.56s; }
+  .l5 { animation-delay: 0.63s; }
+  .l6 { animation-delay: 0.70s; }
+  .l7 { animation-delay: 0.77s; }
+</style>

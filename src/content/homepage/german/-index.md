@@ -1,104 +1,109 @@
 ---
-title: "Sapick"
-description: "This is the homepage"
-meta_title: "Sapick homepage"
+title: "ODGX Agency"
+description: "Mehr Leads für Ihr Unternehmen – Online Marketing was bei Ihnen ankommt"
+meta_title: "ODGX Agency – Mehr Leads durch Online Marketing"
 hero:
-  title: "d B2B Advertising"
-  content: "Learn to grow your wealth with powerful analytics, customized insights, and streamlined financial planning."
+  title: "Mehr Leads für Ihr Unternehmen"
+  content: "Online Marketing, das bei Ihnen ankommt. Wir bringen Ihr Unternehmen dort hin, wo Ihre Kunden suchen – und sorgen dafür, dass sie bei Ihnen landen."
   buttons:
     - enable: true
-      label: "Get Started For Freed"
+      label: "Kostenlos beraten lassen"
       link: "/contact"
     - enable: true
-      label: "See Our Pricing"
-      link: "/pricing"
+      label: "Unsere Leistungen"
+      link: "/leistungen"
   images:
     - "/images/homepage/hero.png"
     - "/images/homepage/1.png"
     - "/images/homepage/2.png"
     - "/images/homepage/3.png"
   client_logos:
-    - "/images/homepage/clients/1.svg"
-    - "/images/homepage/clients/2.svg"
-    - "/images/homepage/clients/3.svg"
-    - "/images/homepage/clients/4.svg"
-    - "/images/homepage/clients/5.svg"
+    - "/images/clients/consorsbank.jpg"
+    - "/images/clients/babaria.webp"
+    - "/images/clients/helpspace.png"
+    - "/images/clients/suewag.png"
+    - "/images/clients/wibank.jpg"
+    - "/images/clients/osthaven.png"
+    - "/images/clients/jetsoftware.png"
+    - "/images/clients/giti.png"
+    - "/images/clients/binect.png"
+    - "/images/clients/cmf.png"
+    - "/images/clients/schicht.png"
 
 feature:
-  - title: "Mit System zu mehr Anfragen."
-    content: "Viele Unternehmen investieren in Websites, Ads oder Tools aber ohne System dahinter. Die Digital X Funnel Methode bringt Klarheit, Struktur und ein Setup, das sichtbar, messbar und umsatzwirksam ist."
+  - title: "Mehr Anfragen – jeden Monat."
+    content: "Ihr Unternehmen hat gute Leistungen – aber zu wenige Anfragen? Wir sorgen dafür, dass kaufbereite Kunden Sie finden, bevor sie zur Konkurrenz gehen."
     images:
       - "/images/homepage/feature/1.png"
       - "/images/homepage/feature/2.png"
       - "/images/homepage/feature/3.png"
     features:
-      - "Strategisches Fundament"
-      - "Skalierbares Content-System"
-      - "Messbares Tracking-Setup"
-      - "CRM-gesteuerter Leadfluss"
-      - "Performance-Kampagnen mit Fokus auf Ergebnisse"
-
+      - "Mehr qualifizierte Anfragen in Ihrem Postfach"
+      - "Weniger Streuverlust, mehr zahlende Kunden"
+      - "Messbare Ergebnisse statt blinder Budgets"
+      - "Kunden, die schon kaufbereit sind, wenn sie ankommen"
+      - "Strategie, die zu Ihrer Branche passt"
     button:
       enable: true
       label: "Mehr erfahren"
-      link: "/features"
-  - title: "Transparenz für bessere Entscheidungen"
-    content: Wir messen jede relevante Interaktion entlang der Kundenreise von Klick bis Buchung. So wird Marketing endlich steuerbar."
+      link: "/leistungen"
+  - title: "Mehr Besucher auf Ihrer Website."
+    content: "Ihre Website ist Ihr stärkster Vertriebsmitarbeiter – aber nur, wenn die richtigen Menschen sie finden. Wir sorgen dafür, dass Ihre Seite täglich mehr relevante Besucher anzieht, organisch und durch gezielte Werbung."
     images:
       - "/images/homepage/feature/4.png"
     features:
-      - "Funnel-Tracking mit GA4 & Hotjar"
-      - "DSGVO-konformes Server Side Tagging"
-      - "Klarer Measurement-Plan für TOFU → BOFU"
+      - "Mehr Sichtbarkeit bei Google & Bing"
+      - "Besucher, die wirklich nach Ihrem Angebot suchen"
+      - "Langfristiges Wachstum ohne steigende Werbekosten"
     button:
       enable: true
-      label: "Mehr erfahren"
-      link: "/features"
-  - title: "Kein Lead bleibt mehr liegen."
-    content: "Wir integrieren euer CRM so, dass Leads automatisch erfasst, qualifiziert und wieder nutzbar gemacht werden. Tool-Basis: HubSpot Starter CRM"
+      label: "Wie wir das machen"
+      link: "/leistungen"
+  - title: "Mehr Umsatz durch die richtigen Kanäle."
+    content: "Von der ersten Suchanfrage bis zur Anfrage in Ihrem Postfach – wir bauen den kompletten Weg auf. Social Media, Inhalte und Kampagnen greifen ineinander und füllen Ihre Auftragspipeline kontinuierlich."
     images:
       - "/images/homepage/feature/5.png"
     features:
-      - "Lead-Erfassung & Scoring"
-      - "Automatisiertes UTM-Tracking"
-      - "Rückspielung qualifizierter Leads an Google & Meta"
+      - "Volle Auftragspipeline statt Leerläufen"
+      - "Reichweite und Vertrauen aufbauen"
+      - "Mehr Umsatz durch den richtigen Kundenmix"
     button:
       enable: true
-      label: "Learn More"
-      link: "/features"
+      label: "Jetzt anfragen"
+      link: "/kontakt"
 
 video:
-  title: "So funktioniert datengetriebenes B2B-Marketing in der Praxis"
-  content: "Mit der Digital X Funnel Methode steuern wir euer Marketing nicht mehr nach Bauchgefühl, sondern auf Basis klarer Daten: Dashboards zeigen in Echtzeit, wie eure Website, CRM und Kampagnen performen – und wo Optimierungspotenzial liegt."
+  title: "Online Marketing, das wirklich neue Kunden bringt"
+  content: "Viele Unternehmen investieren in Marketing – ohne klare Ergebnisse. Wir ändern das. Mit datengetriebenem Online Marketing sorgen wir dafür, dass Ihr Budget dort eingesetzt wird, wo es echte Leads erzeugt."
   video:
     cover: "/images/home/video/video-cover.png"
     link: "/images/home/video/video.mp4"
   stats:
-    - key: "analysierte Nutzerinteraktionen"
+    - key: "generierte Kundenanfragen"
       value: 340
       suffix: "K"
-    - key: "monatlich gemessene Werbebudgets"
+    - key: "verwaltetes Werbebudget monatlich"
       value: 1.5
-      prefix: "$"
+      prefix: "€"
       suffix: "M+"
-    - key: "getestete Funnel-Kampagnenstrukturen"
+    - key: "betreute Unternehmen"
       value: 170
       suffix: "+"
-    - key: "getrackte Events pro Monat"
+    - key: "organische Seitenaufrufe pro Monat"
       value: 560
       suffix: "K+"
-      
+
 reason:
-  title: "Why work with us?"
+  title: "Warum Unternehmen uns wählen"
   points:
-    - title: "Experienced Strategists"
-      content: "We bring deep experience from B2B and Fintech projects."
+    - title: "Ergebnisorientiert"
+      content: "Wir arbeiten auf messbare Ziele hin – mehr Anfragen, mehr Umsatz."
       image: "/images/icons/strategy1.svg"
-    - title: "Proven Frameworks"
-      content: "We follow structured processes that actually work."
+    - title: "Maßgeschneidert"
+      content: "Keine Pauschallösungen. Jede Strategie ist auf Ihr Unternehmen abgestimmt."
       image: "/images/icons/strategy2.svg"
-    - title: "Sustainable Growth"
-      content: "Our plans scale with your business."
+    - title: "Nachhaltig & skalierbar"
+      content: "Unsere Maßnahmen wachsen mit Ihrem Unternehmen mit."
       image: "/images/icons/strategy3.svg"
 
 ---

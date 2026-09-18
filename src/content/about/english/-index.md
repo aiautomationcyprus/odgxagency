@@ -4,7 +4,7 @@ meta_title: "this is about us page"
 description: "this is meta description"
 hero:
   title: "We’re on a mission"
-  content: "At Sapick, we believe that managing your finances should be effortless and empowering. Founded with a mission to simplify financial management."
+  content: "At ODGX Agency, we believe that managing your finances should be effortless and empowering. Founded with a mission to simplify financial management."
   image_1: "/images/about/1.png"
   image_2: "/images/about/2.png"
   trust:
@@ -31,7 +31,7 @@ value:
       image: "/images/about/value_3.svg"
 
 experience:
-  title: "Experience the Sapick Advantage"
+  title: "Experience the ODGX Agency Advantage"
   cards:
     - type: "image"
       image: "/images/about/exp_1.png"

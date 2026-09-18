@@ -52,7 +52,7 @@ if (disabledLanguages.includes(lang)) {
       </svg>
     </label>
 
-    <ul id="nav-menu" class="navbar-nav lg:space-x-2 xl:space-x-8">
+    <ul id="nav-menu" class="navbar-nav lg:space-x-2 xl:space-x-8 lg:flex-1 lg:justify-center">
       {
         menu?.main.map((menu: any) => (
           <>
@@ -75,7 +75,7 @@ if (disabledLanguages.includes(lang)) {
                         aria-label={child.name}
                         class={`nav-dropdown-link block ${
                           pathname === slugSelector(child.url, lang) && "active"
-                        }`}
+                        } ${child.sub ? "text-text/50 text-sm pl-6" : ""}`}
                       >
                         {child.name}
                       </a>
@@ -116,11 +116,6 @@ if (disabledLanguages.includes(lang)) {
       <!-- Language switcher -->
       <LanguageSwitcher client:only="react" lang={lang} pathname={pathname} />
 
-      <!-- Dark Mode Toggle Button -->
-      <button id="theme-toggle" class="ml-4 text-xl">
-        🌙
-      </button>
-
       <!-- Navigation button -->
       {
         navigation_button.enable && (
@@ -136,34 +131,3 @@ if (disabledLanguages.includes(lang)) {
   </nav>
 </header>
 
-<script>
-  const themeToggle = document.getElementById("theme-toggle");
-  const currentTheme = localStorage.getItem("theme") || "light";
-
-  if (currentTheme === "dark") {
-    document.documentElement.classList.add("dark");
-    themeToggle.textContent = "☀️";
-  }
-
-  themeToggle.addEventListener("click", () => {
-    document.documentElement.classList.toggle("dark");
-    const newTheme = document.documentElement.classList.contains("dark") ? "dark" : "light";
-    localStorage.setItem("theme", newTheme);
-    themeToggle.textContent = newTheme === "dark" ? "☀️" : "🌙";
-  });
-</script>
-
-<style>
-  .dark {
-    background-color: #121212;
-    color: white;
-  }
-  #theme-toggle {
-    margin-left: 20px;
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-    background: transparent;
-    font-size: 1.5rem;
-  }
-</style>

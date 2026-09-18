@@ -1,8 +1,8 @@
 ---
-title: "Publicaciones de Blog"
-meta_title: ""
-description: "Esta es la descripción meta"
+title: "Blog"
+meta_title: "Blog – Online Marketing Tipps & Strategien"
+description: "Aktuelle Beiträge rund um Online Marketing, Leadgenerierung, SEO, Paid Ads und Social Media."
 hero:
-  title: "Perspectivas y Actualizaciones"
-  content: "En el panorama financiero de hoy, en constante evolución, la gestión eficaz de las finanzas se ha vuelto más crucial que nunca."
+  title: "Insights & Tipps für Ihr Online Marketing"
+  content: "Praktisches Wissen rund um Leadgenerierung, SEO, Paid Ads, Social Media und Podcast – damit Ihr Marketing wirklich funktioniert."
 ---

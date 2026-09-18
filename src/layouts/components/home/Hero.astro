@@ -17,17 +17,17 @@ const { hero } = Astro.props;
   <section class="section">
     <div class="container md:w-3/4 lg:1/2 xl:w-full">
       <div class="row g-5 justify-center items-center">
-        <div class="col-12 lg:col-8 xl:col-6" data-aos="fade-up-sm">
-          <ThreeDot className="mb-6 max-md:justify-center" />
+        <div class="col-12 lg:col-8 text-center" data-aos="fade-up-sm">
+          <ThreeDot className="mb-6 justify-center" />
           <h1
             set:html={markdownify(hero.title)}
-            class="mb-6 max-md:text-center"
+            class="mb-6"
           />
           <p
             set:html={markdownify(hero.content)}
-            class="mb-10 text-xl max-md:text-center"
+            class="mb-10 text-xl lg:w-2/3 mx-auto"
           />
-          <div class="flex items-center flex-col md:flex-row gap-4">
+          <div class="flex items-center justify-center flex-col md:flex-row gap-4">
             {
               hero.buttons.map((button, i: number) => (
                 <a
@@ -41,46 +41,165 @@ const { hero } = Astro.props;
             }
           </div>
         </div>
-        <div class="col-12 xl:col-6" data-aos="zoom-out-sm">
-          <div>
-            {console.log("Hero Image URL:", hero.images[0])}
-
-            <ImageMod
-              src={hero.images[0]}
-              alt="hero"
-              class="mx-auto xl:scale-125"
-              format="webp"
-              width={287}
-              height={509}
-            />
-          </div>
-        </div>
       </div>
     </div>
   </section>
   <TitleBg />
-  <div
-    class="border-y border-border backdrop-blur-[80px] w-full"
-    data-aos="fade-up-sm"
-  >
-    <div
-      class="flex max-md:flex-wrap justify-center items-center mx-auto md:w-3/4 lg:1/2 xl:w-full"
-    >
-      {
-        hero.client_logos.map((item: any) => (
-          <div class="max-md:w-1/2 md:first:border-l md:border-r md:border-border px-4 xl:px-7 py-6 xl:py-9">
-            <ImageMod
-              class="mx-auto grayscale opacity-50"
-              src={item}
-              alt="hero"
-              width={179}
-              height={48}
-              format="webp"
-            />
+  <div class="border-y border-border w-full overflow-hidden bg-white" data-aos="fade-up-sm">
+    <div class="marquee-track flex items-center py-6">
+      {[...hero.client_logos, ...hero.client_logos].map((item: any, i: number) => (
+        <div class="marquee-item flex-shrink-0 flex items-center justify-center border-r border-border" style="width:200px;height:80px;padding: 0 2.5rem;">
+          <ImageMod
+            src={item}
+            alt="client"
+            width={180}
+            height={75}
+            format="webp"
+            style="width:100%;height:100%;object-fit:contain;filter:grayscale(1) opacity(0.5);"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Team photos -->
+  <div class="w-full py-16" data-aos="fade-up-sm">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        {[
+          { src: "/images/team/joerg.jpg", name: "Jörg Stark", role: "Managing Director" },
+          { src: "/images/team/florian.jpg", name: "Florian Brenner", role: "Social Media Paid & Organisch" },
+          { src: "/images/team/lev.jpg", name: "Lev Tseytlin", role: "Webentwicklung & Programmierung" },
+          { src: "/images/team/milly.jpg", name: "Milly", role: "Agenturhund" },
+        ].map((member, i) => (
+          <div class="col-12 md:col-6 lg:col-3" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+            <div class="mx-auto w-fit flex flex-col justify-center">
+              <div class="rounded-lg md:h-[383px] overflow-hidden mb-4">
+                <ImageMod
+                  src={member.src}
+                  alt={member.name}
+                  width={400}
+                  height={383}
+                  format="webp"
+                  class="w-full h-full object-cover hover:rotate-2 hover:scale-105 transition-all ease-in-out duration-500"
+                />
+              </div>
+              <div class="text-center md:text-left">
+                <p class="text-lg font-medium">{member.name}</p>
+                <p class="text-text/60">{member.role}</p>
+              </div>
+            </div>
           </div>
-        ))
-      }
+        ))}
+      </div>
     </div>
   </div>
 </div>
 
+<style>
+  @keyframes drawPen {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .marquee-track {
+    animation: marquee 120s linear infinite;
+    width: max-content;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .client-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: grayscale(1) opacity(0.5);
+  }
+</style>
+
+<script is:inline>
+  function initLeadsUnderline() {
+    var h1 = document.querySelector("section h1");
+    if (!h1 || !h1.textContent.includes("Leads")) return;
+
+    // Remove existing SVG if already injected (e.g. on re-navigation)
+    var existing = h1.querySelector("svg[data-pen]");
+    if (existing) existing.remove();
+
+    // Remove existing span wrapper and unwrap text
+    var existingSpan = document.getElementById("leads-word");
+    if (existingSpan) {
+      existingSpan.replaceWith(existingSpan.textContent);
+      // Reset h1 innerHTML so replace works again
+      h1.innerHTML = h1.innerHTML;
+    }
+
+    h1.innerHTML = h1.innerHTML.replace("Leads", '<span id="leads-word">Leads</span>');
+    h1.style.position = "relative";
+
+    var span = document.getElementById("leads-word");
+    if (!span) return;
+
+    var ns = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("viewBox", "0 0 120 14");
+    svg.setAttribute("preserveAspectRatio", "none");
+    Object.assign(svg.style, {
+      position: "absolute",
+      height: "10px",
+      overflow: "visible",
+      pointerEvents: "none",
+      opacity: "0",
+      transition: "opacity 0.1s"
+    });
+
+    var path = document.createElementNS(ns, "path");
+    path.setAttribute("d", "M2,3 C40,9 80,9 118,3");
+    path.setAttribute("stroke", "#B54D2C");
+    path.setAttribute("stroke-width", "7");
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke-linecap", "round");
+    Object.assign(path.style, {
+      strokeDasharray: "300",
+      strokeDashoffset: "300",
+      animation: "drawPen 0.9s cubic-bezier(0.4,0,0.2,1) forwards 0.5s"
+    });
+
+    svg.appendChild(path);
+    h1.appendChild(svg);
+
+    function positionSvg() {
+      var sr = span.getBoundingClientRect();
+      var hr = h1.getBoundingClientRect();
+      svg.style.left  = (sr.left - hr.left - 20) + "px";
+      svg.style.top   = (sr.bottom - hr.top - 4) + "px";
+      svg.style.width = (sr.width + 40) + "px";
+    }
+
+    positionSvg();
+    svg.style.opacity = "1";
+
+    var resizeTimer;
+    window.addEventListener("resize", function () {
+      svg.style.opacity = "0";
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        positionSvg();
+        svg.style.opacity = "1";
+      }, 100);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initLeadsUnderline);
+  document.addEventListener("astro:page-load", initLeadsUnderline);
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted) initLeadsUnderline();
+  });
+</script>

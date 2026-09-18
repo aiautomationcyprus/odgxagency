@@ -1,5 +1,4 @@
 ---
-import TwSizeIndicator from "@/components/TwSizeIndicator.astro";
 import config from "@/config/config.json";
 import theme from "@/config/theme.json";
 import { plainify } from "@/lib/utils/textConverter";
@@ -52,7 +51,7 @@ const language = lang || getLangFromUrl(Astro.url);
     <!-- favicon -->
     <link rel="shortcut icon" href={config.site.favicon} />
     <!-- theme meta -->
-    <meta name="theme-name" content="sapick-astro" />
+    <meta name="theme-name" content="odgx-agency-astro" />
     <meta name="msapplication-TileColor" content="#000000" />
     <meta
       name="theme-color"
@@ -176,7 +175,6 @@ const language = lang || getLangFromUrl(Astro.url);
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
-    <TwSizeIndicator />
     <Header />
     <main id="main-content">
       <slot />

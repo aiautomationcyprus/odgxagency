@@ -1,0 +1,290 @@
+---
+import Base from "@/layouts/Base.astro";
+import { supportedLang } from "@/lib/utils/languageParser";
+import ContactForm from "@/components/ContactForm.astro";
+import DynamicIcon from "@/helpers/DynamicIcon";
+
+export function getStaticPaths() {
+  return supportedLang.map((lang) => ({ params: { lang: lang || undefined } }));
+}
+
+const { lang } = Astro.params;
+const isDE = lang !== "en";
+
+const platforms = isDE ? [
+  { icon: "FaInstagram", title: "Instagram & Facebook", text: "Reels, Stories und Ads, die Ihre Marke erlebbar machen und Follower in Kunden verwandeln." },
+  { icon: "FaTiktok", title: "TikTok", text: "Dynamische Inhalte für eine breite Zielgruppe – B2C und zunehmend auch B2B. Die Reichweite ist enorm." },
+  { icon: "FaLinkedin", title: "LinkedIn", text: "B2B-Positionierung, Leadgenerierung und Employer Branding auf der wichtigsten Business-Plattform." },
+  { icon: "FaYoutube", title: "YouTube", text: "Langform-Content für Vertrauen und SEO-Wirkung – Ihr Kanal als dauerhafter Reichweitenmotor." },
+  { icon: "FaPinterest", title: "Pinterest & weitere", text: "Reddit, X, Snapchat, Bluesky – wir kennen die Eigenheiten jeder Plattform und spielen dort aus, wo Ihre Zielgruppe ist." },
+  { icon: "FaUsers", title: "Influencer & UGC", text: "Micro- bis Mega-Influencer und UGC Creator:innen, die Ihre Produkte authentisch in Reels und Shorts bewerben." },
+] : [
+  { icon: "FaInstagram", title: "Instagram & Facebook", text: "Reels, Stories and Ads that make your brand tangible and turn followers into customers." },
+  { icon: "FaTiktok", title: "TikTok", text: "Dynamic content for a broad audience – B2C and increasingly B2B too. The reach is enormous." },
+  { icon: "FaLinkedin", title: "LinkedIn", text: "B2B positioning, lead generation and employer branding on the most important business platform." },
+  { icon: "FaYoutube", title: "YouTube", text: "Long-form content for trust and SEO impact – your channel as a lasting reach engine." },
+  { icon: "FaPinterest", title: "Pinterest & more", text: "Reddit, X, Snapchat, Bluesky – we know every platform's nuances and play where your audience is." },
+  { icon: "FaUsers", title: "Influencer & UGC", text: "Micro to mega influencers and UGC creators who authentically promote your products in Reels and Shorts." },
+];
+
+const steps = isDE ? [
+  { num: "01", title: "Kennenlernen & Analyse", text: "Wir verstehen Ihr Business, Ihre Zielgruppe und Ihre Ziele. Wir analysieren Ihre bestehenden Kanäle und identifizieren, wo das größte Potenzial steckt." },
+  { num: "02", title: "Strategie & Content", text: "Wir legen fest, welche Plattformen sinnvoll sind, entwickeln Ihre Content-Strategie und erstellen Inhalte, die zu Ihrer Marke und Ihren Zielen passen." },
+  { num: "03", title: "Kampagne, Messung & Optimierung", text: "Wir schalten Ihre Kampagnen, steuern die Ausspielung und optimieren laufend auf Basis echter Daten. Transparent, messbar, skalierbar." },
+] : [
+  { num: "01", title: "Discovery & analysis", text: "We understand your business, your audience and your goals. We analyse your existing channels and identify where the biggest potential lies." },
+  { num: "02", title: "Strategy & content", text: "We define which platforms make sense, develop your content strategy and create content that fits your brand and goals." },
+  { num: "03", title: "Campaign, measurement & optimisation", text: "We run your campaigns, control delivery and continuously optimise based on real data. Transparent, measurable, scalable." },
+];
+
+const trust = isDE ? [
+  "Influencer- & UGC-Creator-Pool für authentische Produktbewerbung",
+  "KI-gestützte Meta-Kampagnen (Andromeda) für maximale Performance",
+  "Alle Plattformen aus einer Hand – Strategie, Content, Ads",
+  "Ergebnisse, die messbar sind – kein Follower-Zahlen-Theater",
+] : [
+  "Influencer & UGC creator pool for authentic product promotion",
+  "AI-powered Meta campaigns (Andromeda) for maximum performance",
+  "All platforms from one source – strategy, content, ads",
+  "Results that are measurable – no vanity metrics",
+];
+
+const faqs = isDE ? [
+  { q: "Auf welchen Plattformen sind Sie aktiv?", a: "Wir arbeiten mit Instagram, Facebook, TikTok, LinkedIn, YouTube, Pinterest, X, Reddit und Bluesky. Wir empfehlen immer die Kanäle, die für Ihre Zielgruppe wirklich relevant sind – nicht alle auf einmal." },
+  { q: "Was ist der Unterschied zwischen organischem Social Media und Paid Ads?", a: "Organisches Social Media baut langfristig Reichweite und Vertrauen auf. Paid Ads liefern sofortige Sichtbarkeit bei einer genau definierten Zielgruppe. Am stärksten wirken beide kombiniert." },
+  { q: "Wie funktioniert Influencer Marketing bei Ihnen?", a: "Wir verfügen über einen Pool an Micro- und Mega-Influencer:innen sowie UGC Creator:innen. Wir finden den richtigen Match für Ihre Marke und koordinieren die gesamte Kampagne – von Briefing bis Reporting." },
+  { q: "Wie starte ich?", a: "Rufen Sie uns an: 069 1753 611 90 oder füllen Sie das Formular aus. Wir melden uns innerhalb eines Werktages und besprechen gemeinsam den nächsten Schritt." },
+] : [
+  { q: "Which platforms do you work with?", a: "We work with Instagram, Facebook, TikTok, LinkedIn, YouTube, Pinterest, X, Reddit and Bluesky. We always recommend the channels that are truly relevant for your audience – not all at once." },
+  { q: "What's the difference between organic social media and paid ads?", a: "Organic social media builds long-term reach and trust. Paid ads deliver immediate visibility to a precisely defined audience. Both combined are the most powerful." },
+  { q: "How does influencer marketing work with you?", a: "We have a pool of micro and mega influencers as well as UGC creators. We find the right match for your brand and coordinate the entire campaign – from briefing to reporting." },
+  { q: "How do I get started?", a: "Call us: 069 1753 611 90 or fill in the form. We'll get back to you within one business day." },
+];
+---
+
+<Base
+  title={isDE ? "Social Media Agentur Frankfurt – Instagram, TikTok, LinkedIn" : "Social Media Agency Frankfurt – Instagram, TikTok, LinkedIn"}
+  meta_title={isDE ? "Social Media Marketing Agentur – Influencer, UGC & Paid Social" : "Social Media Marketing Agency – Influencer, UGC & Paid Social"}
+  description={isDE ? "Social Media Marketing aus Frankfurt: Strategie, Content, Influencer & Paid Campaigns auf allen relevanten Plattformen." : "Social Media Marketing from Frankfurt: strategy, content, influencer & paid campaigns across all relevant platforms."}
+>
+
+  <!-- Hero -->
+  <div class="relative overflow-hidden">
+    <img src="/images/homepage/patternBg.svg" alt="" class="absolute top-0 left-0 -z-10 object-cover w-[168%] h-full pointer-events-none" />
+    <div class="absolute w-full lg:w-[71%] aspect-[0.618/1] opacity-20 top-0 right-[14%] -z-10 rotate-[-157deg]">
+      <div class="absolute w-[40%] aspect-[0.325/1] bg-[#a5a2ff] rounded-full blur-[200px] left-[138px] top-[31px] rotate-12"></div>
+      <div class="absolute w-[40%] aspect-[0.572/1] bg-[#29c775] rounded-full blur-[200px] left-[222px] top-[208px]"></div>
+      <div class="absolute w-[40%] aspect-[0.571/1] bg-[#ffe74b] rounded-full blur-[200px] left-[436px] top-[340px]"></div>
+    </div>
+    <section class="pt-28 pb-16">
+      <div class="container text-center md:w-3/4 xl:w-full">
+        <p class="text-primary font-semibold mb-3 tracking-wide uppercase text-sm" data-aos="fade-up-sm">
+          {isDE ? "Social Media Agentur aus Frankfurt" : "Social Media Agency from Frankfurt"}
+        </p>
+        <h1 class="text-[32px] md:text-[48px] lg:text-[64px] mb-6" data-aos="fade-up-sm">
+          {isDE ? "Social Media, das wirklich Ergebnisse bringt" : "Social Media that actually delivers results"}
+        </h1>
+        <p class="lg:w-1/2 mx-auto mb-4 text-lg text-text-gray" data-aos="fade-up-sm">
+          {isDE
+            ? "Wir helfen Unternehmen dabei, auf Social Media sichtbar zu werden – mit durchdachten Kampagnen, echten Influencern und UGC Creator:innen, die Ihre Zielgruppe wirklich erreichen."
+            : "We help businesses become visible on social media – with well-thought-out campaigns, real influencers and UGC creators who genuinely reach your audience."}
+        </p>
+        <p class="lg:w-1/2 mx-auto mb-10 text-lg font-medium" data-aos="fade-up-sm">
+          {isDE ? "Keine leeren Versprechen – echte Strategien, die funktionieren." : "No empty promises – real strategies that work."}
+        </p>
+        <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary" data-aos="fade-up-sm">
+          {isDE ? "Kostenlose Social-Media-Beratung" : "Free social media consultation"}
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Platforms -->
+  <section class="pb-20 pt-16">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        {platforms.map((p, i) => (
+          <div class="col-12 md:col-6 lg:col-4" data-aos="fade-up-sm" data-aos-delay={i * 80}>
+            <div class="bg-light rounded-2xl p-8 h-full">
+              <div class="mb-4 p-4 rounded-full bg-body w-fit">
+                <DynamicIcon icon={p.icon} className="text-primary text-2xl" />
+              </div>
+              <h4 class="mb-3">{p.title}</h4>
+              <p class="text-text/80">{p.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Influencer & UGC Section -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-center items-center g-4">
+        <div class="col-12 lg:col-6" data-aos="fade-up-sm">
+          <p class="text-primary font-semibold uppercase text-sm tracking-wide mb-3">
+            {isDE ? "Unser Netzwerk" : "Our network"}
+          </p>
+          <h2 class="mb-6">
+            {isDE ? "Influencer & UGC Creator:innen" : "Influencer & UGC Creators"}
+          </h2>
+          <p class="text-text-gray mb-6">
+            {isDE
+              ? "Nicht jeder mit 100.000 Followern ist der richtige Influencer für Sie. Wir finden gezielt die Creator:innen, die wirklich zu Ihrer Marke passen – regional oder national, Micro oder Mega."
+              : "Not everyone with 100,000 followers is the right influencer for you. We find creators who genuinely fit your brand – regional or national, micro or mega."}
+          </p>
+          <ul class="space-y-3">
+            {(isDE ? [
+              "UGC Creator-Pool für Reels, Shorts und authentische Produktvideos",
+              "Micro-Influencer für regionale Reichweite und hohes Engagement",
+              "Mega-Influencer für deutschlandweite und europaweite Markenkampagnen",
+              "Inhalte direkt einsetzbar in Paid-Ads-Kampagnen auf Meta & TikTok",
+            ] : [
+              "UGC creator pool for Reels, Shorts and authentic product videos",
+              "Micro-influencers for regional reach and high engagement",
+              "Mega-influencers for Germany-wide and Europe-wide brand campaigns",
+              "Content directly usable in Paid Ads campaigns on Meta & TikTok",
+            ]).map((item) => (
+              <li class="flex items-start gap-3">
+                <DynamicIcon icon="FaCircleCheck" className="text-primary text-xl mt-0.5 shrink-0" />
+                <span class="text-text-gray">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="col-12 lg:col-5 lg:col-offset-1" data-aos="zoom-in-sm">
+          <div class="bg-body rounded-2xl p-8">
+            <p class="text-5xl font-bold text-primary/20 mb-4">UGC</p>
+            <h3 class="mb-4">
+              {isDE ? "Authentisch. Skalierbar. Messbar." : "Authentic. Scalable. Measurable."}
+            </h3>
+            <p class="text-text-gray">
+              {isDE
+                ? "UGC-Content wirkt persönlich und echt – genau das, was Zielgruppen heute auf TikTok und Instagram erwarten. Wir produzieren ihn in großem Maßstab und setzen ihn gezielt als Ad-Creative ein."
+                : "UGC content feels personal and real – exactly what audiences expect on TikTok and Instagram today. We produce it at scale and use it precisely as ad creative."}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we work -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center mb-14" data-aos="fade-up-sm">
+        {isDE ? "So arbeiten wir" : "How we work"}
+      </h2>
+      <div class="row g-4 justify-center">
+        {steps.map((s, i) => (
+          <div class="col-12 md:col-4" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+            <div class="bg-light rounded-2xl p-8 h-full">
+              <p class="text-5xl font-bold text-primary/20 mb-4">{s.num}</p>
+              <h4 class="mb-3">{s.title}</h4>
+              <p class="text-text/80">{s.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why ODGX -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-center items-center g-4">
+        <div class="col-12 lg:col-5" data-aos="fade-up-sm">
+          <h2 class="mb-6">
+            {isDE ? "Warum ODGX Agency?" : "Why ODGX Agency?"}
+          </h2>
+          <p class="text-text-gray mb-8">
+            {isDE
+              ? "Wir sind eine Frankfurter Social Media Agentur mit echtem Verständnis für lokale und nationale Märkte. Strategie, Content und Kampagnen kommen aus einer Hand."
+              : "We are a Frankfurt-based social media agency with a real understanding of local and national markets. Strategy, content and campaigns from one source."}
+          </p>
+          <ul class="space-y-4">
+            {trust.map((item) => (
+              <li class="flex items-start gap-3">
+                <DynamicIcon icon="FaCircleCheck" className="text-primary text-xl mt-0.5 shrink-0" />
+                <span class="font-medium">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary mt-8 inline-block">
+            {isDE ? "Jetzt Erstgespräch buchen" : "Book a free initial call"}
+          </a>
+        </div>
+        <div class="col-12 lg:col-6 lg:col-offset-1" data-aos="zoom-in-sm">
+          <div class="bg-body rounded-2xl p-8 text-center">
+            <p class="text-6xl font-bold text-primary mb-2">15+</p>
+            <p class="text-text-gray mb-8">{isDE ? "Jahre Social Media Erfahrung" : "years Social Media experience"}</p>
+            <p class="text-4xl font-bold text-primary mb-2">069 1753 611 90</p>
+            <p class="text-text-gray">{isDE ? "Direkt zu Ihrem Social Media Experten" : "Direct to your Social Media expert"}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container md:w-3/4 lg:w-2/3">
+      <h2 class="text-center mb-14" data-aos="fade-up-sm">
+        {isDE ? "Häufige Fragen" : "Frequently asked questions"}
+      </h2>
+      <div class="space-y-4">
+        {faqs.map((faq, i) => (
+          <details class="bg-light rounded-2xl p-6 group" data-aos="fade-up-sm" data-aos-delay={i * 50}>
+            <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center">
+              {faq.q}
+              <DynamicIcon icon="FaChevronDown" className="text-primary text-sm transition-transform group-open:rotate-180 shrink-0 ml-4" />
+            </summary>
+            <p class="mt-4 text-text-gray leading-relaxed">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + Contact -->
+  <section class="section">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        <div class="col-12 text-center mb-6">
+          <h2 class="text-[32px] md:text-[48px] mb-4" data-aos="fade-up-sm">
+            {isDE ? "Bereit für Social Media, das wirklich wirkt?" : "Ready for Social Media that actually works?"}
+          </h2>
+          <p class="lg:w-1/2 mx-auto text-text-gray" data-aos="fade-up-sm">
+            {isDE ? "Kostenlos und unverbindlich – wir zeigen Ihnen, welche Strategie zu Ihrem Unternehmen passt." : "Free and without obligation – we'll show you which strategy fits your business."}
+          </p>
+        </div>
+        <div class="col-12 md:col-10 lg:col-8 xl:col-5">
+          <div class="p-10 rounded-xl bg-light h-full flex flex-col justify-between">
+            <h3 class="mb-6" data-aos="fade-up-sm">
+              {isDE ? "Jetzt Kontakt aufnehmen" : "Get in touch"}
+            </h3>
+            <div>
+              {[
+                { icon: "FaEnvelope", name: "info@odgxagency.de" },
+                { icon: "FaPhone", name: "069 1753 611 90" },
+                { icon: "FaLocationDot", name: isDE ? "Frankfurt am Main" : "Frankfurt am Main, Germany" },
+              ].map((c, i) => (
+                <div class="flex items-center mb-4 last:mb-0" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+                  <div class="mr-4 p-5 rounded-full bg-primary w-fit">
+                    <DynamicIcon icon={c.icon} className="text-text-light text-3xl" />
+                  </div>
+                  <p class="text-xl">{c.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-10 lg:col-8 xl:col-7">
+          <ContactForm lang={lang} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>

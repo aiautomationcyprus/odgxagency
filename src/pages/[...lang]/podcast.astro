@@ -1,0 +1,296 @@
+---
+import Base from "@/layouts/Base.astro";
+import { supportedLang } from "@/lib/utils/languageParser";
+import ContactForm from "@/components/ContactForm.astro";
+import DynamicIcon from "@/helpers/DynamicIcon";
+
+export function getStaticPaths() {
+  return supportedLang.map((lang) => ({ params: { lang: lang || undefined } }));
+}
+
+const { lang } = Astro.params;
+const isDE = lang !== "en";
+
+const services = isDE ? [
+  { icon: "FaMicrophone", title: "Konzeption & Format", text: "Wir entwickeln gemeinsam Ihr Podcast-Format – Thema, Struktur, Tonalität, Länge und Frequenz. Passend zu Ihrer Marke und Zielgruppe." },
+  { icon: "FaHeadphones", title: "Aufnahme & Produktion", text: "Studio in Frankfurt, Joe Rogan Setup oder Remote. Bis zu 4 Personen gleichzeitig, Video-Option inklusive." },
+  { icon: "FaSliders", title: "Schnitt & Mastering", text: "Rohschnitt, Soundprocessing, EQ, Kompression, Rauschunterdrückung und Mastering nach Spotify & Apple Standard." },
+  { icon: "FaBullhorn", title: "Podcast Marketing", text: "Audiogramme für Social Media, SEO-Shownotes, Spotify & Apple Optimierung, Cover Design und Content Repurposing." },
+] : [
+  { icon: "FaMicrophone", title: "Concept & format", text: "We develop your podcast format together – topic, structure, tone, length and frequency. Tailored to your brand and audience." },
+  { icon: "FaHeadphones", title: "Recording & production", text: "Studio in Frankfurt, Joe Rogan setup or remote. Up to 4 people simultaneously, video option included." },
+  { icon: "FaSliders", title: "Editing & mastering", text: "Raw cut, sound processing, EQ, compression, noise reduction and mastering to Spotify & Apple standard." },
+  { icon: "FaBullhorn", title: "Podcast marketing", text: "Audiograms for social media, SEO show notes, Spotify & Apple optimisation, cover design and content repurposing." },
+];
+
+const steps = isDE ? [
+  { num: "01", title: "Rohschnitt & Strukturierung", text: "Wir entfernen Versprecher, Pausen und unnötige Passagen. Ihre Folge bekommt eine klare, angenehm hörbare Struktur." },
+  { num: "02", title: "Soundprocessing & Mastering", text: "EQ, Kompression, Rauschunterdrückung. Abschließend Lautstärkenormalisierung nach Spotify- und Apple-Podcast-Standard (LUFS)." },
+  { num: "03", title: "Export & Distribution", text: "Fertig für alle Plattformen: Spotify, Apple Podcasts, Amazon Music, YouTube. Auf Wunsch übernehmen wir auch den Upload." },
+] : [
+  { num: "01", title: "Raw cut & structuring", text: "We remove stumbles, pauses and unnecessary passages. Your episode gets a clear, pleasant structure." },
+  { num: "02", title: "Sound processing & mastering", text: "EQ, compression, noise reduction. Followed by loudness normalisation to Spotify and Apple Podcast standard (LUFS)." },
+  { num: "03", title: "Export & distribution", text: "Ready for all platforms: Spotify, Apple Podcasts, Amazon Music, YouTube. We also handle the upload if needed." },
+];
+
+const clients = [
+  "Consorsbank, Nürnberg",
+  "BNP Paribas, Frankfurt",
+  "Unit8, Lausanne, Schweiz",
+  "Vepa, Hoogeveen, Niederlande",
+  "Inspirezz, Ingolstadt",
+  "Breitinger AG, Aschaffenburg",
+  "Stefan Dabruck Management GmbH, Frankfurt",
+  "Maik Maurice & Ramon Zenker (Resistance D), Frankfurt",
+  "Uebervart / Solebox, Frankfurt/Berlin",
+  "Loumou Gastro & Event Group, Hanau",
+  "Krimibuchautor Leo Born, Offenbach",
+  "Eishockey Löwen Frankfurt",
+  "Ariane Sommer, Los Angeles, U.S.A.",
+  "Inbiz GmbH & Co. KG, Bad Tabarz",
+  "Hochschule Darmstadt",
+];
+
+const faqs = isDE ? [
+  { q: "Muss ich Erfahrung haben, um einen Podcast zu starten?", a: "Nein. Wir begleiten Sie von der Konzeption über die Aufnahme bis zum fertigen Produkt – auch wenn Sie noch nie vor einem Mikrofon gesessen haben." },
+  { q: "Was ist das Joe Rogan Setup?", a: "Unser Premium-Aufnahme-Setup: Großmembran-Kondensatormikrofone, akustisch behandelter Raum, Kamerasystem für Video-Podcasts und Studiobeleuchtung. Preis auf Anfrage." },
+  { q: "Wie lange dauert die Produktion einer Folge?", a: "Eine fertig bearbeitete Folge von 30–60 Minuten ist in der Regel innerhalb von 2–4 Werktagen nach der Aufnahme bereit." },
+  { q: "Kann ich auch remote aufnehmen?", a: "Ja. Wir unterstützen Remote-Aufnahmen über Tools wie Riverside.fm oder Zencastr und stellen auf Wunsch auch mobile Aufnahmegeräte bereit." },
+] : [
+  { q: "Do I need experience to start a podcast?", a: "No. We guide you from concept through recording to the finished product – even if you've never sat in front of a microphone before." },
+  { q: "What is the Joe Rogan setup?", a: "Our premium recording setup: large-diaphragm condenser microphones, acoustically treated room, camera system for video podcasts and studio lighting. Price on request." },
+  { q: "How long does producing an episode take?", a: "A finished episode of 30–60 minutes is typically ready within 2–4 business days after recording." },
+  { q: "Can I also record remotely?", a: "Yes. We support remote recordings via tools like Riverside.fm or Zencastr and can also provide mobile recording devices on request." },
+];
+---
+
+<Base
+  title={isDE ? "Podcast Produktion Frankfurt – Konzeption, Aufnahme & Marketing" : "Podcast Production Frankfurt – Concept, Recording & Marketing"}
+  meta_title={isDE ? "Podcast Agentur Frankfurt – Professionelle Podcast Produktion" : "Podcast Agency Frankfurt – Professional Podcast Production"}
+  description={isDE ? "Podcast Produktion aus Frankfurt: von der Konzeption über das Joe Rogan Studio Setup bis zum Podcast Marketing auf allen Plattformen." : "Podcast production from Frankfurt: from concept through the Joe Rogan studio setup to podcast marketing on all platforms."}
+>
+
+  <!-- Hero -->
+  <div class="relative overflow-hidden">
+    <img src="/images/homepage/patternBg.svg" alt="" class="absolute top-0 left-0 -z-10 object-cover w-[168%] h-full pointer-events-none" />
+    <div class="absolute w-full lg:w-[71%] aspect-[0.618/1] opacity-20 top-0 right-[14%] -z-10 rotate-[-157deg]">
+      <div class="absolute w-[40%] aspect-[0.325/1] bg-[#a5a2ff] rounded-full blur-[200px] left-[138px] top-[31px] rotate-12"></div>
+      <div class="absolute w-[40%] aspect-[0.572/1] bg-[#29c775] rounded-full blur-[200px] left-[222px] top-[208px]"></div>
+      <div class="absolute w-[40%] aspect-[0.571/1] bg-[#ffe74b] rounded-full blur-[200px] left-[436px] top-[340px]"></div>
+    </div>
+    <section class="pt-28 pb-16">
+      <div class="container text-center md:w-3/4 xl:w-full">
+        <p class="text-primary font-semibold mb-3 tracking-wide uppercase text-sm" data-aos="fade-up-sm">
+          {isDE ? "Podcast Agentur aus Frankfurt" : "Podcast Agency from Frankfurt"}
+        </p>
+        <h1 class="text-[32px] md:text-[48px] lg:text-[64px] mb-6" data-aos="fade-up-sm">
+          {isDE ? "Ihr Podcast – professionell produziert" : "Your podcast – professionally produced"}
+        </h1>
+        <p class="lg:w-1/2 mx-auto mb-4 text-lg text-text-gray" data-aos="fade-up-sm">
+          {isDE
+            ? "Podcasts erreichen die 18- bis 49-Jährigen mit 3–4 Folgen pro Woche – und die Tendenz steigt. Wir produzieren Ihren Podcast von der Idee bis zur fertigen Folge auf Spotify, Apple & Co."
+            : "Podcasts reach 18–49 year-olds with 3–4 episodes per week – and the trend is rising. We produce your podcast from idea to finished episode on Spotify, Apple & more."}
+        </p>
+        <p class="lg:w-1/2 mx-auto mb-10 text-lg font-medium" data-aos="fade-up-sm">
+          {isDE ? "Sie zeigen uns Ihr Thema – wir kümmern uns um den Rest." : "You show us your topic – we handle the rest."}
+        </p>
+        <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary" data-aos="fade-up-sm">
+          {isDE ? "Podcast-Produktion anfragen" : "Request podcast production"}
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Studio Photos -->
+  <section class="pb-0 pt-16">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-12 md:col-4" data-aos="zoom-in-sm" data-aos-delay="0">
+          <img src="/images/podcast/podcast-studio-1.webp" alt={isDE ? "Podcast Studio Frankfurt" : "Podcast Studio Frankfurt"} class="rounded-2xl w-full h-72 object-cover" />
+        </div>
+        <div class="col-12 md:col-4" data-aos="zoom-in-sm" data-aos-delay="100">
+          <img src="/images/podcast/podcast-studio-3.jpg" alt={isDE ? "Podcast Aufnahme Setup" : "Podcast Recording Setup"} class="rounded-2xl w-full h-72 object-cover" />
+        </div>
+        <div class="col-12 md:col-4" data-aos="zoom-in-sm" data-aos-delay="200">
+          <img src="/images/podcast/podcast-studio-2.webp" alt={isDE ? "Podcast Video Produktion" : "Podcast Video Production"} class="rounded-2xl w-full h-72 object-cover" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="pb-20 pt-16">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        {services.map((s, i) => (
+          <div class="col-12 md:col-6 lg:col-3" data-aos="fade-up-sm" data-aos-delay={i * 80}>
+            <div class="bg-light rounded-2xl p-8 h-full">
+              <div class="mb-4 p-4 rounded-full bg-body w-fit">
+                <DynamicIcon icon={s.icon} className="text-primary text-2xl" />
+              </div>
+              <h4 class="mb-3">{s.title}</h4>
+              <p class="text-text/80">{s.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Joe Rogan Setup -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-center items-center g-4">
+        <div class="col-12 lg:col-6" data-aos="fade-up-sm">
+          <p class="text-primary font-semibold uppercase text-sm tracking-wide mb-3">
+            {isDE ? "Unser Studio" : "Our studio"}
+          </p>
+          <h2 class="mb-6">
+            {isDE ? "Joe Rogan Setup – klingen wie die Profis" : "Joe Rogan Setup – sound like the pros"}
+          </h2>
+          <p class="text-text-gray mb-6">
+            {isDE
+              ? "Professionelle Mikrofone, akustisch behandelter Raum und optionales Kamerasystem für Video-Podcasts. Genau das Setup, das die größten Podcasts der Welt nutzen – jetzt in Frankfurt."
+              : "Professional microphones, acoustically treated room and optional camera system for video podcasts. Exactly the setup the world's biggest podcasts use – now in Frankfurt."}
+          </p>
+          <ul class="space-y-3">
+            {(isDE ? [
+              "Großmembran-Kondensatormikrofone (Shure SM7B o.ä.) für satten, warmen Klang",
+              "Mehrkanaliges Interface für bis zu 4 Personen gleichzeitig",
+              "Optionales Kamerasystem für YouTube & Social Media",
+              "Studiobeleuchtung für cineastisches Look-and-Feel",
+              "Remote-Aufnahmen via Riverside.fm oder Zencastr möglich",
+            ] : [
+              "Large-diaphragm condenser microphones (Shure SM7B or similar) for rich, warm sound",
+              "Multi-channel interface for up to 4 people simultaneously",
+              "Optional camera system for YouTube & social media",
+              "Studio lighting for a cinematic look and feel",
+              "Remote recordings via Riverside.fm or Zencastr possible",
+            ]).map((item) => (
+              <li class="flex items-start gap-3">
+                <DynamicIcon icon="FaCircleCheck" className="text-primary text-xl mt-0.5 shrink-0" />
+                <span class="text-text-gray">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="col-12 lg:col-5 lg:col-offset-1" data-aos="zoom-in-sm">
+          <div class="bg-body rounded-2xl p-8">
+            <p class="text-5xl font-bold text-primary/20 mb-4">Studio</p>
+            <h3 class="mb-4">
+              {isDE ? "Einzelinterview, Roundtable oder Solo" : "Single interview, roundtable or solo"}
+            </h3>
+            <p class="text-text-gray">
+              {isDE
+                ? "Egal ob Corporate Podcast, Personal Branding oder eigenes Format – mit unserem Setup klingt und sieht Ihr Podcast aus wie eine professionelle TV-Produktion."
+                : "Whether corporate podcast, personal branding or your own format – with our setup your podcast sounds and looks like a professional TV production."}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Production Process -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center mb-14" data-aos="fade-up-sm">
+        {isDE ? "Unser Produktionsprozess" : "Our production process"}
+      </h2>
+      <div class="row g-4 justify-center">
+        {steps.map((s, i) => (
+          <div class="col-12 md:col-4" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+            <div class="bg-light rounded-2xl p-8 h-full">
+              <p class="text-5xl font-bold text-primary/20 mb-4">{s.num}</p>
+              <h4 class="mb-3">{s.title}</h4>
+              <p class="text-text/80">{s.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Clients -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="col-12 lg:col-8">
+          <h2 class="text-center mb-12" data-aos="fade-up-sm">
+            {isDE ? "Bereits produziert für" : "Already produced for"}
+          </h2>
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-8" data-aos="fade-up-sm">
+            {clients.map((c) => (
+              <li class="flex items-center gap-3 py-3 border-b border-border/30">
+                <DynamicIcon icon="FaMicrophone" className="text-primary text-sm shrink-0" />
+                <span class="font-medium">{c}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container md:w-3/4 lg:w-2/3">
+      <h2 class="text-center mb-14" data-aos="fade-up-sm">
+        {isDE ? "Häufige Fragen" : "Frequently asked questions"}
+      </h2>
+      <div class="space-y-4">
+        {faqs.map((faq, i) => (
+          <details class="bg-light rounded-2xl p-6 group" data-aos="fade-up-sm" data-aos-delay={i * 50}>
+            <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center">
+              {faq.q}
+              <DynamicIcon icon="FaChevronDown" className="text-primary text-sm transition-transform group-open:rotate-180 shrink-0 ml-4" />
+            </summary>
+            <p class="mt-4 text-text-gray leading-relaxed">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + Contact -->
+  <section class="section">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        <div class="col-12 text-center mb-6">
+          <h2 class="text-[32px] md:text-[48px] mb-4" data-aos="fade-up-sm">
+            {isDE ? "Bereit, Ihren Podcast zu starten?" : "Ready to launch your podcast?"}
+          </h2>
+          <p class="lg:w-1/2 mx-auto text-text-gray" data-aos="fade-up-sm">
+            {isDE ? "Kostenlos und unverbindlich – wir besprechen gemeinsam Ihr Format und was wir für Sie tun können." : "Free and without obligation – we'll discuss your format and what we can do for you."}
+          </p>
+        </div>
+        <div class="col-12 md:col-10 lg:col-8 xl:col-5">
+          <div class="p-10 rounded-xl bg-light h-full flex flex-col justify-between">
+            <h3 class="mb-6" data-aos="fade-up-sm">
+              {isDE ? "Jetzt Kontakt aufnehmen" : "Get in touch"}
+            </h3>
+            <div>
+              {[
+                { icon: "FaEnvelope", name: "info@odgxagency.de" },
+                { icon: "FaPhone", name: "069 1753 611 90" },
+                { icon: "FaLocationDot", name: isDE ? "Frankfurt am Main" : "Frankfurt am Main, Germany" },
+              ].map((c, i) => (
+                <div class="flex items-center mb-4 last:mb-0" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+                  <div class="mr-4 p-5 rounded-full bg-primary w-fit">
+                    <DynamicIcon icon={c.icon} className="text-text-light text-3xl" />
+                  </div>
+                  <p class="text-xl">{c.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-10 lg:col-8 xl:col-7">
+          <ContactForm lang={lang} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</Base>

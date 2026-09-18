@@ -6,31 +6,28 @@
       "hasChildren": true,
       "children": [
         {
-          "name": "Strategie-Workshop",
-          "url": "/strategy2"
+          "name": "SEO",
+          "url": "/seo"
         },
         {
-          "name": "Phase 1",
-          "url": "/phase1"
+          "name": "Paid Ads",
+          "url": "/paid-ads"
         },
         {
-           "name": "Phase 2",
-          "url": "/phase2"
+          "name": "↳ ChatGPT Ads",
+          "url": "/chatgpt-ads",
+          "sub": true
         },
         {
-           "name": "Phase 3",
-          "url": "/phase3"
+          "name": "Social Media",
+          "url": "/social-media"
         },
         {
-          "name": "Phase 4",
-          "url": "/phase4"
+          "name": "Podcast Creation",
+          "url": "/podcast"
         }
       ]
     }, 
-    {
-      "name": "Methode",
-      "url": "/methode"
-    },
     {
       "name": "Case Study",
       "url": "/casestudies"
@@ -46,53 +43,19 @@
   ],
   "footer": [
     {
-      "title": "Produkt",
-      "children": [
-        {
-          "name": "Übersicht",
-          "url": "/"
-        },
-        {
-          "name": "Funktionen",
-          "url": "/features"
-        },
-        {
-          "name": "Lösungen",
-          "url": "/"
-        }
-      ]
-    },
-    {
       "title": "Unternehmen",
       "children": [
+        {
+          "name": "Startseite",
+          "url": "/"
+        },
         {
           "name": "Über uns",
           "url": "/about"
         },
         {
-          "name": "Karriere",
-          "url": "/about"
-        },
-        {
-          "name": "Presse",
-          "url": "/about"
-        }
-      ]
-    },
-    {
-      "title": "Ressourcen",
-      "children": [
-        {
           "name": "Blog",
           "url": "/blog"
-        },
-        {
-          "name": "Newsletter",
-          "url": "/blog"
-        },
-        {
-          "name": "Veranstaltung",
-          "url": "/about"
         }
       ]
     },

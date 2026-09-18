@@ -1,7 +1,7 @@
 ---
-title: "Sapick"
+title: "ODGX Agency"
 description: "Esta es la página de inicio"
-meta_title: "Página de inicio de Sapick"
+meta_title: "Página de inicio de ODGX Agency"
 hero:
   title: "Toma el control de tus finanzas con facilidad"
   content: "Aprende a hacer crecer tu riqueza con potentes análisis, perspectivas personalizadas y planificación financiera optimizada."
@@ -18,11 +18,17 @@ hero:
     - "/images/homepage/2.png"
     - "/images/homepage/3.png"
   client_logos:
-    - "/images/homepage/clients/1.svg"
-    - "/images/homepage/clients/2.svg"
-    - "/images/homepage/clients/3.svg"
-    - "/images/homepage/clients/4.svg"
-    - "/images/homepage/clients/5.svg"
+    - "/images/clients/consorsbank.jpg"
+    - "/images/clients/babaria.webp"
+    - "/images/clients/helpspace.png"
+    - "/images/clients/suewag.png"
+    - "/images/clients/wibank.jpg"
+    - "/images/clients/osthaven.png"
+    - "/images/clients/jetsoftware.png"
+    - "/images/clients/giti.png"
+    - "/images/clients/binect.png"
+    - "/images/clients/cmf.png"
+    - "/images/clients/schicht.png"
 
 feature:
   - title: "Desbloquea herramientas poderosas para gestionar tus finanzas"
@@ -82,9 +88,9 @@ video:
       value: 560
       suffix: "K+"
 reason:
-  title: "Razones por las que <br> debes obtener <br> Finaco hoy"
+  title: "Razones por las que <br> debes obtener <br> ODGX Agency hoy"
   points:
-    - title: "Sapick para tus herramientas de presupuesto"
+    - title: "ODGX Agency para tus herramientas de presupuesto"
       content: "Realiza un seguimiento automático de tus ingresos y gastos, ayudándote a crear presupuestos personalizados y mantenerte al tanto de tus metas financieras."
       image: "/images/homepage/reasons/1.png"
     - title: "Para todos tus pagos digitales"
