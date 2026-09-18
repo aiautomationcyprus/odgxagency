@@ -3,8 +3,8 @@ title: "ODGX Agency"
 description: "Mehr Leads für Ihr Unternehmen – Online Marketing was bei Ihnen ankommt"
 meta_title: "ODGX Agency – Mehr Leads durch Online Marketing"
 hero:
-  title: "Mehr Leads für Ihr Unternehmen"
-  content: "Online Marketing, das bei Ihnen ankommt. Wir bringen Ihr Unternehmen dort hin, wo Ihre Kunden suchen – und sorgen dafür, dass sie bei Ihnen landen."
+  title: "Full-Service-Marketing & Content – mehr Leads, mehr Umsatz"
+  content: "Von SEO über Paid Ads bis Social Media und Content: ODGX ist Ihre komplette Marketing-Abteilung aus Frankfurt. Eine Strategie, ein Team – kein Koordinieren zwischen fünf Agenturen."
   buttons:
     - enable: true
       label: "Kostenlos beraten lassen"
