@@ -6,25 +6,12 @@ import ReasonSlide from "./ReasonSlide.astro";
 const { reason } = Astro.props;
 ---
 
-<section class="section relative overflow-hidden">
-  <!-- Background video -->
-  <video
-    class="absolute inset-0 w-full h-full object-cover -z-10"
-    autoplay
-    muted
-    loop
-    playsinline
-  >
-    <source src="/videos/reasons-bg.mp4" type="video/mp4" />
-  </video>
-  <!-- Dark overlay so text stays readable -->
-  <div class="absolute inset-0 bg-black/60 -z-10"></div>
-
+<section class="section">
   <div class="container md:w-3/4 lg:1/2 xl:w-full">
     <ThreeDot className="mb-10 max-xl:justify-center" data-aos="fade-up" />
     <h2
       set:html={markdownify(reason.title)}
-      class="mb-14 max-xl:text-center text-white"
+      class="mb-14 max-xl:text-center"
       data-aos="fade-right"
     />
 
