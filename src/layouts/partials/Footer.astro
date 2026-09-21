@@ -72,7 +72,11 @@ const call_to_action = await getSinglePage(
                       }) => (
                         <li class="mb-3 last:mb-0 text-text font-semibold hover:text-secondary max-lg:text-center">
                           {/* @ts-ignore */}
-                          <a href={slugSelector(child?.url, lang)}>
+                          <a
+                            href={child?.url?.startsWith("http") ? child.url : slugSelector(child?.url, lang)}
+                            target={child?.url?.startsWith("http") ? "_blank" : undefined}
+                            rel={child?.url?.startsWith("http") ? "noopener noreferrer" : undefined}
+                          >
                             {child.name}
                           </a>
                         </li>
