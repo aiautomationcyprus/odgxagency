@@ -5,8 +5,8 @@ description: "Lernen Sie das Team hinter ODGX Agency kennen. Seit 2009 bringen w
 hero:
   title: "Wir sind ODGX Agency"
   content: "Ein Team aus Online-Marketing-Spezialisten aus Frankfurt am Main. Seit 2009 beraten wir mittlere und größere Unternehmen in allen digitalen Channels – und sorgen dafür, dass Ihre Strategie nicht nur existiert, sondern funktioniert."
-  image_1: "/images/about/exp_1.png"
-  image_2: "/images/about/exp_2.png"
+  image_1: "/images/about/odgx-dev1.jpg"
+  image_2: "/images/about/odgx-dev2.jpg"
   trust:
     title: "Vertrauenswürdig von führenden Unternehmen"
     business:
@@ -34,9 +34,9 @@ experience:
   title: "17+ Jahre digitale Erfahrung"
   cards:
     - type: "image"
-      image: "/images/about/exp_1.png"
+      image: "/images/about/odgx-dev2.jpg"
     - type: "image"
-      image: "/images/about/exp_2.png"
+      image: "/images/about/odgx-lukasz.jpg"
     - type: "info"
       value: 17
       suffix: "+"
@@ -48,7 +48,7 @@ experience:
       title: "Kundenprojekte"
       content: "Von Startups bis zu großen Mittelständlern und internationalen Brands."
     - type: "image"
-      image: "/images/about/exp_3.png"
+      image: "/images/about/odgx-dog.jpg"
 
 team:
   title: "Das Team hinter ODGX"
@@ -63,6 +63,12 @@ team:
     - name: "Lev Tseytlin"
       designation: "Webentwicklung & Programmierung"
       avatar: "/images/team/lev.jpg"
+    - name: "Markus"
+      designation: "Online Marketing"
+      avatar: "/images/about/odgx-markus.jpg"
+    - name: "Lukasz"
+      designation: "Online Marketing"
+      avatar: "/images/about/odgx-lukasz.jpg"
     - name: "Milly"
       designation: "Agenturhund"
       avatar: "/images/team/milly.jpg"
