@@ -11,6 +11,14 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 const isDE = lang !== "en";
+
+const cases = [
+  { id: "babaria",      name: "Babaria" },
+  { id: "lee-stafford", name: "Lee Stafford" },
+  { id: "adelta",       name: "Adelta Finanz" },
+  { id: "home-hostel",  name: "Home Hostel" },
+  { id: "jetsoftware",  name: "JetSoftware" },
+];
 ---
 
 <Base
@@ -20,121 +28,184 @@ const isDE = lang !== "en";
     ? "Unternehmen, denen wir Sichtbarkeit verschafft haben – und Wachstum!"
     : "Companies we've helped grow through visibility and smart marketing."}
 >
-  <!-- Cases Header -->
-  <section class="pt-20 pb-0">
-    <div class="container">
-      <div class="text-center mb-12">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">
-          {isDE ? "Unsere Cases" : "Our Cases"}
-        </h1>
-        <p class="text-lg text-text-gray max-w-2xl mx-auto">
-          {isDE
-            ? "Unternehmen, denen wir Sichtbarkeit verschafft haben – und Wachstum!"
-            : "Companies we've helped achieve visibility – and growth!"}
-        </p>
-      </div>
 
-      <!-- Client List -->
-      <div class="flex flex-wrap justify-center gap-3 mb-0">
-        {["Lee Stafford", "Babaria", "Adelta Finanz AG", "Home Hostel", "JetSoftware"].map((name) => (
-          <span class="px-5 py-2 rounded-full border border-border font-semibold text-sm hover:bg-primary hover:text-white transition-colors cursor-pointer">
-            {name}
-          </span>
-        ))}
+  <!-- Header + Tab Nav -->
+  <section class="pt-28 pb-0">
+    <div class="container">
+      <p class="text-primary font-semibold mb-3 tracking-wide uppercase text-sm">Case Studies</p>
+      <h1 class="text-[32px] md:text-[48px] lg:text-[56px] mb-4">
+        {isDE ? "Ergebnisse, die für sich sprechen" : "Results that speak for themselves"}
+      </h1>
+      <p class="text-lg text-text-gray mb-12 max-w-2xl">
+        {isDE
+          ? "Echte Projekte. Echte Zahlen. So arbeiten wir mit unseren Kunden."
+          : "Real projects. Real numbers. This is how we work with our clients."}
+      </p>
+
+      <!-- Tab bar -->
+      <div class="border-b border-border">
+        <div class="flex gap-0 overflow-x-auto">
+          {cases.map((c, i) => (
+            <button
+              class={`case-tab px-6 py-4 font-semibold text-sm border-b-2 transition-colors whitespace-nowrap -mb-px ${
+                i === 0
+                  ? "border-primary text-primary"
+                  : "border-transparent text-text/40 hover:text-text"
+              }`}
+              data-target={c.id}
+            >
+              {c.name}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Babaria Case Study -->
-  <section class="pb-20">
-    <div class="container">
+  <!-- Babaria Panel -->
+  <div id="panel-babaria" class="case-panel">
+    <section class="pt-16 pb-20">
+      <div class="container">
 
-      <!-- Hero Image -->
-      <div class="rounded-2xl overflow-hidden mb-16 mt-12">
-        <img
-          src="/images/cases/babaria-hero.png"
-          alt="Babaria – Beauty for Sun Lovers"
-          class="w-full object-cover max-h-[420px]"
-        />
-      </div>
+        <!-- Hero Image -->
+        <div class="overflow-hidden mb-16">
+          <img
+            src="/images/cases/babaria-hero.png"
+            alt="Babaria – Beauty for Sun Lovers"
+            class="w-full object-cover max-h-[420px]"
+          />
+        </div>
 
-      <!-- Title -->
-      <div class="mb-14">
-        <h2 class="text-3xl md:text-4xl font-bold mb-2">Babaria</h2>
-        <p class="text-lg text-text-gray">
-          {isDE
-            ? "Markteinführung & Mediaplanung für Rossmann, DM & Müller"
-            : "Market launch & media planning for Rossmann, DM & Müller"}
-        </p>
-      </div>
-
-      <!-- 01 + 02 Blocks -->
-      <div class="row mb-16">
-        <div class="col-12 md:col-6 mb-10 md:mb-0">
-          <p class="text-5xl font-bold text-primary/20 mb-4">01</p>
-          <h3 class="text-xl font-bold mb-4">
-            {isDE ? "Herausforderung" : "Challenge"}
-          </h3>
-          <p class="text-text-gray leading-relaxed">
+        <!-- Title -->
+        <div class="mb-14 border-b border-border pb-10">
+          <h2 class="text-3xl md:text-4xl font-bold mb-2">Babaria</h2>
+          <p class="text-lg text-text-gray">
             {isDE
-              ? "In Spanien ist Babaria seit Jahrzehnten fest verankert. Der deutsche Markt war Neuland — ohne Bekanntheit, ohne bestehende Community. Gleichzeitig stand der Eintritt in drei große Drogerieketten an. Das Zeitfenster war eng, der Druck hoch."
-              : "In Spain, Babaria has been an established name for decades. Germany was uncharted territory — no brand awareness, no existing community. At the same time, the brand was entering three major drugstore chains at once. The window was tight, the pressure real."}
+              ? "Markteinführung & Mediaplanung für Rossmann, DM & Müller"
+              : "Market launch & media planning for Rossmann, DM & Müller"}
           </p>
         </div>
-        <div class="col-12 md:col-6">
-          <p class="text-5xl font-bold text-primary/20 mb-4">02</p>
-          <h3 class="text-xl font-bold mb-4">
-            {isDE ? "Lösung" : "Solution"}
-          </h3>
-          <p class="text-text-gray leading-relaxed">
-            {isDE
-              ? "Wir haben eine kanalübergreifende Strategie entwickelt, die Meta, TikTok und Google Ads gezielt miteinander verzahnt. Awareness, Consideration und Conversion — jede Phase mit eigenem Creative-Ansatz und klarem Budget-Allocation-Framework."
-              : "We built a cross-channel strategy that connects Meta, TikTok and Google Ads with purpose. Awareness, consideration and conversion — each phase with its own creative approach and a clear budget allocation framework."}
-          </p>
-        </div>
-      </div>
 
-      <!-- UGC Image Grid -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-        {[
-          { src: "/images/cases/ugc-1.png", alt: "UGC #1" },
-          { src: "/images/cases/ugc-2.png", alt: "UGC #2" },
-          { src: "/images/cases/ugc-3.png", alt: "UGC #3" },
-          { src: "/images/cases/ad-pic.png", alt: "Ad" },
-        ].map((img) => (
-          <div class="rounded-xl overflow-hidden aspect-[9/16]">
-            <img src={img.src} alt={img.alt} class="w-full h-full object-cover scale-[1.08]" />
+        <!-- 01 + 02 Blocks -->
+        <div class="row mb-16">
+          <div class="col-12 md:col-6 mb-10 md:mb-0 border-r border-border pr-10">
+            <p class="text-5xl font-bold text-primary/20 mb-4">01</p>
+            <h3 class="text-xl font-bold mb-4">
+              {isDE ? "Herausforderung" : "Challenge"}
+            </h3>
+            <p class="text-text-gray leading-relaxed">
+              {isDE
+                ? "In Spanien ist Babaria seit Jahrzehnten fest verankert. Der deutsche Markt war Neuland — ohne Bekanntheit, ohne bestehende Community. Gleichzeitig stand der Eintritt in drei große Drogerieketten an. Das Zeitfenster war eng, der Druck hoch."
+                : "In Spain, Babaria has been an established name for decades. Germany was uncharted territory — no brand awareness, no existing community. At the same time, the brand was entering three major drugstore chains at once. The window was tight, the pressure real."}
+            </p>
           </div>
-        ))}
-      </div>
+          <div class="col-12 md:col-6 pl-10">
+            <p class="text-5xl font-bold text-primary/20 mb-4">02</p>
+            <h3 class="text-xl font-bold mb-4">
+              {isDE ? "Lösung" : "Solution"}
+            </h3>
+            <p class="text-text-gray leading-relaxed">
+              {isDE
+                ? "Wir haben eine kanalübergreifende Strategie entwickelt, die Meta, TikTok und Google Ads gezielt miteinander verzahnt. Awareness, Consideration und Conversion — jede Phase mit eigenem Creative-Ansatz und klarem Budget-Allocation-Framework."
+                : "We built a cross-channel strategy that connects Meta, TikTok and Google Ads with purpose. Awareness, consideration and conversion — each phase with its own creative approach and a clear budget allocation framework."}
+            </p>
+          </div>
+        </div>
 
-      <!-- The Challenge Block -->
-      <div class="bg-light rounded-2xl p-8 md:p-12 mb-16">
-        <h3 class="text-xl font-bold mb-4">
-          {isDE ? "Die Herausforderung" : "The Challenge"}
-        </h3>
-        <p class="text-text-gray leading-relaxed max-w-3xl">
-          {isDE
-            ? "Eine Marke mit über 50 Jahren Geschichte auf einem fremden Markt einzuführen, ist kein Sprint — es ist Aufbauarbeit. Unsere Aufgabe war es, Babaria in Deutschland nicht nur sichtbar, sondern relevant zu machen. Mit Inhalten, die zur Zielgruppe sprechen, und einer Medialogik, die den Regalstart in den Drogeriemärkten direkt unterstützt."
-            : "Launching a brand with over 50 years of history in a new market isn't a sprint — it's groundwork. Our job was to make Babaria not just visible in Germany, but relevant. With content that speaks to the target audience and a media logic that directly supports the drugstore shelf launch."}
-        </p>
-      </div>
+        <!-- UGC Image Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+          {[
+            { src: "/images/cases/ugc-1.png", alt: "UGC #1" },
+            { src: "/images/cases/ugc-2.png", alt: "UGC #2" },
+            { src: "/images/cases/ugc-3.png", alt: "UGC #3" },
+            { src: "/images/cases/ad-pic.png", alt: "Ad" },
+          ].map((img) => (
+            <div class="overflow-hidden aspect-[9/16]">
+              <img src={img.src} alt={img.alt} class="w-full h-full object-cover scale-[1.08]" />
+            </div>
+          ))}
+        </div>
 
-      <!-- CTA -->
-      <div class="text-center">
-        <h3 class="text-2xl md:text-3xl font-bold mb-4">
-          {isDE
-            ? "Bereit für Ergebnisse wie diese oder lieber weiter zusehen?"
-            : "Ready for results like these — or keep watching from the sidelines?"}
-        </h3>
-        <a href="/contact" class="btn btn-primary mr-4">
-          {isDE ? "Kostenfreies Erstgespräch" : "Free initial consultation"}
-        </a>
-        <p class="mt-4 text-text-gray text-sm">
-          {isDE ? "Per Telefon:" : "By phone:"} <a href="tel:+4906917536119​0" class="font-semibold hover:text-primary">069 1753 611 90</a>
-        </p>
-      </div>
+        <!-- Challenge Block -->
+        <div class="border-l-4 border-primary pl-8 py-2 mb-16">
+          <h3 class="text-xl font-bold mb-4">
+            {isDE ? "Die Herausforderung" : "The Challenge"}
+          </h3>
+          <p class="text-text-gray leading-relaxed max-w-3xl">
+            {isDE
+              ? "Eine Marke mit über 50 Jahren Geschichte auf einem fremden Markt einzuführen, ist kein Sprint — es ist Aufbauarbeit. Unsere Aufgabe war es, Babaria in Deutschland nicht nur sichtbar, sondern relevant zu machen. Mit Inhalten, die zur Zielgruppe sprechen, und einer Medialogik, die den Regalstart in den Drogeriemärkten direkt unterstützt."
+              : "Launching a brand with over 50 years of history in a new market isn't a sprint — it's groundwork. Our job was to make Babaria not just visible in Germany, but relevant. With content that speaks to the target audience and a media logic that directly supports the drugstore shelf launch."}
+          </p>
+        </div>
 
+        <!-- CTA -->
+        <div class="border-t border-border pt-12 text-center">
+          <h3 class="text-2xl md:text-3xl font-bold mb-6">
+            {isDE
+              ? "Bereit für Ergebnisse wie diese?"
+              : "Ready for results like these?"}
+          </h3>
+          <a href="/kontakt" class="btn btn-primary mr-4">
+            {isDE ? "Kostenfreies Erstgespräch" : "Free initial consultation"}
+          </a>
+          <p class="mt-4 text-text-gray text-sm">
+            {isDE ? "Per Telefon:" : "By phone:"}
+            <a href="tel:+496917536119​0" class="font-semibold hover:text-primary"> 069 1753 611 90</a>
+          </p>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- Placeholder panels for other clients -->
+  {["lee-stafford", "adelta", "home-hostel", "jetsoftware"].map((id) => (
+    <div id={`panel-${id}`} class="case-panel hidden">
+      <section class="section">
+        <div class="container">
+          <div class="border-t border-border pt-16 text-center">
+            <p class="text-5xl font-bold text-primary/10 mb-6">Soon</p>
+            <h2 class="text-2xl font-bold mb-4">
+              {isDE ? "Case Study in Kürze" : "Case Study coming soon"}
+            </h2>
+            <p class="text-text-gray max-w-md mx-auto">
+              {isDE
+                ? "Wir bereiten diesen Case gerade auf. Melden Sie sich gerne – wir erzählen Ihnen mehr."
+                : "We're preparing this case study. Get in touch – we'll tell you more."}
+            </p>
+            <a href="/kontakt" class="btn btn-primary mt-8 inline-block">
+              {isDE ? "Kontakt aufnehmen" : "Get in touch"}
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
-  </section>
+  ))}
+
 </Base>
+
+<script>
+  function initCaseTabs() {
+    const tabs = document.querySelectorAll<HTMLButtonElement>(".case-tab");
+    const panels = document.querySelectorAll<HTMLElement>(".case-panel");
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const target = tab.dataset.target;
+
+        tabs.forEach((t) => {
+          t.classList.remove("border-primary", "text-primary");
+          t.classList.add("border-transparent", "text-text/40");
+        });
+        tab.classList.add("border-primary", "text-primary");
+        tab.classList.remove("border-transparent", "text-text/40");
+
+        panels.forEach((p) => p.classList.add("hidden"));
+        document.getElementById(`panel-${target}`)?.classList.remove("hidden");
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", initCaseTabs);
+  document.addEventListener("DOMContentLoaded", initCaseTabs);
+</script>
