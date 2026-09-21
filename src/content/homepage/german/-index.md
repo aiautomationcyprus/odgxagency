@@ -36,7 +36,7 @@ feature:
     images:
       - "/images/homepage/feature/1.png"
       - "/images/homepage/feature/2.png"
-      - "/images/homepage/feature/3.png"
+      - "/images/favicon.svg"
     features:
       - "Mehr qualifizierte Anfragen in Ihrem Postfach"
       - "Weniger Streuverlust, mehr zahlende Kunden"
