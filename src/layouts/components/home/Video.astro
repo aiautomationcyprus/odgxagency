@@ -41,25 +41,28 @@ const { video } = Astro.props;
         </div>
       </div>
 
-      <div class="flex gap-4 md:gap-6 justify-center items-end mb-28 px-4" data-aos="zoom-in">
+      <div class="flex gap-4 md:gap-8 justify-center items-end mt-16 mb-16 px-0" data-aos="zoom-in">
         {[
-          "/videos/social-1.mp4",
-          "/videos/social-2.mp4",
-          "/videos/social-3.mp4",
-        ].map((src, i) => (
-          <div
-            class={`relative rounded-2xl overflow-hidden border border-white/20 shadow-xl flex-1 max-w-[280px] ${i === 1 ? "scale-105" : "opacity-90"}`}
-            style="aspect-ratio: 9/16;"
-          >
-            <video
-              class="w-full h-full object-cover"
-              autoplay
-              muted
-              loop
-              playsinline
+          { src: "/videos/social-1.mp4", handle: "@jess.amweg" },
+          { src: "/videos/social-2.mp4", handle: "@lauradajana" },
+          { src: "/videos/social-3.mp4", handle: "@steffi_burmeister" },
+        ].map((v, i) => (
+          <div class={`flex flex-col items-center flex-1 max-w-[340px] ${i === 1 ? "scale-105" : "opacity-90"}`}>
+            <div
+              class="relative rounded-2xl overflow-hidden border border-white/20 shadow-xl w-full"
+              style="aspect-ratio: 9/16;"
             >
-              <source src={src} type="video/mp4" />
-            </video>
+              <video
+                class="w-full h-full object-cover"
+                autoplay
+                muted
+                loop
+                playsinline
+              >
+                <source src={v.src} type="video/mp4" />
+              </video>
+            </div>
+            <p class="text-white/70 text-sm mt-3 font-medium">{v.handle}</p>
           </div>
         ))}
       </div>
