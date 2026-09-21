@@ -3,8 +3,8 @@ title: "ODGX Agency"
 description: "Mehr Leads für Ihr Unternehmen – Online Marketing was bei Ihnen ankommt"
 meta_title: "ODGX Agency – Mehr Leads durch Online Marketing"
 hero:
-  title: "Full-Service-Marketing & Content – mehr Leads, mehr Umsatz"
-  content: "Von SEO über Paid Ads bis Social Media und Content: ODGX ist Ihre komplette Marketing-Abteilung aus Frankfurt. Eine Strategie, ein Team – kein Koordinieren zwischen fünf Agenturen."
+  title: "Mehr Leads. Mehr Umsatz. Wir kümmern uns um alles andere."
+  content: "Von Content über Social Media bis SEO und Paid Ads – ODGX übernimmt Ihr komplettes Marketing. Sie konzentrieren sich auf Ihr Business, wir sorgen für den Kundenstrom."
   buttons:
     - enable: true
       label: "Kostenlos beraten lassen"
@@ -31,50 +31,50 @@ hero:
     - "/images/clients/schicht.png"
 
 feature:
-  - title: "Mehr Anfragen – jeden Monat."
-    content: "Ihr Unternehmen hat gute Leistungen – aber zu wenige Anfragen? Wir sorgen dafür, dass kaufbereite Kunden Sie finden, bevor sie zur Konkurrenz gehen."
+  - title: "Kein Content-Stress mehr – wir produzieren alles."
+    content: "Texte, Videos, Creatives, Posts – für jeden Kanal, in Ihrer Sprache, auf Ihre Zielgruppe zugeschnitten. Sie bekommen fertige Inhalte, die performen. Kein Briefing-Chaos, keine Abstimmungsschleifen."
     images:
       - "/images/homepage/feature/1.png"
       - "/images/homepage/feature/2.png"
       - "/images/favicon.svg"
     features:
-      - "Mehr qualifizierte Anfragen in Ihrem Postfach"
-      - "Weniger Streuverlust, mehr zahlende Kunden"
-      - "Messbare Ergebnisse statt blinder Budgets"
-      - "Kunden, die schon kaufbereit sind, wenn sie ankommen"
-      - "Strategie, die zu Ihrer Branche passt"
+      - "Content-Strategie, Produktion und Veröffentlichung aus einer Hand"
+      - "Videos, Reels, Texte und Creatives – je nach Kanal"
+      - "Kein eigenes Team nötig – wir sind Ihr Content-Team"
+      - "Konsistente Markenkommunikation auf allen Plattformen"
+      - "Monatliche Content-Pakete, flexibel anpassbar"
+    button:
+      enable: true
+      label: "Unsere Leistungen"
+      link: "/leistungen"
+  - title: "Überall sichtbar – wir kümmern uns darum."
+    content: "Google, Instagram, TikTok, LinkedIn – wir bauen Ihre Präsenz auf jedem Kanal auf, der für Ihre Zielgruppe relevant ist. Organisch und bezahlt, aufeinander abgestimmt, ohne dass Sie jeden Kanal einzeln managen müssen."
+    images:
+      - "/images/homepage/feature/4.png"
+    features:
+      - "SEO, Paid Ads und Social Media greifen ineinander"
+      - "Eine Strategie für alle Kanäle – kein Silodenken"
+      - "Wir übernehmen Setup, Steuerung und Optimierung"
     button:
       enable: true
       label: "Mehr erfahren"
       link: "/leistungen"
-  - title: "Mehr Besucher auf Ihrer Website."
-    content: "Ihre Website ist Ihr stärkster Vertriebsmitarbeiter – aber nur, wenn die richtigen Menschen sie finden. Wir sorgen dafür, dass Ihre Seite täglich mehr relevante Besucher anzieht, organisch und durch gezielte Werbung."
-    images:
-      - "/images/homepage/feature/4.png"
-    features:
-      - "Mehr Sichtbarkeit bei Google & Bing"
-      - "Besucher, die wirklich nach Ihrem Angebot suchen"
-      - "Langfristiges Wachstum ohne steigende Werbekosten"
-    button:
-      enable: true
-      label: "Wie wir das machen"
-      link: "/leistungen"
-  - title: "Mehr Umsatz durch die richtigen Kanäle."
-    content: "Von der ersten Suchanfrage bis zur Anfrage in Ihrem Postfach – wir bauen den kompletten Weg auf. Social Media, Inhalte und Kampagnen greifen ineinander und füllen Ihre Auftragspipeline kontinuierlich."
+  - title: "Sie wachsen – wir machen den Rest."
+    content: "Mehr Anfragen, mehr Umsatz, mehr Wachstum – durch ein Marketingsystem, das wir für Sie aufbauen und täglich optimieren. Sie müssen keine Agentur koordinieren, kein Budget manuell steuern, keine Reports interpretieren."
     images:
       - "/images/homepage/feature/5.png"
     features:
       - "Volle Auftragspipeline statt Leerläufen"
-      - "Reichweite und Vertrauen aufbauen"
-      - "Mehr Umsatz durch den richtigen Kundenmix"
+      - "Transparente Ergebnisse – monatlich, verständlich"
+      - "Skalierbar: wächst mit Ihrem Unternehmen mit"
     button:
       enable: true
       label: "Jetzt anfragen"
       link: "/kontakt"
 
 video:
-  title: "Online Marketing, das wirklich neue Kunden bringt"
-  content: "Viele Unternehmen investieren in Marketing – ohne klare Ergebnisse. Wir ändern das. Mit datengetriebenem Online Marketing sorgen wir dafür, dass Ihr Budget dort eingesetzt wird, wo es echte Leads erzeugt."
+  title: "Content, der bewegt – produziert und ausgespielt von uns"
+  content: "UGC, Influencer-Marketing, Reels, Stories – wir produzieren Inhalte, die Ihre Zielgruppe wirklich erreichen. Von der Idee bis zur Ausspielung übernehmen wir alles. Sie sehen das Ergebnis, nicht den Aufwand dahinter."
   video:
     cover: "/images/home/video/video-cover.png"
     link: "/images/home/video/video.mp4"
