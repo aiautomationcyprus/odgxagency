@@ -79,19 +79,19 @@ video:
     cover: "/images/home/video/video-cover.png"
     link: "/images/home/video/video.mp4"
   stats:
-    - key: "generierte Kundenanfragen"
-      value: 340
-      suffix: "K"
-    - key: "verwaltetes Werbebudget monatlich"
-      value: 1.5
+    - key: "für unsere Kunden generiert"
+      value: 100
       prefix: "€"
-      suffix: "M+"
-    - key: "betreute Unternehmen"
-      value: 170
+      suffix: "Mio.+"
+    - key: "SEA-Konten erfolgreich aufgebaut"
+      value: 1000
       suffix: "+"
-    - key: "organische Seitenaufrufe pro Monat"
-      value: 560
-      suffix: "K+"
+    - key: "Social-Media-Kampagnen durchgeführt"
+      value: 200
+      suffix: "+"
+    - key: "Jahre Erfahrung im Online Marketing"
+      value: 17
+      suffix: "+"
 
 reason:
   title: "Warum Unternehmen uns wählen"
