@@ -39,41 +39,16 @@ const { points } = Astro.props;
   data-aos="fade-left-sm"
   data-aos-delay="200"
 >
-  <div class="relative rounded-[2rem] overflow-hidden bg-light w-full h-full">
-    <img
-      src="/images/card-pattern-1.png"
-      alt="pattern"
-      class="absolute bottom-0 right-0 scale-x-[-1] w-1/3"
-      width={0}
-      height={0}
-    />
-    <img
-      src="/images/card-pattern-2.png"
-      alt="pattern"
-      class="absolute top-0 left-[-9%] scale-x-[-1] w-1/3"
-      width={0}
-      height={0}
-    />
-    {
-      points.map((f: any, i: number) => (
-        <div class="h-full" data-tab-content={i}>
-          <div
-            class:list={[
-              "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 w-3/5",
-              { "opacity-0 pointer-events-none": i !== 0 },
-            ]}
-          >
-            <ImageMod
-              src={f.image}
-              width={329}
-              height={431}
-              alt="reason"
-              class="h-1/3 mx-auto shadow rounded-[25px] w-full p-2 border border-[#ffffff4d]"
-            />
-          </div>
-        </div>
-      ))
-    }
+  <div class="relative rounded-[2rem] overflow-hidden w-full h-full">
+    <video
+      class="w-full h-full object-cover"
+      autoplay
+      muted
+      loop
+      playsinline
+    >
+      <source src="/videos/reasons-bg.mp4" type="video/mp4" />
+    </video>
   </div>
 </div>
 
