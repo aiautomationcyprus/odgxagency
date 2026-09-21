@@ -15,17 +15,17 @@ const { hero } = Astro.props;
 
 <div class="relative overflow-hidden">
   <section class="pt-28 pb-16">
-    <div class="container md:w-3/4 lg:1/2 xl:w-full">
+    <div class="container">
       <div class="row g-5 justify-center items-center">
-        <div class="col-12 lg:col-8 text-center" data-aos="fade-up-sm">
+        <div class="col-12 text-center" data-aos="fade-up-sm">
           <ThreeDot className="mb-6 justify-center" />
           <h1
             set:html={markdownify(hero.title)}
-            class="mb-6"
+            class="mb-6 text-[28px] md:text-[40px] lg:text-[52px]"
           />
           <p
             set:html={markdownify(hero.content)}
-            class="mb-10 text-xl lg:w-2/3 mx-auto"
+            class="mb-10 text-xl max-w-3xl mx-auto"
           />
           <div class="flex items-center justify-center flex-col md:flex-row gap-4">
             {
