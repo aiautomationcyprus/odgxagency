@@ -45,6 +45,7 @@ const { hero } = Astro.props;
     </div>
   </section>
   <TitleBg />
+</div>
   <div class="border-y border-border w-full overflow-hidden bg-white" data-aos="fade-up-sm">
     <div class="marquee-track flex items-center py-6">
       {[...hero.client_logos, ...hero.client_logos].map((item: any, i: number) => (
@@ -94,7 +95,6 @@ const { hero } = Astro.props;
       </div>
     </div>
   </div>
-</div>
 
 <style>
   @keyframes drawPen {
