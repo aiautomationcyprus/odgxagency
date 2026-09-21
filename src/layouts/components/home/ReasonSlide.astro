@@ -4,7 +4,7 @@ import ImageMod from "../ImageMod.astro";
 const { points } = Astro.props;
 ---
 
-<div class="w-full xl:w-[48%]">
+<div class="w-full max-w-2xl mx-auto">
   {
     points.map((f: any, i: number) => (
       <div data-tab-trigger={i}>
@@ -18,13 +18,13 @@ const { points } = Astro.props;
             data-card-content
           >
             <p
-              class="pb-3 font-medium text-xl transition-colors duration-300"
+              class="pb-3 font-medium text-xl transition-colors duration-300 text-white"
               data-title
               set:html={f.title}
             />
             <p
               set:html={f.content}
-              class="text-lg transition-colors duration-300"
+              class="text-lg transition-colors duration-300 text-white/70"
               data-description
             />
           </div>
@@ -34,23 +34,6 @@ const { points } = Astro.props;
   }
 </div>
 
-<div
-  class="w-full xl:w-[48%] h-[300px] md:h-[630px]"
-  data-aos="fade-left-sm"
-  data-aos-delay="200"
->
-  <div class="relative rounded-[2rem] overflow-hidden w-full h-full">
-    <video
-      class="w-full h-full object-cover"
-      autoplay
-      muted
-      loop
-      playsinline
-    >
-      <source src="/videos/reasons-bg.mp4" type="video/mp4" />
-    </video>
-  </div>
-</div>
 
 <script>
   function setupTabs() {
