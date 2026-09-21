@@ -36,7 +36,7 @@ experience:
     - type: "image"
       image: "/images/about/odgx-dev2.jpg"
     - type: "image"
-      image: "/images/about/odgx-lukasz.jpg"
+      image: "/images/homepage/feature/odgx-neon.jpg"
     - type: "info"
       value: 17
       suffix: "+"
