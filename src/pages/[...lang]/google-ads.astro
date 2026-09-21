@@ -1,0 +1,287 @@
+---
+import Base from "@/layouts/Base.astro";
+import { supportedLang } from "@/lib/utils/languageParser";
+import ContactForm from "@/components/ContactForm.astro";
+import DynamicIcon from "@/helpers/DynamicIcon";
+
+export function getStaticPaths() {
+  return supportedLang.map((lang) => ({ params: { lang: lang || undefined } }));
+}
+
+const { lang } = Astro.params;
+const isDE = lang !== "en";
+
+const services = isDE ? [
+  { icon: "FaSearch", title: "Suchanzeigen (Search)", text: "Textanzeigen genau dann, wenn Ihre Zielgruppe aktiv nach Ihrer Leistung sucht. Höchste Kaufabsicht, direkter Einstieg in den Funnel." },
+  { icon: "FaShoppingCart", title: "Google Shopping", text: "Produkte visuell im Shopping-Tab präsentieren – mit Bild, Preis und direktem Link. Ideal für E-Commerce mit messbarem ROAS." },
+  { icon: "FaBullseye", title: "Performance Max", text: "Eine Kampagne, alle Google-Kanäle: Search, Display, YouTube, Maps, Gmail. KI-optimiert für maximalen Conversion-Output." },
+  { icon: "FaRobot", title: "KI-Kampagnenmanagement", text: "Unser KI-System optimiert Gebote und Budgets 24/7 – bis zu 99 % Optimierungsgrad statt 50–60 % manuell. Fehleranfälligkeit massiv reduziert." },
+] : [
+  { icon: "FaSearch", title: "Search Ads", text: "Text ads precisely when your target audience is actively searching for your service. Highest purchase intent, direct funnel entry." },
+  { icon: "FaShoppingCart", title: "Google Shopping", text: "Present products visually in the Shopping tab – with image, price and direct link. Ideal for e-commerce with measurable ROAS." },
+  { icon: "FaBullseye", title: "Performance Max", text: "One campaign, all Google channels: Search, Display, YouTube, Maps, Gmail. AI-optimised for maximum conversion output." },
+  { icon: "FaRobot", title: "AI Campaign Management", text: "Our AI system optimises bids and budgets 24/7 – up to 99% optimisation rate vs. 50–60% manually. Error rate massively reduced." },
+];
+
+const steps = isDE ? [
+  { num: "01", title: "Analyse & Strategie", text: "Wir analysieren Ihre Ziele, Wettbewerber und Suchvolumina. Daraus entsteht eine Kanalstrategie mit klaren KPIs – bevor auch nur ein Euro fließt." },
+  { num: "02", title: "Setup & Launch", text: "Kampagnenstruktur, Keyword-Recherche, Anzeigentexte, Tracking und Conversion-Setup. Nach Ihrer Freigabe sind wir live – in der Regel innerhalb weniger Tage." },
+  { num: "03", title: "Optimierung & Reporting", text: "KI-gestützte Optimierung rund um die Uhr. Sie erhalten transparente Berichte mit allen KPIs – Klicks, Conversions, Cost per Lead, ROAS. Jederzeit nachvollziehbar." },
+] : [
+  { num: "01", title: "Analysis & strategy", text: "We analyse your goals, competitors and search volumes. This results in a channel strategy with clear KPIs – before a single euro is spent." },
+  { num: "02", title: "Setup & launch", text: "Campaign structure, keyword research, ad copy, tracking and conversion setup. After your approval we go live – usually within a few days." },
+  { num: "03", title: "Optimisation & reporting", text: "AI-powered optimisation around the clock. You receive transparent reports with all KPIs – clicks, conversions, cost per lead, ROAS. Always clear." },
+];
+
+const trust = isDE ? [
+  "Über 15 Jahre Erfahrung mit Google Ads – auf allen Kampagnentypen",
+  "KI-gesteuertes Management: bis zu 99 % Optimierungsgrad, 7 Tage / 24 Stunden",
+  "Transparente Management Fee – keine versteckten Kosten, keine Mindestlaufzeiten",
+  "Certified Google Ads Partner – direkter Support-Zugang zu Google",
+] : [
+  "Over 15 years of Google Ads experience – across all campaign types",
+  "AI-powered management: up to 99% optimisation rate, 7 days / 24 hours",
+  "Transparent management fee – no hidden costs, no minimum terms",
+  "Certified Google Ads Partner – direct Google support access",
+];
+
+const details = isDE ? [
+  "Keyword-Strategie: profitable Suchbegriffe identifizieren, Streuverluste eliminieren",
+  "Anzeigentexte, die Klicks generieren und zur Landingpage passen",
+  "Conversion-Tracking mit Google Tag Manager – sauber, DSGVO-konform",
+  "Shopping-Kampagnen mit optimiertem Product Feed und ROAS-Steuerung",
+  "Performance Max: KI-gestützte Aussteuerung über alle Google-Kanäle",
+  "Bing Ads optional: oft günstigere CPCs, wachsender Marktanteil durch KI-Integration",
+] : [
+  "Keyword strategy: identify profitable search terms, eliminate wastage",
+  "Ad copy that generates clicks and matches the landing page",
+  "Conversion tracking with Google Tag Manager – clean and GDPR-compliant",
+  "Shopping campaigns with optimised product feed and ROAS control",
+  "Performance Max: AI-driven delivery across all Google channels",
+  "Bing Ads optional: often lower CPCs, growing market share through AI integration",
+];
+
+const faqs = isDE ? [
+  { q: "Wie schnell liefern Google Ads erste Ergebnisse?", a: "Im Gegensatz zu SEO sind Google Ads sofort sichtbar. Nach Setup und Freigabe sind Kampagnen in der Regel innerhalb weniger Tage live – erste Klicks und Anfragen folgen unmittelbar." },
+  { q: "Wie hoch sollte mein Google-Ads-Budget sein?", a: "Das hängt von Ihrer Branche, Ihren Zielen und dem Wettbewerb ab. Wir analysieren das gemeinsam und empfehlen ein realistisches Startbudget – ohne aufgeblähte Empfehlungen." },
+  { q: "Was kostet die Kampagnenverwaltung?", a: "Wir arbeiten mit einer transparenten Management Fee bezogen auf Ihr Werbebudget. Keine versteckten Kosten, keine Bindung über das Vereinbarte hinaus." },
+  { q: "Was ist der Unterschied zwischen Search, Shopping und Performance Max?", a: "Search-Kampagnen zeigen Textanzeigen bei aktiven Suchanfragen. Shopping präsentiert Produkte visuell. Performance Max kombiniert alle Google-Kanäle in einer Kampagne – ideal, wenn Sie maximale Reichweite bei klaren Conversion-Zielen wollen." },
+  { q: "Wie starte ich?", a: "Rufen Sie uns an: 069 1753 611 90 oder füllen Sie das Kontaktformular aus. Wir melden uns innerhalb eines Werktages und besprechen den nächsten Schritt." },
+] : [
+  { q: "How quickly do Google Ads deliver results?", a: "Unlike SEO, Google Ads are visible immediately. After setup and approval, campaigns typically go live within a few days – first clicks and enquiries follow right away." },
+  { q: "How large should my Google Ads budget be?", a: "It depends on your industry, goals and competition. We analyse this together and recommend a realistic starting budget – without inflated recommendations." },
+  { q: "What does campaign management cost?", a: "We work with a transparent management fee based on your ad budget. No hidden costs, no commitment beyond what is agreed." },
+  { q: "What is the difference between Search, Shopping and Performance Max?", a: "Search campaigns show text ads for active search queries. Shopping presents products visually. Performance Max combines all Google channels in one campaign – ideal when you want maximum reach with clear conversion goals." },
+  { q: "How do I get started?", a: "Call us: 069 1753 611 90 or fill in the contact form. We will get back to you within one working day and discuss the next step." },
+];
+---
+
+<Base
+  title={isDE ? "Google Ads Agentur Frankfurt – Mehr Leads & Umsatz durch Google" : "Google Ads Agency Frankfurt – More Leads & Revenue through Google"}
+  meta_title={isDE ? "Google Ads Agentur Frankfurt – Search, Shopping & Performance Max" : "Google Ads Agency Frankfurt – Search, Shopping & Performance Max"}
+  description={isDE ? "KI-optimierte Google Ads Kampagnen – Search, Shopping, Performance Max und Bing. Messbare Ergebnisse ab dem ersten Tag. Über 15 Jahre Erfahrung aus Frankfurt." : "AI-optimised Google Ads campaigns – Search, Shopping, Performance Max and Bing. Measurable results from day one. Over 15 years of experience from Frankfurt."}
+>
+
+  <!-- Hero -->
+  <div class="relative overflow-hidden">
+    <img src="/images/homepage/patternBg.svg" alt="" class="absolute top-0 left-0 -z-10 object-cover w-[168%] h-full pointer-events-none" />
+    <div class="absolute w-full lg:w-[71%] aspect-[0.618/1] opacity-20 top-0 right-[14%] -z-10 rotate-[-157deg]">
+      <div class="absolute w-[40%] aspect-[0.325/1] bg-[#a5a2ff] rounded-full blur-[200px] left-[138px] top-[31px] rotate-12"></div>
+      <div class="absolute w-[40%] aspect-[0.572/1] bg-[#29c775] rounded-full blur-[200px] left-[222px] top-[208px]"></div>
+      <div class="absolute w-[40%] aspect-[0.571/1] bg-[#ffe74b] rounded-full blur-[200px] left-[436px] top-[340px]"></div>
+    </div>
+    <section class="pt-28 pb-16">
+      <div class="container text-center md:w-3/4 xl:w-full">
+        <p class="text-primary font-semibold mb-3 tracking-wide uppercase text-sm" data-aos="fade-up-sm">
+          {isDE ? "Google Ads Agentur aus Frankfurt" : "Google Ads Agency from Frankfurt"}
+        </p>
+        <h1 class="text-[32px] md:text-[48px] lg:text-[64px] mb-6" data-aos="fade-up-sm">
+          {isDE ? "Google Ads, die sofort Umsatz bringen" : "Google Ads that drive revenue from day one"}
+        </h1>
+        <p class="lg:w-1/2 mx-auto mb-4 text-lg text-text-gray" data-aos="fade-up-sm">
+          {isDE
+            ? "Search, Shopping, Performance Max – wir planen, schalten und optimieren Ihre Google-Kampagnen KI-gestützt und datenbasiert. Sichtbar genau dann, wenn Ihre Kunden suchen."
+            : "Search, Shopping, Performance Max – we plan, run and optimise your Google campaigns with AI and data. Visible exactly when your customers are searching."}
+        </p>
+        <p class="lg:w-1/2 mx-auto mb-10 text-lg font-medium" data-aos="fade-up-sm">
+          {isDE ? "Qualifizierter Traffic. Messbare Ergebnisse. Ab dem ersten Tag." : "Qualified traffic. Measurable results. From day one."}
+        </p>
+        <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary" data-aos="fade-up-sm">
+          {isDE ? "Kostenlose Google-Ads-Analyse anfragen" : "Request a free Google Ads analysis"}
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Services -->
+  <section class="pb-20 pt-16">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        {services.map((s, i) => (
+          <div class="col-12 md:col-6 lg:col-3" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+            <div class="bg-light rounded-2xl p-8 h-full">
+              <div class="mb-4 p-4 rounded-full bg-body w-fit">
+                <DynamicIcon icon={s.icon} className="text-primary text-2xl" />
+              </div>
+              <h4 class="mb-3">{s.title}</h4>
+              <p class="text-text/80">{s.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail Section -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-center items-center g-4">
+        <div class="col-12 lg:col-6 order-2 lg:order-1" data-aos="fade-up-sm">
+          <p class="text-primary font-semibold uppercase text-sm tracking-wide mb-3">
+            {isDE ? "Unser Ansatz" : "Our approach"}
+          </p>
+          <h2 class="mb-6 break-words">
+            {isDE ? "KI-gesteuertes Google Ads Management" : "AI-powered Google Ads management"}
+          </h2>
+          <p class="text-text-gray mb-6">
+            {isDE
+              ? "Ein Mensch kann eine Kampagne zu 50–60 % täglich optimieren. Unser KI-System schafft bis zu 99 % – 7 Tage, 24 Stunden. Das ergibt messbar mehr Conversions bei gleichem oder niedrigerem Budget."
+              : "A human can optimise a campaign to 50–60% daily. Our AI system achieves up to 99% – 7 days, 24 hours. The result: measurably more conversions at the same or lower budget."}
+          </p>
+          <ul class="space-y-3">
+            {details.map((item) => (
+              <li class="flex items-start gap-3">
+                <DynamicIcon icon="FaCircleCheck" className="text-primary text-xl mt-0.5 shrink-0" />
+                <span class="text-text-gray">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="col-12 lg:col-5 lg:col-offset-1 order-1 lg:order-2" data-aos="zoom-in-sm">
+          <div class="bg-body rounded-2xl p-8 text-center">
+            <p class="text-6xl font-bold text-primary mb-2">99%</p>
+            <p class="text-text-gray mb-8">{isDE ? "Optimierungsgrad durch KI" : "Optimisation rate via AI"}</p>
+            <p class="text-4xl font-bold text-primary mb-2">24/7</p>
+            <p class="text-text-gray">{isDE ? "Kampagnen laufen und werden optimiert" : "Campaigns running and being optimised"}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we work -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center mb-14" data-aos="fade-up-sm">
+        {isDE ? "So arbeiten wir" : "How we work"}
+      </h2>
+      <div class="row g-4 justify-center">
+        {steps.map((s, i) => (
+          <div class="col-12 md:col-4" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+            <div class="bg-light rounded-2xl p-8 h-full">
+              <p class="text-5xl font-bold text-primary/20 mb-4">{s.num}</p>
+              <h4 class="mb-3">{s.title}</h4>
+              <p class="text-text/80">{s.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why ODGX -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-center items-center g-4">
+        <div class="col-12 lg:col-5" data-aos="fade-up-sm">
+          <h2 class="mb-6">{isDE ? "Warum ODGX Agency?" : "Why ODGX Agency?"}</h2>
+          <p class="text-text-gray mb-8">
+            {isDE
+              ? "Sie arbeiten direkt mit erfahrenen Google-Ads-Experten – keine anonymen Projektteams, keine Zwischenhändler. Direkte Kommunikation, klare Verantwortung, messbare Ergebnisse."
+              : "You work directly with experienced Google Ads specialists – no anonymous project teams, no middlemen. Direct communication, clear accountability, measurable results."}
+          </p>
+          <ul class="space-y-4">
+            {trust.map((item) => (
+              <li class="flex items-start gap-3">
+                <DynamicIcon icon="FaCircleCheck" className="text-primary text-xl mt-0.5 shrink-0" />
+                <span class="font-medium">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary mt-8 inline-block">
+            {isDE ? "Jetzt Erstgespräch buchen" : "Book a free initial call"}
+          </a>
+        </div>
+        <div class="col-12 lg:col-6 lg:col-offset-1" data-aos="zoom-in-sm">
+          <div class="bg-body rounded-2xl p-8 text-center">
+            <p class="text-6xl font-bold text-primary mb-2">1.000+</p>
+            <p class="text-text-gray mb-8">{isDE ? "Google Ads Konten aufgebaut" : "Google Ads accounts built"}</p>
+            <p class="text-4xl font-bold text-primary mb-2">069 1753 611 90</p>
+            <p class="text-text-gray">{isDE ? "Direkter Draht zu Ihrem Ads-Experten" : "Direct line to your Ads expert"}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container md:w-3/4 lg:w-2/3">
+      <h2 class="text-center mb-14" data-aos="fade-up-sm">
+        {isDE ? "Häufige Fragen" : "Frequently asked questions"}
+      </h2>
+      <div class="space-y-4">
+        {faqs.map((faq, i) => (
+          <details class="bg-light rounded-2xl p-6 group" data-aos="fade-up-sm" data-aos-delay={i * 50}>
+            <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center">
+              {faq.q}
+              <DynamicIcon icon="FaChevronDown" className="text-primary text-sm transition-transform group-open:rotate-180 shrink-0 ml-4" />
+            </summary>
+            <p class="mt-4 text-text-gray leading-relaxed">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + Contact -->
+  <section class="section">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        <div class="col-12 text-center mb-6">
+          <h2 class="text-[32px] md:text-[48px] mb-4" data-aos="fade-up-sm">
+            {isDE ? "Bereit für Google Ads, die wirklich liefern?" : "Ready for Google Ads that actually deliver?"}
+          </h2>
+          <p class="lg:w-1/2 mx-auto text-text-gray" data-aos="fade-up-sm">
+            {isDE ? "Kostenlos und unverbindlich – wir zeigen Ihnen, welches Potenzial Google Ads für Ihr Unternehmen hat." : "Free and without obligation – we'll show you the potential Google Ads holds for your business."}
+          </p>
+        </div>
+        <div class="col-12 md:col-10 lg:col-8 xl:col-5">
+          <div class="p-10 rounded-xl bg-light h-full flex flex-col justify-between">
+            <h3 class="mb-6" data-aos="fade-up-sm">
+              {isDE ? "Jetzt Kontakt aufnehmen" : "Get in touch"}
+            </h3>
+            <div>
+              {[
+                { icon: "FaEnvelope", name: "info@odgxagency.de" },
+                { icon: "FaPhone", name: "069 1753 611 90" },
+                { icon: "FaLocationDot", name: isDE ? "Frankfurt am Main" : "Frankfurt am Main, Germany" },
+              ].map((c, i) => (
+                <div class="flex items-center mb-4 last:mb-0" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+                  <div class="mr-4 p-5 rounded-full bg-primary w-fit">
+                    <DynamicIcon icon={c.icon} className="text-text-light text-3xl" />
+                  </div>
+                  <p class="text-xl">{c.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-10 lg:col-8 xl:col-7">
+          <ContactForm lang={lang} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>
