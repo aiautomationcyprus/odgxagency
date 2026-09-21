@@ -113,7 +113,7 @@ const { points } = Astro.props;
         const title = trigger.querySelector("[data-title]");
         const description = trigger.querySelector("[data-description]");
 
-        cardContent?.classList.remove("border-green-600");
+        cardContent?.classList.remove("border-primary");
         cardContent?.classList.add("border-border");
         cardContent?.classList.remove("bg-light");
         cardContent?.classList.add("bg-body");
@@ -134,7 +134,7 @@ const { points } = Astro.props;
       const activeDescription = activeCard?.querySelector("[data-description]");
 
       activeCardContent?.classList.remove("border-border");
-      activeCardContent?.classList.add("border-green-600");
+      activeCardContent?.classList.add("border-primary");
       activeCardContent?.classList.remove("bg-body");
       activeCardContent?.classList.add("bg-light");
       activeTitle?.classList.remove("text-text/60");

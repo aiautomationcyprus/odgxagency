@@ -95,14 +95,14 @@ video:
 reason:
   title: "Warum Unternehmen uns wählen"
   points:
-    - title: "Ergebnisorientiert"
-      content: "Wir arbeiten auf messbare Ziele hin – mehr Anfragen, mehr Umsatz."
-      image: "/images/icons/strategy1.svg"
-    - title: "Maßgeschneidert"
-      content: "Keine Pauschallösungen. Jede Strategie ist auf Ihr Unternehmen abgestimmt."
-      image: "/images/icons/strategy2.svg"
-    - title: "Nachhaltig & skalierbar"
-      content: "Unsere Maßnahmen wachsen mit Ihrem Unternehmen mit."
-      image: "/images/icons/strategy3.svg"
+    - title: "15+ Jahre Erfahrung – im- und ausland"
+      content: "Unser Team hat in Agenturen und auf Kundenseite gearbeitet – national und international. Wir kennen die Fallstricke, die andere erst noch lernen müssen. Das spart Ihnen Zeit und Budget."
+      image: "/images/homepage/reasons/1.png"
+    - title: "Alles aus einer Hand – kein Koordinationsaufwand"
+      content: "SEO, SEA, Social Media, Content, Web – bei uns greift alles ineinander. Keine fünf Ansprechpartner, keine Informationsverluste. Eine Strategie, ein Team, ein Ziel: Ihr Wachstum."
+      image: "/images/homepage/reasons/2.png"
+    - title: "Messbare Ergebnisse – keine leeren Versprechen"
+      content: "Über 100 Millionen Euro E-Commerce-Umsatz für unsere Kunden. 500+ SEO-Projekte. 1.000+ SEA-Konten. Wir liefern Zahlen, keine Präsentationen."
+      image: "/images/homepage/reasons/3.png"
 
 ---
