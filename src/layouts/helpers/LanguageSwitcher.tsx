@@ -58,15 +58,16 @@ const LanguageSwitcher = ({
     };
   }, []);
 
+  const isDisabled = sortedLanguages.length <= 1;
+
   return (
-    <div
-      className={`mr-5 relative ${sortedLanguages.length > 1 ? "block" : "hidden"}`}
-    >
+    <div className="mr-5 relative">
       <FaGlobe className="absolute left-4 top-1/2 -translate-y-1/2 w-3.5 h-3.5 pointer-events-none" />
 
       <select
         aria-label="Language Switcher"
-        className="inline-block pl-9 pr-6 py-3.5 border border-text-gray focus:border-text-gray focus-visible:ring-transparent focus:outline-none rounded-[1.125rem] btn-outline-primary appearance-none cursor-pointer"
+        disabled={isDisabled}
+        className={`inline-block pl-9 pr-6 py-3.5 border border-text-gray focus:border-text-gray focus-visible:ring-transparent focus:outline-none rounded-[1.125rem] btn-outline-primary appearance-none ${isDisabled ? "cursor-default opacity-60" : "cursor-pointer"}`}
         onChange={(e) => {
           const selectedLang = e.target.value;
           const normalizedPath = removeTrailingSlash(pathname);
