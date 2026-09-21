@@ -2,26 +2,23 @@
 title_1: "FAQ"
 title_2: "Die wichtigsten Fragen vor der Entscheidung"
 faqs:
-  - question: "Was ist in Conversion-Website und Content konkret enthalten?"
-    answer: "Eine neue Seitenstruktur auf Funnel-Basis, SEO-Content (Pillar + Cluster), Messaging-Leitlinien und ein Go-Live mit Fokus. Danach: Content-Sprints für Ausbau, Leadgenerierung & Retargeting."
+  - question: "Was genau macht ODGX als Full-Service-Agentur?"
+    answer: "Wir übernehmen Ihr komplettes Online-Marketing – von SEO und Paid Ads über Social Media bis hin zu Content-Produktion und Webentwicklung. Alles aus einer Hand, aufeinander abgestimmt, ohne dass Sie mehrere Agenturen koordinieren müssen."
 
-  - question: "Wie lange dauert die Umsetzung?"
-    answer: "Der initiale Go-Live ist in 3–5 Wochen möglich – schlank, aber wirkungsvoll. Die Erweiterung passiert danach schrittweise und datenbasiert."
+  - question: "Für wen ist ODGX geeignet?"
+    answer: "Für Unternehmen jeder Größe, die messbar mehr Leads und Umsatz wollen – ob B2B oder B2C, ob Mittelstand oder Konzern. Wir haben Erfahrung in über 15 Branchen und passen die Strategie individuell an."
 
-  - question: "Brauche ich schon Inhalte oder eine Strategie?"
-    answer: Nein, wir arbeiten auf Basis des FunnelX-Workshops (Phase 0) oder entwickeln eine fundierte Struktur & SEO-Strategie mit euch gemeinsam."
+  - question: "Wie schnell sehe ich erste Ergebnisse?"
+    answer: "Bei Paid Ads sind erste Resultate oft schon in der ersten Woche sichtbar. SEO und organische Kanäle brauchen 3–6 Monate für nachhaltige Wirkung. Wir zeigen Ihnen von Anfang an, was wann zu erwarten ist."
 
-  - question: "Für wen ist die Conversion-Website und Content Erstellung besonders geeignet?"
-    answer: "Für B2B-Unternehmen, die strategisch wachsen wollen, mit klarer Zielgruppe, komplexen Leistungen und Bedarf an Sichtbarkeit & qualifizierten Leads."
+  - question: "Wie läuft die Zusammenarbeit konkret ab?"
+    answer: "Wir starten mit einem kostenlosen Erstgespräch, analysieren Ihre aktuelle Situation und entwickeln eine maßgeschneiderte Strategie. Danach übernehmen wir Setup, Umsetzung und laufende Optimierung – Sie erhalten monatliche Berichte und haben jederzeit einen direkten Ansprechpartner."
 
-  - question: "Wie unterscheidet sich das von einem typischen Website-Relaunch?"
-    answer: "Wir starten nicht mit Design, sondern mit Strategie. Keine monatelangen Agentur-Loops, sondern direkte Umsetzung und gezielter Ausbau entlang messbarer Ziele."
+  - question: "Was unterscheidet ODGX von anderen Agenturen?"
+    answer: "Über 15 Jahre Erfahrung, KI-gestütztes Kampagnenmanagement mit bis zu 99 % Optimierungsgrad und ein Team, das selbst auf Kundenseite gearbeitet hat. Wir denken wie Unternehmer – nicht wie Agentur."
 
-  - question: "Was kostet die Funnel-Methode?"
-    answer: "Das hängt vom Umfang ab. Projekte starten meist ab [Preisspanne einsetzen], je nach Ausgangslage, Zielgruppenanzahl und Content-Tiefe."
-
-  - question: "Und wenn ich schon eine Website habe?"
-    answer: "Dann prüfen wir, was davon sinnvoll übernommen werden kann und wo struktureller oder inhaltlicher Hebel liegt."
+  - question: "Was kostet eine Zusammenarbeit?"
+    answer: "Das hängt von Umfang und Kanälen ab. Wir arbeiten transparent ohne versteckte Kosten. Gerne erstellen wir ein individuelles Angebot nach dem ersten Gespräch."
 
 contact:
   title: "Noch Fragen? Buche ein kostenloses Vorgespräch."
