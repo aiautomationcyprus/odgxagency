@@ -41,45 +41,27 @@ const { video } = Astro.props;
         </div>
       </div>
 
-      <div
-        class="mx-auto p-2 shadow rounded-[20px] border border-[#ffffff36] mb-28"
-        data-aos="zoom-in"
-      >
-        <div class="video-container">
-          <ImageMod
-            src="/images/homepage/video/video-cover.png"
-            alt="Thumbnail"
-            class="video-thumbnail"
-            width={1100}
-            height={492}
-            loading={"eager"}
-          />
-          <div class="play-button">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="var(--token-834413c1-7886-40c2-905d-025892d495c7, rgb(0, 88, 67))"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              ><polygon points="5 3 19 12 5 21 5 3"></polygon></svg
-            >
-
-            <p>Watch how it works</p>
-          </div>
-
-          <video
-            class="overflow-hidden rounded-lg object-cover video-player"
-            width="full"
-            height={550}
-            controls
-            autoplay
+      <div class="flex gap-4 md:gap-6 justify-center items-end mb-28 px-4" data-aos="zoom-in">
+        {[
+          "/videos/social-1.mp4",
+          "/videos/social-2.mp4",
+          "/videos/social-3.mp4",
+        ].map((src, i) => (
+          <div
+            class={`relative rounded-2xl overflow-hidden border border-white/20 shadow-xl flex-1 max-w-[280px] ${i === 1 ? "scale-105" : "opacity-90"}`}
+            style="aspect-ratio: 9/16;"
           >
-            <source src="/videos/video.mp4" type="video/mp4" />
-            "Demo video"
-          </video>
-        </div>
+            <video
+              class="w-full h-full object-cover"
+              autoplay
+              muted
+              loop
+              playsinline
+            >
+              <source src={src} type="video/mp4" />
+            </video>
+          </div>
+        ))}
       </div>
 
       <div class="row g-5 justify-between px-14">
