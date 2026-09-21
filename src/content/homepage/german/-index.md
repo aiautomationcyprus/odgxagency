@@ -34,9 +34,9 @@ feature:
   - title: "Kein Content-Stress mehr – wir produzieren alles."
     content: "Texte, Videos, Creatives, Posts – für jeden Kanal, in Ihrer Sprache, auf Ihre Zielgruppe zugeschnitten. Sie bekommen fertige Inhalte, die performen. Kein Briefing-Chaos, keine Abstimmungsschleifen."
     images:
-      - "/images/homepage/feature/1.png"
-      - "/images/homepage/feature/2.png"
-      - "/images/favicon.svg"
+      - "/images/homepage/feature/odgx-office.jpg"
+      - "/images/homepage/feature/odgx-neon.jpg"
+      - "/images/homepage/feature/odgx-logo-wall.jpg"
     features:
       - "Content-Strategie, Produktion und Veröffentlichung aus einer Hand"
       - "Videos, Reels, Texte und Creatives – je nach Kanal"
@@ -50,7 +50,7 @@ feature:
   - title: "Überall sichtbar – wir kümmern uns darum."
     content: "Google, Instagram, TikTok, LinkedIn – wir bauen Ihre Präsenz auf jedem Kanal auf, der für Ihre Zielgruppe relevant ist. Organisch und bezahlt, aufeinander abgestimmt, ohne dass Sie jeden Kanal einzeln managen müssen."
     images:
-      - "/images/homepage/feature/4.png"
+      - "/images/homepage/feature/odgx-logo-wall.jpg"
     features:
       - "SEO, Paid Ads und Social Media greifen ineinander"
       - "Eine Strategie für alle Kanäle – kein Silodenken"
@@ -62,7 +62,7 @@ feature:
   - title: "Sie wachsen – wir machen den Rest."
     content: "Mehr Anfragen, mehr Umsatz, mehr Wachstum – durch ein Marketingsystem, das wir für Sie aufbauen und täglich optimieren. Sie müssen keine Agentur koordinieren, kein Budget manuell steuern, keine Reports interpretieren."
     images:
-      - "/images/homepage/feature/5.png"
+      - "/images/homepage/feature/odgx-chair.jpg"
     features:
       - "Volle Auftragspipeline statt Leerläufen"
       - "Transparente Ergebnisse – monatlich, verständlich"
