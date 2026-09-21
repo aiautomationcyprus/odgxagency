@@ -79,17 +79,16 @@ video:
     cover: "/images/home/video/video-cover.png"
     link: "/images/home/video/video.mp4"
   stats:
-    - key: "für unsere Kunden generiert"
-      value: 100
-      prefix: "€"
-      suffix: "Mio.+"
-    - key: "SEA-Konten erfolgreich aufgebaut"
+    - key: "SEO-Projekte"
+      value: 500
+      suffix: "+"
+    - key: "SEA-Konten aufgebaut"
       value: 1000
       suffix: "+"
-    - key: "Social-Media-Kampagnen durchgeführt"
+    - key: "Social-Media-Kampagnen"
       value: 200
       suffix: "+"
-    - key: "Jahre Erfahrung im Online Marketing"
+    - key: "Jahre Erfahrung"
       value: 17
       suffix: "+"
 
