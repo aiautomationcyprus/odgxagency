@@ -69,15 +69,15 @@
       "children": [
         {
           "name": "LinkedIn",
-          "url": "https://www.linkedin.com/"
+          "url": "https://www.linkedin.com/company/6435982"
         },
         {
           "name": "Facebook",
-          "url": "https://www.facebook.com/"
+          "url": "https://www.facebook.com/onlinedigitalx"
         },
         {
-          "name": "Twitter",
-          "url": "https://twitter.com/"
+          "name": "Instagram",
+          "url": "https://www.instagram.com/onlinedigitalx/"
         }
       ]
     },
@@ -85,8 +85,8 @@
       "title": "Rechtliches",
       "children": [
         {
-          "name": "AGBs",
-          "url": "/terms"
+          "name": "Impressum",
+          "url": "/impressum"
         },
         {
           "name": "Datenschutz",
