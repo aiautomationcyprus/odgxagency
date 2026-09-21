@@ -95,12 +95,13 @@ const aboutCollection = defineCollection({
       cards: z.array(
         z.union([
           z.object({
-            // Schema for image cards
             type: z.literal("image"),
             image: z.string(),
           }),
           z.object({
-            // Schema for info cards
+            type: z.literal("video"),
+          }),
+          z.object({
             type: z.literal("info"),
             value: z.number(),
             suffix: z.string(),
