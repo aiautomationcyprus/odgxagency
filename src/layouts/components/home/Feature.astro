@@ -25,33 +25,45 @@ const { feature } = Astro.props;
             data-aos-delay={i * 100}
           >
           {item.images.length === 1 ? (
-              <div class="rounded-[2rem] overflow-hidden w-full" style="height: 420px;">
-                <img
-                  src={item.images[0]}
-                  alt="feature"
-                  class="w-full h-full object-cover"
-                />
-              </div>
+              <Card>
+                <div class="h-full bg-light">
+                  <div class="h-1/3 w-auto p-8 md:p-20">
+                    <ImageMod
+                      src={item.images[0]}
+                      width={0}
+                      height={0}
+                      alt="feature"
+                      class="flex justify-center items-center object-cover image-card relative z-10 rounded-xl"
+                    />
+                  </div>
+                </div>
+              </Card>
             ) : (
-              <div class="rounded-[2rem] overflow-hidden w-full grid grid-cols-2 gap-2" style="height: 420px;">
-                <img
-                  src={item.images[0]}
-                  alt="feature"
-                  class="w-full h-full object-cover col-span-1 row-span-2"
-                />
-                <img
-                  src={item.images[1]}
-                  alt="feature"
-                  class="w-full h-full object-cover"
-                  style="height: 207px;"
-                />
-                <img
-                  src={item.images[2]}
-                  alt="feature"
-                  class="w-full h-full object-cover"
-                  style="height: 207px;"
-                />
-              </div>
+              <Card className="bg-light">
+                <div class="h-full relative">
+                  <div class="p-8 md:p-20">
+                    <ImageMod
+                      src={item.images[0]}
+                      width={0}
+                      height={0}
+                      alt="feature"
+                      class="max-md:mb-4 flex justify-center items-center object-cover image-card relative z-10 rounded-xl"
+                    />
+                    <ImageMod
+                      src={item.images[1]}
+                      width={0}
+                      height={0}
+                      alt="feature"
+                      class="max-md:mb-4 max-md:w-full max-md:mx-auto md:w-[40%] md:absolute image-card md:z-20 md:top-1/2 md:right-5 md:transform md:-translate-y-1/2 rounded-xl"
+                    />
+                    <img
+                      src={item.images[2]}
+                      alt=""
+                      class="max-md:w-full max-md:mx-auto md:w-[25%] md:absolute image-card md:z-20 md:bottom-5 md:right-5 rounded-xl"
+                    />
+                  </div>
+                </div>
+              </Card>
             )}
           </div>
 
