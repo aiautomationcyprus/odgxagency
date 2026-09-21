@@ -35,8 +35,7 @@ experience:
   cards:
     - type: "image"
       image: "/images/about/odgx-dev2.jpg"
-    - type: "image"
-      image: "/images/homepage/feature/odgx-neon.jpg"
+    - type: "video"
     - type: "info"
       value: 17
       suffix: "+"
