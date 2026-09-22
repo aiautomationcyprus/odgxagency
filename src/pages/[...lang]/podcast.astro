@@ -212,25 +212,29 @@ const faqs = isDE ? [
   </section>
 
   <!-- Clients -->
-  <section class="section bg-light">
-    <div class="container">
-      <div class="row justify-center">
-        <div class="col-12 lg:col-8">
-          <h2 class="text-center mb-12" data-aos="fade-up-sm">
-            {isDE ? "Bereits produziert für" : "Already produced for"}
-          </h2>
-          <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-8" data-aos="fade-up-sm">
-            {clients.map((c) => (
-              <li class="flex items-center gap-3 py-3 border-b border-border/30">
-                <DynamicIcon icon="FaMicrophone" className="text-primary text-sm shrink-0" />
-                <span class="font-medium">{c}</span>
-              </li>
-            ))}
-          </ul>
+  <div class="relative overflow-hidden bg-primary">
+    <img src="/images/homepage/patternBg.png" alt="" class="absolute top-0 left-0 z-10 object-cover w-full h-full pointer-events-none" />
+    <div class="absolute flex-none w-[440px] h-[769px] left-[calc(45%-220px)] top-14 bg-gradient-to-r from-[#ffe74b] to-[rgb(255,231,75)] rounded-[769px] blur-[100px] opacity-15 z-1 overflow-visible rotate-[35deg]"></div>
+    <section class="section relative z-20">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="col-12 lg:col-8">
+            <h2 class="text-center mb-12 text-white" data-aos="fade-up-sm">
+              {isDE ? "Bereits produziert für" : "Already produced for"}
+            </h2>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-8" data-aos="fade-up-sm">
+              {clients.map((c) => (
+                <li class="flex items-center gap-3 py-3 border-b border-white/20">
+                  <DynamicIcon icon="FaMicrophone" className="text-white/70 text-sm shrink-0" />
+                  <span class="font-medium text-white">{c}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
   <!-- FAQ -->
   <section class="section">
