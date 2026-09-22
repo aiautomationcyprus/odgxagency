@@ -5,49 +5,13 @@ import ImageMod from "../ImageMod.astro";
 const { hero } = Astro.props;
 ---
 
-<section class="section">
-  <div class="container md:w-3/4 lg:1/2 xl:w-full">
-    <div class="row justify-center g-5 overflow-hidden">
-      <div class="col-12">
-        <h1
-          set:html={markdownify(hero.title)}
-          class="mb-6 text-center text-[32px] md:text-[48px] lg:text-[64px]"
-          data-aos="fade-up-sm"
-        />
-        <p
-          set:html={markdownify(hero.content)}
-          class="text-center text-lg mt-6 lg:w-3/4 mx-auto"
-          data-aos="fade-up-sm"
-        />
-      </div>
-      <div class="col-12">
-        <div class="row g-4">
-          <div class="col-12 lg:col-8 min-h-full" data-aos="fade-left-sm">
-            <ImageMod
-              src={hero.image_1}
-              alt="hero"
-              width={804}
-              height={524}
-              format="webp"
-              class="rounded-2xl object-cover w-full h-full"
-            />
-          </div>
-          <div class="col-12 lg:col-4 min-h-full" data-aos="fade-right-sm">
-            <ImageMod
-              src={hero.image_2}
-              alt="hero"
-              width={804}
-              height={524}
-              format="webp"
-              class="rounded-2xl object-cover w-full h-full"
-            />
-          </div>
-        </div>
-      </div>
+<section class="section pt-16 pb-8">
+  <div class="container">
+    <div class="row justify-center">
       <div class="col-12 lg:col-10">
         <p
           set:html={markdownify(hero.trust.title)}
-          class="text-center mb-8 mt-9"
+          class="text-center mb-8"
           data-aos="fade-up-sm"
         />
         <div
