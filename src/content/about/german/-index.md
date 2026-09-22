@@ -8,13 +8,19 @@ hero:
   image_1: "/images/about/odgx-dev1.jpg"
   image_2: "/images/about/odgx-dev2.jpg"
   trust:
-    title: "Vertrauenswürdig von führenden Unternehmen"
+    title: "Unsere Kollaborationspartner"
     business:
-      - "/images/clients/consorsbank.jpg"
-      - "/images/clients/helpspace.png"
-      - "/images/clients/suewag.png"
-      - "/images/clients/wibank.jpg"
-      - "/images/clients/osthaven.png"
+      - "/images/partners/lus_logo.svg"
+      - "/images/partners/logo-db.svg"
+      - "/images/partners/cocomore.png"
+      - "/images/partners/nordmeyer-digitalx-collab.jpg"
+      - "/images/partners/logo-bourros-light.svg"
+      - "/images/partners/1xinternet.svg"
+      - "/images/partners/schleegleixner.svg"
+      - "/images/partners/cosalux.svg"
+      - "/images/partners/inbiz-logo.png"
+      - "/images/partners/bz-comm.svg"
+      - "/images/partners/sowespoke_logo_150x52_header.png"
 
 value:
   title: "Warum ODGX Agency?"
