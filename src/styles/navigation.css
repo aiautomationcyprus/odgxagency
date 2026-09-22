@@ -33,7 +33,7 @@
 }
 
 .nav-dropdown-list {
-  @apply z-10 rounded bg-light lg:bg-body p-4 shadow lg:p-8 mb-2 lg:mb-0 lg:transition-[opacity_transform] lg:duration-500 lg:fixed top-[15%] left-[40%] lg:invisible lg:group-hover:visible lg:opacity-0 lg:group-hover:opacity-100 lg:scale-95 lg:group-hover:scale-100 lg:block min-w-max lg:-translate-x-1/2;
+  @apply z-10 rounded bg-light lg:bg-body p-4 shadow lg:p-6 mb-2 lg:mb-0 lg:transition-[opacity_transform] lg:duration-500 lg:absolute lg:top-full lg:left-0 lg:invisible lg:group-hover:visible lg:opacity-0 lg:group-hover:opacity-100 lg:scale-95 lg:group-hover:scale-100 lg:block min-w-max;
 }
 
 @media (max-width: 1023px) {
