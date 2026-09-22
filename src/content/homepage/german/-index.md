@@ -4,7 +4,7 @@ description: "Mehr Kunden für Ihr Unternehmen – Online Marketing was bei Ihne
 meta_title: "ODGX Agency – Mehr Kunden durch Online Marketing"
 hero:
   title: "Mehr Kunden. Mehr Umsatz. Wir kümmern uns um alles andere."
-  content: "Von Content über Social Media bis SEO und Paid Ads – ODGX übernimmt Ihr komplettes Marketing. Sie konzentrieren sich auf Ihr Business, wir sorgen für den Kundenstrom."
+  content: "Sie haben Content, aber noch kein Marketing? Wir übernehmen. Kein Content, aber eine klare Botschaft? Wir produzieren. Beides fehlt? Kein Problem – wir bauen alles auf. ODGX ist Ihr komplettes Marketing-Team."
   buttons:
     - enable: true
       label: "Kostenlos beraten lassen"
@@ -31,8 +31,8 @@ hero:
     - "/images/clients/schicht.png"
 
 feature:
-  - title: "Kein Content-Stress mehr – wir produzieren alles."
-    content: "Texte, Videos, Creatives, Posts – für jeden Kanal, in Ihrer Sprache, auf Ihre Zielgruppe zugeschnitten. Sie bekommen fertige Inhalte, die performen. Kein Briefing-Chaos, keine Abstimmungsschleifen."
+  - title: "Content, Marketing oder beides – wir haben alles."
+    content: "Sie haben Content, aber kein Marketing? Wir spielen ihn aus. Kein Content? Wir produzieren ihn. Beides fehlt? Wir liefern alles – Texte, Videos, Creatives und die komplette Mediaplanung. Aus einer Hand, ohne Abstimmungsschleifen."
     images:
       - "/images/homepage/feature/odgx-office.jpg"
       - "/images/homepage/feature/odgx-neon.jpg"
