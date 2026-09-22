@@ -129,6 +129,19 @@
                     "properties": {
                       "type": {
                         "type": "string",
+                        "const": "video"
+                      }
+                    },
+                    "required": [
+                      "type"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
                         "const": "info"
                       },
                       "value": {

@@ -12,12 +12,12 @@ const { lang } = Astro.params;
 const isDE = lang !== "en";
 
 const services = isDE ? [
-  { icon: "FaMicrophone", title: "Konzeption & Format", text: "Wir entwickeln gemeinsam Ihr Podcast-Format – Thema, Struktur, Tonalität, Länge und Frequenz. Passend zu Ihrer Marke und Zielgruppe." },
+  { icon: "FaMicrophone", title: "Konzeption & Format", text: "Wir entwickeln gemeinsam Ihr Podcast-Format: Thema, Struktur, Tonalität, Länge und Frequenz. Passend zu Ihrer Marke und Zielgruppe." },
   { icon: "FaHeadphones", title: "Aufnahme & Produktion", text: "Studio in Frankfurt, Joe Rogan Setup oder Remote. Bis zu 4 Personen gleichzeitig, Video-Option inklusive." },
   { icon: "FaSliders", title: "Schnitt & Mastering", text: "Rohschnitt, Soundprocessing, EQ, Kompression, Rauschunterdrückung und Mastering nach Spotify & Apple Standard." },
   { icon: "FaBullhorn", title: "Podcast Marketing", text: "Audiogramme für Social Media, SEO-Shownotes, Spotify & Apple Optimierung, Cover Design und Content Repurposing." },
 ] : [
-  { icon: "FaMicrophone", title: "Concept & format", text: "We develop your podcast format together – topic, structure, tone, length and frequency. Tailored to your brand and audience." },
+  { icon: "FaMicrophone", title: "Concept & format", text: "We develop your podcast format together: topic, structure, tone, length and frequency. Tailored to your brand and audience." },
   { icon: "FaHeadphones", title: "Recording & production", text: "Studio in Frankfurt, Joe Rogan setup or remote. Up to 4 people simultaneously, video option included." },
   { icon: "FaSliders", title: "Editing & mastering", text: "Raw cut, sound processing, EQ, compression, noise reduction and mastering to Spotify & Apple standard." },
   { icon: "FaBullhorn", title: "Podcast marketing", text: "Audiograms for social media, SEO show notes, Spotify & Apple optimisation, cover design and content repurposing." },
@@ -52,14 +52,14 @@ const clients = [
 ];
 
 const faqs = isDE ? [
-  { q: "Muss ich Erfahrung haben, um einen Podcast zu starten?", a: "Nein. Wir begleiten Sie von der Konzeption über die Aufnahme bis zum fertigen Produkt – auch wenn Sie noch nie vor einem Mikrofon gesessen haben." },
+  { q: "Muss ich Erfahrung haben, um einen Podcast zu starten?", a: "Nein. Wir begleiten Sie von der Konzeption über die Aufnahme bis zum fertigen Produkt, auch wenn Sie noch nie vor einem Mikrofon gesessen haben." },
   { q: "Was ist das Joe Rogan Setup?", a: "Unser Premium-Aufnahme-Setup: Großmembran-Kondensatormikrofone, akustisch behandelter Raum, Kamerasystem für Video-Podcasts und Studiobeleuchtung. Preis auf Anfrage." },
-  { q: "Wie lange dauert die Produktion einer Folge?", a: "Eine fertig bearbeitete Folge von 30–60 Minuten ist in der Regel innerhalb von 2–4 Werktagen nach der Aufnahme bereit." },
+  { q: "Wie lange dauert die Produktion einer Folge?", a: "Eine fertig bearbeitete Folge von 30 bis 60 Minuten ist in der Regel innerhalb von 2 bis 4 Werktagen nach der Aufnahme bereit." },
   { q: "Kann ich auch remote aufnehmen?", a: "Ja. Wir unterstützen Remote-Aufnahmen über Tools wie Riverside.fm oder Zencastr und stellen auf Wunsch auch mobile Aufnahmegeräte bereit." },
 ] : [
-  { q: "Do I need experience to start a podcast?", a: "No. We guide you from concept through recording to the finished product – even if you've never sat in front of a microphone before." },
+  { q: "Do I need experience to start a podcast?", a: "No. We guide you from concept through recording to the finished product, even if you've never sat in front of a microphone before." },
   { q: "What is the Joe Rogan setup?", a: "Our premium recording setup: large-diaphragm condenser microphones, acoustically treated room, camera system for video podcasts and studio lighting. Price on request." },
-  { q: "How long does producing an episode take?", a: "A finished episode of 30–60 minutes is typically ready within 2–4 business days after recording." },
+  { q: "How long does producing an episode take?", a: "A finished episode of 30 to 60 minutes is typically ready within 2 to 4 business days after recording." },
   { q: "Can I also record remotely?", a: "Yes. We support remote recordings via tools like Riverside.fm or Zencastr and can also provide mobile recording devices on request." },
 ];
 ---
@@ -84,15 +84,15 @@ const faqs = isDE ? [
           {isDE ? "Podcast Agentur aus Frankfurt" : "Podcast Agency from Frankfurt"}
         </p>
         <h1 class="text-[32px] md:text-[48px] lg:text-[64px] mb-6" data-aos="fade-up-sm">
-          {isDE ? "Ihr Podcast – professionell produziert" : "Your podcast – professionally produced"}
+          {isDE ? "Ihr Podcast. Professionell produziert." : "Your podcast. Professionally produced."}
         </h1>
         <p class="lg:w-1/2 mx-auto mb-4 text-lg text-text-gray" data-aos="fade-up-sm">
           {isDE
-            ? "Podcasts erreichen die 18- bis 49-Jährigen mit 3–4 Folgen pro Woche – und die Tendenz steigt. Wir produzieren Ihren Podcast von der Idee bis zur fertigen Folge auf Spotify, Apple & Co."
-            : "Podcasts reach 18–49 year-olds with 3–4 episodes per week – and the trend is rising. We produce your podcast from idea to finished episode on Spotify, Apple & more."}
+            ? "Podcasts erreichen die 18- bis 49-Jährigen mit 3 bis 4 Folgen pro Woche, und die Tendenz steigt. Wir produzieren Ihren Podcast von der Idee bis zur fertigen Folge auf Spotify, Apple & Co."
+            : "Podcasts reach 18 to 49 year-olds with 3 to 4 episodes per week, and the trend is rising. We produce your podcast from idea to finished episode on Spotify, Apple & more."}
         </p>
         <p class="lg:w-1/2 mx-auto mb-10 text-lg font-medium" data-aos="fade-up-sm">
-          {isDE ? "Sie zeigen uns Ihr Thema – wir kümmern uns um den Rest." : "You show us your topic – we handle the rest."}
+          {isDE ? "Sie zeigen uns Ihr Thema. Wir kümmern uns um den Rest." : "You show us your topic. We handle the rest."}
         </p>
         <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary" data-aos="fade-up-sm">
           {isDE ? "Podcast-Produktion anfragen" : "Request podcast production"}
@@ -146,12 +146,12 @@ const faqs = isDE ? [
             {isDE ? "Unser Studio" : "Our studio"}
           </p>
           <h2 class="mb-6">
-            {isDE ? "Joe Rogan Setup – klingen wie die Profis" : "Joe Rogan Setup – sound like the pros"}
+            {isDE ? "Joe Rogan Setup. Klingen wie die Profis." : "Joe Rogan Setup. Sound like the pros."}
           </h2>
           <p class="text-text-gray mb-6">
             {isDE
-              ? "Professionelle Mikrofone, akustisch behandelter Raum und optionales Kamerasystem für Video-Podcasts. Genau das Setup, das die größten Podcasts der Welt nutzen – jetzt in Frankfurt."
-              : "Professional microphones, acoustically treated room and optional camera system for video podcasts. Exactly the setup the world's biggest podcasts use – now in Frankfurt."}
+              ? "Professionelle Mikrofone, akustisch behandelter Raum und optionales Kamerasystem für Video-Podcasts. Genau das Setup, das die größten Podcasts der Welt nutzen. Jetzt in Frankfurt."
+              : "Professional microphones, acoustically treated room and optional camera system for video podcasts. Exactly the setup the world's biggest podcasts use. Now in Frankfurt."}
           </p>
           <ul class="space-y-3">
             {(isDE ? [
@@ -182,8 +182,8 @@ const faqs = isDE ? [
             </h3>
             <p class="text-text-gray">
               {isDE
-                ? "Egal ob Corporate Podcast, Personal Branding oder eigenes Format – mit unserem Setup klingt und sieht Ihr Podcast aus wie eine professionelle TV-Produktion."
-                : "Whether corporate podcast, personal branding or your own format – with our setup your podcast sounds and looks like a professional TV production."}
+                ? "Egal ob Corporate Podcast, Personal Branding oder eigenes Format. Mit unserem Setup klingt und sieht Ihr Podcast aus wie eine professionelle TV-Produktion."
+                : "Whether corporate podcast, personal branding or your own format. With our setup your podcast sounds and looks like a professional TV production."}
             </p>
           </div>
         </div>
@@ -261,7 +261,7 @@ const faqs = isDE ? [
             {isDE ? "Bereit, Ihren Podcast zu starten?" : "Ready to launch your podcast?"}
           </h2>
           <p class="lg:w-1/2 mx-auto text-text-gray" data-aos="fade-up-sm">
-            {isDE ? "Kostenlos und unverbindlich – wir besprechen gemeinsam Ihr Format und was wir für Sie tun können." : "Free and without obligation – we'll discuss your format and what we can do for you."}
+            {isDE ? "Kostenlos und unverbindlich. Wir besprechen gemeinsam Ihr Format und was wir für Sie tun können." : "Free and without obligation. We'll discuss your format and what we can do for you."}
           </p>
         </div>
         <div class="col-12 md:col-10 lg:col-8 xl:col-5">

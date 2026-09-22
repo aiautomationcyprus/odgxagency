@@ -13,65 +13,65 @@ const isDE = lang !== "en";
 
 const services = isDE ? [
   { icon: "FaMagnifyingGlass", title: "Suchanzeigen (Search)", text: "Textanzeigen genau dann, wenn Ihre Zielgruppe aktiv nach Ihrer Leistung sucht. Höchste Kaufabsicht, direkter Einstieg in den Funnel." },
-  { icon: "FaCartShopping", title: "Google Shopping", text: "Produkte visuell im Shopping-Tab präsentieren – mit Bild, Preis und direktem Link. Ideal für E-Commerce mit messbarem ROAS." },
+  { icon: "FaCartShopping", title: "Google Shopping", text: "Produkte visuell im Shopping-Tab präsentieren, mit Bild, Preis und direktem Link. Ideal für E-Commerce mit messbarem ROAS." },
   { icon: "FaBullseye", title: "Performance Max", text: "Eine Kampagne, alle Google-Kanäle: Search, Display, YouTube, Maps, Gmail. KI-optimiert für maximalen Conversion-Output." },
-  { icon: "FaRobot", title: "KI-Kampagnenmanagement", text: "Unser KI-System optimiert Gebote und Budgets 24/7 – bis zu 99 % Optimierungsgrad statt 50–60 % manuell. Fehleranfälligkeit massiv reduziert." },
+  { icon: "FaRobot", title: "KI-Kampagnenmanagement", text: "Unser KI-System optimiert Gebote und Budgets 24/7, bis zu 99 % Optimierungsgrad statt 50 bis 60 % manuell. Fehleranfälligkeit massiv reduziert." },
 ] : [
   { icon: "FaMagnifyingGlass", title: "Search Ads", text: "Text ads precisely when your target audience is actively searching for your service. Highest purchase intent, direct funnel entry." },
-  { icon: "FaCartShopping", title: "Google Shopping", text: "Present products visually in the Shopping tab – with image, price and direct link. Ideal for e-commerce with measurable ROAS." },
+  { icon: "FaCartShopping", title: "Google Shopping", text: "Present products visually in the Shopping tab, with image, price and direct link. Ideal for e-commerce with measurable ROAS." },
   { icon: "FaBullseye", title: "Performance Max", text: "One campaign, all Google channels: Search, Display, YouTube, Maps, Gmail. AI-optimised for maximum conversion output." },
-  { icon: "FaRobot", title: "AI Campaign Management", text: "Our AI system optimises bids and budgets 24/7 – up to 99% optimisation rate vs. 50–60% manually. Error rate massively reduced." },
+  { icon: "FaRobot", title: "AI Campaign Management", text: "Our AI system optimises bids and budgets 24/7, up to 99% optimisation rate vs. 50 to 60% manually. Error rate massively reduced." },
 ];
 
 const steps = isDE ? [
-  { num: "01", title: "Analyse & Strategie", text: "Wir analysieren Ihre Ziele, Wettbewerber und Suchvolumina. Daraus entsteht eine Kanalstrategie mit klaren KPIs – bevor auch nur ein Euro fließt." },
-  { num: "02", title: "Setup & Launch", text: "Kampagnenstruktur, Keyword-Recherche, Anzeigentexte, Tracking und Conversion-Setup. Nach Ihrer Freigabe sind wir live – in der Regel innerhalb weniger Tage." },
-  { num: "03", title: "Optimierung & Reporting", text: "KI-gestützte Optimierung rund um die Uhr. Sie erhalten transparente Berichte mit allen KPIs – Klicks, Conversions, Cost per Lead, ROAS. Jederzeit nachvollziehbar." },
+  { num: "01", title: "Analyse & Strategie", text: "Wir analysieren Ihre Ziele, Wettbewerber und Suchvolumina. Daraus entsteht eine Kanalstrategie mit klaren KPIs, bevor auch nur ein Euro fließt." },
+  { num: "02", title: "Setup & Launch", text: "Kampagnenstruktur, Keyword-Recherche, Anzeigentexte, Tracking und Conversion-Setup. Nach Ihrer Freigabe sind wir live, in der Regel innerhalb weniger Tage." },
+  { num: "03", title: "Optimierung & Reporting", text: "KI-gestützte Optimierung rund um die Uhr. Sie erhalten transparente Berichte mit allen KPIs: Klicks, Conversions, Cost per Lead, ROAS. Jederzeit nachvollziehbar." },
 ] : [
-  { num: "01", title: "Analysis & strategy", text: "We analyse your goals, competitors and search volumes. This results in a channel strategy with clear KPIs – before a single euro is spent." },
-  { num: "02", title: "Setup & launch", text: "Campaign structure, keyword research, ad copy, tracking and conversion setup. After your approval we go live – usually within a few days." },
-  { num: "03", title: "Optimisation & reporting", text: "AI-powered optimisation around the clock. You receive transparent reports with all KPIs – clicks, conversions, cost per lead, ROAS. Always clear." },
+  { num: "01", title: "Analysis & strategy", text: "We analyse your goals, competitors and search volumes. This results in a channel strategy with clear KPIs, before a single euro is spent." },
+  { num: "02", title: "Setup & launch", text: "Campaign structure, keyword research, ad copy, tracking and conversion setup. After your approval we go live, usually within a few days." },
+  { num: "03", title: "Optimisation & reporting", text: "AI-powered optimisation around the clock. You receive transparent reports with all KPIs: clicks, conversions, cost per lead, ROAS. Always clear." },
 ];
 
 const trust = isDE ? [
-  "Über 15 Jahre Erfahrung mit Google Ads – auf allen Kampagnentypen",
+  "Über 15 Jahre Erfahrung mit Google Ads, auf allen Kampagnentypen",
   "KI-gesteuertes Management: bis zu 99 % Optimierungsgrad, 7 Tage / 24 Stunden",
-  "Transparente Management Fee – keine versteckten Kosten, keine Mindestlaufzeiten",
-  "Certified Google Ads Partner – direkter Support-Zugang zu Google",
+  "Transparente Management Fee, keine versteckten Kosten, keine Mindestlaufzeiten",
+  "Certified Google Ads Partner, direkter Support-Zugang zu Google",
 ] : [
-  "Over 15 years of Google Ads experience – across all campaign types",
+  "Over 15 years of Google Ads experience, across all campaign types",
   "AI-powered management: up to 99% optimisation rate, 7 days / 24 hours",
-  "Transparent management fee – no hidden costs, no minimum terms",
-  "Certified Google Ads Partner – direct Google support access",
+  "Transparent management fee, no hidden costs, no minimum terms",
+  "Certified Google Ads Partner, direct Google support access",
 ];
 
 const details = isDE ? [
   "Keyword-Strategie: profitable Suchbegriffe identifizieren, Streuverluste eliminieren",
   "Anzeigentexte, die Klicks generieren und zur Landingpage passen",
-  "Conversion-Tracking mit Google Tag Manager – sauber, DSGVO-konform",
+  "Conversion-Tracking mit Google Tag Manager, sauber, DSGVO-konform",
   "Shopping-Kampagnen mit optimiertem Product Feed und ROAS-Steuerung",
   "Performance Max: KI-gestützte Aussteuerung über alle Google-Kanäle",
   "Bing Ads optional: oft günstigere CPCs, wachsender Marktanteil durch KI-Integration",
 ] : [
   "Keyword strategy: identify profitable search terms, eliminate wastage",
   "Ad copy that generates clicks and matches the landing page",
-  "Conversion tracking with Google Tag Manager – clean and GDPR-compliant",
+  "Conversion tracking with Google Tag Manager, clean and GDPR-compliant",
   "Shopping campaigns with optimised product feed and ROAS control",
   "Performance Max: AI-driven delivery across all Google channels",
   "Bing Ads optional: often lower CPCs, growing market share through AI integration",
 ];
 
 const faqs = isDE ? [
-  { q: "Wie schnell liefern Google Ads erste Ergebnisse?", a: "Im Gegensatz zu SEO sind Google Ads sofort sichtbar. Nach Setup und Freigabe sind Kampagnen in der Regel innerhalb weniger Tage live – erste Klicks und Anfragen folgen unmittelbar." },
-  { q: "Wie hoch sollte mein Google-Ads-Budget sein?", a: "Das hängt von Ihrer Branche, Ihren Zielen und dem Wettbewerb ab. Wir analysieren das gemeinsam und empfehlen ein realistisches Startbudget – ohne aufgeblähte Empfehlungen." },
+  { q: "Wie schnell liefern Google Ads erste Ergebnisse?", a: "Im Gegensatz zu SEO sind Google Ads sofort sichtbar. Nach Setup und Freigabe sind Kampagnen in der Regel innerhalb weniger Tage live. Erste Klicks und Anfragen folgen unmittelbar." },
+  { q: "Wie hoch sollte mein Google-Ads-Budget sein?", a: "Das hängt von Ihrer Branche, Ihren Zielen und dem Wettbewerb ab. Wir analysieren das gemeinsam und empfehlen ein realistisches Startbudget, ohne aufgeblähte Empfehlungen." },
   { q: "Was kostet die Kampagnenverwaltung?", a: "Wir arbeiten mit einer transparenten Management Fee bezogen auf Ihr Werbebudget. Keine versteckten Kosten, keine Bindung über das Vereinbarte hinaus." },
-  { q: "Was ist der Unterschied zwischen Search, Shopping und Performance Max?", a: "Search-Kampagnen zeigen Textanzeigen bei aktiven Suchanfragen. Shopping präsentiert Produkte visuell. Performance Max kombiniert alle Google-Kanäle in einer Kampagne – ideal, wenn Sie maximale Reichweite bei klaren Conversion-Zielen wollen." },
+  { q: "Was ist der Unterschied zwischen Search, Shopping und Performance Max?", a: "Search-Kampagnen zeigen Textanzeigen bei aktiven Suchanfragen. Shopping präsentiert Produkte visuell. Performance Max kombiniert alle Google-Kanäle in einer Kampagne, ideal wenn Sie maximale Reichweite bei klaren Conversion-Zielen wollen." },
   { q: "Wie starte ich?", a: "Rufen Sie uns an: 069 1753 611 90 oder füllen Sie das Kontaktformular aus. Wir melden uns innerhalb eines Werktages und besprechen den nächsten Schritt." },
 ] : [
-  { q: "How quickly do Google Ads deliver results?", a: "Unlike SEO, Google Ads are visible immediately. After setup and approval, campaigns typically go live within a few days – first clicks and enquiries follow right away." },
-  { q: "How large should my Google Ads budget be?", a: "It depends on your industry, goals and competition. We analyse this together and recommend a realistic starting budget – without inflated recommendations." },
+  { q: "How quickly do Google Ads deliver results?", a: "Unlike SEO, Google Ads are visible immediately. After setup and approval, campaigns typically go live within a few days. First clicks and enquiries follow right away." },
+  { q: "How large should my Google Ads budget be?", a: "It depends on your industry, goals and competition. We analyse this together and recommend a realistic starting budget, without inflated recommendations." },
   { q: "What does campaign management cost?", a: "We work with a transparent management fee based on your ad budget. No hidden costs, no commitment beyond what is agreed." },
-  { q: "What is the difference between Search, Shopping and Performance Max?", a: "Search campaigns show text ads for active search queries. Shopping presents products visually. Performance Max combines all Google channels in one campaign – ideal when you want maximum reach with clear conversion goals." },
+  { q: "What is the difference between Search, Shopping and Performance Max?", a: "Search campaigns show text ads for active search queries. Shopping presents products visually. Performance Max combines all Google channels in one campaign, ideal when you want maximum reach with clear conversion goals." },
   { q: "How do I get started?", a: "Call us: 069 1753 611 90 or fill in the contact form. We will get back to you within one working day and discuss the next step." },
 ];
 ---
@@ -79,7 +79,7 @@ const faqs = isDE ? [
 <Base
   title={isDE ? "Google Ads Agentur Frankfurt – Mehr Leads & Umsatz durch Google" : "Google Ads Agency Frankfurt – More Leads & Revenue through Google"}
   meta_title={isDE ? "Google Ads Agentur Frankfurt – Search, Shopping & Performance Max" : "Google Ads Agency Frankfurt – Search, Shopping & Performance Max"}
-  description={isDE ? "KI-optimierte Google Ads Kampagnen – Search, Shopping, Performance Max und Bing. Messbare Ergebnisse ab dem ersten Tag. Über 15 Jahre Erfahrung aus Frankfurt." : "AI-optimised Google Ads campaigns – Search, Shopping, Performance Max and Bing. Measurable results from day one. Over 15 years of experience from Frankfurt."}
+  description={isDE ? "KI-optimierte Google Ads Kampagnen: Search, Shopping, Performance Max und Bing. Messbare Ergebnisse ab dem ersten Tag. Über 15 Jahre Erfahrung aus Frankfurt." : "AI-optimised Google Ads campaigns: Search, Shopping, Performance Max and Bing. Measurable results from day one. Over 15 years of experience from Frankfurt."}
 >
 
   <!-- Hero -->
@@ -100,8 +100,8 @@ const faqs = isDE ? [
         </h1>
         <p class="lg:w-1/2 mx-auto mb-4 text-lg text-text-gray" data-aos="fade-up-sm">
           {isDE
-            ? "Search, Shopping, Performance Max – wir planen, schalten und optimieren Ihre Google-Kampagnen KI-gestützt und datenbasiert. Sichtbar genau dann, wenn Ihre Kunden suchen."
-            : "Search, Shopping, Performance Max – we plan, run and optimise your Google campaigns with AI and data. Visible exactly when your customers are searching."}
+            ? "Search, Shopping, Performance Max: Wir planen, schalten und optimieren Ihre Google-Kampagnen KI-gestützt und datenbasiert. Sichtbar genau dann, wenn Ihre Kunden suchen."
+            : "Search, Shopping, Performance Max: We plan, run and optimise your Google campaigns with AI and data. Visible exactly when your customers are searching."}
         </p>
         <p class="lg:w-1/2 mx-auto mb-10 text-lg font-medium" data-aos="fade-up-sm">
           {isDE ? "Qualifizierter Traffic. Messbare Ergebnisse. Ab dem ersten Tag." : "Qualified traffic. Measurable results. From day one."}
@@ -145,8 +145,8 @@ const faqs = isDE ? [
           </h2>
           <p class="text-text-gray mb-6">
             {isDE
-              ? "Ein Mensch kann eine Kampagne zu 50–60 % täglich optimieren. Unser KI-System schafft bis zu 99 % – 7 Tage, 24 Stunden. Das ergibt messbar mehr Conversions bei gleichem oder niedrigerem Budget."
-              : "A human can optimise a campaign to 50–60% daily. Our AI system achieves up to 99% – 7 days, 24 hours. The result: measurably more conversions at the same or lower budget."}
+              ? "Ein Mensch kann eine Kampagne zu 50 bis 60 % täglich optimieren. Unser KI-System schafft bis zu 99 %, 7 Tage, 24 Stunden. Das ergibt messbar mehr Conversions bei gleichem oder niedrigerem Budget."
+              : "A human can optimise a campaign to 50 to 60% daily. Our AI system achieves up to 99%, 7 days, 24 hours. The result: measurably more conversions at the same or lower budget."}
           </p>
           <ul class="space-y-3">
             {details.map((item) => (
@@ -197,8 +197,8 @@ const faqs = isDE ? [
           <h2 class="mb-6">{isDE ? "Warum ODGX Agency?" : "Why ODGX Agency?"}</h2>
           <p class="text-text-gray mb-8">
             {isDE
-              ? "Sie arbeiten direkt mit erfahrenen Google-Ads-Experten – keine anonymen Projektteams, keine Zwischenhändler. Direkte Kommunikation, klare Verantwortung, messbare Ergebnisse."
-              : "You work directly with experienced Google Ads specialists – no anonymous project teams, no middlemen. Direct communication, clear accountability, measurable results."}
+              ? "Sie arbeiten direkt mit erfahrenen Google-Ads-Experten, keine anonymen Projektteams, keine Zwischenhändler. Direkte Kommunikation, klare Verantwortung, messbare Ergebnisse."
+              : "You work directly with experienced Google Ads specialists, no anonymous project teams, no middlemen. Direct communication, clear accountability, measurable results."}
           </p>
           <ul class="space-y-4">
             {trust.map((item) => (
@@ -253,7 +253,7 @@ const faqs = isDE ? [
             {isDE ? "Bereit für Google Ads, die wirklich liefern?" : "Ready for Google Ads that actually deliver?"}
           </h2>
           <p class="lg:w-1/2 mx-auto text-text-gray" data-aos="fade-up-sm">
-            {isDE ? "Kostenlos und unverbindlich – wir zeigen Ihnen, welches Potenzial Google Ads für Ihr Unternehmen hat." : "Free and without obligation – we'll show you the potential Google Ads holds for your business."}
+            {isDE ? "Kostenlos und unverbindlich. Wir zeigen Ihnen, welches Potenzial Google Ads für Ihr Unternehmen hat." : "Free and without obligation. We'll show you the potential Google Ads holds for your business."}
           </p>
         </div>
         <div class="col-12 md:col-10 lg:col-8 xl:col-5">
