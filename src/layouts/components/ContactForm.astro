@@ -12,13 +12,8 @@ const {
   full_name_placeholder,
   mail,
   mail_placeholder,
-  phone,
-  phone_placeholder,
   message,
   message_placeholder,
-  select,
-  select_placeholder,
-  select_options,
   submit,
 } = await getTranslations(lang as keyof ContentEntryMap);
 ---
@@ -26,62 +21,39 @@ const {
 <div class="p-10 rounded-xl bg-light h-full">
   <form action={contact_form_action} method="POST">
     <div class="mb-4" data-aos="fade-up-sm">
-      <label for="name" class="form-label"> {full_name}</label>
+      <label for="name" class="form-label">{full_name}</label>
       <input
         id="name"
         name="name"
         class="form-input"
         placeholder={full_name_placeholder}
         type="text"
+        required
       />
     </div>
-    <div class="mb-4 flex items-center gap-2 w-full">
-      <div class="w-full" data-aos="fade-up-sm">
-        <label for="email" class="form-label"> {mail} </label>
-        <input
-          id="email"
-          name="email"
-          class="form-input"
-          placeholder={mail_placeholder}
-          type="email"
-        />
-      </div>
-      <div class="w-full" data-aos="fade-up-sm">
-        <label for="phone" class="form-label"> {phone} </label>
-        <input
-          id="phone"
-          name="phone"
-          class="form-input"
-          placeholder={phone_placeholder}
-          type="text"
-        />
-      </div>
-    </div>
     <div class="mb-4" data-aos="fade-up-sm">
-      <label for="service" class="form-label"> {select} </label>
-      <select id="service" name="service" class="form-input">
-        <option disabled selected> {select_placeholder} </option>
-        {
-          select_options.map(
-            (option: {
-              value: string | number | string[] | null | undefined;
-              key: unknown;
-            }) => <option value={option.value}> {option.key} </option>
-          )
-        }
-      </select>
+      <label for="email" class="form-label">{mail}</label>
+      <input
+        id="email"
+        name="email"
+        class="form-input"
+        placeholder={mail_placeholder}
+        type="email"
+        required
+      />
     </div>
-    <div class="mb-4" data-aos="fade-up-sm">
-      <label for="message" class="form-label"> {message} </label>
+    <div class="mb-6" data-aos="fade-up-sm">
+      <label for="message" class="form-label">{message}</label>
       <textarea
         id="message"
         name="message"
         class="form-input"
         placeholder={message_placeholder}
-        rows="4"></textarea>
+        rows="5"
+        required></textarea>
     </div>
-    <button type="submit" class="btn btn-primary" data-aos="fade-up-sm"
-      >{submit}</button
-    >
+    <button type="submit" class="btn btn-primary w-full" data-aos="fade-up-sm">
+      {submit}
+    </button>
   </form>
 </div>
