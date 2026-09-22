@@ -13,11 +13,9 @@ const { lang } = Astro.params;
 const isDE = lang !== "en";
 
 const cases = [
-  { id: "babaria",      name: "Babaria" },
-  { id: "lee-stafford", name: "Lee Stafford" },
-  { id: "adelta",       name: "Adelta Finanz" },
-  { id: "home-hostel",  name: "Home Hostel" },
-  { id: "jetsoftware",  name: "JetSoftware" },
+  { id: "adelta",      name: "Adelta Finanz" },
+  { id: "home-hostel", name: "Home Hostel" },
+  { id: "jetsoftware", name: "JetSoftware" },
 ];
 ---
 
@@ -62,136 +60,25 @@ const cases = [
     </div>
   </section>
 
-  <!-- Babaria Panel -->
-  <div id="panel-babaria" class="case-panel">
-    <section class="pt-16 pb-20">
-      <div class="container">
-
-        <!-- Hero Image -->
-        <div class="overflow-hidden mb-16">
-          <img
-            src="/images/cases/babaria-hero.png"
-            alt="Babaria – Beauty for Sun Lovers"
-            class="w-full object-cover max-h-[420px]"
-          />
-        </div>
-
-        <!-- Title -->
-        <div class="mb-14 border-b border-border pb-10">
-          <h2 class="text-3xl md:text-4xl font-bold mb-2">Babaria</h2>
-          <p class="text-lg text-text-gray">
-            {isDE
-              ? "Markteinführung & Mediaplanung für Rossmann, DM & Müller"
-              : "Market launch & media planning for Rossmann, DM & Müller"}
-          </p>
-        </div>
-
-        <!-- 01 + 02 Blocks -->
-        <div class="row mb-16">
-          <div class="col-12 md:col-6 mb-10 md:mb-0 border-r border-border pr-10">
-            <p class="text-5xl font-bold text-primary/20 mb-4">01</p>
-            <h3 class="text-xl font-bold mb-4">
-              {isDE ? "Herausforderung" : "Challenge"}
-            </h3>
-            <p class="text-text-gray leading-relaxed">
-              {isDE
-                ? "In Spanien ist Babaria seit Jahrzehnten fest verankert. Der deutsche Markt war Neuland — ohne Bekanntheit, ohne bestehende Community. Gleichzeitig stand der Eintritt in drei große Drogerieketten an. Das Zeitfenster war eng, der Druck hoch."
-                : "In Spain, Babaria has been an established name for decades. Germany was uncharted territory — no brand awareness, no existing community. At the same time, the brand was entering three major drugstore chains at once. The window was tight, the pressure real."}
-            </p>
-          </div>
-          <div class="col-12 md:col-6 pl-10">
-            <p class="text-5xl font-bold text-primary/20 mb-4">02</p>
-            <h3 class="text-xl font-bold mb-4">
-              {isDE ? "Lösung" : "Solution"}
-            </h3>
-            <p class="text-text-gray leading-relaxed">
-              {isDE
-                ? "Wir haben eine kanalübergreifende Strategie entwickelt, die Meta, TikTok und Google Ads gezielt miteinander verzahnt. Awareness, Consideration und Conversion — jede Phase mit eigenem Creative-Ansatz und klarem Budget-Allocation-Framework."
-                : "We built a cross-channel strategy that connects Meta, TikTok and Google Ads with purpose. Awareness, consideration and conversion — each phase with its own creative approach and a clear budget allocation framework."}
-            </p>
-          </div>
-        </div>
-
-        <!-- UGC Image Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-          {[
-            { src: "/images/cases/ugc-1.png", alt: "UGC #1" },
-            { src: "/images/cases/ugc-2.png", alt: "UGC #2" },
-            { src: "/images/cases/ugc-3.png", alt: "UGC #3" },
-            { src: "/images/cases/ad-pic.png", alt: "Ad" },
-          ].map((img) => (
-            <div class="overflow-hidden aspect-[9/16]">
-              <img src={img.src} alt={img.alt} class="w-full h-full object-cover scale-[1.08]" />
-            </div>
-          ))}
-        </div>
-
-        <!-- Challenge Block -->
-        <div class="border-l-4 border-primary pl-8 py-2 mb-16">
-          <h3 class="text-xl font-bold mb-4">
-            {isDE ? "Die Herausforderung" : "The Challenge"}
-          </h3>
-          <p class="text-text-gray leading-relaxed max-w-3xl">
-            {isDE
-              ? "Eine Marke mit über 50 Jahren Geschichte auf einem fremden Markt einzuführen, ist kein Sprint — es ist Aufbauarbeit. Unsere Aufgabe war es, Babaria in Deutschland nicht nur sichtbar, sondern relevant zu machen. Mit Inhalten, die zur Zielgruppe sprechen, und einer Medialogik, die den Regalstart in den Drogeriemärkten direkt unterstützt."
-              : "Launching a brand with over 50 years of history in a new market isn't a sprint — it's groundwork. Our job was to make Babaria not just visible in Germany, but relevant. With content that speaks to the target audience and a media logic that directly supports the drugstore shelf launch."}
-          </p>
-        </div>
-
-        <!-- CTA -->
-        <div class="border-t border-border pt-12 text-center">
-          <h3 class="text-2xl md:text-3xl font-bold mb-6">
-            {isDE
-              ? "Bereit für Ergebnisse wie diese?"
-              : "Ready for results like these?"}
-          </h3>
-          <a href="/kontakt" class="btn btn-primary mr-4">
-            {isDE ? "Kostenfreies Erstgespräch" : "Free initial consultation"}
-          </a>
-          <p class="mt-4 text-text-gray text-sm">
-            {isDE ? "Per Telefon:" : "By phone:"}
-            <a href="tel:+496917536119​0" class="font-semibold hover:text-primary"> 069 1753 611 90</a>
-          </p>
-        </div>
-
-      </div>
-    </section>
-  </div>
-
-  <!-- Lee Stafford – Coming Soon -->
-  <div id="panel-lee-stafford" class="case-panel hidden">
-    <section class="section">
-      <div class="container">
-        <div class="border-t border-border pt-16 text-center">
-          <p class="text-5xl font-bold text-primary/10 mb-6">Soon</p>
-          <h2 class="text-2xl font-bold mb-4">
-            {isDE ? "Case Study in Kürze" : "Case Study coming soon"}
-          </h2>
-          <p class="text-text-gray max-w-md mx-auto">
-            {isDE
-              ? "Wir bereiten diesen Case gerade auf. Melden Sie sich gerne – wir erzählen Ihnen mehr."
-              : "We're preparing this case study. Get in touch – we'll tell you more."}
-          </p>
-          <a href="/kontakt" class="btn btn-primary mt-8 inline-block">
-            {isDE ? "Kontakt aufnehmen" : "Get in touch"}
-          </a>
-        </div>
-      </div>
-    </section>
-  </div>
-
   <!-- Adelta Finanz AG -->
-  <div id="panel-adelta" class="case-panel hidden">
+  <div id="panel-adelta" class="case-panel">
     <section class="pt-16 pb-20">
       <div class="container">
 
-        <div class="mb-14 border-b border-border pb-10">
-          <h2 class="text-3xl md:text-4xl font-bold mb-2">Adelta Finanz AG</h2>
+        <div class="overflow-hidden mb-16">
+          <img src="/images/cases/seo-geo.png" alt="SEO & GEO – Adelta Finanz" class="w-full object-cover max-h-[420px]" />
+        </div>
+
+        <div class="mb-14 border-b border-border pb-10 flex items-center gap-6">
+          <img src="/images/cases/adelta-logo.png" alt="Adelta Finanz AG" class="h-10 object-contain" />
+          <div>
+            <h2 class="text-3xl md:text-4xl font-bold mb-2">Adelta Finanz AG</h2>
           <p class="text-lg text-text-gray">
             {isDE
               ? "SEO, GEO & Paid Social für nachhaltigen B2B-Leadaufbau im Factoring-Markt"
               : "SEO, GEO & Paid Social for sustainable B2B lead generation in the factoring market"}
           </p>
+          </div>
         </div>
 
         <div class="row mb-16">
@@ -251,6 +138,10 @@ const cases = [
   <div id="panel-home-hostel" class="case-panel hidden">
     <section class="pt-16 pb-20">
       <div class="container">
+
+        <div class="overflow-hidden mb-16">
+          <img src="/images/cases/odgx-usecases-ugc.png" alt="Home Hostel Frankfurt – Social Media & UGC" class="w-full object-cover max-h-[420px]" />
+        </div>
 
         <div class="mb-14 border-b border-border pb-10">
           <h2 class="text-3xl md:text-4xl font-bold mb-2">Home Hostel Frankfurt</h2>
@@ -319,13 +210,20 @@ const cases = [
     <section class="pt-16 pb-20">
       <div class="container">
 
-        <div class="mb-14 border-b border-border pb-10">
-          <h2 class="text-3xl md:text-4xl font-bold mb-2">JetSoftware</h2>
+        <div class="overflow-hidden mb-16">
+          <img src="/images/cases/geo-ai.webp" alt="GEO & AI – JetSoftware" class="w-full object-cover max-h-[420px]" />
+        </div>
+
+        <div class="mb-14 border-b border-border pb-10 flex items-center gap-6">
+          <img src="/images/cases/jetsoftware-logo.png" alt="JetSoftware" class="h-10 object-contain" />
+          <div>
+            <h2 class="text-3xl md:text-4xl font-bold mb-2">JetSoftware</h2>
           <p class="text-lg text-text-gray">
             {isDE
               ? "SEO & GEO gegen die großen Player – nachhaltige Sichtbarkeit für ein Softwarehaus"
               : "SEO & GEO against the big players — sustainable visibility for a software company"}
           </p>
+          </div>
         </div>
 
         <div class="row mb-16">
