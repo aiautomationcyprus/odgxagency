@@ -54,12 +54,14 @@ if (disabledLanguages.includes(lang)) {
 
     <ul id="nav-menu" class="navbar-nav lg:space-x-2 xl:space-x-8 lg:flex-1 lg:justify-center">
       {
-        menu?.main.map((menu: any) => (
+        menu?.main.map((item: any) => (
           <>
-            {menu.hasChildren ? (
+            {item.separator ? (
+              <li class="hidden lg:block self-stretch w-px bg-primary/30 mx-1" aria-hidden="true" />
+            ) : item.hasChildren ? (
               <li class="nav-item nav-dropdown group relative">
-                <a href={slugSelector(menu.url, lang)} class="nav-link inline-flex items-center cursor-pointer">
-                  {menu.name}
+                <a href={slugSelector(item.url, lang)} class="nav-link inline-flex items-center cursor-pointer">
+                  {item.name}
                   <svg
                     class="h-4 w-4 fill-current transition-transform duration-200"
                     viewBox="0 0 20 20"
@@ -68,14 +70,14 @@ if (disabledLanguages.includes(lang)) {
                   </svg>
                 </a>
                 <ul class="nav-dropdown-list">
-                  {menu.children?.map((child: any) => (
+                  {item.children?.map((child: any) => (
                     <li class="nav-dropdown-item">
                       <a
                         href={slugSelector(child.url, lang)}
                         aria-label={child.name}
                         class={`nav-dropdown-link block ${
                           pathname === slugSelector(child.url, lang) && "active"
-                        } ${child.sub ? "text-text/50 text-sm pl-2" : ""}`}
+                        }`}
                       >
                         {child.name}
                       </a>
@@ -86,12 +88,12 @@ if (disabledLanguages.includes(lang)) {
             ) : (
               <li class="nav-item">
                 <a
-                  href={slugSelector(menu.url, lang)}
+                  href={slugSelector(item.url, lang)}
                   class={`nav-link block ${
-                    pathname === slugSelector(menu.url, lang) && "active"
+                    pathname === slugSelector(item.url, lang) && "active"
                   }`}
                 >
-                  {menu.name}
+                  {item.name}
                 </a>
               </li>
             )}

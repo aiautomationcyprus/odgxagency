@@ -1,45 +1,36 @@
 {
   "main": [
     {
-      "name": "Unsere Bereiche",
+      "name": "Online Marketing",
       "url": "/leistungen",
       "hasChildren": true,
       "children": [
-        {
-          "name": "SEO",
-          "url": "/seo"
-        },
-        {
-          "name": "Paid Ads",
-          "url": "/paid-ads"
-        },
-        {
-          "name": "↳ Google Ads",
-          "url": "/google-ads",
-          "sub": true
-        },
-        {
-          "name": "↳ ChatGPT Ads",
-          "url": "/chatgpt-ads",
-          "sub": true
-        },
-        {
-          "name": "Social Media",
-          "url": "/social-media"
-        },
-        {
-          "name": "Podcast Creation",
-          "url": "/podcast"
-        }
+        { "name": "SEO / GEO", "url": "/seo" },
+        { "name": "Google Ads", "url": "/google-ads" },
+        { "name": "ChatGPT Ads", "url": "/chatgpt-ads" },
+        { "name": "Social Media Ads", "url": "/social-media" },
+        { "name": "Content Creation", "url": "/content-creation" }
       ]
+    },
+    {
+      "name": "Webentwicklung",
+      "url": "/webentwicklung"
+    },
+    {
+      "name": "Podcast",
+      "url": "/podcast",
+      "hasChildren": true,
+      "children": [
+        { "name": "Podcast Produktion", "url": "/podcast" },
+        { "name": "Studio mieten", "url": "/studio-mieten" }
+      ]
+    },
+    {
+      "separator": true
     },
     {
       "name": "Über uns",
       "url": "/about"
-    },
-    {
-      "name": "Projekte",
-      "url": "/casestudies"
     },
     {
       "name": "Kontakt",
@@ -50,48 +41,24 @@
     {
       "title": "Unternehmen",
       "children": [
-        {
-          "name": "Über uns",
-          "url": "/about"
-        },
-        {
-          "name": "Blog",
-          "url": "/blog"
-        },
-        {
-          "name": "Startseite",
-          "url": "/"
-        }
+        { "name": "Über uns", "url": "/about" },
+        { "name": "Blog", "url": "/blog" },
+        { "name": "Startseite", "url": "/" }
       ]
     },
     {
       "title": "Social Media",
       "children": [
-        {
-          "name": "LinkedIn",
-          "url": "https://www.linkedin.com/company/6435982"
-        },
-        {
-          "name": "Facebook",
-          "url": "https://www.facebook.com/onlinedigitalx"
-        },
-        {
-          "name": "Instagram",
-          "url": "https://www.instagram.com/onlinedigitalx/"
-        }
+        { "name": "LinkedIn", "url": "https://www.linkedin.com/company/6435982" },
+        { "name": "Facebook", "url": "https://www.facebook.com/onlinedigitalx" },
+        { "name": "Instagram", "url": "https://www.instagram.com/onlinedigitalx/" }
       ]
     },
     {
       "title": "Rechtliches",
       "children": [
-        {
-          "name": "Impressum",
-          "url": "/impressum"
-        },
-        {
-          "name": "Datenschutz",
-          "url": "/privacy-policy"
-        }
+        { "name": "Impressum", "url": "/impressum" },
+        { "name": "Datenschutz", "url": "/privacy-policy" }
       ]
     }
   ]
