@@ -135,7 +135,7 @@ const { hero } = Astro.props;
 
   function initLeadsUnderline() {
     var h1 = document.querySelector("section h1");
-    if (!h1 || !h1.textContent.includes("Leads")) return;
+    if (!h1 || !h1.textContent.includes("Kunden")) return;
 
     // Remove ALL injected SVGs in h1 to prevent duplicates
     h1.querySelectorAll("svg[data-leads-pen]").forEach(function(s) { s.remove(); });
@@ -146,7 +146,7 @@ const { hero } = Astro.props;
       existingSpan.outerHTML = existingSpan.textContent;
     }
 
-    h1.innerHTML = h1.innerHTML.replace("Leads", '<span id="leads-word">Leads</span>');
+    h1.innerHTML = h1.innerHTML.replace("Kunden", '<span id="leads-word">Kunden</span>');
     h1.style.position = "relative";
 
     var span = document.getElementById("leads-word");
