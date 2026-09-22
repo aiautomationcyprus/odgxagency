@@ -68,7 +68,7 @@ team:
     - name: "Lukasz"
       designation: "Online Marketing"
       avatar: "/images/about/odgx-lukasz.jpg"
-    - name: "Milly"
+    - name: "Bonnie Bonita Torres"
       designation: "Agenturhund"
-      avatar: "/images/team/milly.jpg"
+      avatar: "/images/about/odgx-dog.jpg"
 ---
