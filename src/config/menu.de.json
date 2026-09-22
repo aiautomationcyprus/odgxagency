@@ -32,7 +32,11 @@
           "url": "/podcast"
         }
       ]
-    }, 
+    },
+    {
+      "name": "Über uns",
+      "url": "/about"
+    },
     {
       "name": "Case Study",
       "url": "/casestudies"
@@ -51,16 +55,16 @@
       "title": "Unternehmen",
       "children": [
         {
-          "name": "Startseite",
-          "url": "/"
-        },
-        {
           "name": "Über uns",
           "url": "/about"
         },
         {
           "name": "Blog",
           "url": "/blog"
+        },
+        {
+          "name": "Startseite",
+          "url": "/"
         }
       ]
     },
