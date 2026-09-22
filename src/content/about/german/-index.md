@@ -70,5 +70,5 @@ team:
       avatar: "/images/about/odgx-lukasz.jpg"
     - name: "Bonnie Bonita Torres"
       designation: "Agenturhund"
-      avatar: "/images/about/odgx-dog.jpg"
+      avatar: "/images/team/milly.jpg"
 ---
