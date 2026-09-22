@@ -7,7 +7,7 @@ hero:
   title: "Let's talk"
   content: "Got a project, a question, or just want to know what we can do for your business? Write to us or call directly."
 contact:
-  - name: "info@odgxagency.de"
+  - name: "info@online-digitalx.de"
     icon: "FaRegEnvelopeOpen"
   - name: "069 1753 611 90"
     icon: "FaPhoneVolume"
