@@ -1,16 +1,16 @@
 ---
 title: "ODGX Agency"
-description: "Mehr Leads für Ihr Unternehmen – Online Marketing was bei Ihnen ankommt"
-meta_title: "ODGX Agency – Mehr Leads durch Online Marketing"
+description: "Mehr Kunden für Ihr Unternehmen – Online Marketing was bei Ihnen ankommt"
+meta_title: "ODGX Agency – Mehr Kunden durch Online Marketing"
 hero:
-  title: "Mehr Leads. Mehr Umsatz. Wir kümmern uns um alles andere."
+  title: "Mehr Kunden. Mehr Umsatz. Wir kümmern uns um alles andere."
   content: "Von Content über Social Media bis SEO und Paid Ads – ODGX übernimmt Ihr komplettes Marketing. Sie konzentrieren sich auf Ihr Business, wir sorgen für den Kundenstrom."
   buttons:
     - enable: true
       label: "Kostenlos beraten lassen"
       link: "/contact"
     - enable: true
-      label: "Unsere Leistungen"
+      label: "Unsere Bereiche"
       link: "/leistungen"
   images:
     - "/images/homepage/hero.png"
@@ -45,7 +45,7 @@ feature:
       - "Monatliche Content-Pakete, flexibel anpassbar"
     button:
       enable: true
-      label: "Unsere Leistungen"
+      label: "Unsere Bereiche"
       link: "/leistungen"
   - title: "Überall sichtbar – wir kümmern uns darum."
     content: "Google, Instagram, TikTok, LinkedIn – wir bauen Ihre Präsenz auf jedem Kanal auf, der für Ihre Zielgruppe relevant ist. Organisch und bezahlt, aufeinander abgestimmt, ohne dass Sie jeden Kanal einzeln managen müssen."
