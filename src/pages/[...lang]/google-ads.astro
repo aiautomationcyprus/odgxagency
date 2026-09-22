@@ -12,13 +12,13 @@ const { lang } = Astro.params;
 const isDE = lang !== "en";
 
 const services = isDE ? [
-  { icon: "FaSearch", title: "Suchanzeigen (Search)", text: "Textanzeigen genau dann, wenn Ihre Zielgruppe aktiv nach Ihrer Leistung sucht. Höchste Kaufabsicht, direkter Einstieg in den Funnel." },
-  { icon: "FaShoppingCart", title: "Google Shopping", text: "Produkte visuell im Shopping-Tab präsentieren – mit Bild, Preis und direktem Link. Ideal für E-Commerce mit messbarem ROAS." },
+  { icon: "FaMagnifyingGlass", title: "Suchanzeigen (Search)", text: "Textanzeigen genau dann, wenn Ihre Zielgruppe aktiv nach Ihrer Leistung sucht. Höchste Kaufabsicht, direkter Einstieg in den Funnel." },
+  { icon: "FaCartShopping", title: "Google Shopping", text: "Produkte visuell im Shopping-Tab präsentieren – mit Bild, Preis und direktem Link. Ideal für E-Commerce mit messbarem ROAS." },
   { icon: "FaBullseye", title: "Performance Max", text: "Eine Kampagne, alle Google-Kanäle: Search, Display, YouTube, Maps, Gmail. KI-optimiert für maximalen Conversion-Output." },
   { icon: "FaRobot", title: "KI-Kampagnenmanagement", text: "Unser KI-System optimiert Gebote und Budgets 24/7 – bis zu 99 % Optimierungsgrad statt 50–60 % manuell. Fehleranfälligkeit massiv reduziert." },
 ] : [
-  { icon: "FaSearch", title: "Search Ads", text: "Text ads precisely when your target audience is actively searching for your service. Highest purchase intent, direct funnel entry." },
-  { icon: "FaShoppingCart", title: "Google Shopping", text: "Present products visually in the Shopping tab – with image, price and direct link. Ideal for e-commerce with measurable ROAS." },
+  { icon: "FaMagnifyingGlass", title: "Search Ads", text: "Text ads precisely when your target audience is actively searching for your service. Highest purchase intent, direct funnel entry." },
+  { icon: "FaCartShopping", title: "Google Shopping", text: "Present products visually in the Shopping tab – with image, price and direct link. Ideal for e-commerce with measurable ROAS." },
   { icon: "FaBullseye", title: "Performance Max", text: "One campaign, all Google channels: Search, Display, YouTube, Maps, Gmail. AI-optimised for maximum conversion output." },
   { icon: "FaRobot", title: "AI Campaign Management", text: "Our AI system optimises bids and budgets 24/7 – up to 99% optimisation rate vs. 50–60% manually. Error rate massively reduced." },
 ];
@@ -123,7 +123,7 @@ const faqs = isDE ? [
               <div class="mb-4 p-4 rounded-full bg-body w-fit">
                 <DynamicIcon icon={s.icon} className="text-primary text-2xl" />
               </div>
-              <h4 class="mb-3">{s.title}</h4>
+              <h4 class="mb-3 break-words">{s.title}</h4>
               <p class="text-text/80">{s.text}</p>
             </div>
           </div>
@@ -180,7 +180,7 @@ const faqs = isDE ? [
           <div class="col-12 md:col-4" data-aos="fade-up-sm" data-aos-delay={i * 100}>
             <div class="bg-light rounded-2xl p-8 h-full">
               <p class="text-5xl font-bold text-primary/20 mb-4">{s.num}</p>
-              <h4 class="mb-3">{s.title}</h4>
+              <h4 class="mb-3 break-words">{s.title}</h4>
               <p class="text-text/80">{s.text}</p>
             </div>
           </div>
