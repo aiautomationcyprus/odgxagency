@@ -2,7 +2,6 @@
   "main": [
     {
       "name": "Online Marketing",
-      "url": "/leistungen",
       "hasChildren": true,
       "children": [
         { "name": "SEO / GEO", "url": "/seo" },
@@ -15,6 +14,10 @@
     {
       "name": "Webentwicklung",
       "url": "/webentwicklung"
+    },
+    {
+      "name": "Projekte",
+      "url": "/casestudies"
     },
     {
       "name": "Podcast",

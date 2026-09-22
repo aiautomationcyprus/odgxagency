@@ -60,15 +60,21 @@ if (disabledLanguages.includes(lang)) {
               <li class="hidden lg:block self-stretch w-px bg-primary/30" aria-hidden="true" />
             ) : item.hasChildren ? (
               <li class="nav-item nav-dropdown group relative">
-                <a href={slugSelector(item.url, lang)} class="nav-link inline-flex items-center cursor-pointer">
-                  {item.name}
-                  <svg
-                    class="h-4 w-4 fill-current transition-transform duration-200"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                  </svg>
-                </a>
+                {item.url ? (
+                  <a href={slugSelector(item.url, lang)} class="nav-link inline-flex items-center cursor-pointer">
+                    {item.name}
+                    <svg class="h-4 w-4 fill-current transition-transform duration-200" viewBox="0 0 20 20">
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </a>
+                ) : (
+                  <span class="nav-link inline-flex items-center cursor-pointer select-none">
+                    {item.name}
+                    <svg class="h-4 w-4 fill-current transition-transform duration-200" viewBox="0 0 20 20">
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </span>
+                )}
                 <ul class="nav-dropdown-list">
                   {item.children?.map((child: any) => (
                     <li class="nav-dropdown-item">
