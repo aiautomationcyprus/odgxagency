@@ -15,7 +15,7 @@
 }
 
 .navbar-nav {
-  @apply max-lg:absolute text-center lg:text-left order-3 hidden p-4 pb-7 lg:order-1 lg:flex lg:w-auto lg:pb-4 max-lg:rounded-2xl max-lg:border max-lg:border-border max-lg:bg-body max-lg:z-30 max-lg:w-3/5 max-lg:left-0 max-lg:top-16  max-lg:translate-x-1/2;
+  @apply max-lg:absolute text-center lg:text-left order-3 hidden p-4 pb-7 lg:order-1 lg:flex lg:items-center lg:w-auto lg:pb-4 max-lg:rounded-2xl max-lg:border max-lg:border-border max-lg:bg-body max-lg:z-30 max-lg:w-3/5 max-lg:left-0 max-lg:top-16 max-lg:translate-x-1/2;
 }
 
 .nav-item {

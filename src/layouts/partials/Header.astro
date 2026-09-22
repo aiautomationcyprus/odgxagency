@@ -52,12 +52,12 @@ if (disabledLanguages.includes(lang)) {
       </svg>
     </label>
 
-    <ul id="nav-menu" class="navbar-nav lg:space-x-2 xl:space-x-8 lg:flex-1 lg:justify-center">
+    <ul id="nav-menu" class="navbar-nav lg:gap-2 xl:gap-6 lg:flex-1 lg:justify-center">
       {
         menu?.main.map((item: any) => (
           <>
             {item.separator ? (
-              <li class="hidden lg:block self-stretch w-px bg-primary/30 mx-4" aria-hidden="true" />
+              <li class="hidden lg:block self-stretch w-px bg-primary/30" aria-hidden="true" />
             ) : item.hasChildren ? (
               <li class="nav-item nav-dropdown group relative">
                 <a href={slugSelector(item.url, lang)} class="nav-link inline-flex items-center cursor-pointer">
