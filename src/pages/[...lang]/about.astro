@@ -6,7 +6,6 @@ import Value from "@/components/about/Value.astro";
 import Base from "@/layouts/Base.astro";
 import { getListPage, getSinglePage } from "@/lib/contentParser.astro";
 import { supportedLang } from "@/lib/utils/languageParser";
-import Testimonial from "@/partials/Testimonial.astro";
 import type { ContentEntryMap } from "astro:content";
 
 export function getStaticPaths() {
@@ -21,11 +20,6 @@ const aboutIndex = await getListPage("about", lang as keyof ContentEntryMap);
 const { title, meta_title, description, hero, value, experience, team } =
   aboutIndex[0].data;
 
-const testimonial = await getSinglePage(
-  "testimonialSection",
-  lang as keyof ContentEntryMap,
-  "testimonial"
-);
 ---
 
 <Base title={title} meta_title={meta_title} description={description}>
@@ -33,5 +27,44 @@ const testimonial = await getSinglePage(
   <Team {team} />
   <Value {value} />
   <Experience {experience} />
-  <Testimonial {testimonial} />
+
+  <!-- Partner Section -->
+  <section class="section bg-light">
+    <div class="container">
+      <p class="text-center text-text-gray font-semibold mb-10 tracking-wide uppercase text-sm" data-aos="fade-up-sm">Unsere Partner</p>
+
+      <!-- Official Partners (Meta, LinkedIn, Google, Realize) -->
+      <div class="flex flex-wrap justify-center items-center gap-8 mb-14" data-aos="fade-up-sm">
+        {[
+          { src: "/images/partners/meta-logo.svg", alt: "Meta" },
+          { src: "/images/partners/linkedin-logo.svg", alt: "LinkedIn" },
+          { src: "/images/partners/Google-Partner-digitalx2-150.png", alt: "Google Partner" },
+          { src: "/images/partners/logo-realize.png", alt: "Realize" },
+        ].map((p) => (
+          <img src={p.src} alt={p.alt} class="h-10 object-contain grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all" />
+        ))}
+      </div>
+
+      <div class="border-t border-border pt-12">
+        <p class="text-center text-text-gray text-sm font-semibold mb-8 tracking-wide uppercase" data-aos="fade-up-sm">Kollaborationspartner</p>
+        <div class="flex flex-wrap justify-center items-center gap-x-10 gap-y-6" data-aos="fade-up-sm">
+          {[
+            { src: "/images/partners/lus_logo.svg", alt: "Laut und Schön" },
+            { src: "/images/partners/logo-db.svg", alt: "DAMM & BIERBAUM" },
+            { src: "/images/partners/cocomore.png", alt: "Cocomore" },
+            { src: "/images/partners/nordmeyer-digitalx-collab.jpg", alt: "Nordmeyer" },
+            { src: "/images/partners/logo-bourros-light.svg", alt: "Bourros" },
+            { src: "/images/partners/1xinternet.svg", alt: "1xInternet" },
+            { src: "/images/partners/schleegleixner.svg", alt: "Schleegleixner" },
+            { src: "/images/partners/cosalux.svg", alt: "Cosalux" },
+            { src: "/images/partners/inbiz-logo.png", alt: "InBiz" },
+            { src: "/images/partners/bz-comm.svg", alt: "BZ.COMM" },
+            { src: "/images/partners/sowespoke_logo_150x52_header.png", alt: "So We Spoke" },
+          ].map((p) => (
+            <img src={p.src} alt={p.alt} class="h-8 object-contain grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-all" />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
 </Base>
