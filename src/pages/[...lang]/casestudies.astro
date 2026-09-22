@@ -158,29 +158,228 @@ const cases = [
     </section>
   </div>
 
-  <!-- Placeholder panels for other clients -->
-  {["lee-stafford", "adelta", "home-hostel", "jetsoftware"].map((id) => (
-    <div id={`panel-${id}`} class="case-panel hidden">
-      <section class="section">
-        <div class="container">
-          <div class="border-t border-border pt-16 text-center">
-            <p class="text-5xl font-bold text-primary/10 mb-6">Soon</p>
-            <h2 class="text-2xl font-bold mb-4">
-              {isDE ? "Case Study in Kürze" : "Case Study coming soon"}
-            </h2>
-            <p class="text-text-gray max-w-md mx-auto">
+  <!-- Lee Stafford – Coming Soon -->
+  <div id="panel-lee-stafford" class="case-panel hidden">
+    <section class="section">
+      <div class="container">
+        <div class="border-t border-border pt-16 text-center">
+          <p class="text-5xl font-bold text-primary/10 mb-6">Soon</p>
+          <h2 class="text-2xl font-bold mb-4">
+            {isDE ? "Case Study in Kürze" : "Case Study coming soon"}
+          </h2>
+          <p class="text-text-gray max-w-md mx-auto">
+            {isDE
+              ? "Wir bereiten diesen Case gerade auf. Melden Sie sich gerne – wir erzählen Ihnen mehr."
+              : "We're preparing this case study. Get in touch – we'll tell you more."}
+          </p>
+          <a href="/kontakt" class="btn btn-primary mt-8 inline-block">
+            {isDE ? "Kontakt aufnehmen" : "Get in touch"}
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Adelta Finanz AG -->
+  <div id="panel-adelta" class="case-panel hidden">
+    <section class="pt-16 pb-20">
+      <div class="container">
+
+        <div class="mb-14 border-b border-border pb-10">
+          <h2 class="text-3xl md:text-4xl font-bold mb-2">Adelta Finanz AG</h2>
+          <p class="text-lg text-text-gray">
+            {isDE
+              ? "SEO, GEO & Paid Social für nachhaltigen B2B-Leadaufbau im Factoring-Markt"
+              : "SEO, GEO & Paid Social for sustainable B2B lead generation in the factoring market"}
+          </p>
+        </div>
+
+        <div class="row mb-16">
+          <div class="col-12 md:col-6 mb-10 md:mb-0 border-r border-border pr-10">
+            <p class="text-5xl font-bold text-primary/20 mb-4">01</p>
+            <h3 class="text-xl font-bold mb-4">
+              {isDE ? "Herausforderung" : "Challenge"}
+            </h3>
+            <p class="text-text-gray leading-relaxed">
               {isDE
-                ? "Wir bereiten diesen Case gerade auf. Melden Sie sich gerne – wir erzählen Ihnen mehr."
-                : "We're preparing this case study. Get in touch – we'll tell you more."}
+                ? "Der Factoring-Markt ist kein ruhiges Fahrwasser. Etablierte Anbieter mit großen Budgets dominierten die Suchergebnisse. Für Adelta Finanz bedeutete das: Sichtbarkeit musste strategisch erkämpft werden – nicht nur bei Google, sondern zunehmend auch bei KI-Systemen wie ChatGPT oder Perplexity, die Kaufentscheidungen im B2B-Bereich beeinflussen."
+                : "The factoring market is fiercely competitive. Established providers with large budgets dominated search results. For Adelta Finanz, that meant visibility had to be fought for strategically — not just on Google, but increasingly also in AI systems like ChatGPT or Perplexity that influence B2B purchase decisions."}
             </p>
-            <a href="/kontakt" class="btn btn-primary mt-8 inline-block">
-              {isDE ? "Kontakt aufnehmen" : "Get in touch"}
-            </a>
+          </div>
+          <div class="col-12 md:col-6 pl-10">
+            <p class="text-5xl font-bold text-primary/20 mb-4">02</p>
+            <h3 class="text-xl font-bold mb-4">
+              {isDE ? "Lösung" : "Solution"}
+            </h3>
+            <p class="text-text-gray leading-relaxed">
+              {isDE
+                ? "Wir haben SEO und Generative Engine Optimization (GEO) kombiniert: klassische Suchmaschinenoptimierung für Google-Rankings, ergänzt durch gezielte Maßnahmen, damit Adelta auch in KI-generierten Antworten präsent ist. Flankiert von Paid Social Kampagnen und organischem Content, der qualifizierte B2B-Leads statt bloßer Klickzahlen generiert."
+                : "We combined SEO and Generative Engine Optimization (GEO): classic search engine optimization for Google rankings, plus targeted measures to ensure Adelta appears in AI-generated answers. Supported by paid social campaigns and organic content designed to generate qualified B2B leads rather than mere click numbers."}
+            </p>
           </div>
         </div>
-      </section>
-    </div>
-  ))}
+
+        <div class="border-l-4 border-primary pl-8 py-2 mb-16">
+          <h3 class="text-xl font-bold mb-4">
+            {isDE ? "Das Ergebnis" : "The Result"}
+          </h3>
+          <p class="text-text-gray leading-relaxed max-w-3xl">
+            {isDE
+              ? "Adelta Finanz gewinnt heute qualifizierte Anfragen aus organischen und bezahlten Kanälen – mit dem Fokus auf Abschlussqualität statt Masse. Die Kombination aus klassischem SEO und KI-Sichtbarkeit sorgt dafür, dass das Unternehmen auch dort gefunden wird, wo Entscheider heute ihre erste Recherche starten."
+              : "Adelta Finanz now attracts qualified inquiries from both organic and paid channels — with a focus on conversion quality rather than volume. The combination of classic SEO and AI visibility ensures the company is found where decision-makers start their research today."}
+          </p>
+        </div>
+
+        <div class="border-t border-border pt-12 text-center">
+          <h3 class="text-2xl md:text-3xl font-bold mb-6">
+            {isDE ? "Bereit für Ergebnisse wie diese?" : "Ready for results like these?"}
+          </h3>
+          <a href="/kontakt" class="btn btn-primary mr-4">
+            {isDE ? "Kostenfreies Erstgespräch" : "Free initial consultation"}
+          </a>
+          <p class="mt-4 text-text-gray text-sm">
+            {isDE ? "Per Telefon:" : "By phone:"}
+            <a href="tel:+4969175361190" class="font-semibold hover:text-primary"> 069 1753 611 90</a>
+          </p>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- Home Hostel -->
+  <div id="panel-home-hostel" class="case-panel hidden">
+    <section class="pt-16 pb-20">
+      <div class="container">
+
+        <div class="mb-14 border-b border-border pb-10">
+          <h2 class="text-3xl md:text-4xl font-bold mb-2">Home Hostel Frankfurt</h2>
+          <p class="text-lg text-text-gray">
+            {isDE
+              ? "Website, Paid Ads & Social Media für ein neues Hostel mitten in Frankfurt"
+              : "Website, Paid Ads & Social Media for a new hostel in the heart of Frankfurt"}
+          </p>
+        </div>
+
+        <div class="row mb-16">
+          <div class="col-12 md:col-6 mb-10 md:mb-0 border-r border-border pr-10">
+            <p class="text-5xl font-bold text-primary/20 mb-4">01</p>
+            <h3 class="text-xl font-bold mb-4">
+              {isDE ? "Herausforderung" : "Challenge"}
+            </h3>
+            <p class="text-text-gray leading-relaxed">
+              {isDE
+                ? "Ein neues Hostel in einer Stadt mit vielen Mitbewerbern – ohne bestehende Bekanntheit, ohne Community, ohne Bewertungen. Studenten, Geschäftsreisende und Wochenendbesucher als Zielgruppen gleichzeitig zu erreichen, ohne im Rauschen der Konkurrenz unterzugehen: das war die Aufgabe."
+                : "A new hostel in a city crowded with competitors — no existing awareness, no community, no reviews. Reaching students, business travellers and weekend visitors simultaneously without getting lost in the competitive noise: that was the challenge."}
+            </p>
+          </div>
+          <div class="col-12 md:col-6 pl-10">
+            <p class="text-5xl font-bold text-primary/20 mb-4">02</p>
+            <h3 class="text-xl font-bold mb-4">
+              {isDE ? "Lösung" : "Solution"}
+            </h3>
+            <p class="text-text-gray leading-relaxed">
+              {isDE
+                ? "Wir haben eine neue Website entwickelt, die die Atmosphäre des Hostels authentisch transportiert. Ergänzt durch zielgruppenspezifische Paid Ads, die je nach Persona unterschiedliche Botschaften ausspielen, und organischen Social-Media-Content, der direkt vor Ort mit dem Team entstanden ist – nah am Gast, nah an der Realität."
+                : "We developed a new website that authentically reflects the hostel's atmosphere. Combined with persona-specific paid ads delivering different messages to each audience segment, and organic social media content created on-site with the team — close to guests, close to reality."}
+            </p>
+          </div>
+        </div>
+
+        <div class="border-l-4 border-primary pl-8 py-2 mb-16">
+          <h3 class="text-xl font-bold mb-4">
+            {isDE ? "Das Ergebnis" : "The Result"}
+          </h3>
+          <p class="text-text-gray leading-relaxed max-w-3xl">
+            {isDE
+              ? "Das Hostel erreicht heute konstant hohe Auslastung. Das Design wird aktiv weiterempfohlen, die Positionierung als modernes, faires Übernachtungsangebot ist etabliert. Was als unbekanntes Neuobjekt startete, hat sich zu einer festen Adresse in Frankfurt entwickelt – mit einer Community, die es trägt."
+              : "The hostel now consistently achieves high occupancy rates. The design is actively recommended, and its positioning as a modern, fairly priced accommodation has been firmly established. What started as an unknown newcomer has grown into a recognised Frankfurt address — with a community that sustains it."}
+          </p>
+        </div>
+
+        <div class="border-t border-border pt-12 text-center">
+          <h3 class="text-2xl md:text-3xl font-bold mb-6">
+            {isDE ? "Bereit für Ergebnisse wie diese?" : "Ready for results like these?"}
+          </h3>
+          <a href="/kontakt" class="btn btn-primary mr-4">
+            {isDE ? "Kostenfreies Erstgespräch" : "Free initial consultation"}
+          </a>
+          <p class="mt-4 text-text-gray text-sm">
+            {isDE ? "Per Telefon:" : "By phone:"}
+            <a href="tel:+4969175361190" class="font-semibold hover:text-primary"> 069 1753 611 90</a>
+          </p>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- JetSoftware -->
+  <div id="panel-jetsoftware" class="case-panel hidden">
+    <section class="pt-16 pb-20">
+      <div class="container">
+
+        <div class="mb-14 border-b border-border pb-10">
+          <h2 class="text-3xl md:text-4xl font-bold mb-2">JetSoftware</h2>
+          <p class="text-lg text-text-gray">
+            {isDE
+              ? "SEO & GEO gegen die großen Player – nachhaltige Sichtbarkeit für ein Softwarehaus"
+              : "SEO & GEO against the big players — sustainable visibility for a software company"}
+          </p>
+        </div>
+
+        <div class="row mb-16">
+          <div class="col-12 md:col-6 mb-10 md:mb-0 border-r border-border pr-10">
+            <p class="text-5xl font-bold text-primary/20 mb-4">01</p>
+            <h3 class="text-xl font-bold mb-4">
+              {isDE ? "Herausforderung" : "Challenge"}
+            </h3>
+            <p class="text-text-gray leading-relaxed">
+              {isDE
+                ? "In der Softwareentwicklung tummeln sich die Schwergewichte: Microsoft, Oracle, Google. Für ein spezialisiertes Softwarehaus wie JetSoftware bedeutet das, mit einem Bruchteil des Budgets gegen Konzerne mit eigenen Marketing-Abteilungen anzutreten – und trotzdem bei relevanten Keywords dauerhaft in den Suchergebnissen und in KI-Ausgaben zu erscheinen."
+                : "Software development is dominated by heavyweights: Microsoft, Oracle, Google. For a specialised software company like JetSoftware, that means competing against corporations with dedicated marketing departments on a fraction of the budget — and still appearing consistently in search results and AI outputs for relevant keywords."}
+            </p>
+          </div>
+          <div class="col-12 md:col-6 pl-10">
+            <p class="text-5xl font-bold text-primary/20 mb-4">02</p>
+            <h3 class="text-xl font-bold mb-4">
+              {isDE ? "Lösung" : "Solution"}
+            </h3>
+            <p class="text-text-gray leading-relaxed">
+              {isDE
+                ? "Wir haben eine präzise Keyword-Architektur entwickelt, die Suchintention und Wettbewerbsdruck genau analysiert. On-Page-Optimierung, technisches SEO und gezielter Linkaufbau wurden mit Maßnahmen kombiniert, die JetSoftware auch in LLM-Ausgaben wie ChatGPT und Perplexity als relevante Quelle positionieren."
+                : "We developed a precise keyword architecture based on exact analysis of search intent and competitive pressure. On-page optimisation, technical SEO and targeted link building were combined with measures that position JetSoftware as a relevant source in LLM outputs like ChatGPT and Perplexity."}
+            </p>
+          </div>
+        </div>
+
+        <div class="border-l-4 border-primary pl-8 py-2 mb-16">
+          <h3 class="text-xl font-bold mb-4">
+            {isDE ? "Das Ergebnis" : "The Result"}
+          </h3>
+          <p class="text-text-gray leading-relaxed max-w-3xl">
+            {isDE
+              ? "JetSoftware platziert sich heute dauerhaft für relevante Keywords in den Google-Suchergebnissen – trotz der Budgetungleichheit gegenüber den großen Wettbewerbern. Die Kombination aus klassischem SEO und gezielter LLM-Sichtbarkeit sorgt für kontinuierlichen, qualifizierten Traffic und Sichtbarkeit genau dort, wo potenzielle Kunden ihre Recherche beginnen."
+              : "JetSoftware now holds consistent rankings for relevant keywords in Google search results — despite the budget imbalance against major competitors. The combination of classic SEO and targeted LLM visibility drives continuous, qualified traffic and ensures visibility exactly where potential clients start their research."}
+          </p>
+        </div>
+
+        <div class="border-t border-border pt-12 text-center">
+          <h3 class="text-2xl md:text-3xl font-bold mb-6">
+            {isDE ? "Bereit für Ergebnisse wie diese?" : "Ready for results like these?"}
+          </h3>
+          <a href="/kontakt" class="btn btn-primary mr-4">
+            {isDE ? "Kostenfreies Erstgespräch" : "Free initial consultation"}
+          </a>
+          <p class="mt-4 text-text-gray text-sm">
+            {isDE ? "Per Telefon:" : "By phone:"}
+            <a href="tel:+4969175361190" class="font-semibold hover:text-primary"> 069 1753 611 90</a>
+          </p>
+        </div>
+
+      </div>
+    </section>
+  </div>
 
 </Base>
 
