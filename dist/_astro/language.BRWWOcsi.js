@@ -1,0 +1,1 @@
+const e={default_language:"de",disable_languages:["en"]},a={settings:e},n=[{languageName:"De",languageCode:"de",contentDir:"german",weight:1},{languageName:"En",languageCode:"en",contentDir:"english",weight:2}];export{a as c,n as l};

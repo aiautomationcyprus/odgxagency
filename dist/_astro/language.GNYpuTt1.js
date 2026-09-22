@@ -1,1 +1,0 @@
-const e={default_language:"de",disable_languages:[]},a={settings:e},g=[{languageName:"De",languageCode:"de",contentDir:"german",weight:1},{languageName:"En",languageCode:"en",contentDir:"english",weight:2}];export{a as c,g as l};
