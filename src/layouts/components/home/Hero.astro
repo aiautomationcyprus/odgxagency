@@ -79,9 +79,9 @@ const { hero } = Astro.props;
           { src: "/images/team/lev.jpg", name: "Lev Tseytlin", role: "Webentwicklung & Programmierung" },
           { src: "/images/team/milly.jpg", name: "Bonnie Bonita Torres", role: "Agenturhund" },
         ].map((member, i) => (
-          <div class="col-12 md:col-6 lg:col-3" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+          <div class="col-6 md:col-6 lg:col-3" data-aos="fade-up-sm" data-aos-delay={i * 100}>
             <div class="mx-auto w-fit flex flex-col justify-center">
-              <div class="rounded-lg md:h-[383px] overflow-hidden mb-4">
+              <div class="rounded-lg h-[190px] md:h-[320px] lg:h-[383px] overflow-hidden mb-4">
                 <ImageMod
                   src={member.src}
                   alt={member.name}
@@ -158,9 +158,10 @@ const { hero } = Astro.props;
     svg.setAttribute("data-leads-pen", "");
     svg.setAttribute("viewBox", "0 0 120 14");
     svg.setAttribute("preserveAspectRatio", "none");
+    var isMobile = window.innerWidth < 768;
     Object.assign(svg.style, {
       position: "absolute",
-      height: "10px",
+      height: isMobile ? "6px" : "10px",
       overflow: "visible",
       pointerEvents: "none",
       opacity: "0",
@@ -170,7 +171,7 @@ const { hero } = Astro.props;
     var path = document.createElementNS(ns, "path");
     path.setAttribute("d", "M2,3 C40,9 80,9 118,3");
     path.setAttribute("stroke", "#B54D2C");
-    path.setAttribute("stroke-width", "7");
+    path.setAttribute("stroke-width", isMobile ? "4" : "7");
     path.setAttribute("fill", "none");
     path.setAttribute("stroke-linecap", "round");
     Object.assign(path.style, {
@@ -202,11 +203,15 @@ const { hero } = Astro.props;
         currentSvg.style.opacity = "0";
         clearTimeout(_leadsResizeTimer);
         _leadsResizeTimer = setTimeout(function () {
+          var mobile = window.innerWidth < 768;
           var sr = currentSpan.getBoundingClientRect();
           var hr = currentSpan.closest("h1").getBoundingClientRect();
-          currentSvg.style.left  = (sr.left - hr.left - 20) + "px";
-          currentSvg.style.top   = (sr.bottom - hr.top - 4) + "px";
-          currentSvg.style.width = (sr.width + 40) + "px";
+          currentSvg.style.left   = (sr.left - hr.left - 20) + "px";
+          currentSvg.style.top    = (sr.bottom - hr.top - 4) + "px";
+          currentSvg.style.width  = (sr.width + 40) + "px";
+          currentSvg.style.height = mobile ? "6px" : "10px";
+          var p = currentSvg.querySelector("path");
+          if (p) p.setAttribute("stroke-width", mobile ? "4" : "7");
           currentSvg.style.opacity = "1";
         }, 100);
       });
