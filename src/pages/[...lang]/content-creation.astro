@@ -2,6 +2,7 @@
 import Base from "@/layouts/Base.astro";
 import { supportedLang } from "@/lib/utils/languageParser";
 import ContactForm from "@/components/ContactForm.astro";
+import DynamicIcon from "@/helpers/DynamicIcon";
 
 export function getStaticPaths() {
   return supportedLang.map((lang) => ({ params: { lang: lang || undefined } }));
@@ -10,118 +11,269 @@ export function getStaticPaths() {
 const { lang } = Astro.params;
 const isDE = lang !== "en";
 
-const services = [
-  { icon: "🎬", title: "UGC & Reels", text: "Authentischer User Generated Content für TikTok, Instagram, YouTube und Co. – produziert von uns, auf Ihre Marke zugeschnitten." },
-  { icon: "✍️", title: "Texte & Copywriting", text: "Landingpages, Blogartikel, Ads, E-Mails – Texte, die Ihre Zielgruppe ansprechen und Conversions erzeugen." },
-  { icon: "🎨", title: "Creatives & Grafiken", text: "Anzeigen-Creatives, Story-Formate, Banner – visuell stark und plattformgerecht für jeden Kanal." },
-  { icon: "🎙️", title: "Podcast & Audio", text: "Produktion, Schnitt und Nachbearbeitung – von der Aufnahme bis zur fertigen Episode, inklusive Intro und Outro." },
-  { icon: "📱", title: "Social Media Content", text: "Feed-Posts, Stories, Reels, Shorts – konsistenter Content-Output, der zu Ihrer Marke passt und Ihre Community aufbaut." },
-  { icon: "🎥", title: "Vollproduktion", text: "Von der Konzeptentwicklung über Moderation und Drehtag bis zur finalen Auslieferung. Wir begleiten den gesamten Produktionsprozess." },
+const services = isDE ? [
+  { icon: "FaVideo", title: "UGC & Video Content", text: "Authentischer User Generated Content und professionelle Videoproduktion für TikTok, Instagram und YouTube. Produziert von uns, auf Ihre Marke und Zielgruppe zugeschnitten." },
+  { icon: "FaPenNib", title: "Texte & Copywriting", text: "Landingpages, Blogartikel, Ads, E-Mails – Texte, die Ihre Zielgruppe ansprechen, bei Suchmaschinen ranken und messbar Conversions erzeugen." },
+  { icon: "FaPalette", title: "Creatives & Grafiken", text: "Anzeigen-Creatives, Story-Formate, Banner – visuell stark, plattformgerecht und auf Conversion ausgelegt. Für jeden Kanal das passende Format." },
+  { icon: "FaMicrophone", title: "Podcast & Audio", text: "Produktion, Schnitt und Nachbearbeitung – von der Aufnahme bis zur fertigen Episode, inklusive Intro, Outro und Distribution auf allen Plattformen." },
+] : [
+  { icon: "FaVideo", title: "UGC & Video Content", text: "Authentic user generated content and professional video production for TikTok, Instagram and YouTube. Produced by us, tailored to your brand and target audience." },
+  { icon: "FaPenNib", title: "Copy & Copywriting", text: "Landing pages, blog articles, ads, emails – copy that speaks to your audience, ranks on search engines and measurably drives conversions." },
+  { icon: "FaPalette", title: "Creatives & Graphics", text: "Ad creatives, story formats, banners – visually strong, platform-appropriate and optimised for conversion. The right format for every channel." },
+  { icon: "FaMicrophone", title: "Podcast & Audio", text: "Production, editing and post-processing – from recording to the finished episode, including intro, outro and distribution across all platforms." },
 ];
 
-const steps = [
-  { num: "01", title: "Briefing & Konzept", text: "Wir verstehen Ihre Marke, Zielgruppe und Ziele. Daraus entwickeln wir ein Content-Konzept, das zu Ihrer Strategie passt." },
-  { num: "02", title: "Produktion", text: "Texte, Videos, Grafiken, Audio – je nach Bedarf produzieren wir alles in-house oder mit unserem Partner-Netzwerk." },
-  { num: "03", title: "Ausspielung & Optimierung", text: "Fertiger Content kommt direkt auf die Kanäle. Wir analysieren die Performance und optimieren kontinuierlich." },
+const steps = isDE ? [
+  { num: "01", title: "Briefing & Konzept", text: "Wir verstehen Ihre Marke, Zielgruppe und Ziele. Daraus entwickeln wir ein Content-Konzept mit klarem Format-Mix und Redaktionsplan – bevor auch nur ein Wort geschrieben oder ein Frame gedreht wird." },
+  { num: "02", title: "Produktion", text: "Texte, Videos, Grafiken, Audio – je nach Bedarf produzieren wir alles in-house oder mit unserem erprobten Partner-Netzwerk. Auf Ihre Marke abgestimmt, termingerecht geliefert." },
+  { num: "03", title: "Ausspielung & Optimierung", text: "Fertiger Content kommt direkt auf die Kanäle. Wir analysieren die Performance, sehen was funktioniert – und optimieren kontinuierlich." },
+] : [
+  { num: "01", title: "Briefing & Concept", text: "We understand your brand, target audience and goals. From that we develop a content concept with a clear format mix and editorial plan – before a single word is written or frame is shot." },
+  { num: "02", title: "Production", text: "Copy, videos, graphics, audio – we produce everything in-house or through our proven partner network. Tailored to your brand, delivered on time." },
+  { num: "03", title: "Distribution & Optimisation", text: "Finished content goes straight to the channels. We analyse performance, see what works – and optimise continuously." },
 ];
 
-const formats = ["TikTok", "Instagram Reels", "YouTube Shorts", "Facebook", "LinkedIn", "Podcast"];
+const trust = isDE ? [
+  "Sie erhalten Content, der zu Ihrer Marke passt – nicht generische Massenware",
+  "Kein eigenes Content-Team nötig – wir übernehmen Strategie, Produktion und Ausspielung",
+  "Alle Formate aus einer Hand: Video, Text, Creatives, Podcast – aufeinander abgestimmt",
+  "Jeden Monat sehen Sie, wie Content-Performance sich in Reichweite und Anfragen niederschlägt",
+] : [
+  "You receive content that fits your brand – not generic mass-produced material",
+  "No in-house content team needed – we handle strategy, production and distribution",
+  "All formats from one source: video, copy, creatives, podcast – coordinated together",
+  "Every month you see how content performance translates into reach and enquiries",
+];
+
+const faqs = isDE ? [
+  { q: "Wir haben noch keinen Content – können Sie komplett von vorne starten?", a: "Ja. Wir beginnen mit einer Strategie-Session, in der wir Ihre Marke, Zielgruppe und Ziele analysieren. Daraus entsteht ein vollständiger Content-Plan – wir produzieren alles, was Sie brauchen, ohne dass Sie vorher etwas vorbereiten müssen." },
+  { q: "Was ist der Unterschied zwischen UGC und klassischer Videoproduktion?", a: "UGC wirkt authentisch und nativ – wie echte Nutzerbeiträge auf TikTok oder Instagram. Klassische Videoproduktion ist hochwertiger und eignet sich besser für Landingpages oder YouTube. Wir empfehlen je nach Ziel und Kanal den richtigen Mix aus beiden." },
+  { q: "Können Sie Content für mehrere Kanäle gleichzeitig produzieren?", a: "Ja. Wir denken Content von Anfang an kanalübergreifend. Ein Dreh liefert Material für Reels, Stories, Ads und Long-Form-Video. Texte werden gleichzeitig für Social Media, Blog und E-Mail aufbereitet – ohne den Aufwand zu vervielfachen." },
+  { q: "Wie schnell erhalten wir ersten Content?", a: "Nach dem Briefing und einer kurzen Konzeptionsphase starten wir in der Regel innerhalb von 1–2 Wochen mit der Produktion. Den genauen Zeitplan klären wir im Erstgespräch – abhängig von Umfang und Format." },
+  { q: "Wie starte ich?", a: "Rufen Sie uns an: 069 1753 611 90 oder füllen Sie das Formular aus. Wir melden uns innerhalb eines Werktages und besprechen, welcher Content-Mix für Ihr Unternehmen Sinn ergibt." },
+] : [
+  { q: "We have no content yet – can you start completely from scratch?", a: "Yes. We start with a strategy session where we analyse your brand, target audience and goals. This results in a complete content plan – we produce everything you need without any preparation on your side." },
+  { q: "What is the difference between UGC and classic video production?", a: "UGC feels authentic and native – like real user posts on TikTok or Instagram. Classic video production is higher quality and better suited for landing pages or YouTube. We recommend the right mix of both depending on your goals and channel." },
+  { q: "Can you produce content for multiple channels simultaneously?", a: "Yes. We think about content cross-channel from the start. One shoot provides material for reels, stories, ads and long-form video. Copy is simultaneously prepared for social media, blog and email – without multiplying the effort." },
+  { q: "How quickly will we receive first content?", a: "After briefing and a short concept phase, we typically start production within 1–2 weeks. We clarify the exact timeline in the initial call – depending on scope and format." },
+  { q: "How do I get started?", a: "Call us: 069 1753 611 90 or fill in the form. We'll get back to you within one business day and discuss which content mix makes sense for your business." },
+];
 ---
 
 <Base
-  title={isDE ? "Content Creation – ODGX Agency Frankfurt" : "Content Creation – ODGX Agency"}
-  meta_title={isDE ? "Content Creation Agentur Frankfurt – ODGX Agency" : "Content Creation Agency Frankfurt – ODGX Agency"}
-  description={isDE ? "UGC, Videos, Reels, Texte, Creatives – wir produzieren Content, der Ihre Zielgruppe erreicht und Ergebnisse liefert." : "UGC, videos, reels, copy, creatives – we produce content that reaches your audience and delivers results."}
+  title={isDE ? "Content Creation Agentur Frankfurt – ODGX Agency" : "Content Creation Agency Frankfurt – ODGX Agency"}
+  meta_title={isDE ? "Content Creation Agentur Frankfurt – UGC, Video, Texte, Creatives" : "Content Creation Agency Frankfurt – UGC, Video, Copy, Creatives"}
+  description={isDE ? "UGC, Videos, Reels, Texte, Creatives – wir produzieren Content, der Ihre Zielgruppe erreicht und Ergebnisse liefert. Content Creation Agentur aus Frankfurt." : "UGC, videos, reels, copy, creatives – we produce content that reaches your audience and delivers results. Content creation agency from Frankfurt."}
 >
 
   <!-- Hero -->
-  <section class="pt-28 pb-20 bg-light">
-    <div class="container">
-      <div class="max-w-3xl">
-        <p class="text-primary font-semibold mb-3 tracking-wide uppercase text-sm" data-aos="fade-up-sm">Content Creation</p>
-        <h1 class="text-[32px] md:text-[48px] lg:text-[56px] mb-6" data-aos="fade-up-sm">
-          {isDE ? "Sie haben kein Content-Team – wir sind es." : "You don't have a content team – we are it."}
-        </h1>
-        <p class="text-lg text-text-gray mb-10 max-w-2xl" data-aos="fade-up-sm">
-          {isDE
-            ? "Sie haben Content und brauchen Distribution? Wir spielen ihn aus. Sie haben noch keinen Content? Wir produzieren ihn. Texte, Videos, Reels, UGC, Creatives – alles aus einer Hand. Kein Briefing-Chaos, keine Abstimmungsschleifen."
-            : "You have content and need distribution? We handle it. No content yet? We produce it. Copy, videos, reels, UGC, creatives – everything from one source."}
+  <div class="relative overflow-hidden">
+    <img src="/images/homepage/patternBg.svg" alt="" class="absolute top-0 left-0 -z-10 object-cover w-[168%] h-full pointer-events-none" />
+    <div class="absolute w-full lg:w-[71%] aspect-[0.618/1] opacity-20 top-0 right-[14%] -z-10 rotate-[-157deg]">
+      <div class="absolute w-[40%] aspect-[0.325/1] bg-[#a5a2ff] rounded-full blur-[200px] left-[138px] top-[31px] rotate-12"></div>
+      <div class="absolute w-[40%] aspect-[0.572/1] bg-[#29c775] rounded-full blur-[200px] left-[222px] top-[208px]"></div>
+      <div class="absolute w-[40%] aspect-[0.571/1] bg-[#ffe74b] rounded-full blur-[200px] left-[436px] top-[340px]"></div>
+    </div>
+    <section class="pt-28 pb-16">
+      <div class="container text-center md:w-3/4 xl:w-full">
+        <p class="text-primary font-semibold mb-3 tracking-wide uppercase text-sm" data-aos="fade-up-sm">
+          {isDE ? "Content Creation Agentur aus Frankfurt" : "Content Creation Agency from Frankfurt"}
         </p>
-        <div class="flex flex-wrap gap-3" data-aos="fade-up-sm">
-          {formats.map((f) => (
-            <span class="px-4 py-1.5 rounded-full border border-border text-sm font-medium">{f}</span>
-          ))}
+        <h1 class="text-[32px] md:text-[48px] lg:text-[64px] mb-6" data-aos="fade-up-sm">
+          {isDE ? "Sie haben kein Content-Team – wir sind es" : "You don't have a content team – we are it"}
+        </h1>
+        <p class="lg:w-1/2 mx-auto mb-4 text-lg text-text-gray" data-aos="fade-up-sm">
+          {isDE
+            ? "Sie haben Content und brauchen Distribution? Wir spielen ihn aus. Noch keinen Content? Wir produzieren ihn. Texte, Videos, Reels, UGC, Creatives – alles aus einer Hand, ohne Briefing-Chaos und Abstimmungsschleifen."
+            : "You have content and need distribution? We handle it. No content yet? We produce it. Copy, videos, reels, UGC, creatives – everything from one source, no briefing chaos, no coordination loops."}
+        </p>
+        <p class="lg:w-1/2 mx-auto mb-10 text-lg font-medium" data-aos="fade-up-sm">
+          {isDE ? "Content, der Ihre Zielgruppe erreicht – und Ergebnisse liefert." : "Content that reaches your audience – and delivers results."}
+        </p>
+        <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary" data-aos="fade-up-sm">
+          {isDE ? "Kostenloses Content-Gespräch anfragen" : "Request a free content consultation"}
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Services -->
+  <section class="pb-20 pt-16">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        {services.map((s, i) => (
+          <div class="col-12 md:col-6 lg:col-3" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+            <div class="bg-light rounded-2xl p-8 h-full">
+              <div class="mb-4 p-4 rounded-full bg-body w-fit">
+                <DynamicIcon icon={s.icon} className="text-primary text-2xl" />
+              </div>
+              <h4 class="mb-3">{s.title}</h4>
+              <p class="text-text/80">{s.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Full-service Content -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row justify-center items-center g-4">
+        <div class="col-12 lg:col-6" data-aos="fade-up-sm">
+          <p class="text-primary font-semibold uppercase text-sm tracking-wide mb-3">
+            {isDE ? "Alles aus einer Hand" : "Everything from one source"}
+          </p>
+          <h2 class="mb-6">
+            {isDE ? "Content und Distribution – aufeinander abgestimmt" : "Content and distribution – aligned from the start"}
+          </h2>
+          <p class="text-text-gray mb-6">
+            {isDE
+              ? "Die meisten Unternehmen haben entweder Content ohne Reichweite oder Reichweite ohne passenden Content. Wir lösen beides gleichzeitig. Produktion und Ausspielung kommen vom selben Team – das spart Zeit, Abstimmung und Budget."
+              : "Most businesses have either content without reach or reach without the right content. We solve both at the same time. Production and distribution come from the same team – saving time, coordination and budget."}
+          </p>
+          <ul class="space-y-3">
+            {(isDE ? [
+              "TikTok, Instagram Reels, YouTube Shorts, LinkedIn, Facebook – alle Kanäle bedient",
+              "Ein Dreh, viele Formate: Reels, Stories, Ads, Long-Form aus einem Produktionstag",
+              "Content-Kalender, Redaktionsplan und regelmäßiger Output – ohne Ihren internen Aufwand",
+              "Performance-Analyse nach jedem Zyklus – was funktioniert, wird mehr. Was nicht, wird optimiert.",
+            ] : [
+              "TikTok, Instagram Reels, YouTube Shorts, LinkedIn, Facebook – all channels covered",
+              "One shoot, many formats: reels, stories, ads, long-form from a single production day",
+              "Content calendar, editorial plan and regular output – without internal effort on your side",
+              "Performance analysis after every cycle – what works gets more. What doesn't gets optimised.",
+            ]).map((item) => (
+              <li class="flex items-start gap-3">
+                <DynamicIcon icon="FaCircleCheck" className="text-primary text-xl mt-0.5 shrink-0" />
+                <span class="text-text-gray">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="col-12 lg:col-5 lg:col-offset-1" data-aos="zoom-in-sm">
+          <div class="bg-body rounded-2xl p-8 text-center">
+            <p class="text-6xl font-bold text-primary mb-2">6</p>
+            <p class="text-text-gray mb-8">{isDE ? "Content-Formate aus einer Produktion" : "Content formats from one production"}</p>
+            <p class="text-4xl font-bold text-primary mb-2">100%</p>
+            <p class="text-text-gray">{isDE ? "Auf Ihre Marke zugeschnitten" : "Tailored to your brand"}</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Services Grid -->
+  <!-- How we work -->
   <section class="section">
     <div class="container">
-      <h2 class="text-2xl md:text-3xl font-bold mb-12" data-aos="fade-up-sm">
-        {isDE ? "Was wir produzieren" : "What we produce"}
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {services.map((s, i) => (
-          <div class="p-8 rounded-2xl bg-light border border-border" data-aos="fade-up-sm" data-aos-delay={i * 80}>
-            <div class="text-3xl mb-4">{s.icon}</div>
-            <h3 class="text-lg font-bold mb-3">{s.title}</h3>
-            <p class="text-text-gray text-sm leading-relaxed">{s.text}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Process -->
-  <section class="section bg-light">
-    <div class="container">
-      <h2 class="text-2xl md:text-3xl font-bold mb-12" data-aos="fade-up-sm">
+      <h2 class="text-center mb-14" data-aos="fade-up-sm">
         {isDE ? "So arbeiten wir" : "How we work"}
       </h2>
-      <div class="row g-4">
+      <div class="row g-4 justify-center">
         {steps.map((s, i) => (
           <div class="col-12 md:col-4" data-aos="fade-up-sm" data-aos-delay={i * 100}>
-            <p class="text-5xl font-bold text-primary/20 mb-4">{s.num}</p>
-            <h3 class="text-xl font-bold mb-3">{s.title}</h3>
-            <p class="text-text-gray leading-relaxed">{s.text}</p>
+            <div class="bg-light rounded-2xl p-8 h-full">
+              <p class="text-5xl font-bold text-primary/20 mb-4">{s.num}</p>
+              <h4 class="mb-3">{s.title}</h4>
+              <p class="text-text/80">{s.text}</p>
+            </div>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Quote -->
-  <section class="section">
-    <div class="container">
-      <div class="border-l-4 border-primary pl-8 py-2 max-w-3xl">
-        <p class="text-xl font-medium leading-relaxed">
-          {isDE
-            ? "„Unser Ziel ist es, Ihre Zuschauer bis zum Ende zu fesseln. So haben Sie die Chance auf maximale Reichweite.“"
-            : "“Our goal is to captivate your audience to the very end. That’s how you achieve maximum reach.”"}
-        </p>
-        <p class="text-text-gray mt-4 text-sm">ODGX Agency – Content Creation Team</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA + Form -->
+  <!-- Why ODGX -->
   <section class="section bg-light">
     <div class="container">
-      <div class="row justify-center g-4">
-        <div class="col-12 md:col-5" data-aos="fade-up-sm">
-          <h2 class="text-2xl md:text-3xl font-bold mb-4">
-            {isDE ? "Content, der wirklich wirkt." : "Content that actually works."}
+      <div class="row justify-center items-center g-4">
+        <div class="col-12 lg:col-5" data-aos="fade-up-sm">
+          <h2 class="mb-6">
+            {isDE ? "Warum ODGX Agency?" : "Why ODGX Agency?"}
           </h2>
           <p class="text-text-gray mb-8">
             {isDE
-              ? "Lassen Sie uns in einem kurzen Gespräch herausfinden, welcher Content-Mix für Ihr Unternehmen am meisten Sinn ergibt."
-              : "Let's find out in a quick call which content mix makes the most sense for your business."}
+              ? "Viele Agenturen produzieren Content. Wir produzieren Content, der funktioniert. Sie arbeiten direkt mit dem Team, das Ihre Kampagne kennt – kein Weitervermitteln, keine anonymen Projektteams."
+              : "Many agencies produce content. We produce content that works. You work directly with the team that knows your campaign – no hand-offs, no anonymous project teams."}
           </p>
-          <p class="font-semibold">069 1753 611 90</p>
+          <ul class="space-y-4">
+            {trust.map((item) => (
+              <li class="flex items-start gap-3">
+                <DynamicIcon icon="FaCircleCheck" className="text-primary text-xl mt-0.5 shrink-0" />
+                <span class="font-medium">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary mt-8 inline-block">
+            {isDE ? "Jetzt Erstgespräch buchen" : "Book a free initial call"}
+          </a>
         </div>
-        <div class="col-12 md:col-7" data-aos="fade-up-sm">
+        <div class="col-12 lg:col-6 lg:col-offset-1" data-aos="zoom-in-sm">
+          <div class="bg-body rounded-2xl p-8 text-center">
+            <p class="text-6xl font-bold text-primary mb-2">15+</p>
+            <p class="text-text-gray mb-8">{isDE ? "Jahre Erfahrung in Content & Marketing" : "Years of content & marketing experience"}</p>
+            <p class="text-4xl font-bold text-primary mb-2">069 1753 611 90</p>
+            <p class="text-text-gray">{isDE ? "Direkter Draht zu Ihrem Content-Team" : "Direct line to your content team"}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container md:w-3/4 lg:w-2/3">
+      <h2 class="text-center mb-14" data-aos="fade-up-sm">
+        {isDE ? "Häufige Fragen" : "Frequently asked questions"}
+      </h2>
+      <div class="space-y-4">
+        {faqs.map((faq, i) => (
+          <details class="bg-light rounded-2xl p-6 group" data-aos="fade-up-sm" data-aos-delay={i * 50}>
+            <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center">
+              {faq.q}
+              <DynamicIcon icon="FaChevronDown" className="text-primary text-sm transition-transform group-open:rotate-180 shrink-0 ml-4" />
+            </summary>
+            <p class="mt-4 text-text-gray leading-relaxed">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + Contact -->
+  <section class="section">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        <div class="col-12 text-center mb-6">
+          <h2 class="text-[32px] md:text-[48px] mb-4" data-aos="fade-up-sm">
+            {isDE ? "Welcher Content fehlt Ihnen gerade?" : "What content are you missing right now?"}
+          </h2>
+          <p class="lg:w-1/2 mx-auto text-text-gray" data-aos="fade-up-sm">
+            {isDE ? "Wir finden es heraus – in einem kurzen, kostenlosen Gespräch." : "We'll find out – in a short, free consultation."}
+          </p>
+        </div>
+        <div class="col-12 md:col-10 lg:col-8 xl:col-5">
+          <div class="p-10 rounded-xl bg-light h-full flex flex-col justify-between">
+            <h3 class="mb-6" data-aos="fade-up-sm">
+              {isDE ? "Jetzt Kontakt aufnehmen" : "Get in touch"}
+            </h3>
+            <div>
+              {[
+                { icon: "FaEnvelope", name: "info@odgxagency.de" },
+                { icon: "FaPhone", name: "069 1753 611 90" },
+                { icon: "FaLocationDot", name: isDE ? "Frankfurt am Main" : "Frankfurt am Main, Germany" },
+              ].map((c, i) => (
+                <div class="flex items-center mb-4 last:mb-0" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+                  <div class="mr-4 p-5 rounded-full bg-primary w-fit">
+                    <DynamicIcon icon={c.icon} className="text-text-light text-3xl" />
+                  </div>
+                  <p class="text-xl">{c.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-10 lg:col-8 xl:col-7">
           <ContactForm lang={lang} />
         </div>
       </div>

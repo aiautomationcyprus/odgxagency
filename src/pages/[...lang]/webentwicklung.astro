@@ -11,274 +11,210 @@ export function getStaticPaths() {
 const { lang } = Astro.params;
 const isDE = lang !== "en";
 
-const services = [
-  { icon: "🌐", title: "Websites", text: "Vom Relaunch bis zum kompletten Neuaufbau – individuelle Gestaltung, technisch sauber und suchmaschinenoptimiert." },
-  { icon: "🛒", title: "Online-Shops", text: "Conversion-optimierte Shops, die verkaufen. Skalierbar, mit durchdachter Nutzerführung und integriertem SEO." },
-  { icon: "🎯", title: "Landingpages", text: "Fokussiert auf ein Ziel: Anfragen und Verkäufe. Klar, schnell, überzeugend – und A/B-testbar." },
-  { icon: "📣", title: "Microsites", text: "Für Kampagnen, Produkte und Events. Schnell realisiert, auf den Punkt gebracht, mit eigenem Design." },
+const services = isDE ? [
+  { icon: "FaCode", title: "Websites & Relaunch", text: "Vom kompletten Neuaufbau bis zum gezielten Relaunch – individuelle Gestaltung, technisch sauber umgesetzt und von Anfang an für Suchmaschinen optimiert." },
+  { icon: "FaCartShopping", title: "Online-Shops", text: "Conversion-optimierte Shops, die verkaufen. Durchdachte Nutzerführung, schnelle Ladezeiten und integriertes SEO – skalierbar mit Ihrem Unternehmen." },
+  { icon: "FaArrowsRotate", title: "Baukasten-Migration", text: "Ihre Website läuft noch auf Ionos, Jimdo oder Wix? Wir migrieren Sie zügig auf ein professionelles CMS – inklusive Content-Migration und SEO-Weiterleitungen." },
+  { icon: "FaUniversalAccess", title: "BFSG-Konformität", text: "Das Barrierefreiheitsstärkungsgesetz gilt seit 28.06.2025. Wir prüfen Ihre Website und setzen sie auf Wunsch barrierefrei um – damit Sie auf der sicheren Seite sind." },
+] : [
+  { icon: "FaCode", title: "Websites & Relaunch", text: "From a complete new build to a targeted relaunch – custom design, technically clean implementation and search engine optimised from the start." },
+  { icon: "FaCartShopping", title: "Online Shops", text: "Conversion-optimised shops that sell. Thoughtful user flow, fast loading times and integrated SEO – scalable as your business grows." },
+  { icon: "FaArrowsRotate", title: "Page Builder Migration", text: "Your website still runs on a page builder? We migrate you quickly to a professional CMS – including content migration and SEO redirects." },
+  { icon: "FaUniversalAccess", title: "BFSG Accessibility", text: "The German Accessibility Strengthening Act has applied since 28.06.2025. We audit your site and make it accessible on request – so you're on the safe side." },
 ];
 
-const migrationSteps = [
-  { num: "01", title: "Analyse & Konzept", text: "Wir prüfen Ihre bestehende Seite, Inhalte und Rankings. Was bleibt, was kommt weg, was wird besser?" },
-  { num: "02", title: "Design & Aufbau", text: "Individuelles Webdesign oder hochwertig adaptiertes Template – technisch sauber umgesetzt, responsive von Anfang an." },
-  { num: "03", title: "Content-Migration & SEO", text: "Alle Inhalte ziehen um. Rankings bleiben durch saubere 301-Weiterleitungen erhalten. Keine Rankings verloren." },
-  { num: "04", title: "Go-Live & Übergabe", text: "Einweisung in Ihr neues CMS, auf Wunsch laufender Support. Fester Go-Live-Termin – kein offenes Ende." },
+const steps = isDE ? [
+  { num: "01", title: "Analyse & Konzept", text: "Wir prüfen Ihre bestehende Seite, Inhalte und Rankings. Was bleibt, was kommt weg, was wird besser? Sie erhalten einen klaren Fahrplan mit festem Go-Live-Termin." },
+  { num: "02", title: "Design & Entwicklung", text: "Individuelles Webdesign oder hochwertig adaptiertes Template – technisch sauber umgesetzt, responsiv auf jedem Gerät und auf Conversion ausgelegt." },
+  { num: "03", title: "Go-Live & Übergabe", text: "Vollständige Content-Migration, saubere 301-Weiterleitungen für Ihr Google-Ranking, Einweisung in Ihr CMS – auf Wunsch mit laufendem Support." },
+] : [
+  { num: "01", title: "Analysis & concept", text: "We review your existing site, content and rankings. What stays, what goes, what improves? You receive a clear roadmap with a fixed go-live date." },
+  { num: "02", title: "Design & development", text: "Custom web design or a high-quality adapted template – technically clean, responsive on every device and built for conversion." },
+  { num: "03", title: "Go-live & handover", text: "Full content migration, clean 301 redirects to protect your Google rankings, CMS training – with ongoing support on request." },
 ];
 
-const cms = [
-  { name: "WordPress", desc: "Das vielseitigste CMS: benutzerfreundliche Oberfläche, unzählige Erweiterungen, ideal für Unternehmensseiten und Content-Marketing." },
-  { name: "Kirby", desc: "Schlank und schnell: ideal für klar strukturierte Websites ohne Datenbank-Ballast. Maximale Kontrolle, minimaler Overhead." },
-  { name: "Typo3", desc: "Die Enterprise-Lösung: maximale Kontrolle, Rechteverwaltung und Skalierbarkeit für größere Organisationen." },
-  { name: "AstroJS", desc: "Höchste Performance, maximale Sicherheit, volle Code-Kontrolle. Perfekt, wenn Ladezeit und SEO oberste Priorität haben." },
+const trust = isDE ? [
+  "Ihr Google-Ranking bleibt beim Relaunch erhalten – durch saubere Weiterleitungen und SEO-geprüfte Architektur",
+  "Fester Go-Live-Termin nach dem Erstgespräch – kein offenes Ende, kein Scope Creep",
+  "Sie können Ihre Website nach der Übergabe selbst pflegen – wir schulen Sie ein",
+  "WordPress, Kirby, Typo3 oder AstroJS – wir empfehlen das System, das wirklich zu Ihnen passt",
+] : [
+  "Your Google ranking is preserved in the relaunch – through clean redirects and SEO-reviewed architecture",
+  "Fixed go-live date agreed after the initial call – no open end, no scope creep",
+  "You can maintain your website yourself after handover – we train you",
+  "WordPress, Kirby, Typo3 or AstroJS – we recommend the system that truly fits you",
 ];
 
-const projects = [
-  {
-    name: "Osthaven GmbH",
-    tech: "WordPress",
-    text: "Kompletter Relaunch mit individuellem Webdesign: klare Nutzerführung, überarbeitete Informationsarchitektur und responsives Design, das die Marke auf jedem Gerät überzeugend präsentiert.",
-    img: "/images/cases/jetsoftware-digitalx2.jpg",
-  },
-  {
-    name: "JETSoftware",
-    tech: "UI-Modernisierung & Performance",
-    text: "Umfassende Modernisierung des Webauftritts: zeitgemäßes, klares Design, komplett überarbeitete mobile Darstellung und deutlich verbesserte Ladezeiten. Für einen Auftritt, der zur Software-Kompetenz passt.",
-    img: "/images/cases/jetsoftware-digitalx2.jpg",
-  },
-  {
-    name: "Hostel Home",
-    tech: "Typo3",
-    text: "Vom veralteten Look zum modernen Markenauftritt: neues UI-Design, mobile-first optimierte Nutzerführung und spürbar schnellere Performance auf allen Geräten.",
-    img: "/images/cases/homehostel-innen-digitalx-1.webp",
-  },
-  {
-    name: "Binect",
-    tech: "Markenauftritt",
-    text: "Ein Design, das die Marke trägt: durchdachtes visuelles Konzept mit klarer Typografie, präziser Farbwelt und großzügigem Layout. Jedes Element folgt der Markenidentität.",
-    img: "/images/cases/adelta-digitalx-case.png",
-  },
-];
-
-const faqs = [
-  { q: "Wie lange dauert die Migration von einem Baukastensystem?", a: "Je nach Umfang und Ihrer Zuarbeit oft nur wenige Wochen – inklusive Content-Migration und SEO-Weiterleitungen." },
-  { q: "Wie lange dauert eine komplett neue Website?", a: "Als Orientierung: Für eine WordPress-Website mit überschaubarem Umfang kalkulieren wir mindestens 5 Personentage. Den konkreten Zeitplan legen wir gemeinsam im Erstgespräch fest, inklusive festem Go-Live-Termin." },
+const faqs = isDE ? [
+  { q: "Wie lange dauert die Migration von einem Baukastensystem?", a: "Je nach Umfang und Ihrer Zuarbeit oft nur wenige Wochen – inklusive Content-Migration und SEO-Weiterleitungen. Den genauen Zeitplan klären wir im Erstgespräch." },
   { q: "Bleibt mein Google-Ranking beim Relaunch erhalten?", a: "Ja – durch saubere 301-Weiterleitungen, übernommene Meta-Daten und eine SEO-geprüfte Informationsarchitektur sichern wir Ihre Rankings ab. SEO ist eines unserer Kernarbeitsgebiete." },
-  { q: "Ist meine neue Website BFSG-konform?", a: "Auf Wunsch, ja. Die barrierefreie Umsetzung ist eine Zusatzleistung, die Sie dazubuchen können. Wir prüfen im Erstgespräch, ob Ihre Website unter die gesetzliche Pflicht fällt, und kalkulieren den Aufwand transparent mit ein." },
-  { q: "Kann ich meine Website danach selbst pflegen?", a: "Ja. Sie erhalten eine Einweisung in Ihr CMS und können Texte, Bilder und Seiten eigenständig bearbeiten. Auf Wunsch übernehmen wir Wartung und Support." },
+  { q: "Welches CMS empfehlen Sie?", a: "Das hängt von Ihren Anforderungen ab. WordPress ist die vielseitigste Lösung für die meisten Unternehmen. Kirby eignet sich für schlanke, schnelle Seiten. Typo3 für große Organisationen mit komplexen Rechteanforderungen. AstroJS für maximale Performance und SEO. Von Baukastensystemen raten wir für professionelle Auftritte grundsätzlich ab." },
+  { q: "Ist meine neue Website BFSG-konform?", a: "Auf Wunsch, ja. Wir prüfen im Erstgespräch, ob Ihre Website unter die gesetzliche Pflicht fällt, und kalkulieren den Aufwand transparent mit ein. So vermeiden Sie eine teure Nachrüstung im Nachhinein." },
+  { q: "Wie starte ich?", a: "Rufen Sie uns an: 069 1753 611 90 oder füllen Sie das Formular aus. Wir melden uns innerhalb eines Werktages und klären Ihre Anforderungen – Sie erhalten danach ein verbindliches Angebot." },
+] : [
+  { q: "How long does migration from a page builder take?", a: "Depending on scope and your input, often just a few weeks – including content migration and SEO redirects. We clarify the exact timeline in the initial call." },
+  { q: "Will my Google ranking be preserved in the relaunch?", a: "Yes – through clean 301 redirects, carried-over meta data and an SEO-reviewed information architecture we protect your rankings. SEO is one of our core competencies." },
+  { q: "Which CMS do you recommend?", a: "It depends on your requirements. WordPress is the most versatile solution for most businesses. Kirby suits lean, fast sites. Typo3 suits large organisations with complex permissions. AstroJS for maximum performance and SEO. We generally advise against page builders for professional presences." },
+  { q: "Will my new website be BFSG-compliant?", a: "On request, yes. We check in the initial call whether your website falls under the legal requirement and include the effort transparently in your quote – so you avoid expensive retrofitting later." },
+  { q: "How do I get started?", a: "Call us: 069 1753 611 90 or fill in the form. We'll get back to you within one business day, clarify your requirements and send you a binding quote." },
 ];
 ---
 
 <Base
-  title={isDE ? "Webdesign Frankfurt – Websites & Online-Shops – ODGX Agency" : "Web Design Frankfurt – Websites & Online Shops – ODGX Agency"}
-  meta_title={isDE ? "Webdesign Agentur Frankfurt – WordPress, Typo3, AstroJS – ODGX Agency" : "Web Design Agency Frankfurt – WordPress, Typo3, AstroJS – ODGX Agency"}
+  title={isDE ? "Webdesign Agentur Frankfurt – WordPress, Typo3, AstroJS – ODGX Agency" : "Web Design Agency Frankfurt – WordPress, Typo3, AstroJS – ODGX Agency"}
+  meta_title={isDE ? "Webdesign Frankfurt – Websites & Online-Shops – ODGX Agency" : "Web Design Frankfurt – Websites & Online Shops – ODGX Agency"}
   description={isDE ? "Professionelles Webdesign aus Frankfurt. WordPress, Kirby, Typo3, AstroJS – individuell gestaltet, suchmaschinenoptimiert, BFSG-konform. Vom Baukasten zur modernen Website." : "Professional web design from Frankfurt. WordPress, Kirby, Typo3, AstroJS – custom built, SEO-optimised, BFSG-compliant. From page builder to modern website."}
 >
 
   <!-- Hero -->
   <div class="relative overflow-hidden">
     <img src="/images/homepage/patternBg.svg" alt="" class="absolute top-0 left-0 -z-10 object-cover w-[168%] h-full pointer-events-none" />
+    <div class="absolute w-full lg:w-[71%] aspect-[0.618/1] opacity-20 top-0 right-[14%] -z-10 rotate-[-157deg]">
+      <div class="absolute w-[40%] aspect-[0.325/1] bg-[#a5a2ff] rounded-full blur-[200px] left-[138px] top-[31px] rotate-12"></div>
+      <div class="absolute w-[40%] aspect-[0.572/1] bg-[#29c775] rounded-full blur-[200px] left-[222px] top-[208px]"></div>
+      <div class="absolute w-[40%] aspect-[0.571/1] bg-[#ffe74b] rounded-full blur-[200px] left-[436px] top-[340px]"></div>
+    </div>
     <section class="pt-28 pb-16">
       <div class="container text-center md:w-3/4 xl:w-full">
         <p class="text-primary font-semibold mb-3 tracking-wide uppercase text-sm" data-aos="fade-up-sm">
           {isDE ? "Webdesign Agentur aus Frankfurt" : "Web Design Agency from Frankfurt"}
         </p>
         <h1 class="text-[32px] md:text-[48px] lg:text-[64px] mb-6" data-aos="fade-up-sm">
-          {isDE ? "Websites, die überzeugen und verkaufen" : "Websites that convince and convert"}
+          {isDE ? "Ihre Website kostet Sie täglich Kunden" : "Your website is costing you customers every day"}
         </h1>
         <p class="lg:w-1/2 mx-auto mb-4 text-lg text-text-gray" data-aos="fade-up-sm">
           {isDE
-            ? "Wir entwickeln Ihre WordPress-, Kirby-, Typo3- oder AstroJS-Seite. Individuell gestaltet, suchmaschinenoptimiert und auf Wunsch barrierefrei nach BFSG."
-            : "We build your WordPress, Kirby, Typo3 or AstroJS website. Custom designed, SEO-optimised and BFSG-accessible on request."}
+            ? "Eine Website, die langsam lädt, auf dem Smartphone bricht oder bei Google nicht gefunden wird, ist kein Aushängeschild – sie ist ein Umsatzkiller. Wir bringen Ihre Website auf den Stand, den Ihre Kunden erwarten."
+            : "A website that loads slowly, breaks on mobile or can't be found on Google is not a showpiece – it's a revenue killer. We bring your website up to the standard your customers expect."}
         </p>
         <p class="lg:w-1/2 mx-auto mb-10 text-lg font-medium" data-aos="fade-up-sm">
-          {isDE ? "15+ Jahre Erfahrung · Agentur aus dem Herzen Frankfurts" : "15+ years of experience · Agency from the heart of Frankfurt"}
+          {isDE ? "15+ Jahre Erfahrung – Agentur aus dem Herzen Frankfurts." : "15+ years of experience – agency from the heart of Frankfurt."}
         </p>
         <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary" data-aos="fade-up-sm">
-          {isDE ? "Kostenlose Website-Analyse anfordern" : "Request a free website analysis"}
+          {isDE ? "Kostenlose Website-Analyse anfragen" : "Request a free website analysis"}
         </a>
       </div>
     </section>
   </div>
 
   <!-- Services -->
-  <section class="section">
+  <section class="pb-20 pt-16">
     <div class="container">
-      <h2 class="text-2xl md:text-3xl font-bold mb-4" data-aos="fade-up-sm">
-        {isDE ? "Ihre Website ist veraltet und kostet Sie täglich Kunden?" : "Your website is outdated and costing you customers every day?"}
-      </h2>
-      <p class="text-text-gray mb-12 max-w-3xl" data-aos="fade-up-sm">
-        {isDE
-          ? "Eine Website, die langsam lädt, auf dem Smartphone bricht oder nicht gefunden wird, ist kein Aushängeschild, sondern ein Umsatzkiller. Wir bringen Ihre Website auf den neuesten Stand – in Design, Technik und Nutzerführung."
-          : "A website that loads slowly, breaks on mobile or can't be found is not a showpiece – it's a revenue killer. We bring your website up to date in design, technology and user experience."}
-      </p>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="row g-4 justify-center">
         {services.map((s, i) => (
-          <div class="p-8 rounded-2xl bg-light border border-border" data-aos="fade-up-sm" data-aos-delay={i * 80}>
-            <div class="text-3xl mb-4">{s.icon}</div>
-            <h3 class="text-lg font-bold mb-3">{s.title}</h3>
-            <p class="text-text-gray text-sm leading-relaxed">{s.text}</p>
+          <div class="col-12 md:col-6 lg:col-3" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+            <div class="bg-light rounded-2xl p-8 h-full">
+              <div class="mb-4 p-4 rounded-full bg-body w-fit">
+                <DynamicIcon icon={s.icon} className="text-primary text-2xl" />
+              </div>
+              <h4 class="mb-3">{s.title}</h4>
+              <p class="text-text/80">{s.text}</p>
+            </div>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- BFSG -->
+  <!-- CMS Section -->
   <section class="section bg-light">
     <div class="container">
       <div class="row justify-center items-center g-4">
         <div class="col-12 lg:col-6" data-aos="fade-up-sm">
-          <p class="text-primary font-semibold uppercase text-sm tracking-wide mb-3">BFSG</p>
+          <p class="text-primary font-semibold uppercase text-sm tracking-wide mb-3">
+            {isDE ? "Das richtige System für Ihr Projekt" : "The right system for your project"}
+          </p>
           <h2 class="mb-6">
-            {isDE ? "Barrierefreiheit ab 28.06.2025 Pflicht" : "Accessibility required from 28.06.2025"}
+            {isDE ? "WordPress, Kirby, Typo3 oder AstroJS – wir empfehlen, was passt" : "WordPress, Kirby, Typo3 or AstroJS – we recommend what fits"}
           </h2>
           <p class="text-text-gray mb-6">
             {isDE
-              ? "Das Barrierefreiheitsstärkungsgesetz (BFSG) ist am 28.06.2025 in Kraft getreten. Betreiber kommerzieller Websites sind verpflichtet, ihre Seiten barrierefrei zu gestalten. Bei Verstößen drohen Abmahnungen und Bußgelder."
-              : "The German Accessibility Strengthening Act (BFSG) came into force on 28.06.2025. Operators of commercial websites are required to make their sites accessible. Non-compliance carries warnings and fines."}
+              ? "Viele Agenturen empfehlen immer dasselbe System – unabhängig davon, was Sie wirklich brauchen. Wir wählen das CMS nach Ihren Anforderungen: Für professionelle Auftritte raten wir grundsätzlich von Baukastensystemen ab."
+              : "Many agencies always recommend the same system – regardless of what you actually need. We choose the CMS based on your requirements. For professional presences we generally advise against page builders."}
           </p>
-          <p class="text-text-gray mb-6">
-            {isDE
-              ? "Die gute Nachricht: Barrierefreiheit und gutes Webdesign schließen sich nicht aus. Beides verbessert Ihre Nutzerführung und Ihre Google-Rankings."
-              : "The good news: accessibility and good web design are not mutually exclusive. Both improve your user experience and your Google rankings."}
-          </p>
-          <ul class="space-y-2 mb-8">
-            {["Online-Shops (B2C und teilweise B2B)", "Banken und Finanzdienstleister", "E-Book- und Digital-Dienstleister", "Buchungs- und Terminsysteme"].map((item) => (
+          <ul class="space-y-3">
+            {(isDE ? [
+              "WordPress – vielseitigste Lösung, ideal für Unternehmensseiten und Content-Marketing",
+              "Kirby – schlank und schnell, ideal für klar strukturierte Seiten ohne Datenbank-Ballast",
+              "Typo3 – Enterprise-Lösung für große Organisationen mit komplexen Rechteanforderungen",
+              "AstroJS – maximale Performance und SEO, volle Code-Kontrolle, ideal für statische Seiten",
+            ] : [
+              "WordPress – most versatile solution, ideal for business sites and content marketing",
+              "Kirby – lean and fast, ideal for clearly structured sites without database overhead",
+              "Typo3 – enterprise solution for large organisations with complex permission requirements",
+              "AstroJS – maximum performance and SEO, full code control, ideal for static sites",
+            ]).map((item) => (
               <li class="flex items-start gap-3">
                 <DynamicIcon icon="FaCircleCheck" className="text-primary text-xl mt-0.5 shrink-0" />
                 <span class="text-text-gray">{item}</span>
               </li>
             ))}
           </ul>
-          <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary inline-block">
-            {isDE ? "Kostenlosen BFSG-Schnellcheck anfordern" : "Request a free BFSG quick check"}
-          </a>
         </div>
         <div class="col-12 lg:col-5 lg:col-offset-1" data-aos="zoom-in-sm">
           <div class="bg-body rounded-2xl p-8 text-center">
-            <p class="text-6xl font-bold text-primary mb-2">28.06.</p>
-            <p class="text-text-gray mb-8">{isDE ? "BFSG in Kraft seit 28.06.2025" : "BFSG in force since 28.06.2025"}</p>
-            <p class="text-4xl font-bold text-primary mb-2">15+</p>
-            <p class="text-text-gray">{isDE ? "Jahre Webdesign-Erfahrung" : "Years of web design experience"}</p>
+            <p class="text-6xl font-bold text-primary mb-2">15+</p>
+            <p class="text-text-gray mb-8">{isDE ? "Jahre Webdesign-Erfahrung" : "Years of web design experience"}</p>
+            <p class="text-4xl font-bold text-primary mb-2">069 1753 611 90</p>
+            <p class="text-text-gray">{isDE ? "Direkter Draht zu Ihrem Webentwickler" : "Direct line to your web developer"}</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Baukasten Migration -->
+  <!-- How we work -->
   <section class="section">
     <div class="container">
-      <div class="max-w-3xl mb-12" data-aos="fade-up-sm">
-        <h2 class="text-2xl md:text-3xl font-bold mb-4">
-          {isDE ? "Vom Baukasten zum modernen CMS" : "From page builder to modern CMS"}
-        </h2>
-        <p class="text-text-gray">
-          {isDE
-            ? "Ihre Website läuft noch auf Ionos, Strato, Jimdo oder Wix? Diese Systeme stoßen schnell an ihre Grenzen – beim Design, bei den Funktionen und vor allem bei der Suchmaschinenoptimierung. Mit unseren Design-Sprints migrieren wir zügig auf ein modernes System – inklusive kompletter Content-Migration."
-            : "Your website still runs on Ionos, Strato, Jimdo or Wix? These systems quickly reach their limits – in design, functionality and especially SEO. With our design sprints we migrate quickly to a modern system – including full content migration."}
-        </p>
-      </div>
-      <div class="row g-4">
-        {migrationSteps.map((s, i) => (
-          <div class="col-12 md:col-6 lg:col-3" data-aos="fade-up-sm" data-aos-delay={i * 80}>
+      <h2 class="text-center mb-14" data-aos="fade-up-sm">
+        {isDE ? "So arbeiten wir" : "How we work"}
+      </h2>
+      <div class="row g-4 justify-center">
+        {steps.map((s, i) => (
+          <div class="col-12 md:col-4" data-aos="fade-up-sm" data-aos-delay={i * 100}>
             <div class="bg-light rounded-2xl p-8 h-full">
               <p class="text-5xl font-bold text-primary/20 mb-4">{s.num}</p>
               <h4 class="mb-3">{s.title}</h4>
-              <p class="text-text/80 text-sm leading-relaxed">{s.text}</p>
+              <p class="text-text/80">{s.text}</p>
             </div>
           </div>
         ))}
       </div>
-      <div class="mt-10" data-aos="fade-up-sm">
-        <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary inline-block">
-          {isDE ? "Migration unverbindlich anfragen" : "Request migration without obligation"}
-        </a>
-      </div>
     </div>
   </section>
 
-  <!-- Projects -->
+  <!-- Why ODGX -->
   <section class="section bg-light">
     <div class="container">
-      <h2 class="text-2xl md:text-3xl font-bold mb-12" data-aos="fade-up-sm">
-        {isDE ? "Kundenprojekte aus Frankfurt und ganz Deutschland" : "Client projects from Frankfurt and across Germany"}
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {projects.map((p, i) => (
-          <div class="bg-body rounded-2xl overflow-hidden border border-border" data-aos="fade-up-sm" data-aos-delay={i * 80}>
-            <div class="rounded-t-2xl overflow-hidden">
-              <img src={p.img} alt={p.name} class="w-full h-48 object-cover" />
-            </div>
-            <div class="p-8">
-              <p class="text-primary text-xs font-semibold uppercase tracking-wide mb-2">{p.tech}</p>
-              <h3 class="text-xl font-bold mb-3">{p.name}</h3>
-              <p class="text-text-gray text-sm leading-relaxed">{p.text}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- CMS Comparison -->
-  <section class="section">
-    <div class="container">
-      <h2 class="text-2xl md:text-3xl font-bold mb-4" data-aos="fade-up-sm">
-        {isDE ? "WordPress, Kirby, Typo3 oder AstroJS: Wir empfehlen, was zu Ihnen passt" : "WordPress, Kirby, Typo3 or AstroJS: We recommend what fits you"}
-      </h2>
-      <p class="text-text-gray mb-12 max-w-3xl" data-aos="fade-up-sm">
-        {isDE
-          ? "Wir arbeiten mit den Systemen, die zu Ihren Anforderungen passen. Für professionelle Auftritte raten wir grundsätzlich von Baukastensystemen ab – sie stoßen schnell an ihre Grenzen und sind für SEO in der Regel ungeeignet."
-          : "We work with systems that match your requirements. For professional presences we generally advise against page builders – they quickly reach their limits and are generally unsuitable for SEO."}
-      </p>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {cms.map((c, i) => (
-          <div class="p-8 rounded-2xl bg-light border border-border" data-aos="fade-up-sm" data-aos-delay={i * 80}>
-            <h3 class="text-lg font-bold mb-3 text-primary">{c.name}</h3>
-            <p class="text-text-gray text-sm leading-relaxed">{c.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Design & Pricing -->
-  <section class="section bg-light">
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-12 lg:col-6" data-aos="fade-up-sm">
-          <h2 class="text-2xl md:text-3xl font-bold mb-4">
-            {isDE ? "Design, das Vertrauen schafft und verkauft" : "Design that builds trust and sells"}
+      <div class="row justify-center items-center g-4">
+        <div class="col-12 lg:col-5" data-aos="fade-up-sm">
+          <h2 class="mb-6">
+            {isDE ? "Warum ODGX Agency?" : "Why ODGX Agency?"}
           </h2>
-          <p class="text-text-gray mb-4">
+          <p class="text-text-gray mb-8">
             {isDE
-              ? "Gutes Design ist mehr als Ästhetik: Es schafft Vertrauen und führt Besucher gezielt zur Anfrage oder zum Kauf. Farben, Typografie und Layout wählen wir so, dass sie Ihre Marke präzise repräsentieren und die Benutzerfreundlichkeit maximieren."
-              : "Good design is more than aesthetics: it builds trust and guides visitors towards enquiry or purchase. We choose colours, typography and layout to precisely represent your brand and maximise usability."}
+              ? "Viele Agenturen bauen Websites. Wir bauen Websites, die verkaufen. Sie arbeiten direkt mit dem Entwickler, der Ihr Projekt kennt – fester Ansprechpartner, klarer Fahrplan, keine Überraschungen."
+              : "Many agencies build websites. We build websites that sell. You work directly with the developer who knows your project – one fixed contact, clear roadmap, no surprises."}
           </p>
-          <p class="text-text-gray">
-            {isDE
-              ? "Selbstverständlich ist jedes unserer Designs responsiv. Interaktive Elemente und Animationen setzen wir gezielt ein – sie bereichern das Nutzererlebnis, ohne die Ladezeiten zu beeinträchtigen."
-              : "Every design we create is responsive. We use interactive elements and animations purposefully – they enhance the user experience without impacting load times."}
-          </p>
-        </div>
-        <div class="col-12 lg:col-6" data-aos="fade-up-sm">
-          <h2 class="text-2xl md:text-3xl font-bold mb-4">
-            {isDE ? "Was kostet eine professionelle Website?" : "What does a professional website cost?"}
-          </h2>
-          <p class="text-text-gray mb-4">
-            {isDE
-              ? "Pauschalpreise für Websites sind unseriös. Jedes Projekt unterscheidet sich in Umfang, Design-Anspruch und Funktionen. Wir kalkulieren transparent nach Personentagen."
-              : "Flat-rate pricing for websites is misleading. Every project differs in scope, design ambition and functionality. We calculate transparently by person-days."}
-          </p>
-          <p class="text-text-gray mb-6">
-            {isDE
-              ? "Für eine WordPress-Website mit überschaubarem Content-Umfang, inklusive Konzept, Informationsarchitektur, Webdesign und Programmierung, sollten Sie mindestens 5 Personentage einplanen. Eine Baukasten-Migration ist je nach Umfang oft günstiger und schneller."
-              : "For a WordPress website with manageable content scope – including concept, information architecture, web design and development – you should budget at least 5 person-days. A page-builder migration is often cheaper and faster depending on scope."}
-          </p>
-          <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary inline-block">
-            {isDE ? "Unverbindliches Angebot anfordern" : "Request a non-binding quote"}
+          <ul class="space-y-4">
+            {trust.map((item) => (
+              <li class="flex items-start gap-3">
+                <DynamicIcon icon="FaCircleCheck" className="text-primary text-xl mt-0.5 shrink-0" />
+                <span class="font-medium">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <a href={isDE ? "/kontakt" : "/contact"} class="btn btn-primary mt-8 inline-block">
+            {isDE ? "Jetzt Erstgespräch buchen" : "Book a free initial call"}
           </a>
+        </div>
+        <div class="col-12 lg:col-6 lg:col-offset-1" data-aos="zoom-in-sm">
+          <div class="bg-body rounded-2xl p-8 text-center">
+            <p class="text-6xl font-bold text-primary mb-2">5+</p>
+            <p class="text-text-gray mb-8">{isDE ? "Personentage Mindestaufwand – transparent kalkuliert" : "Person-days minimum effort – transparently calculated"}</p>
+            <p class="text-4xl font-bold text-primary mb-2">28.06.25</p>
+            <p class="text-text-gray">{isDE ? "BFSG in Kraft – wir helfen Ihnen, compliant zu sein" : "BFSG in force – we help you stay compliant"}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -288,7 +224,7 @@ const faqs = [
   <section class="section">
     <div class="container md:w-3/4 lg:w-2/3">
       <h2 class="text-center mb-14" data-aos="fade-up-sm">
-        {isDE ? "Häufige Fragen zum Webdesign" : "Frequently asked questions about web design"}
+        {isDE ? "Häufige Fragen" : "Frequently asked questions"}
       </h2>
       <div class="space-y-4">
         {faqs.map((faq, i) => (
@@ -304,23 +240,40 @@ const faqs = [
     </div>
   </section>
 
-  <!-- CTA + Form -->
-  <section class="section bg-light">
+  <!-- CTA + Contact -->
+  <section class="section">
     <div class="container">
-      <div class="row justify-center g-4">
-        <div class="col-12 md:col-5" data-aos="fade-up-sm">
-          <h2 class="text-2xl md:text-3xl font-bold mb-4">
+      <div class="row g-4 justify-center">
+        <div class="col-12 text-center mb-6">
+          <h2 class="text-[32px] md:text-[48px] mb-4" data-aos="fade-up-sm">
             {isDE ? "Bereit für eine Website, die wieder verkauft?" : "Ready for a website that sells again?"}
           </h2>
-          <p class="text-text-gray mb-6">
-            {isDE
-              ? "Im kostenlosen Erstgespräch klären wir Ihre Anforderungen und Sie erhalten ein verbindliches Angebot mit nachvollziehbarer Aufwandsschätzung. Keine versteckten Kosten, keine Überraschungen."
-              : "In a free initial call we clarify your requirements and you receive a binding offer with a transparent effort estimate. No hidden costs, no surprises."}
+          <p class="lg:w-1/2 mx-auto text-text-gray" data-aos="fade-up-sm">
+            {isDE ? "Im Erstgespräch klären wir Ihre Anforderungen – Sie erhalten danach ein verbindliches Angebot. Keine versteckten Kosten, keine Überraschungen." : "In the initial call we clarify your requirements – you then receive a binding quote. No hidden costs, no surprises."}
           </p>
-          <p class="font-semibold">069 1753 611 90</p>
-          <p class="text-text-gray text-sm mt-1">info@odgxagency.de</p>
         </div>
-        <div class="col-12 md:col-7" data-aos="fade-up-sm">
+        <div class="col-12 md:col-10 lg:col-8 xl:col-5">
+          <div class="p-10 rounded-xl bg-light h-full flex flex-col justify-between">
+            <h3 class="mb-6" data-aos="fade-up-sm">
+              {isDE ? "Jetzt Kontakt aufnehmen" : "Get in touch"}
+            </h3>
+            <div>
+              {[
+                { icon: "FaEnvelope", name: "info@odgxagency.de" },
+                { icon: "FaPhone", name: "069 1753 611 90" },
+                { icon: "FaLocationDot", name: isDE ? "Frankfurt am Main" : "Frankfurt am Main, Germany" },
+              ].map((c, i) => (
+                <div class="flex items-center mb-4 last:mb-0" data-aos="fade-up-sm" data-aos-delay={i * 100}>
+                  <div class="mr-4 p-5 rounded-full bg-primary w-fit">
+                    <DynamicIcon icon={c.icon} className="text-text-light text-3xl" />
+                  </div>
+                  <p class="text-xl">{c.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-10 lg:col-8 xl:col-7">
           <ContactForm lang={lang} />
         </div>
       </div>
