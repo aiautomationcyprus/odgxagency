@@ -26,7 +26,7 @@ if (disabledLanguages.includes(lang)) {
 
 {announcement_bar.enable && <AnnouncementBar />}
 
-<header class={`header z-30 ${settings.sticky_header && "sticky top-0"}`}>
+<header transition:persist class={`header z-30 ${settings.sticky_header && "sticky top-0"}`}>
   <nav class="navbar container">
     
     <!-- logo -->
@@ -147,4 +147,22 @@ if (disabledLanguages.includes(lang)) {
     </div>
   </nav>
 </header>
+
+<script is:inline>
+  function updateNavActive() {
+    var path = window.location.pathname;
+    document.querySelectorAll("#nav-menu a.nav-link, #nav-menu a.nav-dropdown-link").forEach(function(a) {
+      var href = a.getAttribute("href");
+      if (href && path === href) {
+        a.classList.add("active");
+      } else {
+        a.classList.remove("active");
+      }
+    });
+    // close mobile menu on navigation
+    var toggle = document.getElementById("nav-toggle");
+    if (toggle) toggle.checked = false;
+  }
+  document.addEventListener("astro:page-load", updateNavActive);
+</script>
 
