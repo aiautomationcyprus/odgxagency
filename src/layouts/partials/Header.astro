@@ -85,6 +85,15 @@ if (disabledLanguages.includes(lang)) {
                   ))}
                 </ul>
               </li>
+            ) : item.url === "/kontakt" ? (
+              <li class="nav-item">
+                <a
+                  href={slugSelector(item.url, lang)}
+                  class="btn btn-primary btn-sm"
+                >
+                  {item.name}
+                </a>
+              </li>
             ) : (
               <li class="nav-item">
                 <a
