@@ -18,12 +18,7 @@
     },
     {
       "name": "Podcast",
-      "url": "/podcast",
-      "hasChildren": true,
-      "children": [
-        { "name": "Podcast Produktion", "url": "/podcast" },
-        { "name": "Studio mieten", "url": "/studio-mieten" }
-      ]
+      "url": "/podcast"
     },
     {
       "separator": true
