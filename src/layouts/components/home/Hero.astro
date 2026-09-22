@@ -80,7 +80,7 @@ const { hero } = Astro.props;
           { src: "/images/team/milly.jpg", name: "Bonnie Bonita Torres", role: "Agenturhund" },
         ].map((member, i) => (
           <div class="col-6 md:col-6 lg:col-3" data-aos="fade-up-sm" data-aos-delay={i * 100}>
-            <div class="mx-auto w-fit flex flex-col justify-center">
+            <div class="w-full flex flex-col justify-center">
               <div class="rounded-lg h-[190px] md:h-[320px] lg:h-[383px] overflow-hidden mb-4">
                 <ImageMod
                   src={member.src}
