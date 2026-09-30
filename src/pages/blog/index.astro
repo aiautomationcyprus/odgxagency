@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Cta from '../../components/sections/Cta.astro';
+import SectionHeading from '../../components/sections/SectionHeading.astro';
+import Container from '../../components/ui/Container.astro';
+import PostCard from '../../components/ui/PostCard.astro';
+import { ROUTES } from '../../config/site';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+);
+const categories = (await getCollection('blogCategories')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const categoryOf = (post: (typeof posts)[number]) =>
+  categories.find((c) => c.id === post.data.category);
+---
+
+<BaseLayout
+  title="Blog"
+  description="Insights, trends and guidance from our teams across technology, energy, logistics and finance."
+>
+  <section class="global-section">
+    <div class="spacer"></div>
+
+    <div class="global">
+      <Container>
+        <div class="blog-block">
+          <div class="blog-text-block">
+            <SectionHeading
+              as="h1"
+              breadcrumb={[{ label: 'Home', href: ROUTES.home }, { label: 'Blog' }]}
+              title="Latest insights and trends"
+              excerpt="Perspectives from the people running our operations — what is changing in our industries, and what we are doing about it."
+              class="blog-text"
+            />
+          </div>
+
+          <nav class="blog-tag-nav" aria-label="Post categories">
+            <a href={ROUTES.blog} class="blog-tag is-current" aria-current="page">All</a>
+            {
+              categories.map((category) => (
+                <a href={ROUTES.blogCategory(category.id)} class="blog-tag">
+                  {category.data.title}
+                </a>
+              ))
+            }
+          </nav>
+
+          <div class="blog-post-block">
+            {/* The page heading is the h1; the cards are h3, so this names
+                the group and keeps the outline from skipping a level. */}
+            <h2 class="sr-only">All posts</h2>
+            <div class="blog-list">
+              {
+                posts.map((post, i) => (
+                  <PostCard {post} category={categoryOf(post)} eager={i < 3} delay={(i % 3) * 0.15} />
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+  <Cta />
+</BaseLayout>

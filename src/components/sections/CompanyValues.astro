@@ -1,0 +1,121 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+import Container from '../ui/Container.astro';
+import Counter from '../ui/Counter.astro';
+import Icon from '../ui/Icon.astro';
+import SectionHeading, { type Breadcrumb } from './SectionHeading.astro';
+
+/**
+ * The company statement: a headline paragraph, a video-backed portrait with a
+ * years-in-business badge, and the three commitments beside it.
+ */
+interface Props {
+  statement: string;
+  breadcrumb?: Breadcrumb[];
+  title: string;
+  items: CollectionEntry<'company'>[];
+  image: ImageMetadata;
+  imageAlt: string;
+  /** Video file name in `/public/videos`, without an extension. */
+  video: string;
+  badge?: { value: string; label: string };
+}
+
+const { statement, breadcrumb, title, items, image, imageAlt, video, badge } = Astro.props;
+/*
+ * Posters live in `src/assets` rather than `public`, so the build serves them
+ * responsively in a modern format. The hero's is the page's largest paint, and
+ * an unoptimised full-width JPEG is the slowest thing on a phone.
+ */
+const posters = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/videos/*-poster.jpg',
+  { eager: true }
+);
+const posterAsset = posters[`../../assets/videos/${video}-poster.jpg`]?.default;
+const posterUrl = posterAsset
+  ? (await getImage({ src: posterAsset, format: 'webp', width: 1280 })).src
+  : undefined;
+---
+
+<section class="company-section">
+  <div class="section-gap">
+    <Container>
+      <div class="company-info-block">
+        <div class="details-text-block">
+          <h2 class="details-text is-about" data-anim="words">{statement}</h2>
+        </div>
+      </div>
+
+      <div class="company-text-block">
+        <div class="company-image-block">
+          <div class="company-background background-video" data-anim="fade-left">
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              preload="none"
+              poster={posterUrl}
+              aria-hidden="true"
+              tabindex="-1"
+              data-bg-video
+            >
+              <source data-src={`/videos/${video}.mp4`} type="video/mp4" />
+              <source data-src={`/videos/${video}.webm`} type="video/webm" />
+            </video>
+          </div>
+
+          <div class="company-image-wrap">
+            <Image
+              src={image}
+              alt={imageAlt}
+              class="company-image"
+              widths={[500, 900, 1400]}
+              sizes="(max-width: 991px) 100vw, 50vw"
+              loading="lazy"
+              data-anim="fade-right"
+            />
+            {
+              badge && (
+                <div class="company-review" data-anim="grow" data-anim-delay="0.5">
+                  <Counter value={badge.value} label={badge.label} variant="review" />
+                </div>
+              )
+            }
+          </div>
+        </div>
+
+        <div class="company-details-block">
+          <SectionHeading {breadcrumb} {title} class="company-text" />
+
+          <div class="company-list">
+            {
+              /*
+               * The rule is a separator between commitments, not part of one.
+               * The design has it as a sibling of the item, spanning the
+               * column; nested inside the item it becomes a third child of
+               * that flex row and draws itself off to the right of the text.
+               */
+              items.map((item, i) => (
+                <>
+                  {i > 0 && <div class="company-line" />}
+                  <div class="company-item" data-anim="fade-up" data-anim-delay={i * 0.15}>
+                    <div class="company-icon">
+                      <Icon name={item.data.icon} class="company-ico" />
+                    </div>
+                    <div class="company-wrap">
+                      <h3 class="company-name">{item.data.title}</h3>
+                      <p class="company-except">{item.data.description}</p>
+                    </div>
+                  </div>
+                </>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

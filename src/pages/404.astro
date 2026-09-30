@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets';
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import Container from '../components/ui/Container.astro';
+import Icon from '../components/ui/Icon.astro';
+import pupil from '../assets/images/misc/404.webp';
+import { ROUTES } from '../config/site';
+---
+
+<BaseLayout
+  title="Page not found"
+  description="The page you were looking for is not here."
+  noindex
+>
+  <section class="global-section">
+    <div class="spacer"></div>
+
+    <div class="global">
+      <Container>
+        <div class="error-block">
+          <div class="error-icon-block">
+            <div class="error-icon">
+              <Icon name="error-text" class="error-icon-text" />
+
+              {/* The middle "0" is an eye that blinks. */}
+              <div class="error-icon-wrap" data-anim="blink">
+                <Icon name="error-eye" class="error-icon-bg" />
+                <div class="error-icon-eye" data-blink-lid></div>
+                <Image
+                  src={pupil}
+                  alt=""
+                  class="error-icon-vector"
+                  width={268}
+                  height={320}
+                  densities={[1, 2]}
+                  loading="eager"
+                  data-blink-pupil
+                />
+              </div>
+
+              <Icon name="error-text" class="error-icon-text" />
+            </div>
+          </div>
+
+          <div class="error-title-block">
+            <h1 class="error-title" data-anim="hero-title">Oops! Page not found</h1>
+          </div>
+
+          <div class="error-except-block">
+            <p class="error-except" data-anim="fade-up" data-anim-delay="0.2">
+              The page you were trying to reach seems to have gone missing.
+            </p>
+          </div>
+
+          <div class="error-button-block" data-anim="fade-up" data-anim-delay="0.3">
+            <Button label="Back to home" href={ROUTES.home} />
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,79 @@
+---
+import { getImage } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+import Container from '../ui/Container.astro';
+import SectionHeading from './SectionHeading.astro';
+
+/**
+ * Headline sustainability figures over a looping video. The four cards start
+ * spread apart and converge as the section scrolls into place.
+ */
+interface Props {
+  tag?: string;
+  title: string;
+  excerpt?: string;
+  items: CollectionEntry<'impact'>[];
+  /** Video file name in `/public/videos`, without an extension. */
+  video: string;
+}
+
+const { tag = 'Our Impact', title, excerpt, items, video } = Astro.props;
+/*
+ * Posters live in `src/assets` rather than `public`, so the build serves them
+ * responsively in a modern format. The hero's is the page's largest paint, and
+ * an unoptimised full-width JPEG is the slowest thing on a phone.
+ */
+const posters = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/videos/*-poster.jpg',
+  { eager: true }
+);
+const posterAsset = posters[`../../assets/videos/${video}-poster.jpg`]?.default;
+const posterUrl = posterAsset
+  ? (await getImage({ src: posterAsset, format: 'webp', width: 1280 })).src
+  : undefined;
+
+// Where each card travels in from, as "x,y" pixels.
+const ORIGINS = ['370,0', '-370,0', '185,-240', '-185,-240'];
+---
+
+<section class="impact-section">
+  <div class="section-gap">
+    <Container>
+      <div class="impact-block">
+        <div class="impact-text-block">
+          <SectionHeading {tag} {title} {excerpt} class="impact-text" />
+        </div>
+
+        <div class="impact-card-block" data-anim="converge">
+          <div class="impact-mp4 background-video">
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              preload="none"
+              poster={posterUrl}
+              aria-hidden="true"
+              tabindex="-1"
+              data-bg-video
+            >
+              <source data-src={`/videos/${video}.mp4`} type="video/mp4" />
+              <source data-src={`/videos/${video}.webm`} type="video/webm" />
+            </video>
+          </div>
+
+          {
+            items.map((item, i) => (
+              <article class="impact-card" data-converge-from={ORIGINS[i % ORIGINS.length]}>
+                <div class="impact-num">{item.data.value}</div>
+                <h3 class="impact-title">{item.data.title}</h3>
+                <p class="impact-except">{item.data.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

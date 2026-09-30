@@ -1,0 +1,32 @@
+[
+  {
+    "id": "logistics",
+    "title": "Logistics",
+    "description": "Supply chains, freight networks and the systems that keep goods moving.",
+    "order": 1
+  },
+  {
+    "id": "sustainability",
+    "title": "Sustainability",
+    "description": "Decarbonization, circular design and the road to net zero.",
+    "order": 2
+  },
+  {
+    "id": "people-and-culture",
+    "title": "People & Culture",
+    "description": "How we hire, grow and support teams across every market we operate in.",
+    "order": 3
+  },
+  {
+    "id": "technology",
+    "title": "Technology",
+    "description": "Platforms, automation and the engineering behind our operations.",
+    "order": 4
+  },
+  {
+    "id": "finance",
+    "title": "Finance",
+    "description": "Capital allocation, risk and long-term value creation.",
+    "order": 5
+  }
+]

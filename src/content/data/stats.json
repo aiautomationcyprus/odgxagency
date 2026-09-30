@@ -1,0 +1,6 @@
+[
+  { "id": "years", "value": 40, "suffix": "+", "label": "Years Experience", "order": 1 },
+  { "id": "employees", "value": 30, "suffix": "K+", "label": "Employees Worldwide", "order": 2 },
+  { "id": "satisfaction", "value": 90, "suffix": "%", "label": "Satisfied Customers", "order": 3 },
+  { "id": "savings", "value": 50, "suffix": "B+", "label": "Energy cost savings", "order": 4 }
+]

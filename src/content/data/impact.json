@@ -1,0 +1,30 @@
+[
+  {
+    "id": "projects",
+    "value": "30+",
+    "title": "Active Projects",
+    "description": "Live sustainability programs running across our operating regions.",
+    "order": 1
+  },
+  {
+    "id": "carbon",
+    "value": "50%",
+    "title": "Carbon Reduction",
+    "description": "Absolute reduction in scope 1 and 2 emissions against our 2015 baseline.",
+    "order": 2
+  },
+  {
+    "id": "beneficiaries",
+    "value": "20,000+",
+    "title": "Beneficiaries",
+    "description": "People reached through our community and workforce development programs.",
+    "order": 3
+  },
+  {
+    "id": "esg",
+    "value": "100%",
+    "title": "ESG Compliance",
+    "description": "Operating sites audited and compliant with our group ESG standard.",
+    "order": 4
+  }
+]

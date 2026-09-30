@@ -1,0 +1,78 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import TeamCard from '../ui/TeamCard.astro';
+
+/**
+ * Leadership.
+ *
+ * The design carries two arrangements of the same people and swaps them at the
+ * tablet breakpoint: a four-column grid above it, a carousel below. They are
+ * separate blocks rather than one that reflows, so both are rendered and the
+ * stylesheet decides which is shown.
+ */
+interface Props {
+  tag?: string;
+  title: string;
+  titleTail?: string;
+  members: CollectionEntry<'team'>[];
+}
+
+const { tag = 'Team', title, titleTail, members } = Astro.props;
+---
+
+<section class="team-section">
+  <div class="section-gap">
+    <Container>
+      <div class="team-block">
+        <div class="team-text-block">
+          <SectionHeading {tag} {title} {titleTail} class="team-text" />
+        </div>
+
+        <div class="team-card-block" data-anim="fade-up">
+          {members.map((member) => <TeamCard {member} sizes="25vw" />)}
+        </div>
+
+        <div class="team-slider-block">
+          <div class="team-slider" data-slider>
+            <div
+              class="team-mask slider-mask"
+              data-slider-mask
+              tabindex="0"
+              role="group"
+              aria-label="Team members"
+            >
+              {
+                members.map((member) => (
+                  <div class="team-slide" data-slide>
+                    <TeamCard {member} sizes="(max-width: 767px) 90vw, 45vw" />
+                  </div>
+                ))
+              }
+            </div>
+
+            <button
+              type="button"
+              class="team-arrow"
+              data-slider-prev
+              aria-label="Previous team members"
+            >
+              <Icon name="chevron-down" class="team-arrow-icon" />
+            </button>
+            <button
+              type="button"
+              class="team-arrow"
+              data-slider-next
+              aria-label="Next team members"
+            >
+              <Icon name="chevron-down" class="team-arrow-icon" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

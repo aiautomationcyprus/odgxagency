@@ -1,0 +1,71 @@
+---
+import Media from './Media.astro';
+import type { CollectionEntry } from 'astro:content';
+
+import Icon from './Icon.astro';
+import { ROUTES } from '../../config/site';
+
+/**
+ * A funding round teaser: image, name, summary, amount raised, and the round's
+ * participation figures.
+ */
+interface Props {
+  investor: CollectionEntry<'investors'>;
+  /** Only the first few cards on a page should load eagerly. */
+  eager?: boolean;
+  /** Stagger for the reveal, in seconds. */
+  delay?: number;
+}
+
+const { investor, eager = false, delay = 0 }: Props = Astro.props;
+const { title, excerpt, image, raised, investors, funded } = investor.data;
+const href = ROUTES.investor(investor.id);
+---
+
+<article class="investors-post" data-anim="fade-up" data-anim-delay={delay}>
+  <a href={href} class="investors-image-post" tabindex="-1" aria-hidden="true">
+    <Media
+      src={image}
+      alt=""
+      class="post-image"
+      widths={[400, 800, 1040]}
+      sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 33vw"
+      loading={eager ? 'eager' : 'lazy'}
+    />
+  </a>
+
+  <div class="investors-details-post">
+    <h3>
+      <a href={href} class="investors-name">{title}</a>
+    </h3>
+    <p class="investors-except">{excerpt}</p>
+
+    <div class="investors-wrapp">
+      <div class="investors-price">{raised}</div>
+      <div class="investors-raised">Raised</div>
+    </div>
+
+    {/* Progress toward the round's target. */}
+    <div
+      class="investors-divider"
+      role="progressbar"
+      aria-valuenow={funded}
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-label={`${funded}% funded`}
+    >
+      <div class="investors-line" data-anim="line" data-anim-value={`${funded}%`}></div>
+    </div>
+
+    <div class="investors-content">
+      <div class="investors-wrap">
+        <div class="investors-tag">{investors.toLocaleString('en-US')} Investors</div>
+        <div class="investors-dash"></div>
+        <div class="investors-tag">{funded}% Funded</div>
+      </div>
+      <a href={href} class="investors-link" tabindex="-1" aria-hidden="true">
+        <Icon name="arrow-up-right-sm" class="investors-icon" />
+      </a>
+    </div>
+  </div>
+</article>

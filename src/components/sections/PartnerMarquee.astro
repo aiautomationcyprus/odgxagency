@@ -1,0 +1,38 @@
+---
+import Media from '../ui/Media.astro';
+import type { CollectionEntry } from 'astro:content';
+
+/**
+ * A continuously scrolling logo belt. The motion layer duplicates the track so
+ * the loop is seamless; the duplicate is hidden from assistive technology.
+ */
+interface Props {
+  label?: string;
+  logos: CollectionEntry<'partners'>[];
+  /** Seconds for one full cycle. */
+  duration?: number;
+  class?: string;
+}
+
+const { label, logos, duration = 45, class: className } = Astro.props;
+---
+
+<div class:list={['partner-block', className]}>
+  {
+    label && (
+      <div class="partner-text-block">
+        <p class="partner-text">{label}</p>
+      </div>
+    )
+  }
+
+  <div class="partner-logo-block marquee" data-anim="marquee" data-anim-value={duration}>
+    <div class="partner-loop">
+      {
+        logos.map((logo) => (
+          <Media src={logo.data.logo} alt={logo.data.name} class="partner-logo" loading="lazy" />
+        ))
+      }
+    </div>
+  </div>
+</div>

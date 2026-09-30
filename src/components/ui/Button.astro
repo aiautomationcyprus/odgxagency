@@ -1,0 +1,56 @@
+---
+import Icon from './Icon.astro';
+
+/**
+ * The site's primary call to action. The label is rendered twice so the pair
+ * can slide on hover — the second copy is hidden from assistive tech.
+ */
+export type ButtonVariant =
+  | 'dark'          // default: ink fill, white text
+  | 'light'         // white fill, ink text
+  | 'solid-light'   // white fill and border, for dark backgrounds
+  | 'outline-light' // transparent fill, white border
+  | 'offer'         // white fill with the arrow artwork behind it
+  | 'form';         // fills its container, for submit buttons
+
+interface Props {
+  label: string;
+  href?: string;
+  variant?: ButtonVariant;
+  type?: 'button' | 'submit';
+  class?: string;
+  /** Set for links that leave the site. */
+  external?: boolean;
+}
+
+const {
+  label,
+  href,
+  variant = 'dark',
+  type = 'button',
+  class: className,
+  external = false,
+} = Astro.props;
+
+const classes = ['button', variant !== 'dark' && `is-${variant}`, className]
+  .filter(Boolean)
+  .join(' ');
+
+const Tag = href ? 'a' : 'button';
+---
+<Tag
+  class={classes}
+  {...href ? { href } : { type }}
+  {...external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+>
+  <span class="button-wrap">
+    <span class="button-text-wrap">
+      <span class="button-text">{label}</span>
+      <span class="button-text" aria-hidden="true">{label}</span>
+    </span>
+    <span class="button-icon-wrap">
+      <Icon name="arrow-right-double" class="button-icon" />
+      <Icon name="arrow-right-double" class="button-icon" />
+    </span>
+  </span>
+</Tag>

@@ -1,0 +1,104 @@
+---
+import { Image, getImage } from 'astro:assets';
+
+import Container from '../ui/Container.astro';
+import Counter from '../ui/Counter.astro';
+import SectionHeading from './SectionHeading.astro';
+import reachOne from '../../assets/images/home/global-reach-01.webp';
+import reachTwo from '../../assets/images/home/global-reach-02.webp';
+
+/**
+ * Headline figures about the group's global footprint, interleaved with two
+ * photographs and a looping clip. Card tones alternate to build the collage the
+ * design uses: four columns, with the clip lying across the first two of the
+ * second row.
+ */
+export interface ReachFigure {
+  value: string;
+  unit?: string;
+  caption: string;
+  tone: 'bg' | 'white' | 'black';
+}
+
+interface Props {
+  tag?: string;
+  title: string;
+  titleTail?: string;
+  figures: ReachFigure[];
+}
+
+const { tag, title, titleTail, figures } = Astro.props;
+
+// The photographs close the first row, one after each of the first two cards.
+const imageAfter: Record<number, { src: ImageMetadata; alt: string }> = {
+  0: { src: reachOne, alt: 'Colleagues reviewing plans on site' },
+  1: { src: reachTwo, alt: 'A container terminal at dusk' },
+};
+
+const posters = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/videos/*-poster.jpg',
+  { eager: true }
+);
+const posterAsset = posters['../../assets/videos/operating-worldwide-poster.jpg']?.default;
+const posterUrl = posterAsset
+  ? (await getImage({ src: posterAsset, format: 'webp', width: 960 })).src
+  : undefined;
+---
+
+<section class="reach-section">
+  <div class="section-gap">
+    <Container>
+      <div class="reach-block">
+        <div class="reach-text-block">
+          <SectionHeading {tag} {title} {titleTail} class="reach-text" />
+        </div>
+
+        <div class="reach-card-block">
+          {
+            figures.map((figure, i) => (
+              <>
+                <div class={`reach-card is-${figure.tone}`} data-anim="fade-up" data-anim-delay={i * 0.1}>
+                  <div class="reach-wrap">
+                    <Counter value={figure.value} unit={figure.unit} variant="review" />
+                  </div>
+                  <p class="reach-except">{figure.caption}</p>
+                </div>
+
+                {imageAfter[i] && (
+                  <Image
+                    src={imageAfter[i].src}
+                    alt={imageAfter[i].alt}
+                    class="reach-img"
+                    widths={[500, 900, 1400]}
+                    sizes="(max-width: 991px) 100vw, 25vw"
+                    loading="lazy"
+                  />
+                )}
+
+                {/* Opens the second row, lying across two of the four columns. */}
+                {i === 1 && (
+                  <div class="reach-video">
+                    <video
+                      autoplay
+                      loop
+                      muted
+                      playsinline
+                      preload="none"
+                      poster={posterUrl}
+                      aria-hidden="true"
+                      tabindex="-1"
+                      data-bg-video
+                    >
+                      <source data-src="/videos/operating-worldwide.mp4" type="video/mp4" />
+                      <source data-src="/videos/operating-worldwide.webm" type="video/webm" />
+                    </video>
+                  </div>
+                )}
+              </>
+            ))
+          }
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

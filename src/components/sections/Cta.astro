@@ -1,0 +1,38 @@
+---
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+
+/** The closing call to action shared by nearly every page. */
+interface Props {
+  title?: string;
+  excerpt?: string;
+  action?: { label: string; href: string };
+  /** Light background variant, used where the section below is dark. */
+  white?: boolean;
+}
+
+const {
+  title = "Let's start talking",
+  excerpt = 'Have a business in mind? Just let us know.',
+  action = { label: 'Contact us', href: '/contact' },
+  white = false,
+} = Astro.props;
+---
+
+<section class:list={['cta-section', white && 'is-white']}>
+  <div class="section-gap">
+    <Container>
+      <div class="cta-block">
+        <div class="section-gap">
+          <div class="cta-wrap">
+            <h2 class="cta-title" data-anim="title">{title}</h2>
+            <p class="cta-except" data-anim="fade-up" data-anim-delay="0.15">{excerpt}</p>
+            <div class="cta-button" data-anim="fade-up" data-anim-delay="0.25">
+              <Button label={action.label} href={action.href} variant="solid-light" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

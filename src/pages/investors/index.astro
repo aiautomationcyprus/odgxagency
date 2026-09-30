@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Cta from '../../components/sections/Cta.astro';
+import SectionHeading from '../../components/sections/SectionHeading.astro';
+import Container from '../../components/ui/Container.astro';
+import InvestorCard from '../../components/ui/InvestorCard.astro';
+import { ROUTES } from '../../config/site';
+
+const investors = (await getCollection('investors', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+);
+const categories = (await getCollection('investorCategories')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<BaseLayout
+  title="Investors"
+  description="Vetted opportunities raising capital across energy, logistics, finance and healthcare."
+>
+  <section class="global-section">
+    <div class="spacer"></div>
+
+    <div class="global">
+      <Container>
+        <div class="investors-block">
+          <div class="investors-text-block">
+            <SectionHeading
+              as="h1"
+              breadcrumb={[{ label: 'Home', href: ROUTES.home }, { label: 'Investors' }]}
+              title="Invest today in tomorrow's"
+              titleTail="leading companies."
+              excerpt="Explore vetted companies raising capital, and back innovation from the ground up."
+              class="investors-text"
+            />
+          </div>
+
+          <nav class="blog-tag-nav" aria-label="Investor categories">
+            <a href={ROUTES.investors} class="blog-tag is-current" aria-current="page">All</a>
+            {
+              categories.map((category) => (
+                <a href={ROUTES.investorCategory(category.id)} class="blog-tag">
+                  {category.data.title}
+                </a>
+              ))
+            }
+          </nav>
+
+          <div class="investors-post-block">
+            {/* Names the group so the card headings do not skip a level. */}
+            <h2 class="sr-only">Investors</h2>
+            <div class="investors-list">
+              {
+                investors.map((investor, i) => (
+                  <InvestorCard {investor} eager={i < 3} delay={(i % 3) * 0.15} />
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+  <Cta white />
+</BaseLayout>

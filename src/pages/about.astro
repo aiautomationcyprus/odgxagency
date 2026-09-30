@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AboutHero from '../components/sections/AboutHero.astro';
+import Awards from '../components/sections/Awards.astro';
+import CompanyValues from '../components/sections/CompanyValues.astro';
+import CoreValues from '../components/sections/CoreValues.astro';
+import Cta from '../components/sections/Cta.astro';
+import Journey from '../components/sections/Journey.astro';
+import Team from '../components/sections/Team.astro';
+import TrustedLogos from '../components/sections/TrustedLogos.astro';
+import businessValues from '../assets/images/about/business-values.webp';
+import { ROUTES } from '../config/site';
+
+const byOrder = (a: { data: { order: number } }, b: { data: { order: number } }) =>
+  a.data.order - b.data.order;
+
+const company = (await getCollection('company')).sort(byOrder);
+const values = (await getCollection('values')).sort(byOrder);
+const milestones = (await getCollection('milestones')).sort(byOrder);
+const team = (await getCollection('team')).sort(byOrder);
+const awards = (await getCollection('awards')).sort(byOrder);
+const trusted = (await getCollection('partners', ({ data }) => data.group === 'trusted')).sort(byOrder);
+---
+
+<BaseLayout
+  title="About Us"
+  description="A global, diversified company building solutions across technology, energy, logistics, finance and consumer products."
+  overlayHeader
+>
+  <AboutHero
+    title="Shaping the Future of Global Business"
+    actions={[{ label: 'Explore Business', href: ROUTES.solutions, variant: 'solid-light' }]}
+  />
+
+  <CompanyValues
+    statement="A global, diversified company building solutions across technology, energy, logistics, finance, and consumer products."
+    breadcrumb={[{ label: 'Home', href: ROUTES.home }, { label: 'Our Company' }]}
+    title="Our Business Values"
+    items={company}
+    image={businessValues}
+    imageAlt="Colleagues in conversation at our headquarters"
+    video="our-business-values"
+    badge={{ value: '40+', label: 'Years Experience' }}
+  />
+
+  <CoreValues
+    title="Our core values define who we are, guide every decision we make,"
+    titleTail="and drive us forward toward long-term, sustainable success."
+    items={values}
+  />
+
+  <TrustedLogos logos={trusted} />
+
+  <Journey title="Our story started with a clear vision — helping." milestones={milestones} />
+
+  <Team
+    title="Meet the team turning ideas"
+    titleTail="into work that holds up."
+    members={team}
+  />
+
+  <Awards
+    title="No limits, just vision"
+    titleTail="redefining what is possible."
+    items={awards}
+  />
+
+  <Cta white />
+</BaseLayout>

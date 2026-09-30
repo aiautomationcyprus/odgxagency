@@ -1,0 +1,167 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Cta from '../../components/sections/Cta.astro';
+import Button from '../../components/ui/Button.astro';
+import Container from '../../components/ui/Container.astro';
+import InvestorCard from '../../components/ui/InvestorCard.astro';
+import Media from '../../components/ui/Media.astro';
+import SectionHeading from '../../components/sections/SectionHeading.astro';
+import { ROUTES } from '../../config/site';
+
+export async function getStaticPaths() {
+  const investors = await getCollection('investors', ({ data }) => !data.draft);
+
+  return investors.map((investor) => ({
+    params: { slug: investor.id },
+    props: {
+      investor,
+      related: investors
+        .filter((i) => i.id !== investor.id)
+        .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+        .slice(0, 3),
+    },
+  }));
+}
+
+const { investor, related } = Astro.props;
+const { Content } = await render(investor);
+const {
+  title, excerpt, image, raised, investors, funded,
+  minimumInvestment, slotsLeft, document, seo,
+} = investor.data;
+
+const category = await getEntry('investorCategories', investor.data.category);
+
+/* Shared by the visible eyebrow and the breadcrumb structured data. The
+   trailing crumb names the current page, so it carries no link. */
+const crumbs = [
+  { label: 'Investors', href: ROUTES.investors },
+  ...(category ? [{ label: category.data.title }] : []),
+];
+---
+
+<BaseLayout
+  title={seo?.title ?? title}
+  description={seo?.description ?? excerpt}
+  noindex={seo?.noindex}
+  breadcrumb={crumbs}
+>
+  <section class="global-section">
+    <div class="spacer"></div>
+
+    <div class="global">
+      <Container>
+        {/*
+          The source design opens straight on the image, leaving the page with
+          no title and its only h1 on a related-content heading. A heading is
+          added here so the page states its subject; the funding card below
+          repeats the name at card size, as the design intends.
+        */}
+        <div class="cms-details-text-block">
+          <div class="cms-details-text">
+            <SectionHeading
+              as="h1"
+              breadcrumb={crumbs}
+              {title}
+              {excerpt}
+              variant="cms-details"
+            />
+          </div>
+        </div>
+
+        <div class="invest-details-block">
+          <div class="invest-details-image-block">
+            <Media
+              src={image}
+              alt=""
+              class="invest-details-image"
+              widths={[800, 1200, 2000]}
+              sizes="(max-width: 991px) 100vw, 1010px"
+              loading="eager"
+            />
+          </div>
+
+          <div class="invest-details-content-block">
+            {/* The funding card: what is being raised and on what terms. */}
+            <div class="invest-details-content" data-anim="fade-up">
+              <div class="invest-details-title">
+                <h2>{title}</h2>
+                {
+                  category && (
+                    <a href={ROUTES.investorCategory(category.id)} class="blog-tag">
+                      {category.data.title}
+                    </a>
+                  )
+                }
+              </div>
+
+              <p class="invest-details-except">{excerpt}</p>
+
+              <div class="investors-wrapp">
+                <div class="investors-price">{raised}</div>
+                <div class="investors-raised">Raised</div>
+              </div>
+
+              <div
+                class="investors-divider is-invest-details"
+                role="progressbar"
+                aria-valuenow={funded}
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-label={`${funded}% funded`}
+              >
+                <div class="investors-line" data-anim="line" data-anim-value={`${funded}%`}></div>
+              </div>
+
+              <div class="investors-wrap">
+                <div class="investors-tag">{investors.toLocaleString('en-US')} Investors</div>
+                <div class="investors-dash"></div>
+                <div class="investors-tag">{funded}% Funded</div>
+              </div>
+
+              <div class="invest-button">
+                <Button label={document ? document.label : 'Invest Now'} href={document?.href ?? ROUTES.contact} />
+              </div>
+
+              {
+                (minimumInvestment || slotsLeft) && (
+                  <div class="invest-info">
+                    {minimumInvestment && <div class="invest-infos">{minimumInvestment}</div>}
+                    {minimumInvestment && slotsLeft && (
+                      <div class="investors-dash is-display-show-for-desktop" />
+                    )}
+                    {slotsLeft && <div class="invest-infos is-black">{slotsLeft} slots left</div>}
+                  </div>
+                )
+              }
+            </div>
+
+            {/* The write-up. Markdown maps onto the card's own type scale. */}
+            <div class="invest-details-content" data-anim="fade-up">
+              <Content />
+            </div>
+          </div>
+        </div>
+
+        {
+          related.length > 0 && (
+            <div class="investors-post-block">
+              <h2 class="section-title" data-anim="title">
+                Discover more startups in our network
+              </h2>
+              <div class="investors-list">
+                {related.map((item) => (
+                  <InvestorCard investor={item} />
+                ))}
+              </div>
+            </div>
+          )
+        }
+      </Container>
+    </div>
+  </section>
+
+  <Cta />
+</BaseLayout>

@@ -1,0 +1,65 @@
+---
+import { getCollection, render } from 'astro:content';
+import Media from '../../components/ui/Media.astro';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Cta from '../../components/sections/Cta.astro';
+import SectionHeading from '../../components/sections/SectionHeading.astro';
+import Container from '../../components/ui/Container.astro';
+
+export async function getStaticPaths() {
+  const stories = await getCollection('stories', ({ data }) => !data.draft);
+  return stories.map((story) => ({
+    params: { slug: story.id },
+    props: { story },
+  }));
+}
+
+const { story } = Astro.props;
+const { Content } = await render(story);
+const { title, excerpt, image, publishedAt, seo } = story.data;
+---
+
+<BaseLayout
+  title={seo?.title ?? title}
+  description={seo?.description ?? excerpt}
+  noindex={seo?.noindex}
+  type="article"
+  publishedAt={publishedAt}
+  breadcrumb={[{ label: 'Stories' }]}
+>
+  <section class="global-section">
+    <div class="spacer"></div>
+
+    <div class="global">
+      <Container>
+        <div class="cms-details-block">
+          <div class="cms-details-text-block">
+            <div class="cms-details-text">
+              <SectionHeading as="h1" tag="Stories" {title} {excerpt} />
+            </div>
+          </div>
+
+          <div class="cms-details-thumb-block">
+            <Media
+              src={image}
+              alt=""
+              class="cms-details-thumb"
+              widths={[800, 1200, 2000]}
+              sizes="(max-width: 991px) 100vw, 1010px"
+              loading="eager"
+            />
+          </div>
+
+          <div class="cms-details-content-block">
+            <div class="cms-details-content" data-anim="fade-up">
+              <Content />
+            </div>
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+  <Cta white />
+</BaseLayout>

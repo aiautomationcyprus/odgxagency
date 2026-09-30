@@ -1,0 +1,114 @@
+---
+import { Image, getImage } from 'astro:assets';
+
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+
+/**
+ * The full-bleed opening section, with a looping background video behind the
+ * headline. The poster carries the frame until the video is attached, which
+ * happens after first paint — and not at all for a reader who has asked for
+ * reduced motion. See `scripts/video.ts`.
+ */
+interface Props {
+  tag?: string;
+  title: string;
+  excerpt?: string;
+  actions?: { label: string; href: string; variant?: 'outline-light' | 'solid-light' | 'dark' | 'light' }[];
+  /** Video file name in `/public/videos`, without an extension. */
+  video: string;
+}
+
+const { tag, title, excerpt, actions = [], video } = Astro.props;
+
+/*
+ * Posters live in `src/assets` rather than `public`, so the build serves them
+ * responsively in a modern format. The hero's is the page's largest paint, and
+ * an unoptimised full-width JPEG is the slowest thing on a phone.
+ */
+const posters = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/videos/*-poster.jpg',
+  { eager: true }
+);
+const posterAsset = posters[`../../assets/videos/${video}-poster.jpg`]?.default;
+const posterUrl = posterAsset
+  ? (await getImage({ src: posterAsset, format: 'webp', width: 1280 })).src
+  : undefined;
+
+---
+
+<section class="banner-section">
+  <div class="banner-block background-video">
+    {/* The frame the page opens on, and what stands in wherever the video is
+        not played. An <img> rather than a poster attribute or a background,
+        so the preload scanner finds it in the markup and fetches it first. */}
+    <Image
+      class="banner-poster"
+      src={posterAsset}
+      alt=""
+      widths={[640, 960, 1280, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="none"
+      poster={posterUrl}
+      aria-hidden="true"
+      tabindex="-1"
+      data-bg-video
+    >
+      <source data-src={`/videos/${video}.mp4`} type="video/mp4" />
+      <source data-src={`/videos/${video}.webm`} type="video/webm" />
+    </video>
+
+    <div class="home">
+      <Container>
+        <div class="home-block">
+          {
+            tag && (
+              <div class="home-tag-block">
+                <div class="home-tag" data-anim="fade-up">
+                  <span class="home-tag-dot" />
+                  <span class="home-tag-text">{tag}</span>
+                </div>
+              </div>
+            )
+          }
+
+          <div class="home-title-block">
+            <h1 class="home-title" data-anim="hero-title">{title}</h1>
+          </div>
+
+          {
+            excerpt && (
+              <div class="home-except-block">
+                <p class="home-except" data-anim="fade-up" data-anim-delay="0.25">
+                  {excerpt}
+                </p>
+              </div>
+            )
+          }
+
+          {
+            actions.length > 0 && (
+              <div class="home-button-block">
+                <div class="home-button">
+                  {actions.map((action) => (
+                    <Button label={action.label} href={action.href} variant={action.variant} />
+                  ))}
+                </div>
+              </div>
+            )
+          }
+        </div>
+      </Container>
+    </div>
+  </div>
+</section>

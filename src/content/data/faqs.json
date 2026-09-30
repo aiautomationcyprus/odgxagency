@@ -1,0 +1,58 @@
+[
+  {
+    "id": "industries",
+    "question": "What industries does your company operate in?",
+    "answer": "We work across technology, finance, logistics, energy and consumer products, and we regularly build joint capabilities where those sectors overlap.",
+    "page": "solutions",
+    "order": 1
+  },
+  {
+    "id": "countries",
+    "question": "Which countries do you operate in?",
+    "answer": "We operate globally, with delivery teams and local partners in most major markets worldwide.",
+    "page": "solutions",
+    "order": 2
+  },
+  {
+    "id": "custom",
+    "question": "Do you offer customized business solutions?",
+    "answer": "Yes. Every engagement starts from your operating model rather than a fixed product, so the solution fits the business you actually run.",
+    "page": "solutions",
+    "order": 3
+  },
+  {
+    "id": "getting-started",
+    "question": "How can we start working with your company?",
+    "answer": "Contact our team to talk through your goals and request a consultation. We will come back with a scoped proposal within a week.",
+    "page": "solutions",
+    "order": 4
+  },
+  {
+    "id": "support",
+    "question": "Do you provide long-term support or maintenance?",
+    "answer": "Yes. Every engagement includes ongoing support and maintenance so the systems we build keep performing long after launch.",
+    "page": "solutions",
+    "order": 5
+  },
+  {
+    "id": "pricing-model",
+    "question": "How is a project priced?",
+    "answer": "Projects are priced per engagement rather than per seat. The plans opposite are typical starting points; the final figure follows the scope we agree together.",
+    "page": "pricing",
+    "order": 1
+  },
+  {
+    "id": "pricing-change",
+    "question": "Can we change plan later?",
+    "answer": "Yes. Plans can be adjusted at any point in the engagement, and the difference is applied to the next billing period.",
+    "page": "pricing",
+    "order": 2
+  },
+  {
+    "id": "pricing-guarantee",
+    "question": "What does the satisfaction guarantee cover?",
+    "answer": "If the first delivery milestone does not meet the brief we agreed, we rework it at no additional cost.",
+    "page": "pricing",
+    "order": 3
+  }
+]

@@ -1,0 +1,73 @@
+---
+import Media from '../ui/Media.astro';
+import type { CollectionEntry } from 'astro:content';
+
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import { ROUTES } from '../../config/site';
+
+/**
+ * Full-width solution rows on a dark ground. Hovering a row opens its summary
+ * and floats the thumbnail toward the pointer.
+ */
+interface Props {
+  tag?: string;
+  title: string;
+  solutions: CollectionEntry<'solutions'>[];
+}
+
+const { tag, title, solutions } = Astro.props;
+---
+
+<section class="solutions-section">
+  <div class="section-gap">
+    <div class="solutions-block">
+      <div class="solutions-text-block">
+        {tag && <div class="section-tag is-gray">{tag}</div>}
+        <h2 class="section-title is-white" data-anim="title" data-anim-value="white">{title}</h2>
+      </div>
+
+      <div class="solutions-post-block">
+        {
+          solutions.map((solution, i) => (
+            <a
+              href={ROUTES.solution(solution.id)}
+              class="solutions-wrap"
+              data-cursor-parallax="40"
+            >
+              <Container>
+                <div class="solutions-card">
+                  <div class="solutions-details">
+                    <div class="solutions-name-block">
+                      <div class="solutions-num">{String(i + 1).padStart(2, '0')}</div>
+                      <h3 class="solutions-name">{solution.data.title}</h3>
+                    </div>
+                    <div class="solutions-icon-block">
+                      <Icon name="arrow-up-right-sm" class="solutions-icon" />
+                    </div>
+                  </div>
+
+                  <div class="solutions-content">
+                    <p class="solutions-except">{solution.data.excerpt}</p>
+                  </div>
+
+                  {solution.data.thumbnail && (
+                    <Media
+                      src={solution.data.thumbnail}
+                      alt=""
+                      class="solutions-thumbnail"
+                      widths={[400, 800]}
+                      sizes="(max-width: 991px) 90vw, 430px"
+                      loading="lazy"
+                      data-cursor-parallax-target
+                    />
+                  )}
+                </div>
+              </Container>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

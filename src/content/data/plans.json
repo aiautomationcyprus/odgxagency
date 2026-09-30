@@ -1,0 +1,57 @@
+[
+  {
+    "id": "basic",
+    "name": "Basic",
+    "price": 390,
+    "currency": "€",
+    "period": "netto zzgl. MwSt.",
+    "icon": "pricing-01",
+    "features": [
+      "2 Kameraperspektiven",
+      "Bis zu 2 Personen",
+      "Einweisung in die Technik durch unser Team",
+      "Einzelaufnahmen: jede Kamera und Ton separat"
+    ],
+    "cta": { "label": "Anfrage stellen", "href": "https://www.online-digitalx.de/kontakt/" },
+    "featured": false,
+    "order": 1
+  },
+  {
+    "id": "standard",
+    "name": "Standard",
+    "tagline": "Empfehlung",
+    "price": 690,
+    "currency": "€",
+    "period": "netto zzgl. MwSt.",
+    "icon": "pricing-02",
+    "features": [
+      "3 Kameraperspektiven inkl. Totale",
+      "Bis zu 3 Personen",
+      "Techniker*in während der gesamten Aufnahme",
+      "Mehrspur-Tonaufnahme: jede Person auf eigener Spur",
+      "Übergabe am selben Tag"
+    ],
+    "cta": { "label": "Anfrage stellen", "href": "https://www.online-digitalx.de/kontakt/" },
+    "featured": true,
+    "order": 2
+  },
+  {
+    "id": "professional",
+    "name": "Professional",
+    "price": 990,
+    "currency": "€",
+    "period": "netto zzgl. MwSt.",
+    "icon": "pricing-03",
+    "features": [
+      "4 Kameraperspektiven: Totale, Einzelaufnahmen und bewegliche Handkamera",
+      "Bis zu 4 Personen",
+      "Techniker*in und Regie während der gesamten Aufnahme",
+      "Mehrspur-Tonaufnahme mit Backup-Recorder",
+      "Alle Kameraspuren einzeln für eigenen Nachschnitt",
+      "Zusätzliche 4K-Aufnahmen als Rohmaterial, ideal für Social-Media-Clips im Hochformat"
+    ],
+    "cta": { "label": "Anfrage stellen", "href": "https://www.online-digitalx.de/kontakt/" },
+    "featured": false,
+    "order": 3
+  }
+]

@@ -1,0 +1,433 @@
+/* ---------------------------------------------------------------- a11y --- */
+
+/* Visible only once it has keyboard focus. */
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  z-index: 2000;
+  padding: 12px 20px;
+  border-radius: var(--radius-2xs);
+  background-color: var(--color-ink);
+  color: var(--color-white);
+  font-size: var(--size-body);
+  transform: translateY(-200%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* =============================================================================
+   Interactive behavior
+   -----------------------------------------------------------------------------
+   Layout and state rules for the components that used to depend on a page
+   builder's JavaScript runtime — navigation, dropdowns, tabs, sliders,
+   accordions and background video — plus the hover transitions.
+
+   Hovers are deliberately CSS rather than JavaScript: they cost nothing, they
+   work before hydration, and they honor `prefers-reduced-motion` for free.
+   ========================================================================== */
+
+/* --------------------------------------------------------------- header -- */
+
+.header-section {
+  /* The header floats over the hero, so it has to out-stack it. */
+  z-index: 1000;
+  transition: transform 0.5s cubic-bezier(0.5, 1, 0.89, 1);
+  will-change: transform;
+}
+
+/* Hidden while scrolling down, revealed on the way back up. */
+.header-section[data-hidden] {
+  transform: translateY(-120%);
+}
+
+/*
+ * The brand is a link, so it needs a block box before the 112x31 sizing the
+ * design gives it can take effect. Left inline, the mark scales up to fill the
+ * column instead.
+ */
+.header-brand {
+  display: block;
+}
+
+.header-brand-logo {
+  width: 100%;
+  height: 100%;
+  /* Keeps a replacement logo of another ratio from stretching. */
+  object-fit: contain;
+}
+
+.header-menu-block {
+  position: relative;
+}
+
+@media screen and (max-width: 991px) {
+  .header-menu-block {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+  }
+
+  .header-menu-block[data-open] {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .header-menu-button {
+    display: none;
+  }
+}
+
+/* Hamburger — the three bars form an X when the menu is open. */
+.header-line-wrap > * {
+  transition:
+    transform 0.4s cubic-bezier(0.83, 0, 0.17, 1),
+    width 0.2s cubic-bezier(0.83, 0, 0.17, 1);
+}
+
+.header-menu-button[aria-expanded='true'] .middle {
+  width: 0;
+}
+
+.header-menu-button[aria-expanded='true'] .top {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.header-menu-button[aria-expanded='true'] .bottom {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ------------------------------------------------------------- dropdown -- */
+
+.header-dropdown {
+  position: relative;
+  z-index: 900;
+}
+
+.header-toggle {
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+.header-dropdown-icon {
+  transition: transform 0.4s ease-out;
+}
+
+.header-toggle[aria-expanded='true'] .header-dropdown-icon {
+  transform: rotate(180deg);
+}
+
+/*
+ * The panel sits below the toggle with a visual gap. That offset has to be
+ * padding rather than margin: a margin would be dead space the pointer crosses
+ * on its way down, which reads as leaving the menu and closes it. As padding it
+ * belongs to the panel, so the trip from toggle to links is unbroken.
+ */
+.header-wrapp {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  display: none;
+  margin-top: 0;
+  padding-top: 56px;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: opacity 0.4s ease-out;
+}
+
+.header-wrapp[data-open] {
+  display: block;
+}
+
+.header-wrapp[data-open][data-visible] {
+  opacity: 1;
+}
+
+@media screen and (max-width: 991px) {
+  .header-wrapp {
+    position: static;
+    padding-top: 0;
+    transform: none;
+  }
+}
+
+/* --------------------------------------------------------------- button -- */
+
+.button-text-wrap,
+.button-icon-wrap {
+  position: relative;
+}
+
+.button-text,
+.button-icon {
+  transition: transform 0.5s cubic-bezier(0.5, 1, 0.89, 1);
+}
+
+.button:hover .button-text {
+  transform: translateY(-100%);
+}
+
+.button:hover .button-icon {
+  transform: translateX(100%);
+}
+
+/* ------------------------------------------------------------ go to top -- */
+
+.footer-gotop-text,
+.footer-gotop-icon {
+  transition: transform 0.5s cubic-bezier(0.5, 1, 0.89, 1);
+}
+
+.footer-gotop:hover .footer-gotop-text,
+.footer-gotop:hover .footer-gotop-icon {
+  transform: translateY(-100%);
+}
+
+/* ---------------------------------------------------------- footer info -- */
+
+.footer-info-icon {
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
+}
+
+.footer-info:hover .footer-info-icon {
+  background-color: var(--color-white);
+  color: var(--color-ink);
+}
+
+/* ----------------------------------------------------------- post cards -- */
+
+.post-image {
+  transition: transform 0.5s ease;
+}
+
+.post-link:hover .post-image,
+.post-wrap:hover .post-image,
+.stories-wrap:hover .post-image {
+  transform: scale(1.15);
+}
+
+/* ------------------------------------------------------------- team card -- */
+
+.team-overlay {
+  height: 0;
+  transition: height 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.team-social {
+  transform: translateY(200%);
+  transition: transform 0.5s cubic-bezier(0.5, 1, 0.89, 1);
+}
+
+.team-card:hover .team-overlay {
+  height: 100%;
+}
+
+.team-card:hover .team-social {
+  transform: translateY(0);
+}
+
+/* ----------------------------------------------------------- award card -- */
+
+.awards-card {
+  transition:
+    background-color 0.5s ease,
+    border-color 0.5s ease;
+}
+
+.awards-details,
+.awards-except {
+  transition: color 0.5s ease;
+}
+
+/*
+ * Above the tablet breakpoint the award image is an absolutely positioned
+ * flourish that swings in on hover. Below it the design drops the image into
+ * the flow as an ordinary photograph, so the reveal is scoped away from there —
+ * unscoped, it reserves the space and then renders nothing in it.
+ */
+@media screen and (min-width: 992px) {
+  .awards-image {
+    opacity: 0;
+    transform: rotate(-45deg) scale(1.5);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+  }
+
+  .awards-card:hover .awards-image {
+    opacity: 1;
+    transform: rotate(-15deg) scale(1);
+  }
+}
+
+.awards-card:hover {
+  background-color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+.awards-card:hover .awards-details,
+.awards-card:hover .awards-except {
+  color: var(--color-white);
+}
+
+/* -------------------------------------------------------- solution card -- */
+
+.solutions-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s ease;
+}
+
+.solutions-content > * {
+  overflow: hidden;
+}
+
+.solutions-card:hover .solutions-content {
+  grid-template-rows: 1fr;
+}
+
+.solutions-thumbnail {
+  opacity: 0;
+  transform: rotate(30deg) scale(1.2);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.solutions-card:hover .solutions-thumbnail {
+  opacity: 1;
+  transform: rotate(15deg) scale(1);
+}
+
+.solutions-icon-block {
+  background-color: transparent;
+  color: var(--color-white);
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
+}
+
+.solutions-card:hover .solutions-icon-block {
+  background-color: var(--color-white);
+  color: var(--color-ink);
+}
+
+/* -------------------------------------------------------------- tabs ----- */
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane[data-active] {
+  display: block;
+}
+
+/* The underline that tracks the active review tab. */
+.review-line {
+  transition: transform 0.3s cubic-bezier(0.5, 1, 0.89, 1);
+}
+
+/* ---------------------------------------------------------- accordion ---- */
+
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.faq-answer > * {
+  overflow: hidden;
+}
+
+[data-accordion-item][data-open] .faq-answer {
+  grid-template-rows: 1fr;
+}
+
+.faq-question-icon {
+  transition: transform 0.3s ease;
+}
+
+[data-accordion-item][data-open] .faq-question-icon {
+  transform: rotate(45deg);
+}
+
+/* ------------------------------------------------------ background video -- */
+
+.background-video {
+  position: relative;
+  overflow: hidden;
+  /* Everything laid over the video reads on a dark frame. */
+  color: var(--color-white);
+}
+
+.background-video > .banner-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Behind the video, which covers it once it plays. */
+  z-index: -101;
+}
+
+.background-video > video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -100;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+/* ------------------------------------------------------------- counter --- */
+
+/* The motion layer sets each strip's starting offset. The source design baked
+   one into CSS as well, which compounds with the animated transform. */
+.count-reverse,
+.review-reverse {
+  transform: none;
+}
+
+/* ------------------------------------------------------------- marquee --- */
+
+.marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+}
+
+.marquee > * {
+  flex: 0 0 auto;
+  min-width: 100%;
+}
+
+/* --------------------------------------------------------------- slider -- */
+
+.slider-mask {
+  display: flex;
+  overflow: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.slider-mask::-webkit-scrollbar {
+  display: none;
+}
+
+.slider-mask > * {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}

@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+/*
+ * Modifier classes chosen at render time — a card's index, a section's tone —
+ * never appear as complete strings in the source, so they are listed here for
+ * the CSS build to pick up.
+ */
+@source inline("is-0{1,2,3,4,5,6}");
+@source inline("is-{bg,white,black,gray,light,dark,alt,current,open}");
+@source inline("is-{solutions,pages,offer,form,outline-light,solid-light,cms-details,without-button}");
+@import "./theme.css";
+@import "./components.css";
+@import "./behavior.css";
+@import "./prose.css";
+@import "./additions.css";
+
+/* =============================================================================
+   Tailwind theme bindings
+   -----------------------------------------------------------------------------
+   `@theme inline` points each utility at the custom property rather than
+   copying its value, so the responsive tokens in theme.css keep working
+   through the utilities (e.g. `text-h1` shrinks on mobile by itself).
+   ========================================================================== */
+
+@theme inline {
+  /* Breakpoints mirror the source design exactly. Tailwind derives the
+     `max-*` variants from these, which is what the desktop-first rules use. */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1440px;
+  --breakpoint-3xl: 1920px;
+
+  /* Colors */
+  --color-background: var(--color-background);
+  --color-white: var(--color-white);
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --color-card: var(--color-card);
+  --color-card-alt: var(--color-card-alt);
+  --color-line: var(--color-line);
+  --color-stroke: var(--color-stroke);
+  --color-stroke-strong: var(--color-stroke-strong);
+  --color-icon: var(--color-icon);
+  --color-pricing: var(--color-pricing);
+  --color-pricing-banner: var(--color-pricing-banner);
+
+  /* Families */
+  --font-heading: var(--family-heading);
+  --font-body: var(--family-body);
+
+  /* Type styles — `text-h1` … `text-subtitle` carry size, leading,
+     tracking and weight together, exactly as the design defines them. */
+  --text-h1: var(--size-h1);
+  --text-h1--line-height: var(--leading-xxs);
+  --text-h1--letter-spacing: -0.004em;
+  --text-h1--font-weight: var(--weight-semibold);
+
+  --text-h2: var(--size-h2);
+  --text-h2--line-height: var(--leading-xs);
+  --text-h2--letter-spacing: -0.003em;
+  --text-h2--font-weight: var(--weight-medium);
+
+  --text-h3: var(--size-h3);
+  --text-h3--line-height: var(--leading-xs);
+  --text-h3--letter-spacing: -0.004em;
+  --text-h3--font-weight: var(--weight-semibold);
+
+  --text-h4: var(--size-h4);
+  --text-h4--line-height: var(--leading-m);
+  --text-h4--letter-spacing: -0.002em;
+  --text-h4--font-weight: var(--weight-semibold);
+
+  --text-h5: var(--size-h5);
+  --text-h5--line-height: var(--leading-s);
+  --text-h5--letter-spacing: -0.002em;
+  --text-h5--font-weight: var(--weight-medium);
+
+  --text-h6: var(--size-h6);
+  --text-h6--line-height: var(--leading-m);
+  --text-h6--letter-spacing: -0.001em;
+  --text-h6--font-weight: var(--weight-semibold);
+
+  --text-body-lg: var(--size-body-lg);
+  --text-body-lg--line-height: var(--leading-xl);
+  --text-body-lg--letter-spacing: 0em;
+  --text-body-lg--font-weight: var(--weight-normal);
+
+  --text-body: var(--size-body);
+  --text-body--line-height: var(--leading-xl);
+  --text-body--letter-spacing: 0em;
+  --text-body--font-weight: var(--weight-normal);
+
+  --text-subtitle: var(--size-subtitle);
+  --text-subtitle--line-height: var(--leading-m);
+  --text-subtitle--letter-spacing: -0.011em;
+  --text-subtitle--font-weight: var(--weight-normal);
+
+  /* Radii — the design's own scale, kept as variables so a buyer can
+     round the whole UI differently from theme.css alone. */
+  --radius-tiny: var(--radius-tiny);
+  --radius-3xs: var(--radius-3xs);
+  --radius-2xs: var(--radius-2xs);
+  --radius-xs: var(--radius-xs);
+  /* `--radius-s` and `--radius-l` are deliberately not registered: Tailwind
+     reserves `rounded-s` and `rounded-l` for the start and left sides, and
+     registering them here would redefine those. Both values remain available
+     in theme.css and are referenced directly where the design needs them. */
+  --radius-m: var(--radius-m);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-3xl);
+  --radius-4xl: var(--radius-4xl);
+  --radius-5xl: var(--radius-5xl);
+  --radius-6xl: var(--radius-6xl);
+  --radius-7xl: var(--radius-7xl);
+  --radius-8xl: var(--radius-8xl);
+  --radius-9xl: var(--radius-9xl);
+  --radius-10xl: var(--radius-10xl);
+
+  /* Layout rhythm, available as utilities (`py-section`, `max-w-container`…) */
+  --spacing-section: var(--section-gap);
+  --spacing-hero-top: var(--hero-top-gap);
+  --spacing-hero-bottom: var(--hero-bottom-gap);
+  --spacing-footer: var(--footer-gap);
+  --spacing-details: var(--details-gap);
+  --container-container: var(--container-size);
+  --container-content: var(--content-width);
+}
+
+/* =============================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  *,
+  ::after,
+  ::before {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-muted);
+    font-family: var(--family-body);
+    font-size: var(--size-body-lg);
+    line-height: var(--leading-xl);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Headings carry type only and inherit their color, so a heading placed on a
+     dark section picks up that section's color without an override. */
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-family: var(--family-heading);
+  }
+
+  h1 { font-size: var(--size-h1); line-height: var(--leading-xxs); letter-spacing: 0.2rem; font-weight: var(--weight-normal); }
+  h2 { font-size: var(--size-h2); line-height: var(--leading-xs); letter-spacing: 0.2rem; font-weight: var(--weight-normal); }
+  h3 { font-size: var(--size-h3); line-height: var(--leading-xs); letter-spacing: 0.2rem; font-weight: var(--weight-normal); }
+  h4 { font-size: var(--size-h4); line-height: var(--leading-m); letter-spacing: 0.15rem; font-weight: var(--weight-normal); }
+  h5 { font-size: var(--size-h5); line-height: var(--leading-s); letter-spacing: 0.1rem; font-weight: var(--weight-normal); }
+  h6 { font-size: var(--size-h6); line-height: var(--leading-m); letter-spacing: 0.1rem; font-weight: var(--weight-normal); }
+
+  p { margin: 0; }
+
+  ul, ol { margin: 0; padding-left: 24px; }
+
+  blockquote, figure { margin: 0; }
+
+  label { display: block; margin-bottom: 0; font-weight: var(--weight-bold); }
+
+  a { color: inherit; text-decoration: none; }
+
+  img, svg, video { display: block; max-width: 100%; }
+
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+  /* Respect the reader's motion preference — the GSAP layer checks this too. */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Keyboard focus, visible against every surface in the palette. */
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+}
+
+/* =============================================================================
+   Utilities the design leans on repeatedly
+   ========================================================================== */
+
+/* Elements the motion layer will animate start hidden, but only when JS is
+   available — without it the content must still be readable. */
+@layer base {
+  html.js [data-anim]:not([data-anim-ready]) {
+    visibility: hidden;
+  }
+}

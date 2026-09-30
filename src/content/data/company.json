@@ -1,0 +1,23 @@
+[
+  {
+    "id": "sustainability",
+    "title": "Sustainability",
+    "description": "Drive sustainable growth through innovation and strategic partnerships.",
+    "icon": "company-01",
+    "order": 1
+  },
+  {
+    "id": "excellence",
+    "title": "Excellence Worldwide",
+    "description": "Lead with integrity and excellence across all global operations.",
+    "icon": "company-02",
+    "order": 2
+  },
+  {
+    "id": "tomorrow",
+    "title": "Building a Better Tomorrow",
+    "description": "Create lasting value for stakeholders, communities and the environment.",
+    "icon": "company-03",
+    "order": 3
+  }
+]

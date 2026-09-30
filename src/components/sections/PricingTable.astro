@@ -1,0 +1,165 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import SectionHeading, { type Breadcrumb } from './SectionHeading.astro';
+import { ROUTES } from '../../config/site';
+
+/**
+ * The plan comparison.
+ *
+ * The card is built in two parts: a white banner carrying the plan's identity,
+ * then a wrapper holding the price, features and action. That wrapper is a
+ * full-height flex column with `space-between`, which is what keeps every
+ * card's button on the same line however many features a plan lists.
+ */
+interface Props {
+  plans: CollectionEntry<'plans'>[];
+  /**
+   * The page's opening text. The design keeps it inside the pricing block
+   * rather than in the standard page hero, so the heading and the cards share
+   * one section and one gap — rendering it as a separate hero section put
+   * about 260px of empty page between the intro and the first card.
+   */
+  breadcrumb?: Breadcrumb[];
+  title: string;
+  excerpt?: string;
+  /** Note shown beneath the table. */
+  note?: string;
+  /** When true, skips the full-page wrapper (spacer + global) for mid-page use. */
+  inline?: boolean;
+}
+
+const { plans, breadcrumb = [], title, excerpt, note, inline = false }: Props = Astro.props;
+
+const price = (plan: CollectionEntry<'plans'>) =>
+  `${plan.data.currency}${plan.data.price.toLocaleString('en-US')}`;
+---
+
+{inline ? (
+  <div class="pricing-block">
+    <div class="pricing-text-wrap">
+      <div class="pricing-text">
+        <SectionHeading {title} {excerpt} />
+      </div>
+    </div>
+    <h2 class="sr-only">Pakete</h2>
+    <div class="pricing-card-block">
+      {plans.map((plan, i) => {
+        const featured = plan.data.featured;
+        return (
+          <article class:list={['pricing-card', featured && 'is-dark']} data-anim="fade-up" data-anim-delay={i * 0.15}>
+            <div class="pricing-banner">
+              <div class="pricing-name">
+                <div class="pricing-wrap">
+                  <Icon name={plan.data.icon} class:list={['pricing-icon', featured && 'is-dark']} />
+                  <h3 class="pricing-plan">{plan.data.name}</h3>
+                </div>
+                {plan.data.tagline && (
+                  <div class:list={['pricing-tag', featured && 'is-dark']}>{plan.data.tagline}</div>
+                )}
+              </div>
+              {plan.data.excerpt && <p class="pricing-except">{plan.data.excerpt}</p>}
+            </div>
+            <div class="pricing-wrapper">
+              <div class="pricing-details">
+                <div class="pricing-price">
+                  <div class:list={['pricing-price-text', featured && 'is-light']}>{price(plan)}</div>
+                  <div class:list={['pricing-price-per', featured && 'is-light']}>{plan.data.period}</div>
+                </div>
+                <div class:list={['pricing-line', featured && 'is-light']} />
+                <ul class="pricing-list">
+                  {plan.data.features.map((feature) => (
+                    <li class:list={['pricing-item', featured && 'is-light']}>
+                      <Icon name="check" class:list={['pricing-item-icon', featured && 'is-light']} />
+                      <span class="pricing-item-text">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="pricing-button">
+                <Button label={plan.data.cta.label} href={plan.data.cta.href} variant={featured ? 'light' : 'dark'} />
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+    {note && (
+      <div class="pricing-info-block" data-anim="fade-up">
+        <div class="pricing-info">
+          <p class="pricing-info-text">{note}</p>
+        </div>
+      </div>
+    )}
+  </div>
+) : (
+  <section class="global-section">
+    <div class="spacer"></div>
+    <div class="global">
+      <Container>
+        <div class="pricing-block">
+          <div class="pricing-text-wrap">
+            <div class="pricing-text">
+              <SectionHeading as="h1" {breadcrumb} {title} {excerpt} />
+            </div>
+          </div>
+          <h2 class="sr-only">Plans</h2>
+          <div class="pricing-card-block">
+            {plans.map((plan, i) => {
+              const featured = plan.data.featured;
+              return (
+                <article class:list={['pricing-card', featured && 'is-dark']} data-anim="fade-up" data-anim-delay={i * 0.15}>
+                  <div class="pricing-banner">
+                    <div class="pricing-name">
+                      <div class="pricing-wrap">
+                        <Icon name={plan.data.icon} class:list={['pricing-icon', featured && 'is-dark']} />
+                        <h3 class="pricing-plan">{plan.data.name}</h3>
+                      </div>
+                      {plan.data.tagline && (
+                        <div class:list={['pricing-tag', featured && 'is-dark']}>{plan.data.tagline}</div>
+                      )}
+                    </div>
+                    {plan.data.excerpt && <p class="pricing-except">{plan.data.excerpt}</p>}
+                  </div>
+                  <div class="pricing-wrapper">
+                    <div class="pricing-details">
+                      <div class="pricing-price">
+                        <div class:list={['pricing-price-text', featured && 'is-light']}>{price(plan)}</div>
+                        <div class:list={['pricing-price-per', featured && 'is-light']}>{plan.data.period}</div>
+                      </div>
+                      <div class:list={['pricing-line', featured && 'is-light']} />
+                      <ul class="pricing-list">
+                        {plan.data.features.map((feature) => (
+                          <li class:list={['pricing-item', featured && 'is-light']}>
+                            <Icon name="check" class:list={['pricing-item-icon', featured && 'is-light']} />
+                            <span class="pricing-item-text">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div class="pricing-button">
+                      <Button label={plan.data.cta.label} href={plan.data.cta.href} variant={featured ? 'light' : 'dark'} />
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+          {note && (
+            <div class="pricing-info-block" data-anim="fade-up">
+              <div class="pricing-info">
+                <p class="pricing-info-text">
+                  {note}{' '}
+                  <a href={ROUTES.contact} class="pricing-info-link">Contact us for guidance</a>
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      </Container>
+    </div>
+  </section>
+)}

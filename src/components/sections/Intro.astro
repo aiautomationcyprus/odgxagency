@@ -1,0 +1,58 @@
+---
+import Container from '../ui/Container.astro';
+import Counter from '../ui/Counter.astro';
+
+import type { CollectionEntry } from 'astro:content';
+
+/**
+ * The statement paragraph and headline figures that follow the hero. The
+ * paragraph's words darken one by one as the reader scrolls through it.
+ */
+interface Props {
+  tag?: string;
+  statement: string;
+  stats?: CollectionEntry<'stats'>[];
+  class?: string;
+}
+
+const { tag, statement, stats = [], class: className }: Props = Astro.props;
+---
+
+<section class:list={['details-section', className]}>
+  <div class="section-gap">
+    <Container>
+      <div class="details-block">
+        {
+          tag && (
+            <div class="details-tag-block">
+              <div class="details-tag">
+                <div class="section-tag">{tag}</div>
+              </div>
+            </div>
+          )
+        }
+
+        <div class="details-text-block">
+          <h2 class="details-text" data-anim="words">{statement}</h2>
+        </div>
+
+        {
+          stats.length > 0 && (
+            <div class="details-count-block">
+              <div class="count-block">
+                {stats.map((stat) => (
+                  <Counter value={`${stat.data.value}${stat.data.suffix}`} label={stat.data.label} />
+                ))}
+              </div>
+            </div>
+          )
+        }
+
+        {/* The logo belt sits inside this section so it inherits its rhythm. */}
+        <div class="details-partner-block">
+          <slot />
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

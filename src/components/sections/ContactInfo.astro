@@ -1,0 +1,51 @@
+---
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import { SITE } from '../../config/site';
+
+/** The three contact detail cards below the inquiry form. */
+const details = [
+  { icon: 'contact-01', title: 'Main Office Address', value: SITE.contact.address },
+  {
+    icon: 'contact-02',
+    title: 'Phone Number',
+    value: SITE.contact.phone,
+    href: SITE.contact.phoneHref,
+  },
+  {
+    icon: 'contact-03',
+    title: 'Email Address',
+    value: SITE.contact.email,
+    href: `mailto:${SITE.contact.email}`,
+  },
+] as const;
+---
+
+<section class="contact-details-section">
+  <div class="section-gap">
+    <Container>
+      <div class="contact-block">
+        {
+          details.map((item, i) => (
+            <div class="contact-card" data-anim="fade-up" data-anim-delay={i * 0.12}>
+              <div class="contact-icon">
+                <Icon name={item.icon} class="contact-ico" />
+              </div>
+              <div class="contact-dash" />
+              <div class="contact-info">
+                <p class="contact-info-title">{item.title}</p>
+                {'href' in item && item.href ? (
+                  <a href={item.href} class="contact-info-text">
+                    {item.value}
+                  </a>
+                ) : (
+                  <p class="contact-info-text">{item.value}</p>
+                )}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </div>
+</section>

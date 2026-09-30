@@ -1,0 +1,122 @@
+[
+  {
+    "id": "sophie-gray",
+    "quote": "I've worked with MNC for over five years now. I'm continually impressed with how seamless our delivery is, and I'd recommend them to anyone looking for a new partner.",
+    "author": "Sophie Gray",
+    "role": "CEO, Logoipsum",
+    "avatar": "../../assets/images/people/sophie-gray.avif",
+    "logo": "client-01",
+    "rating": 4.9,
+    "order": 1,
+    "stats": [
+      {
+        "value": "$1.2M+",
+        "label": "Funding Raised"
+      },
+      {
+        "value": "5+",
+        "label": "Years of Collaboration"
+      },
+      {
+        "value": "Tech Solutions",
+        "label": "Service Taken"
+      }
+    ]
+  },
+  {
+    "id": "jason-miller",
+    "quote": "I've worked with MNC for over five years, and the experience has been outstanding. The process is always smooth and reliable. I highly recommend connecting with them if you're looking for a trusted team.",
+    "author": "Jason Miller",
+    "role": "COO, Logoipsum",
+    "avatar": "../../assets/images/people/jason-miller.avif",
+    "logo": "client-02",
+    "rating": 4.9,
+    "order": 2,
+    "stats": [
+      {
+        "value": "$1.2M+",
+        "label": "Funding Raised"
+      },
+      {
+        "value": "5+",
+        "label": "Years of Collaboration"
+      },
+      {
+        "value": "Renewable Energy",
+        "label": "Service Taken"
+      }
+    ]
+  },
+  {
+    "id": "emily-carter",
+    "quote": "Partnering with MNC has been one of the best decisions for our company. Their workflow is seamless, communication is clear, and delivery is always on point.",
+    "author": "Emily Carter",
+    "role": "Operations Director, Logoipsum",
+    "avatar": "../../assets/images/people/emily-carter.avif",
+    "logo": "client-03",
+    "rating": 4.9,
+    "order": 3,
+    "stats": [
+      {
+        "value": "$1.2M+",
+        "label": "Funding Raised"
+      },
+      {
+        "value": "5+",
+        "label": "Years of Collaboration"
+      },
+      {
+        "value": "Finance & Investment",
+        "label": "Service Taken"
+      }
+    ]
+  },
+  {
+    "id": "michael-anderson",
+    "quote": "We've collaborated with MNC across multiple projects, and every time they've delivered beyond expectations. Truly professional, efficient and detail-oriented.",
+    "author": "Michael Anderson",
+    "role": "Senior UX Strategist, Logoipsum",
+    "avatar": "../../assets/images/people/michael-anderson.avif",
+    "logo": "client-04",
+    "rating": 4.9,
+    "order": 4,
+    "stats": [
+      {
+        "value": "$1.2M+",
+        "label": "Funding Raised"
+      },
+      {
+        "value": "5+",
+        "label": "Years of Collaboration"
+      },
+      {
+        "value": "Healthcare",
+        "label": "Service Taken"
+      }
+    ]
+  },
+  {
+    "id": "olivia-thompson",
+    "quote": "MNC has consistently made our operations smooth and stress-free. Their ability to understand requirements and execute perfectly is remarkable.",
+    "author": "Olivia Thompson",
+    "role": "Marketing Lead, Logoipsum",
+    "avatar": "../../assets/images/people/olivia-thompson.avif",
+    "logo": "client-05",
+    "rating": 4.9,
+    "order": 5,
+    "stats": [
+      {
+        "value": "$1.2M+",
+        "label": "Funding Raised"
+      },
+      {
+        "value": "5+",
+        "label": "Years of Collaboration"
+      },
+      {
+        "value": "Logistic Solutions",
+        "label": "Service Taken"
+      }
+    ]
+  }
+]

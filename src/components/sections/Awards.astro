@@ -1,0 +1,67 @@
+---
+import Media from '../ui/Media.astro';
+import type { CollectionEntry } from 'astro:content';
+
+import Container from '../ui/Container.astro';
+import SectionHeading from './SectionHeading.astro';
+
+/**
+ * The awards list. Hovering a row inverts it and floats the award's image in
+ * from the side, following the pointer.
+ */
+interface Props {
+  tag?: string;
+  title: string;
+  titleTail?: string;
+  items: CollectionEntry<'awards'>[];
+}
+
+const { tag = 'Awards & Achievements', title, titleTail, items } = Astro.props;
+---
+
+<section class="awards-section">
+  <div class="section-gap">
+    <div class="awards-block">
+      <div class="awards-text-block">
+        <Container>
+          <SectionHeading {tag} {title} {titleTail} class="awards-text" />
+        </Container>
+      </div>
+
+      <div class="awards-card-block">
+        {
+          items.map((item, i) => (
+            <article
+                class="awards-card"
+                data-cursor-parallax="50"
+                data-anim="fade-up"
+                data-anim-delay={(i % 3) * 0.1}
+              >
+                <Container>
+                  <div class="awards-wrap">
+                    {/* The year and the title share one row; the block is full
+                        width, which is what pushes the issuer to the far end. */}
+                    <div class="awards-details">
+                      <span class="awards-year">{item.data.year}</span>
+                      <h3 class="awards-name">{item.data.title}</h3>
+                    </div>
+                    <Media
+                      src={item.data.image}
+                      alt=""
+                      class="awards-image"
+                      width={220}
+                      height={220}
+                      densities={[1, 2]}
+                      loading="lazy"
+                      data-cursor-parallax-target
+                    />
+                    <p class="awards-except">{item.data.issuer}</p>
+                  </div>
+                </Container>
+              </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

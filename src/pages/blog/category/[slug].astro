@@ -1,0 +1,85 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Cta from '../../../components/sections/Cta.astro';
+import SectionHeading from '../../../components/sections/SectionHeading.astro';
+import Container from '../../../components/ui/Container.astro';
+import PostCard from '../../../components/ui/PostCard.astro';
+import { ROUTES } from '../../../config/site';
+
+export async function getStaticPaths() {
+  const categories = await getCollection('blogCategories');
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+  return categories.map((category) => ({
+    params: { slug: category.id },
+    props: {
+      category,
+      posts: posts
+        .filter((post) => post.data.category === category.id)
+        .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()),
+    },
+  }));
+}
+
+const { category, posts } = Astro.props;
+const categories = (await getCollection('blogCategories')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<BaseLayout
+  title={category.data.title}
+  description={category.data.description ?? `Posts filed under ${category.data.title}.`}
+>
+  <section class="global-section">
+    <div class="spacer"></div>
+
+    <div class="global">
+      <Container>
+        <div class="blog-block">
+          <div class="blog-text-block">
+            <SectionHeading
+              as="h1"
+              breadcrumb={[{ label: 'Blog', href: ROUTES.blog }, { label: category.data.title }]}
+              title={category.data.title}
+              excerpt={category.data.description}
+              variant="cms-details"
+              class="blog-text"
+            />
+          </div>
+
+          <nav class="blog-tag-nav" aria-label="Post categories">
+            <a href={ROUTES.blog} class="blog-tag">All</a>
+            {
+              categories.map((item) => (
+                <a
+                  href={ROUTES.blogCategory(item.id)}
+                  class:list={['blog-tag', item.id === category.id && 'is-current']}
+                  aria-current={item.id === category.id ? 'page' : undefined}
+                >
+                  {item.data.title}
+                </a>
+              ))
+            }
+          </nav>
+
+          <div class="blog-post-block">
+            <div class="blog-list">
+              {
+                posts.map((post, i) => (
+                  <PostCard {post} {category} eager={i < 3} delay={(i % 3) * 0.15} />
+                ))
+              }
+            </div>
+
+            {posts.length === 0 && <p class="blog-text">No posts in this category yet.</p>}
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+  <Cta />
+</BaseLayout>

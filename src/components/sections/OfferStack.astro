@@ -1,0 +1,88 @@
+---
+import Media from '../ui/Media.astro';
+import type { CollectionEntry } from 'astro:content';
+
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+import SectionHeading from './SectionHeading.astro';
+import checkIcon from '../../assets/images/home/offer-checkbox.webp';
+import { ROUTES } from '../../config/site';
+
+/**
+ * The solutions stack: cards that pile up as the reader scrolls, each shrinking
+ * slightly as the next one covers it.
+ */
+interface Props {
+  tag?: string;
+  title: string;
+  titleTail?: string;
+  solutions: CollectionEntry<'solutions'>[];
+}
+
+const { tag, title, titleTail, solutions } = Astro.props;
+---
+
+<section class="offer-section">
+  <div class="section-gap">
+    <Container>
+      <div class="offer-block">
+        <div class="offer-text-block">
+          <SectionHeading {tag} {title} {titleTail} invert class="offer-text" />
+        </div>
+
+        <div class="offer-card-block" data-anim="stack">
+          {
+            solutions.map((solution, i) => (
+              <>
+                {i > 0 && <div class="offer-blank-space" />}
+                <div class={`offer-list-wrapper is-0${i + 1}`} data-stack-item>
+                  <article class:list={['offer-card', i % 2 === 1 && 'is-white']}>
+                    <div class="offer-details">
+                      <div class="offer-num">{String(i + 1).padStart(2, '0')}</div>
+                      <h3 class="offer-name">{solution.data.title}</h3>
+                      <p class="offer-except">{solution.data.excerpt}</p>
+                      <div class="offer-button">
+                        <Button
+                          label="Learn More"
+                          href={ROUTES.solution(solution.id)}
+                          variant="offer"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="offer-images">
+                      {solution.data.thumbnail && (
+                        <Media
+                          src={solution.data.thumbnail}
+                          alt=""
+                          class="offer-image"
+                          widths={[600, 1000, 1400]}
+                          sizes="(max-width: 991px) 100vw, 50vw"
+                          loading="lazy"
+                        />
+                      )}
+                      <div class="offer-overlay" />
+                      {solution.data.highlights.length > 0 && (
+                        <div class="offer-wrapper">
+                          {solution.data.highlights.map((point) => (
+                            <div class="offer-point">
+                              <Media src={checkIcon} alt="" class="offer-icon" loading="lazy" />
+                              <div class="offer-wrap">
+                                <div class="offer-title">{point.title}</div>
+                                <div class="offer-info">{point.description}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </article>
+                </div>
+              </>
+            ))
+          }
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

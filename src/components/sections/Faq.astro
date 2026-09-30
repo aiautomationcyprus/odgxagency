@@ -1,0 +1,58 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+
+/**
+ * Accordion of frequently asked questions. Answers are rendered in the page, so
+ * they are readable and indexable even before the accordion script loads.
+ */
+interface Props {
+  tag?: string;
+  title: string;
+  titleTail?: string;
+  items: CollectionEntry<'faqs'>[];
+}
+
+const { tag = 'FAQ', title, titleTail, items } = Astro.props;
+---
+
+<section class="faq-section">
+  <div class="section-gap">
+    <Container>
+      <div class="faq-block">
+        <div class="faq-text-block">
+          <SectionHeading {tag} {title} {titleTail} class="faq-text" />
+        </div>
+
+        <div class="faq-wrap-block" data-accordion>
+          {
+            items.map((item, i) => (
+              <div class="faq" data-accordion-item data-open={i === 0 ? '' : undefined}>
+                <h3>
+                  <button
+                    type="button"
+                    class="faq-question"
+                    aria-expanded={i === 0 ? 'true' : 'false'}
+                    aria-controls={`faq-answer-${item.id}`}
+                    data-accordion-trigger
+                  >
+                    <span class="faq-question-text">{item.data.question}</span>
+                    <Icon name="plus" class="faq-question-icon" />
+                  </button>
+                </h3>
+                <div class="faq-answer" id={`faq-answer-${item.id}`} data-accordion-panel>
+                  <div class="faq-answer-details">
+                    <p class="faq-answer-text">{item.data.answer}</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

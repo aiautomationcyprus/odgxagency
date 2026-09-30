@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Cta from '../components/sections/Cta.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import Button from '../components/ui/Button.astro';
+import Container from '../components/ui/Container.astro';
+import Counter from '../components/ui/Counter.astro';
+import Icon from '../components/ui/Icon.astro';
+import { ROUTES } from '../config/site';
+
+/**
+ * A live reference for everything the theme provides — colors, type, buttons,
+ * form controls and icons — rendered from the same tokens and components the
+ * rest of the site uses, so it never drifts out of date.
+ */
+
+const colors = [
+  { name: 'Ink', token: '--color-ink', value: '#201d1d' },
+  { name: 'Muted', token: '--color-muted', value: '#6d6d6d' },
+  { name: 'Line', token: '--color-line', value: '#dedede' },
+  { name: 'Card', token: '--color-card', value: '#f0f0f0' },
+  { name: 'Card alt', token: '--color-card-alt', value: '#fbfbfb' },
+  { name: 'Stroke', token: '--color-stroke', value: '#8f8f8f' },
+  { name: 'Stroke strong', token: '--color-stroke-strong', value: '#5d5d5d' },
+  { name: 'Icon', token: '--color-icon', value: '#2f2f2f' },
+  { name: 'Pricing', token: '--color-pricing', value: '#eaeaea' },
+  { name: 'Background', token: '--color-background', value: '#f4f4f4' },
+  { name: 'White', token: '--color-white', value: '#ffffff' },
+];
+
+const headings = [
+  { tag: 'h1', label: 'Heading 1', token: '--size-h1' },
+  { tag: 'h2', label: 'Heading 2', token: '--size-h2' },
+  { tag: 'h3', label: 'Heading 3', token: '--size-h3' },
+  { tag: 'h4', label: 'Heading 4', token: '--size-h4' },
+  { tag: 'h5', label: 'Heading 5', token: '--size-h5' },
+  { tag: 'h6', label: 'Heading 6', token: '--size-h6' },
+] as const;
+
+const buttons = [
+  { label: 'Dark', variant: 'dark' },
+  { label: 'Light', variant: 'light' },
+  { label: 'Offer', variant: 'offer' },
+] as const;
+
+const icons = [
+  'arrow-right-double', 'arrow-up-double', 'arrow-up-right', 'chevron-down',
+  'plus', 'check', 'mail', 'chat', 'support', 'target', 'facebook', 'instagram',
+  'linkedin', 'threads',
+];
+---
+
+<BaseLayout
+  title="Style Guide"
+  description="The colors, type scale, components and icons this theme is built from."
+>
+  <PageHero
+    class="is-flush"
+    breadcrumb={[{ label: 'Home', href: ROUTES.home }, { label: 'Style Guide' }]}
+    title="Brand guidelines"
+    excerpt="Everything below is rendered from the same design tokens and components the rest of the site uses. Change a token in src/styles/theme.css and this page changes with it."
+  />
+
+  <section class="style-guide-section">
+    <div class="section-gap">
+      <Container>
+        <div class="style-guide-block">
+          <!-- Colors ------------------------------------------------------ -->
+          <div class="style-guide-wrap">
+            <h2 class="style-guide-title">Colors</h2>
+            <div class="colorbox-wrapper">
+              {
+                colors.map((color) => (
+                  <div class="colorbox-card">
+                    <div class="colorbox-square" style={`background-color: var(${color.token})`} />
+                    <div class="colorbox-content">
+                      <div class="colorbox-name">{color.name}</div>
+                      <div class="colorbox-color">{color.value}</div>
+                      <code class="colorbox-color">{color.token}</code>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          <!-- Typography --------------------------------------------------- -->
+          <div class="style-guide-wrap">
+            <h2 class="style-guide-title">Typography</h2>
+
+            <div class="typography-block">
+              <div class="typography-left-block">
+                <div class="typography-title">Aa</div>
+                <div class="typography-subtitle">General Sans · Inter Tight</div>
+                <p class="typography-except">
+                  ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 1234567890
+                </p>
+              </div>
+
+              <div class="typography-right-block">
+                {
+                  headings.map((heading) => (
+                    <div class="typography-wrapper">
+                      <div class="typography-text">{heading.label}</div>
+                      <div class="typography-content-wrapper">
+                        <heading.tag class="typography-heading">The quick brown fox</heading.tag>
+                        <div class="typography-subtext">
+                          <code>var({heading.token})</code>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                }
+
+                <div class="typography-wrapper">
+                  <div class="typography-text">Body</div>
+                  <div class="typography-content-wrapper">
+                    <p>
+                      Body copy runs at <code>var(--size-body-lg)</code> with
+                      <code>var(--leading-xl)</code> line height, and steps down on
+                      narrow screens without any breakpoint classes in the markup.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Buttons ------------------------------------------------------ -->
+          <div class="style-guide-wrap">
+            <h2 class="style-guide-title">Buttons</h2>
+            <div class="style-guide-button">
+              {buttons.map((button) => <Button label={button.label} href="#" variant={button.variant} />)}
+            </div>
+            <div class="style-guide-button" style="background-color: var(--color-ink); padding: 24px; border-radius: var(--radius-xs);">
+              <Button label="Solid light" href="#" variant="solid-light" />
+              <Button label="Outline light" href="#" variant="outline-light" />
+            </div>
+          </div>
+
+          <!-- Counter ------------------------------------------------------ -->
+          <div class="style-guide-wrap">
+            <h2 class="style-guide-title">Counter</h2>
+            <div class="count-block">
+              <Counter value="40+" label="Years Experience" />
+              <Counter value="$2.3B" label="Assets managed" />
+            </div>
+          </div>
+
+          <!-- Form controls ------------------------------------------------ -->
+          <div class="style-guide-wrap">
+            <h2 class="style-guide-title">Form controls</h2>
+            <div class="contact-input-section">
+              <div class="contact-input-wrap">
+                <label class="contact-label" for="sg-text">Text input</label>
+                <input class="contact-field" id="sg-text" type="text" placeholder="Placeholder" />
+              </div>
+              <div class="contact-input-wrap">
+                <label class="contact-label" for="sg-select">Select</label>
+                <select class="contact-field" id="sg-select">
+                  <option>Choose…</option>
+                  <option>Option one</option>
+                </select>
+              </div>
+              <div class="contact-input-wrap">
+                <label class="contact-label" for="sg-area">Textarea</label>
+                <textarea class="contact-field contact-area" id="sg-area" rows="4"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Icons -------------------------------------------------------- -->
+          <div class="style-guide-wrap">
+            <h2 class="style-guide-title">Icons</h2>
+            <p>
+              Drop any file into <code>src/icons</code> and render it with
+              <code>&lt;Icon name="file-name" /&gt;</code>. Icons inherit
+              <code>currentColor</code>.
+            </p>
+            <div class="colorbox-wrapper">
+              {
+                icons.map((name) => (
+                  <div class="colorbox-card">
+                    <div class="contact-icon">
+                      <Icon {name} class="contact-ico" />
+                    </div>
+                    <div class="colorbox-name">{name}</div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+  <Cta />
+</BaseLayout>

@@ -1,0 +1,206 @@
+/* =============================================================================
+   Rich text
+   -----------------------------------------------------------------------------
+   Styling for Markdown and MDX bodies. The source design only styled the few
+   elements its sample content happened to use, so this fills in the rest of
+   what an author can reasonably write.
+   ========================================================================== */
+
+.cms-details-content,
+.prose {
+  font-family: var(--family-body);
+  font-size: var(--size-body);
+  line-height: var(--leading-xl);
+  font-weight: var(--weight-normal);
+  color: var(--color-muted);
+}
+
+.cms-details-content > * + *,
+.prose > * + * {
+  margin-top: 20px;
+}
+
+.cms-details-content :is(h2, h3, h4, h5, h6),
+.prose :is(h2, h3, h4, h5, h6) {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  color: var(--color-ink);
+}
+
+.cms-details-content :is(h2, h3, h4, h5, h6):first-child,
+.prose :is(h2, h3, h4, h5, h6):first-child {
+  margin-top: 0;
+}
+
+/*
+ * The design sets article bodies in its h4 and leaves the larger sizes to page
+ * furniture, while an author writing Markdown reaches for `##` first. The scale
+ * is shifted down to meet in the middle: the level a body actually starts at
+ * lands on the design's size instead of arriving two steps too large.
+ */
+.cms-details-content h2,
+.prose h2 {
+  font-size: var(--size-h4);
+  line-height: var(--leading-m);
+  letter-spacing: -0.002em;
+  font-weight: var(--weight-semibold);
+}
+
+.cms-details-content h3,
+.prose h3 {
+  font-size: var(--size-h5);
+  line-height: var(--leading-s);
+  letter-spacing: -0.002em;
+  font-weight: var(--weight-medium);
+}
+
+.cms-details-content :is(h4, h5, h6),
+.prose :is(h4, h5, h6) {
+  font-size: var(--size-h6);
+  line-height: var(--leading-m);
+  letter-spacing: -0.001em;
+  font-weight: var(--weight-semibold);
+}
+
+.cms-details-content :is(ul, ol),
+.prose :is(ul, ol) {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cms-details-content ul,
+.prose ul {
+  list-style: disc;
+}
+
+.cms-details-content ol,
+.prose ol {
+  list-style: decimal;
+}
+
+.cms-details-content li,
+.prose li {
+  /* The flex column above removes the marker box, so restore it per item. */
+  display: list-item;
+  width: 100%;
+}
+
+.cms-details-content strong,
+.prose strong {
+  color: var(--color-ink);
+  font-weight: var(--weight-semibold);
+}
+
+.cms-details-content a,
+.prose a {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--color-stroke);
+  transition: text-decoration-color 0.3s ease;
+}
+
+.cms-details-content a:hover,
+.prose a:hover {
+  text-decoration-color: var(--color-ink);
+}
+
+.cms-details-content :is(img, video),
+.prose :is(img, video) {
+  width: 100%;
+  border-radius: var(--radius-xs);
+}
+
+.cms-details-content figure,
+.prose figure {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.cms-details-content figcaption,
+.prose figcaption {
+  margin-top: 12px;
+  font-size: var(--size-subtitle);
+  text-align: center;
+}
+
+.cms-details-content blockquote,
+.prose blockquote {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  padding-left: 24px;
+  border-left: 2px solid var(--color-ink);
+  color: var(--color-ink);
+  font-size: var(--size-h6);
+  line-height: var(--leading-m);
+}
+
+.cms-details-content :is(code, pre),
+.prose :is(code, pre) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+}
+
+.cms-details-content code,
+.prose code {
+  padding: 2px 6px;
+  border-radius: var(--radius-3xs);
+  background-color: var(--color-card);
+  color: var(--color-ink);
+}
+
+.cms-details-content pre,
+.prose pre {
+  padding: 20px;
+  border-radius: var(--radius-xs);
+  background-color: var(--color-ink);
+  color: var(--color-white);
+  overflow-x: auto;
+}
+
+.cms-details-content pre code,
+.prose pre code {
+  padding: 0;
+  background: none;
+  color: inherit;
+}
+
+.cms-details-content hr,
+.prose hr {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border: 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.cms-details-content table,
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--size-body);
+}
+
+.cms-details-content :is(th, td),
+.prose :is(th, td) {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-line);
+  text-align: left;
+}
+
+.cms-details-content th,
+.prose th {
+  color: var(--color-ink);
+  font-weight: var(--weight-semibold);
+}
+
+@media screen and (max-width: 991px) {
+  .cms-details-content :is(h2, h3, h4, h5, h6),
+  .prose :is(h2, h3, h4, h5, h6) {
+    margin-top: 32px;
+    margin-bottom: 16px;
+  }
+}

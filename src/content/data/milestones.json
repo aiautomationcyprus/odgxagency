@@ -1,0 +1,34 @@
+[
+  {
+    "id": "2006",
+    "year": "2006",
+    "title": "MNC was founded to make smart and digital business solutions.",
+    "description": "Two founders, one office, and a conviction that industrial businesses deserved better software than they were being sold.",
+    "image": "../../assets/images/about/journey-01.webp",
+    "order": 1
+  },
+  {
+    "id": "2016",
+    "year": "2016",
+    "title": "Introduced digital transformation solutions for clients.",
+    "description": "A decade of operational work became a platform, and the platform took us into ten new markets.",
+    "image": "../../assets/images/about/journey-02.webp",
+    "order": 2
+  },
+  {
+    "id": "2024",
+    "year": "2024",
+    "title": "Formed strategic partnerships with multinational enterprises.",
+    "description": "Joint ventures across energy, logistics and healthcare put our systems inside some of the world's largest supply chains.",
+    "image": "../../assets/images/about/journey-03.webp",
+    "order": 3
+  },
+  {
+    "id": "today",
+    "year": "Today",
+    "title": "Continues driving impact for businesses and communities.",
+    "description": "Thirty thousand people in more than thirty countries, working on the infrastructure the next decade runs on.",
+    "image": "../../assets/images/about/journey-01.webp",
+    "order": 4
+  }
+]

@@ -1,0 +1,151 @@
+---
+import { Image } from 'astro:assets';
+
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import logoFooter from '../../assets/images/logo-footer.svg';
+import { footerNav } from '../../config/navigation';
+import { ROUTES, SITE } from '../../config/site';
+
+const year = new Date().getFullYear();
+
+const contactLinks = [
+  {
+    icon: 'mail',
+    name: 'Telefon',
+    value: SITE.contact.phone,
+    href: SITE.contact.phoneHref,
+  },
+  {
+    icon: 'support',
+    name: 'E-Mail',
+    value: SITE.contact.email,
+    href: `mailto:${SITE.contact.email}`,
+  },
+  {
+    icon: 'target',
+    name: 'Standort',
+    value: SITE.contact.address,
+    href: 'https://maps.google.com/?q=Frankfurt+am+Main',
+  },
+] as const;
+---
+
+<footer class="footer-section">
+  <div class="footer-brand-wrap">
+    <Container>
+      <div class="footer-brand-block">
+        <a href={ROUTES.home} class="footer-brand" aria-label={`${SITE.name} — Startseite`}>
+          <Image src={logoFooter} alt={SITE.name} loading="lazy" width={120} height={54} />
+        </a>
+
+        <a href="#top" class="footer-gotop" data-go-top>
+          <span class="footer-gotop-wrap">
+            <span class="footer-gotop-text-wrap">
+              <span class="footer-gotop-text">Nach oben</span>
+              <span class="footer-gotop-text" aria-hidden="true">Nach oben</span>
+            </span>
+            <span class="footer-gotop-icon-wrap">
+              <Icon name="arrow-up-double" class="footer-gotop-icon" />
+              <Icon name="arrow-up-double" class="footer-gotop-icon" />
+            </span>
+          </span>
+        </a>
+      </div>
+    </Container>
+  </div>
+
+  <div class="footer-line-wrap"></div>
+
+  <div class="footer-menu-wrap">
+    <Container>
+      <div class="footer-menu-block">
+        <div class="footer-cta-block">
+          <p class="footer-cta-title">Online Marketing Agentur Frankfurt</p>
+          <p class="footer-cta-text">
+            Unsere Online Marketing Spezialisten haben über 15 Jahre Erfahrung.
+            Als Full-Service-Agentur aus Frankfurt beraten wir mittelständische
+            Unternehmen in Performance Marketing, SEO, SEA, Social Media und
+            Podcast-Produktion.
+          </p>
+
+          <div class="footer-social-row">
+            {
+              SITE.social.map((link) => (
+                <a
+                  href={link.href}
+                  class="footer-social-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                >
+                  <Icon name={link.icon} class="footer-social-icon" />
+                  <span>{link.label}</span>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="footer-nav-block">
+          {
+            footerNav.map((group) => (
+              <div class="footer-nav">
+                <p class="footer-nav-title">{group.title}</p>
+                <div class="footer-nav-wrap">
+                  {group.links.map((link) => (
+                    <a
+                      href={link.href}
+                      class="footer-nav-link"
+                      {...link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </Container>
+  </div>
+
+  <div class="footer-line-wrap"></div>
+
+  <div class="footer-info-wrap">
+    <Container>
+      <div class="footer-info-block">
+        {
+          contactLinks.map((item, i) => (
+            <a href={item.href} class:list={['footer-info', `is-0${i + 1}`]}>
+              <Icon name={item.icon} class="footer-info-icon" />
+              <span class="footer-info-text">
+                <span class="footer-info-name">{item.name}</span>
+                <span class="footer-info-contact">{item.value}</span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </Container>
+  </div>
+
+  <div class="footer-line-wrap"></div>
+
+  <div class="footer-copy-wrap">
+    <Container>
+      <div class="footer-copy-block">
+        <p class="footer-copy-text">© {year} Online Digital X — Alle Inhalte urheberrechtlich geschützt.</p>
+        <Icon name="dot" class="footer-copy-dot" />
+        <p class="footer-copy-text">
+          <a href="https://www.online-digitalx.de/impressum/" class="footer-copy-link" target="_blank" rel="noopener noreferrer">Impressum</a>
+        </p>
+        <Icon name="dot" class="footer-copy-dot" />
+        <p class="footer-copy-text">
+          <a href="https://www.online-digitalx.de/datenschutzerklaerung/" class="footer-copy-link" target="_blank" rel="noopener noreferrer">Datenschutz</a>
+        </p>
+      </div>
+    </Container>
+  </div>
+</footer>

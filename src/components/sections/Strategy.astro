@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+
+/** The four pillars of the responsible-business approach. */
+interface Props {
+  tag?: string;
+  title: string;
+  titleTail?: string;
+  items: CollectionEntry<'strategy'>[];
+}
+
+const { tag = 'Our Strategy', title, titleTail, items } = Astro.props;
+---
+
+<section class="strategy-section">
+  <div class="section-gap">
+    <Container>
+      <div class="strategy-block">
+        <div class="strategy-text-block">
+          <SectionHeading {tag} {title} {titleTail} invert class="strategy-text" />
+        </div>
+
+        <div class="strategy-card-block">
+          {
+            items.map((item, i) => (
+              <article class="strategy-card" data-anim="fade-up" data-anim-delay={(i % 4) * 0.12}>
+                <Icon name={item.data.icon} class="strategy-icon" />
+                <h3 class="strategy-name">{item.data.title}</h3>
+                <p class="strategy-except">{item.data.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

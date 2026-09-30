@@ -1,0 +1,20 @@
+[
+  {
+    "id": "financial-results",
+    "title": "Financial Results",
+    "description": "Quarterly and annual performance, filings and earnings material.",
+    "order": 1
+  },
+  {
+    "id": "announcements",
+    "title": "Announcements",
+    "description": "Regulatory news, leadership changes and corporate actions.",
+    "order": 2
+  },
+  {
+    "id": "reports",
+    "title": "Reports",
+    "description": "Annual reports, sustainability disclosures and governance documents.",
+    "order": 3
+  }
+]

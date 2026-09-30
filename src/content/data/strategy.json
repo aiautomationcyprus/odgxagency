@@ -1,0 +1,30 @@
+[
+  {
+    "id": "environmental",
+    "title": "Environmental Responsibility",
+    "description": "Reducing carbon emissions, protecting biodiversity and investing in renewable energy for a cleaner planet.",
+    "icon": "strategy-01",
+    "order": 1
+  },
+  {
+    "id": "social",
+    "title": "Social Impact",
+    "description": "Empowering communities, promoting diversity and inclusion, and ensuring ethical labor practices across our operations.",
+    "icon": "strategy-02",
+    "order": 2
+  },
+  {
+    "id": "governance",
+    "title": "Governance",
+    "description": "Maintaining transparency, accountability and ethical standards in all our business practices and partnerships.",
+    "icon": "strategy-03",
+    "order": 3
+  },
+  {
+    "id": "innovation",
+    "title": "Innovation",
+    "description": "Pioneering sustainable technologies and solutions that drive positive change and create long-term value.",
+    "icon": "target",
+    "order": 4
+  }
+]

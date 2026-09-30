@@ -1,0 +1,43 @@
+---
+import Media from './Media.astro';
+import type { CollectionEntry } from 'astro:content';
+
+import Icon from './Icon.astro';
+
+/**
+ * One person. The design shows the same card in two places — a grid above the
+ * tablet breakpoint and a carousel below it — so it lives on its own here.
+ */
+interface Props {
+  member: CollectionEntry<'team'>;
+  /** Sizes hint differs between the grid and the carousel. */
+  sizes?: string;
+}
+
+const { member, sizes = '(max-width: 991px) 50vw, 25vw' } = Astro.props;
+const { name, role, image, social } = member.data;
+---
+
+<article class="team-card">
+  <div class="team-image-wrap">
+    <Media src={image} alt={name} class="team-image" widths={[300, 600]} {sizes} loading="lazy" />
+    <div class="team-overlay"></div>
+
+    {
+      social.length > 0 && (
+        <div class="team-social">
+          {social.map((link) => (
+            <a href={link.href} class="team-social-link" target="_blank" rel="noopener noreferrer">
+              <Icon name={link.icon} class="team-social-icon" label={`${name} on ${link.label}`} />
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+
+  <div class="team-details-wrap">
+    <h3 class="team-name">{name}</h3>
+    <p class="team-except">{role}</p>
+  </div>
+</article>

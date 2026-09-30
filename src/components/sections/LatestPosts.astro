@@ -1,0 +1,63 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+import PostCard from '../ui/PostCard.astro';
+import { ROUTES } from '../../config/site';
+
+/** The blog teaser strip shown near the foot of the home page. */
+interface Props {
+  tag?: string;
+  title: string;
+  posts: CollectionEntry<'posts'>[];
+  categories: CollectionEntry<'blogCategories'>[];
+}
+
+const { tag = 'Blog', title, posts, categories } = Astro.props;
+const categoryOf = (post: CollectionEntry<'posts'>) =>
+  categories.find((c) => c.id === post.data.category);
+---
+
+<section class="insights-section">
+  <div class="section-gap">
+    <Container>
+      <div class="insights-block">
+        <div class="insights-text-block">
+          <div class="insights-title-block">
+            <div class="insights-title">
+              <div class="section-tag-block">
+                <div class="section-tag">{tag}</div>
+              </div>
+              <div class="section-title-block">
+                <h2 class="section-title" data-anim="title">{title}</h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="insights-button-block is-display-show-for-desktop">
+            <div class="insights-button">
+              <Button label="Read all posts" href={ROUTES.blog} />
+            </div>
+          </div>
+        </div>
+
+        <div class="insights-post-block">
+          <div class="blog-list">
+            {
+              posts.map((post, i) => (
+                <PostCard {post} category={categoryOf(post)} delay={i * 0.15} />
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="insights-button-block is-display-show-for-mobile">
+          <div class="insights-button">
+            <Button label="Read all posts" href={ROUTES.blog} />
+          </div>
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

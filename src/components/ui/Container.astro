@@ -1,0 +1,11 @@
+---
+/** Centered page gutter. Width follows the responsive `--container-size` token. */
+interface Props {
+  as?: string;
+  class?: string;
+}
+const { as: Tag = 'div', class: className }: Props = Astro.props;
+---
+<Tag class:list={['container-default', className]}>
+  <slot />
+</Tag>

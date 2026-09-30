@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Cta from '../components/sections/Cta.astro';
+import Faq from '../components/sections/Faq.astro';
+import PricingTable from '../components/sections/PricingTable.astro';
+import { ROUTES } from '../config/site';
+
+const byOrder = (a: { data: { order: number } }, b: { data: { order: number } }) =>
+  a.data.order - b.data.order;
+
+const plans = (await getCollection('plans')).sort(byOrder);
+const faqs = (await getCollection('faqs', ({ data }) => data.page === 'pricing')).sort(byOrder);
+---
+
+<BaseLayout
+  title="Pricing"
+  description="Flexible engagement plans built for companies of every size, priced per project rather than per seat."
+>
+  <PricingTable
+    {plans}
+    breadcrumb={[{ label: 'Home', href: ROUTES.home }, { label: 'Price Plans' }]}
+    title="Flexible plans built for every company"
+    excerpt="Choose the plan that fits today, and scale it as the work grows."
+    note="Every plan includes our satisfaction guarantee. Not sure which is right for you?"
+  />
+
+  <Faq title="Pricing questions," titleTail="answered." items={faqs} />
+
+  <Cta white />
+</BaseLayout>

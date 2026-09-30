@@ -1,0 +1,15 @@
+[
+  { "id": "partner-01", "name": "Logoipsum", "logo": "../../assets/images/partners/partner-01.svg", "group": "partners", "order": 1 },
+  { "id": "partner-02", "name": "Logoipsum", "logo": "../../assets/images/partners/partner-02.svg", "group": "partners", "order": 2 },
+  { "id": "partner-03", "name": "Logoipsum", "logo": "../../assets/images/partners/partner-03.svg", "group": "partners", "order": 3 },
+  { "id": "partner-04", "name": "Logoipsum", "logo": "../../assets/images/partners/partner-04.svg", "group": "partners", "order": 4 },
+  { "id": "partner-05", "name": "Logoipsum", "logo": "../../assets/images/partners/partner-05.svg", "group": "partners", "order": 5 },
+  { "id": "partner-06", "name": "Logoipsum", "logo": "../../assets/images/partners/partner-06.svg", "group": "partners", "order": 6 },
+  { "id": "trusted-01", "name": "Logoipsum", "logo": "../../assets/images/partners/trusted-01.svg", "group": "trusted", "order": 1 },
+  { "id": "trusted-02", "name": "Logoipsum", "logo": "../../assets/images/partners/trusted-02.svg", "group": "trusted", "order": 2 },
+  { "id": "trusted-03", "name": "Logoipsum", "logo": "../../assets/images/partners/trusted-03.svg", "group": "trusted", "order": 3 },
+  { "id": "trusted-04", "name": "Logoipsum", "logo": "../../assets/images/partners/trusted-04.svg", "group": "trusted", "order": 4 },
+  { "id": "trusted-05", "name": "Logoipsum", "logo": "../../assets/images/partners/trusted-05.svg", "group": "trusted", "order": 5 },
+  { "id": "trusted-06", "name": "Logoipsum", "logo": "../../assets/images/partners/trusted-06.svg", "group": "trusted", "order": 6 },
+  { "id": "trusted-07", "name": "Logoipsum", "logo": "../../assets/images/partners/trusted-07.svg", "group": "trusted", "order": 7 }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "global-innovation",
+    "title": "Global Innovation Award",
+    "issuer": "For breakthrough technology solutions",
+    "year": "2017",
+    "image": "../../assets/images/about/award-global-innovation.webp",
+    "order": 1
+  },
+  {
+    "id": "sustainability-excellence",
+    "title": "Sustainability Excellence",
+    "issuer": "Recognized for green energy initiatives",
+    "year": "2019",
+    "image": "../../assets/images/about/award-sustainability.webp",
+    "order": 2
+  },
+  {
+    "id": "top-logistics-partner",
+    "title": "Top Logistics Partner",
+    "issuer": "Outstanding supply chain solutions",
+    "year": "2021",
+    "image": "../../assets/images/about/award-logistics.webp",
+    "order": 3
+  },
+  {
+    "id": "best-corporate-strategy",
+    "title": "Best Corporate Strategy",
+    "issuer": "Strategic growth and expansion worldwide",
+    "year": "2023",
+    "image": "../../assets/images/about/award-corporate-strategy.webp",
+    "order": 4
+  },
+  {
+    "id": "industry-leader",
+    "title": "Industry Leader Recognition",
+    "issuer": "Multi-sector leadership and impact",
+    "year": "2025",
+    "image": "../../assets/images/about/award-industry-leader.webp",
+    "order": 5
+  }
+]

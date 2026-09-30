@@ -1,0 +1,127 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import logo from '../../assets/images/logo.svg';
+import { primaryNav, type NavItem } from '../../config/navigation';
+import { ROUTES, SITE } from '../../config/site';
+
+interface Props {
+  /** Rendered over a dark hero, which changes the header's top offset. */
+  overlay?: boolean;
+}
+
+const { overlay = false } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+// The Solutions mega menu mirrors whatever the solutions collection holds.
+const solutions = (await getCollection('solutions')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const solutionLinks = solutions.map((s) => ({
+  label: s.data.title,
+  href: ROUTES.solution(s.id),
+}));
+
+/** Split the solution links into the two-column mega menu the design uses. */
+const half = Math.ceil(solutionLinks.length / 2);
+const nav: NavItem[] = primaryNav.map((item) =>
+  item.menu === 'solutions'
+    ? { ...item, columns: [solutionLinks.slice(0, half), solutionLinks.slice(half)] }
+    : item
+);
+
+const isCurrent = (href: string) => href === path;
+---
+
+<header
+  class:list={['header-section', overlay && 'is-image']}
+  data-header
+  aria-label="Site"
+>
+  <Container>
+    <div class="header-block">
+      <div class="header-brand-block">
+        <a href={ROUTES.home} class="header-brand" aria-label={`${SITE.name} — home`}>
+          <Image src={logo} alt={SITE.name} class="header-brand-logo" loading="eager" />
+        </a>
+      </div>
+
+      <nav class="header-menu-block" id="site-nav" data-nav-menu aria-label="Main">
+        <div class="header-menu">
+          <div class="header-menu-wrap">
+            {
+              nav.map((item) =>
+                item.columns?.length ? (
+                  <div class="header-dropdown" data-dropdown>
+                    <button
+                      type="button"
+                      class="header-toggle"
+                      aria-expanded="false"
+                      data-dropdown-toggle
+                    >
+                      <span class="header-dropdown-text">{item.label}</span>
+                      <Icon name="chevron-down" class="header-dropdown-icon" />
+                    </button>
+                    <div class="header-wrapp" data-dropdown-list>
+                      <div class:list={['header-megamenu', `is-${item.menu}`]}>
+                        {item.columns.map((column) => (
+                          <div class="header-mega-wrap">
+                            {column.map((link) => (
+                              <a
+                                href={link.href}
+                                class:list={['header-menu-link', isCurrent(link.href) && 'is-current']}
+                                {...link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+                              >
+                                {link.label}
+                              </a>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <a
+                    href={item.href}
+                    class:list={['header-menu-link', isCurrent(item.href) && 'is-current']}
+                    aria-current={isCurrent(item.href) ? 'page' : undefined}
+                    {...item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+                  >
+                    {item.label}
+                  </a>
+                )
+              )
+            }
+          </div>
+
+          <div class="header-button-wrap">
+            <Button label="Anfrage stellen" href="https://www.online-digitalx.de/kontakt/" external />
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-button-block">
+        <Button label="Anfrage stellen" href="https://www.online-digitalx.de/kontakt/" external />
+      </div>
+
+      <button
+        type="button"
+        class="header-menu-button"
+        data-nav-toggle
+        aria-expanded="false"
+        aria-controls="site-nav"
+        aria-label="Open menu"
+      >
+        <span class="header-line-wrap">
+          <span class="top"></span>
+          <span class="middle"></span>
+          <span class="bottom"></span>
+        </span>
+      </button>
+    </div>
+  </Container>
+</header>

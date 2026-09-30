@@ -1,0 +1,68 @@
+---
+import Media from '../ui/Media.astro';
+import type { CollectionEntry } from 'astro:content';
+
+import Container from '../ui/Container.astro';
+import SectionHeading from './SectionHeading.astro';
+
+/**
+ * The company timeline. A rule grows down the left edge as the reader scrolls,
+ * lighting each milestone's dot and revealing its photograph in turn.
+ */
+interface Props {
+  tag?: string;
+  title: string;
+  titleTail?: string;
+  milestones: CollectionEntry<'milestones'>[];
+}
+
+const { tag = 'Our Journey', title, titleTail, milestones } = Astro.props;
+---
+
+<section class="journey-section">
+  <div class="section-gap">
+    <Container>
+      <div class="journey-block">
+        <div class="journey-text-block">
+          <SectionHeading {tag} {title} {titleTail} class="journey-text" />
+        </div>
+
+        <div class="journey-card-block" data-anim="timeline">
+          <div class="journey-line-wrap" aria-hidden="true">
+            <div class="journey-line-block">
+              <div class="journey-line" data-timeline-line></div>
+            </div>
+            <div class="journey-dot-block">
+              {milestones.map(() => <div class="journey-dot" data-timeline-dot />)}
+            </div>
+          </div>
+
+          <ol class="journey-card-wrap">
+            {
+              milestones.map((milestone) => (
+                <li class="journey-card">
+                  <div class="journey-details">
+                    <div class="journey-year">{milestone.data.year}</div>
+                    <h3 class="journey-name">{milestone.data.title}</h3>
+                    <p class="journey-except">{milestone.data.description}</p>
+                  </div>
+                  <div class="journey-images">
+                    <Media
+                      src={milestone.data.image}
+                      alt=""
+                      class="journey-image"
+                      widths={[400, 800]}
+                      sizes="(max-width: 991px) 100vw, 40vw"
+                      loading="lazy"
+                      data-timeline-image
+                    />
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

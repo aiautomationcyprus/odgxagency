@@ -1,0 +1,118 @@
+---
+import { Image } from 'astro:assets';
+import Media from '../ui/Media.astro';
+import type { CollectionEntry } from 'astro:content';
+
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import ratingStars from '../../assets/images/rating-stars.svg';
+
+/**
+ * Client quotes, one per tab. Each client's wordmark selects their testimonial;
+ * the underline slides to whichever is active.
+ */
+interface Props {
+  tag?: string;
+  breadcrumb?: { label: string; href?: string }[];
+  title: string;
+  titleTail?: string;
+  items: CollectionEntry<'testimonials'>[];
+}
+
+const { tag, breadcrumb, title, titleTail, items } = Astro.props;
+---
+
+<section class="review-section">
+  <div class="section-gap">
+    <Container>
+      <div class="review-block">
+        <div class="review-text-block">
+          <SectionHeading {tag} {breadcrumb} {title} {titleTail} class="review-text" />
+        </div>
+
+        <div class="review-card-block" data-anim="fade-up">
+          <div class="review-tabs" data-tabs>
+            <div class="review-tab-menu" role="tablist" aria-label="Client testimonials">
+              {
+                items.map((item, i) => (
+                  <button
+                    type="button"
+                    class="review-logo"
+                    role="tab"
+                    id={`testimonial-tab-${i}`}
+                    aria-controls={`testimonial-panel-${i}`}
+                    aria-selected={i === 0 ? 'true' : 'false'}
+                    data-tab
+                  >
+                    <Icon
+                      name={item.data.logo}
+                      class="review-logo-icon"
+                      label={`Read the testimonial from ${item.data.author}`}
+                    />
+                  </button>
+                ))
+              }
+              <span class="review-line" data-tab-indicator></span>
+            </div>
+
+            <div class="review-tab-pane">
+              {
+                items.map((item, i) => (
+                  <div
+                    class="review-slide tab-pane"
+                    role="tabpanel"
+                    id={`testimonial-panel-${i}`}
+                    aria-labelledby={`testimonial-tab-${i}`}
+                    data-tab-pane
+                  >
+                    <figure class="review-card">
+                      <div class="review-details">
+                        <div class="review-rating">
+                          <Image
+                            src={ratingStars}
+                            alt={`Rated ${item.data.rating} out of 5`}
+                            class="review-rating-icon"
+                            loading="lazy"
+                          />
+                          <span class="review-rating-text">({item.data.rating})</span>
+                        </div>
+
+                        <blockquote class="review-except">{item.data.quote}</blockquote>
+
+                        {item.data.stats.length > 0 && (
+                          <div class="review-wrapp">
+                            {item.data.stats.map((stat) => (
+                              <div class="review-info">
+                                <div class="review-info-title">{stat.value}</div>
+                                <div class="review-info-text">{stat.label}</div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      <figcaption class="review-author">
+                        <Media
+                          src={item.data.avatar}
+                          alt={item.data.author}
+                          class="review-author-image"
+                          width={96}
+                          height={96}
+                          densities={[1, 2]}
+                          loading="lazy"
+                        />
+                        <div class="review-author-name">{item.data.author}</div>
+                        <div class="review-author-desig">{item.data.role}</div>
+                      </figcaption>
+                    </figure>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

@@ -1,0 +1,56 @@
+---
+import Media from './Media.astro';
+import type { CollectionEntry } from 'astro:content';
+
+import Icon from './Icon.astro';
+import { ROUTES } from '../../config/site';
+
+/** A blog post teaser: image, category, headline, read-more. */
+interface Props {
+  post: CollectionEntry<'posts'>;
+  category?: CollectionEntry<'blogCategories'>;
+  /** Only the first few cards on a page should load eagerly. */
+  eager?: boolean;
+  /** Stagger for the reveal, in seconds. */
+  delay?: number;
+  class?: string;
+}
+
+const { post, category, eager = false,
+  delay = 0, class: className } = Astro.props;
+const href = ROUTES.post(post.id);
+---
+
+<article class:list={['blog-post', className]} data-anim="fade-up" data-anim-delay={delay}>
+  <a href={href} class="blog-image-post" tabindex="-1" aria-hidden="true">
+    <Media
+      src={post.data.image}
+      alt=""
+      class="post-image"
+      widths={[400, 800, 1040]}
+      sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 33vw"
+      loading={eager ? 'eager' : 'lazy'}
+    />
+  </a>
+
+  <div class="blog-content-post">
+    {
+      category && (
+        <a href={ROUTES.blogCategory(category.id)} class="blog-tag">
+          {category.data.title}
+        </a>
+      )
+    }
+    <div class="blog-line"></div>
+    <h3>
+      <a href={href} class="blog-name">{post.data.title}</a>
+    </h3>
+    {/* A second route to the same post, so it names its destination rather
+        than leaving three identical "Read more" links on a page. */}
+    <a href={href} class="blog-link" tabindex="-1" aria-hidden="true">
+      <span class="blog-link-text">Read more</span>
+      <span class="sr-only">: {post.data.title}</span>
+      <Icon name="arrow-up-right" class="blog-link-icon" />
+    </a>
+  </div>
+</article>

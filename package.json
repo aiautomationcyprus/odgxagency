@@ -1,0 +1,62 @@
+{
+  "name": "mnc-astro-theme",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MNC \u2014 a multinational corporate website theme for Astro.",
+  "keywords": [
+    "astro",
+    "astro-theme",
+    "astro-template",
+    "corporate",
+    "business",
+    "agency",
+    "tailwindcss",
+    "gsap",
+    "blog",
+    "multi-page"
+  ],
+  "homepage": "https://www.example.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThemeNcode/mnc-astro-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ThemeNcode/mnc-astro-theme/issues"
+  },
+  "author": "ThemeNcode",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "format": "prettier --write .",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^8.0.0",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.1",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.26",
+    "sharp": "^0.35.4",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "typescript": "^5.9.3"
+  },
+  "allowScripts": {
+    "esbuild": true
+  }
+}

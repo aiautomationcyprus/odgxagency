@@ -1,0 +1,71 @@
+---
+import Media from '../ui/Media.astro';
+
+import Container from '../ui/Container.astro';
+import SectionHeading, { type Breadcrumb } from './SectionHeading.astro';
+
+/**
+ * The opening block on inner pages: breadcrumb, headline, intro, actions, and
+ * an optional wide image that grows as the reader scrolls into it.
+ */
+interface Props {
+  breadcrumb: Breadcrumb[];
+  title: string;
+  titleTail?: string;
+  excerpt?: string;
+  actions?: { label: string; href: string; variant?: 'dark' | 'light' | 'solid-light' | 'outline-light' }[];
+  image?: ImageMetadata | string;
+  imageAlt?: string;
+  class?: string;
+}
+
+const {
+  breadcrumb,
+  title,
+  titleTail,
+  excerpt,
+  actions,
+  image,
+  imageAlt = '',
+  class: className,
+} = Astro.props;
+---
+
+<section class:list={['global-section', className]}>
+  <!-- Clears the fixed header. -->
+  <div class="spacer"></div>
+
+  <div class="global">
+    <Container>
+      <div class="solutions-hero-block">
+        <div class="sustainability-text-block">
+          <SectionHeading
+            as="h1"
+            {breadcrumb}
+            {title}
+            {titleTail}
+            {excerpt}
+            {actions}
+            class="solutions-text"
+          />
+        </div>
+
+        {
+          image && (
+            <div class="hero-image-block">
+              <Media
+                src={image}
+                alt={imageAlt}
+                class="hero-image"
+                widths={[800, 1200, 1800]}
+                sizes="100vw"
+                loading="eager"
+                data-anim="hero-image"
+              />
+            </div>
+          )
+        }
+      </div>
+    </Container>
+  </div>
+</section>

@@ -1,0 +1,151 @@
+---
+import { Image } from 'astro:assets';
+
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+import SectionHeading, { type Breadcrumb } from './SectionHeading.astro';
+import contactImage from '../../assets/images/contact/contact.webp';
+import successIcon from '../../assets/images/contact/success.avif';
+import { SITE } from '../../config/site';
+
+/**
+ * The inquiry form, shown beside a photograph, with the page heading above it.
+ *
+ * `action` is the endpoint the form posts to. Leave it unset and the form still
+ * validates and confirms locally, which is what the demo does — point it at your
+ * own handler (Formspree, a serverless function, your CRM) to receive messages.
+ */
+interface Props {
+  breadcrumb: Breadcrumb[];
+  title: string;
+  excerpt?: string;
+  actions?: { label: string; href: string; variant?: 'dark' | 'light' | 'solid-light' | 'outline-light' }[];
+  formTitle?: string;
+  action?: string;
+  topics?: string[];
+}
+
+const {
+  breadcrumb,
+  title,
+  excerpt,
+  actions,
+  formTitle = 'Start the conversation',
+  action,
+  topics = ['Sales', 'Investors', 'Feedback', 'Collaboration', 'Sponsorship'],
+}: Props = Astro.props;
+---
+
+<section class="contact-input-section">
+  <!-- Clears the fixed header. -->
+  <div class="spacer"></div>
+
+  <div class="global">
+    <Container>
+      <div class="contact-input-block">
+        <div class="contact-text-wrap">
+          <SectionHeading as="h1" {breadcrumb} {title} {excerpt} {actions} class="contact-text" />
+        </div>
+
+        <div class="contact-input-wrap">
+          <div class="contact-image-wrap" data-anim="fade-left">
+            <Image
+              src={contactImage}
+              alt="A colleague on a support call at their desk"
+              class="contact-image"
+              widths={[500, 900, 1200]}
+              sizes="(max-width: 991px) 100vw, 45vw"
+              loading="eager"
+            />
+          </div>
+
+          <div class="contact-form-wrap" data-anim="fade-right">
+            <form class="contact-form" {action} method="post" data-contact-form novalidate>
+              <p class="contact-title">{formTitle}</p>
+              <div class="contact-line"></div>
+
+              <div class="contact-wrap">
+                <div class="contact-wrapper">
+                  <label class="contact-label" for="contact-name">Name*</label>
+                  <input
+                    class="contact-field"
+                    id="contact-name"
+                    name="name"
+                    type="text"
+                    autocomplete="name"
+                    required
+                  />
+                </div>
+
+                <div class="contact-wrapper">
+                  <label class="contact-label" for="contact-email">Email*</label>
+                  <input
+                    class="contact-field"
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="contact-wrap">
+                <div class="contact-wrapper">
+                  <label class="contact-label" for="contact-phone">Phone Number*</label>
+                  <input
+                    class="contact-field"
+                    id="contact-phone"
+                    name="phone"
+                    type="tel"
+                    autocomplete="tel"
+                    required
+                  />
+                </div>
+
+                <div class="contact-wrapper">
+                  <label class="contact-label" for="contact-topic">Select Topic*</label>
+                  <select class="contact-field" id="contact-topic" name="topic" required>
+                    <option value="">Choose…</option>
+                    {topics.map((topic) => <option value={topic}>{topic}</option>)}
+                  </select>
+                </div>
+              </div>
+
+              <div class="contact-wrap is-full">
+                <div class="contact-wrapper">
+                  <label class="contact-label" for="contact-message">Message*</label>
+                  <textarea
+                    class="contact-field contact-area"
+                    id="contact-message"
+                    name="message"
+                    rows="5"
+                    required></textarea>
+                </div>
+              </div>
+
+              <div class="contact-button">
+                <Button label="Send message" type="submit" />
+              </div>
+            </form>
+
+            <div class="contact-success" data-form-success hidden>
+              <div class="contact-success-wrap">
+                <Image src={successIcon} alt="" class="contact-success-icon" loading="lazy" />
+                <p class="contact-success-title">Thanks — we have your message.</p>
+                <p class="contact-message">We usually reply within one working day.</p>
+              </div>
+            </div>
+
+            <div class="contact-error" data-form-error hidden>
+              <p class="contact-message">
+                Something went wrong. Please try again, or email us directly at{' '}
+                <a href={`mailto:${SITE.contact.email}`}>{SITE.contact.email}</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

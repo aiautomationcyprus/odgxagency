@@ -1,0 +1,660 @@
+---
+import { Image } from 'astro:assets';
+
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Intro from '../components/sections/Intro.astro';
+import PricingTable from '../components/sections/PricingTable.astro';
+import Container from '../components/ui/Container.astro';
+import Icon from '../components/ui/Icon.astro';
+import SectionHeading from '../components/sections/SectionHeading.astro';
+
+const plans = (await getCollection('plans')).sort((a, b) => a.data.order - b.data.order);
+
+import studioImage1 from '../assets/images/podcast/podcast-studio-1.webp';
+import studioImage2 from '../assets/images/podcast/podcast-studio-2.webp';
+import studioImage3 from '../assets/images/podcast/podcast-studio-3.jpg';
+
+const inAllenEnthalten = [
+  'Aufnahmezeit: 1 Stunde',
+  'Studionutzung: 3 Stunden inkl. Auf- und Abbau',
+  'Video: Full HD (1080p), 10 Bit 4:2:2, MP4 oder MOV',
+  'Audio: 24 Bit / 48 kHz, WAV',
+  'Übergabe aller Aufnahmen per Download-Link',
+  'Kameras: Panasonic Lumix S5 II X mit Sigma 24–70 mm, Sony Alpha 7 IV mit Sony 24–70 mm f/2.8 GM II',
+  'Mikrofone: dynamische Mikrofone, Funkmikrofone mit Lavalier-Option',
+  'Licht: 2 × 300 W und 2 × 100 W Bi-Color, 2 × Oktagon-Softbox 90 cm, 2 × Strip-Softbox 20 × 90 cm',
+];
+
+const postproduktion = [
+  {
+    category: 'Pro Folge',
+    items: [
+      { name: 'Audio-Mastering', desc: 'Lautheit auf Plattformstandard, EQ, Rauschunterdrückung, Export für Spotify und Apple Podcasts', price: '79 €' },
+      { name: 'Feinschnitt leicht', desc: 'Anfang und Ende, Versprecher und lange Pausen entfernen, Kamerawechsel', price: '149 € / Std. Rohmaterial' },
+      { name: 'Feinschnitt umfangreich', desc: 'Zusätzlich inhaltliche Kürzungen, Umstellungen, Einblendungen, Kapitelmarken', price: '349 € / Std. Rohmaterial' },
+      { name: 'Untertitel', desc: 'Als SRT-Datei oder fest im Video, bis 60 Minuten', price: '89 €' },
+      { name: 'Transkript', desc: 'Vollständiges Transkript als Text- oder Word-Datei', price: '49 €' },
+    ],
+  },
+  {
+    category: 'Social-Media-Clips',
+    items: [
+      { name: 'Einzelclip', desc: 'Bis 60 Sekunden, Hochformat 9:16, mit animierten Untertiteln', price: '59 €' },
+      { name: '5er-Paket', desc: '5 Clips aus einer Folge', price: '249 €' },
+      { name: '10er-Paket', desc: '10 Clips aus einer Folge', price: '449 €' },
+    ],
+  },
+  {
+    category: 'Einmalig pro Podcast-Format',
+    items: [
+      { name: 'Intro und Outro', desc: 'Individuelles Intro und Outro mit Jingle, wiederverwendbar für alle Folgen', price: '390 €' },
+      { name: 'Grafikpaket', desc: 'Namenseinblendungen, Logo, Titelkarten und Abspann im Design eures Podcasts', price: '349 €' },
+    ],
+  },
+];
+
+const bestandteile = [
+  {
+    icon: 'target',
+    title: 'Konzeption & Format',
+    text: 'Wir entwickeln gemeinsam Ihr Podcast-Format: Thema, Struktur, Tonalität, Länge und Frequenz. Passend zu Ihrer Marke und Zielgruppe.',
+  },
+  {
+    icon: 'support',
+    title: 'Aufnahme & Produktion',
+    text: 'Studio in Frankfurt, Joe Rogan Setup oder Remote. Bis zu 4 Personen gleichzeitig, Video-Option inklusive.',
+  },
+  {
+    icon: 'strategy-02',
+    title: 'Schnitt & Mastering',
+    text: 'Rohschnitt, Soundprocessing, EQ, Kompression, Rauschunterdrückung und Mastering nach Spotify & Apple Standard.',
+  },
+  {
+    icon: 'strategy-01',
+    title: 'Podcast Marketing',
+    text: 'Audiogramme für Social Media, SEO-Shownotes, Spotify & Apple Optimierung, Cover Design und Content Repurposing.',
+  },
+];
+
+const studioFeatures = [
+  'Großmembran-Kondensatormikrofone (Shure SM7B o.ä.) für satten, warmen Klang',
+  'Mehrkanaliges Interface für bis zu 4 Personen gleichzeitig',
+  'Optionales Kamerasystem für YouTube & Social Media',
+  'Studiobeleuchtung für cineastisches Look-and-Feel',
+  'Remote-Aufnahmen via Riverside.fm oder Zencastr möglich',
+];
+
+
+const marketing = [
+  {
+    title: 'Audiogramme für Social Media',
+    text: 'Wir schneiden kurze Clips aus Ihrer Folge und versehen sie mit animierten Wellenformen und Untertiteln – perfekt für Instagram, LinkedIn oder TikTok. So erreichen Sie auch Menschen, die noch keine Podcast-Hörer sind.',
+  },
+  {
+    title: 'Shownotes & SEO-Texte',
+    text: 'Zu jeder Folge erstellen wir strukturierte Shownotes mit Keywords, Zeitstempeln und Links. Das sorgt dafür, dass Ihre Folgen auch über Google gefunden werden.',
+  },
+  {
+    title: 'Spotify & Apple Optimierung',
+    text: 'Wir helfen Ihnen dabei, Titel, Beschreibung und Tags Ihres Podcasts so zu gestalten, dass Sie innerhalb der Plattformen besser gefunden werden.',
+  },
+  {
+    title: 'Podcast Cover Design',
+    text: 'Ihr Coverbild ist das Erste, was potenzielle Hörer sehen. Wir gestalten ein professionelles Cover, das auf Spotify, Apple Podcasts und Co. sofort ins Auge fällt.',
+  },
+  {
+    title: 'Newsletter & Content Repurposing',
+    text: 'Aus einer Podcast-Folge können mehrere Inhalte entstehen: ein LinkedIn-Post, ein Newsletter, ein Blogartikel. Wir helfen Ihnen dabei, Ihren Content zu verlängern und mehr Reichweite zu erzielen.',
+  },
+];
+
+const referenzen = [
+  'Consorsbank, Nürnberg',
+  'BNP Paribas, Frankfurt',
+  'Unit8, Lausanne, Schweiz',
+  'Vepa, Hoogeveen, Niederlande',
+  'Inspirezz, Ingolstadt',
+  'Breitinger AG, Aschaffenburg',
+  'Stefan Dabruck Management GmbH, Frankfurt',
+  'Maik Maurice & Ramon Zenker (Resistance D), Frankfurt',
+  'Uebervart / Solebox, Frankfurt/Berlin',
+  'Loumou Gastro & Event Group, Hanau',
+  'Krimibuchautor Leo Born, Offenbach',
+  'Eishockey Löwen Frankfurt, Frankfurt',
+  'Ariane Sommer, Los Angeles, U.S.A.',
+  'Inbiz GmbH & Co. KG, Bad Tabarz',
+  'Hochschule Darmstadt, Darmstadt',
+];
+
+const faqs = [
+  {
+    id: 'faq-1',
+    q: 'Wie viel kostet eine Podcast Produktion in Frankfurt?',
+    a: 'Die Kosten hängen vom Umfang ab. Eine einzelne Folge kann aus Aufnahme, Schnitt und Mastering bestehen und wird individuell kalkuliert. Für regelmäßige Formate bieten wir Pakete an, die deutlich günstiger sind als Einzelbuchungen. Kontaktieren Sie uns für ein individuelles Angebot.',
+  },
+  {
+    id: 'faq-2',
+    q: 'Wie lange dauert die Produktion einer Podcast-Folge?',
+    a: 'Eine fertig bearbeitete Folge von 30–60 Minuten ist in der Regel innerhalb von 2–4 Werktagen nach der Aufnahme bereit.',
+  },
+  {
+    id: 'faq-3',
+    q: 'Muss ich Erfahrung haben, um einen Podcast zu produzieren?',
+    a: 'Nein. Wir begleiten Sie von der Konzeption über die Aufnahme bis zum fertigen Produkt – auch wenn Sie noch nie vor einem Mikrofon gesessen haben.',
+  },
+  {
+    id: 'faq-4',
+    q: 'Was ist das Joe Rogan Setup und was kostet es?',
+    a: 'Das Joe Rogan Setup ist unser Premium-Paket. Professionelle Studiomikrofone, akustisch behandelter Raum, optionales Kamerasystem und Studiobeleuchtung. Für einen Look und Sound wie bei den größten Podcasts der Welt. Preis auf Anfrage.',
+  },
+  {
+    id: 'faq-5',
+    q: 'Kann ich meinen Podcast auch remote aufnehmen?',
+    a: 'Ja. Wir unterstützen Remote-Aufnahmen über Tools wie Riverside.fm oder Zencastr und stellen auf Wunsch auch mobile Aufnahmegeräte bereit.',
+  },
+  {
+    id: 'faq-6',
+    q: 'Auf welchen Plattformen wird der Podcast veröffentlicht?',
+    a: 'Wir liefern Ihnen die fertige Datei im richtigen Format für alle gängigen Plattformen: Spotify, Apple Podcasts, Amazon Music, YouTube Music und weitere. Auf Wunsch übernehmen wir auch den Upload.',
+  },
+  {
+    id: 'faq-7',
+    q: 'Kann auch bei Ihnen vor Ort produziert werden?',
+    a: 'Ja. Unser Equipment ist so ausgelegt, dass wir auch außerhalb unserer Studios Video- und Audio-Podcast-Aufnahmen durchführen können.',
+  },
+];
+---
+
+<BaseLayout
+  title="Podcast Produktion Frankfurt – Konzeption, Aufnahme & Marketing"
+  description="Podcast Produktion aus Frankfurt: von der Konzeption über das Joe Rogan Studio Setup bis zum Podcast Marketing auf allen Plattformen."
+  overlayHeader
+>
+
+  <!-- 1. Hero -->
+  <Hero
+    tag="Podcast Agentur aus Frankfurt"
+    title="Produktion von Podcasts inkl. Moderation und Interview"
+    excerpt="Podcasts gehören zu den wachstumsstärksten Medienformaten im deutschsprachigen Raum und bieten Unternehmen, Marken und Persönlichkeiten eine einzigartige Möglichkeit, ihre Zielgruppe direkt anzusprechen."
+    video="podcast-hero"
+    actions={[
+      { label: 'Podcast anfragen', href: 'https://www.online-digitalx.de/kontakt/', variant: 'outline-light' },
+    ]}
+  />
+
+  <!-- 2. Studio-Fotogalerie -->
+  <section>
+    <Container>
+      <div class="podcast-gallery">
+        <div class="podcast-gallery-item" data-anim="fade-up" data-anim-delay="0">
+          <Image
+            src={studioImage1}
+            alt="Podcast Studio Frankfurt"
+            class="podcast-gallery-img"
+            widths={[400, 800]}
+            sizes="(max-width: 991px) 100vw, 33vw"
+            loading="eager"
+          />
+        </div>
+        <div class="podcast-gallery-item" data-anim="fade-up" data-anim-delay="0.1">
+          <Image
+            src={studioImage3}
+            alt="Podcast Aufnahme Setup"
+            class="podcast-gallery-img"
+            widths={[400, 800]}
+            sizes="(max-width: 991px) 100vw, 33vw"
+            loading="eager"
+          />
+        </div>
+        <div class="podcast-gallery-item" data-anim="fade-up" data-anim-delay="0.2">
+          <Image
+            src={studioImage2}
+            alt="Podcast Video Produktion"
+            class="podcast-gallery-img"
+            widths={[400, 800]}
+            sizes="(max-width: 991px) 100vw, 33vw"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 3. Intro – Reichweite-Statement (word-reveal) -->
+  <Intro
+    tag="Podcast Produktion Frankfurt"
+    statement="Die 18- bis 49-Jährigen hören 3–4 Podcasts pro Woche – die über 49-Jährigen 1–2, mit steigender Tendenz. Als Full-Service-Agentur aus Frankfurt produzieren wir Ihren nächsten Podcast: Sie bringen das Thema, wir kümmern uns um den Rest."
+  />
+
+  <!-- 4. Pakete – PricingTable (theme component, inline mode) -->
+  <section id="pakete">
+    <div class="section-gap" style="padding-top: 0;">
+      <Container>
+        <PricingTable
+          {plans}
+          title="Podcast-Produktion im Überblick"
+          excerpt="Drei Studiopakete, ergänzt um flexibel buchbare Postproduktion"
+          inline
+        />
+
+        <!-- In allen Paketen enthalten -->
+        <div class="podcast-included-block" data-anim="fade-up">
+          <p class="podcast-included-title">In allen Paketen enthalten</p>
+          <p class="podcast-included-text">{inAllenEnthalten.join(' · ')}</p>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+  <!-- 4b. Postproduktion – Tabelle -->
+  <section>
+    <div class="section-gap" style="padding-top: 0;">
+      <Container>
+        <div class="podcast-postprod-wrap" data-anim="fade-up">
+          <p class="podcast-postprod-header">Postproduktion</p>
+          <p class="podcast-postprod-sub">Zu jedem Paket buchbar. So zahlt ihr nur für den Schnitt, den eure Folge wirklich braucht.</p>
+          {postproduktion.map((group) => (
+            <div class="podcast-postprod-group">
+              <p class="podcast-postprod-category">{group.category}</p>
+              {group.items.map((item, i) => (
+                <div class:list={['podcast-postprod-row', i === group.items.length - 1 && 'is-last']}>
+                  <span class="podcast-postprod-name">{item.name}</span>
+                  <span class="podcast-postprod-desc">{item.desc}</span>
+                  <span class="podcast-postprod-price">{item.price}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+          <p class="podcast-postprod-note">Alle Preise netto zzgl. gesetzlicher MwSt. Hochformat-Clips in bester Bildqualität empfehlen wir in Kombination mit dem Professional-Paket (4K-Rohmaterial).</p>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+  <!-- 4. Podcast-Bestandteile – strategy cards (dark) -->
+  <section class="strategy-section" id="leistungen">
+    <div class="section-gap">
+      <Container>
+        <div class="strategy-block">
+          <div class="strategy-text-block">
+            <SectionHeading
+              tag="Ein Podcast besteht aus verschiedenen Bereichen"
+              title="Alles, was Ihr Podcast"
+              titleTail="wirklich braucht"
+              invert
+              class="strategy-text"
+            />
+          </div>
+          <div class="strategy-card-block">
+            {bestandteile.map((item, i) => (
+              <article class="strategy-card" data-anim="fade-up" data-anim-delay={i * 0.12}>
+                <Icon name={item.icon} class="strategy-icon" />
+                <h3 class="strategy-name">{item.title}</h3>
+                <p class="strategy-except">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+  <!-- 5. Joe Rogan Setup – 2-col layout (white) -->
+  <section class="journey-section">
+    <div class="section-gap">
+      <Container>
+        <div class="company-text-block">
+          <div class="company-image-block">
+            <div class="company-image-wrap" data-anim="fade-right">
+              <Image
+                src={studioImage1}
+                alt="Joe Rogan Setup – Podcast Studio Frankfurt"
+                class="company-image"
+                widths={[500, 900, 1400]}
+                sizes="(max-width: 991px) 100vw, 45vw"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div class="company-details-block" data-anim="fade-left">
+            <SectionHeading
+              tag="Unser Studio"
+              title="Joe Rogan Setup."
+              titleTail="Klingen wie die Profis."
+              excerpt="Professionelle Mikrofone, akustisch behandelter Raum und optionales Kamerasystem für Video-Podcasts. Genau das Setup, das die größten Podcasts der Welt nutzen. Jetzt in Frankfurt."
+              class="company-text"
+            />
+            <div class="company-list">
+              {studioFeatures.map((feature, i) => (
+                <>
+                  {i > 0 && <div class="company-line" />}
+                  <div class="company-item" data-anim="fade-up" data-anim-delay={i * 0.08}>
+                    <div class="company-icon">
+                      <Icon name="check" class="company-ico" />
+                    </div>
+                    <div class="company-wrap">
+                      <p class="company-except">{feature}</p>
+                    </div>
+                  </div>
+                </>
+              ))}
+            </div>
+            <p class="podcast-body-text" style="margin-top: 2rem;" data-anim="fade-up">
+              Egal ob Corporate Podcast, Personal Branding oder eigenes Format. Mit unserem Setup klingt und sieht Ihr Podcast aus wie eine professionelle TV-Produktion.
+            </p>
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+
+  <!-- 7. Podcast Marketing – solutions rows (dark, hover reveal) -->
+  <section class="solutions-section">
+    <div class="section-gap">
+      <div class="solutions-block">
+        <div class="solutions-text-block">
+          <div class="section-tag is-gray">Podcast Marketing</div>
+          <h2 class="section-title is-white" data-anim="title" data-anim-value="white">
+            Damit Ihr Podcast gehört wird
+          </h2>
+          <p class="podcast-marketing-intro" data-anim="fade-up" data-anim-delay="0.15">
+            Eine professionelle Produktion ist der erste Schritt. Der zweite ist, dass Menschen Ihren Podcast auch finden. Genau dabei unterstützen wir Sie. Denn der beste Podcast bringt nichts, wenn er in der Masse untergeht.
+          </p>
+        </div>
+        <div class="solutions-post-block">
+          {marketing.map((item, i) => (
+            <div class="solutions-wrap">
+              <Container>
+                <div class="solutions-card">
+                  <div class="solutions-details">
+                    <div class="solutions-name-block">
+                      <div class="solutions-num">{String(i + 1).padStart(2, '0')}</div>
+                      <h3 class="solutions-name">{item.title}</h3>
+                    </div>
+                    <div class="solutions-icon-block" style="display:none" />
+                  </div>
+                  <div class="solutions-content">
+                    <p class="solutions-except">{item.text}</p>
+                  </div>
+                </div>
+              </Container>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Referenzen – client grid (default bg) -->
+  <section>
+    <div class="section-gap">
+      <Container>
+        <div class="faq-text-block">
+          <SectionHeading
+            tag="Referenzen"
+            title="Bereits produziert für"
+            titleTail="u.v.a."
+            class="faq-text"
+          />
+        </div>
+        <ul class="podcast-clients-grid">
+          {referenzen.map((client, i) => (
+            <li class="podcast-client-item" data-anim="fade-up" data-anim-delay={i * 0.04}>
+              <span class="podcast-client-icon-wrap">
+                <Icon name="arrow-up-right-sm" class="podcast-client-icon" />
+              </span>
+              <span>{client}</span>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </div>
+  </section>
+
+  <!-- 9. FAQ – accordion -->
+  <section class="faq-section is-alt">
+    <div class="section-gap">
+      <Container>
+        <div class="faq-block">
+          <div class="faq-text-block">
+            <SectionHeading
+              tag="FAQ"
+              title="Häufige Fragen zur"
+              titleTail="Podcast Produktion"
+              class="faq-text"
+            />
+          </div>
+          <div class="faq-wrap-block" data-accordion>
+            {faqs.map((faq, i) => (
+              <div class="faq" data-accordion-item data-open={i === 0 ? '' : undefined}>
+                <h3>
+                  <button
+                    type="button"
+                    class="faq-question"
+                    aria-expanded={i === 0 ? 'true' : 'false'}
+                    aria-controls={faq.id}
+                    data-accordion-trigger
+                  >
+                    <span class="faq-question-text">{faq.q}</span>
+                    <Icon name="plus" class="faq-question-icon" />
+                  </button>
+                </h3>
+                <div class="faq-answer" id={faq.id} data-accordion-panel>
+                  <div class="faq-answer-details">
+                    <p class="faq-answer-text">{faq.a}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+
+</BaseLayout>
+
+<style>
+  .podcast-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    padding: 2.5rem 0;
+  }
+
+  .podcast-gallery-item {
+    border-radius: var(--radius-xs);
+    overflow: hidden;
+  }
+
+  .podcast-gallery-img {
+    width: 100%;
+    height: 18rem;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 767px) {
+    .podcast-gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+
+.podcast-body-text {
+    font-size: var(--size-h5);
+    color: var(--color-muted);
+    line-height: var(--leading-l);
+  }
+
+  .podcast-body-centered {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+.podcast-marketing-intro {
+    color: var(--color-muted);
+    max-width: 600px;
+    line-height: var(--leading-l);
+    margin-top: 1rem;
+  }
+
+  .podcast-clients-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 960px;
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
+  }
+
+  .podcast-client-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid var(--color-line);
+    font-size: var(--size-body);
+    color: var(--color-muted);
+  }
+
+  .podcast-client-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 0.75rem;
+    height: 0.75rem;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .podcast-client-icon {
+    display: block;
+    width: 0.75rem !important;
+    height: 0.75rem !important;
+    color: var(--color-line);
+  }
+
+  @media (max-width: 767px) {
+    .podcast-clients-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .podcast-clients-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* In allen Paketen enthalten */
+  .podcast-included-block {
+    margin-top: 2rem;
+  }
+
+  .podcast-included-title {
+    font-size: var(--size-body);
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .podcast-included-text {
+    font-size: var(--size-body);
+    color: var(--color-muted);
+    line-height: var(--leading-l);
+  }
+
+  /* Postproduktion table */
+  .podcast-postprod-wrap {
+    padding: 2.5rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-xs);
+    background: white;
+  }
+
+  .podcast-postprod-header {
+    font-size: var(--size-h4);
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .podcast-postprod-sub {
+    font-size: var(--size-body);
+    color: var(--color-muted);
+    margin-bottom: 2rem;
+  }
+
+  .podcast-postprod-group {
+    margin-bottom: 2rem;
+  }
+
+  .podcast-postprod-category {
+    font-size: var(--size-body);
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  .podcast-postprod-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 200px;
+    gap: 1rem;
+    align-items: start;
+    padding: 0.875rem 0;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .podcast-postprod-row.is-last {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .podcast-postprod-name {
+    font-size: var(--size-body);
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .podcast-postprod-desc {
+    font-size: var(--size-body);
+    color: var(--color-muted);
+    line-height: var(--leading-l);
+  }
+
+  .podcast-postprod-price {
+    font-size: var(--size-body);
+    font-weight: 700;
+    color: var(--color-ink);
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  .podcast-postprod-note {
+    font-size: var(--size-body);
+    color: var(--color-muted);
+    margin-top: 1.5rem;
+    line-height: var(--leading-l);
+  }
+
+  @media (max-width: 767px) {
+    .podcast-postprod-row {
+      grid-template-columns: 1fr auto;
+    }
+    .podcast-postprod-desc {
+      display: none;
+    }
+    .podcast-postprod-wrap,
+    .podcast-included-block {
+      padding: 1.5rem;
+    }
+  }
+</style>

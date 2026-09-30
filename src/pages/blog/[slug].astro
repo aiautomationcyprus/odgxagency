@@ -1,0 +1,190 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Media from '../../components/ui/Media.astro';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Cta from '../../components/sections/Cta.astro';
+import SectionHeading from '../../components/sections/SectionHeading.astro';
+import Container from '../../components/ui/Container.astro';
+import Button from '../../components/ui/Button.astro';
+import PostCard from '../../components/ui/PostCard.astro';
+import { ROUTES } from '../../config/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+  const newestFirst = (a: typeof posts[number], b: typeof posts[number]) =>
+    b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf();
+
+  return posts.map((post) => {
+    const others = posts.filter((p) => p.id !== post.id);
+    const sameCategory = others.filter((p) => p.data.category === post.data.category);
+    const elsewhere = others.filter((p) => p.data.category !== post.data.category);
+
+    return {
+      params: { slug: post.id },
+      props: {
+        post,
+        /*
+         * The design gives this row three cards, so a thin category is topped
+         * up with whatever else is recent rather than leaving the row short.
+         */
+        related: [...sameCategory.sort(newestFirst), ...elsewhere.sort(newestFirst)].slice(0, 3),
+      },
+    };
+  });
+}
+
+const { post, related } = Astro.props;
+const { Content } = await render(post);
+const { title, excerpt, image, author, publishedAt, readingTime, seo } = post.data;
+
+const category = await getEntry('blogCategories', post.data.category);
+
+/* Shared by the visible eyebrow and the breadcrumb structured data. The
+   trailing crumb names the current page, so it carries no link. */
+const crumbs = [
+  { label: 'Blog', href: ROUTES.blog },
+  ...(category ? [{ label: category.data.title }] : []),
+];
+
+const categories = await getCollection('blogCategories');
+const categoryOf = (entry: (typeof related)[number]) =>
+  categories.find((c) => c.id === entry.data.category);
+
+const dateFormat = new Intl.DateTimeFormat('en-US', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+});
+---
+
+<BaseLayout
+  title={seo?.title ?? title}
+  description={seo?.description ?? excerpt}
+  noindex={seo?.noindex}
+  type="article"
+  publishedAt={publishedAt}
+  author={author.name}
+  breadcrumb={crumbs}
+>
+  <section class="global-section">
+    <div class="spacer"></div>
+
+    <div class="global">
+      <Container>
+        <div class="cms-details-block">
+          <div class="cms-details-text-block">
+            <div class="cms-details-text">
+              <SectionHeading
+                as="h1"
+                breadcrumb={crumbs}
+                {title}
+                {excerpt}
+              variant="cms-details"
+              />
+            </div>
+          </div>
+
+          <div class="cms-details-thumb-block">
+            <Media
+              src={image}
+              alt=""
+              class="cms-details-thumb"
+              widths={[800, 1200, 2000]}
+              sizes="(max-width: 991px) 100vw, 1010px"
+              loading="eager"
+            />
+          </div>
+
+          <div class="cms-details-content-block">
+            <div class="cms-details-content" data-anim="fade-up">
+              <Content />
+            </div>
+          </div>
+
+          <div class="blog-details-information-block" data-anim="fade-up">
+            <div class="blog-details-author-block">
+              {
+                author.avatar && (
+                  <Media
+                    src={author.avatar}
+                    alt=""
+                    class="blog-details-author-image"
+                    width={96}
+                    height={96}
+                    densities={[1, 2]}
+                    loading="lazy"
+                  />
+                )
+              }
+              <div class="blog-details-author-wrap">
+                <div class="blog-details-text-large">{author.name}</div>
+                {author.role && <div class="blog-details-text-small">{author.role}</div>}
+              </div>
+            </div>
+
+            <div class="blog-details-dated-block">
+              <div class="blog-details-text-large">
+                <time datetime={publishedAt.toISOString()}>{dateFormat.format(publishedAt)}</time>
+              </div>
+              <div class="blog-details-text-small">Published</div>
+            </div>
+
+            {
+              readingTime && (
+                <div class="blog-details-dated-block">
+                  <div class="blog-details-text-large">{readingTime} min</div>
+                  <div class="blog-details-text-small">Reading time</div>
+                </div>
+              )
+            }
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+  {
+    related.length > 0 && (
+      <section class="related-section">
+        <div class="section-gap">
+          <Container>
+            <div class="related-block">
+              <div class="related-text-block">
+                <h2 class="related-title" data-anim="title">
+                  Related Post
+                </h2>
+                {/* The row button; below the tablet breakpoint the design
+                    swaps it for the full-width one under the list. */}
+                <div class="related-button">
+                  <Button label="Read All Blog" href={ROUTES.blog} />
+                </div>
+              </div>
+
+              <div class="related-post-block">
+                <div class="blog-list">
+                  {/* The third card only has room on wide screens. */}
+                  {related.map((item, i) => (
+                    <PostCard
+                      post={item}
+                      category={categoryOf(item)}
+                      delay={i * 0.1}
+                      class={i === 2 ? 'is-hide' : undefined}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div class="related-button-block">
+                <Button label="Read All Blog" href={ROUTES.blog} />
+              </div>
+            </div>
+          </Container>
+        </div>
+      </section>
+    )
+  }
+
+  <Cta white />
+</BaseLayout>

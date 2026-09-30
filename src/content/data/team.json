@@ -1,0 +1,90 @@
+[
+  {
+    "id": "timothy-franey",
+    "name": "Timothy Franey",
+    "role": "Co-Founder",
+    "image": "../../assets/images/people/timothy-franey.avif",
+    "order": 1,
+    "social": [
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/", "icon": "linkedin" },
+      { "label": "Threads", "href": "https://www.threads.net/", "icon": "threads" }
+    ]
+  },
+  {
+    "id": "leslie-willms",
+    "name": "Leslie Willms",
+    "role": "Co-Founder",
+    "image": "../../assets/images/people/leslie-willms.avif",
+    "order": 2,
+    "social": [
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/", "icon": "linkedin" },
+      { "label": "Threads", "href": "https://www.threads.net/", "icon": "threads" }
+    ]
+  },
+  {
+    "id": "carroll-keeling",
+    "name": "Carroll Keeling",
+    "role": "Chief Operating Officer (COO)",
+    "image": "../../assets/images/people/carroll-keeling.avif",
+    "order": 3,
+    "social": [
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/", "icon": "linkedin" },
+      { "label": "Instagram", "href": "https://www.instagram.com/", "icon": "instagram" }
+    ]
+  },
+  {
+    "id": "johanna-kassulke",
+    "name": "Johanna Kassulke",
+    "role": "Chief Financial Officer (CFO)",
+    "image": "../../assets/images/people/johanna-kassulke.avif",
+    "order": 4,
+    "social": [
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/", "icon": "linkedin" },
+      { "label": "Threads", "href": "https://www.threads.net/", "icon": "threads" }
+    ]
+  },
+  {
+    "id": "francis-smith",
+    "name": "Francis Smith",
+    "role": "Chief Technology Officer (CTO)",
+    "image": "../../assets/images/people/francis-smith.avif",
+    "order": 5,
+    "social": [
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/", "icon": "linkedin" },
+      { "label": "Facebook", "href": "https://www.facebook.com/", "icon": "facebook" }
+    ]
+  },
+  {
+    "id": "roderick-gulgowski",
+    "name": "Roderick Gulgowski",
+    "role": "Managing Director",
+    "image": "../../assets/images/people/roderick-gulgowski.avif",
+    "order": 6,
+    "social": [
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/", "icon": "linkedin" },
+      { "label": "Threads", "href": "https://www.threads.net/", "icon": "threads" }
+    ]
+  },
+  {
+    "id": "ethel-mitchell",
+    "name": "Ethel Mitchell",
+    "role": "Head of Sustainability & ESG",
+    "image": "../../assets/images/people/ethel-mitchell.avif",
+    "order": 7,
+    "social": [
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/", "icon": "linkedin" },
+      { "label": "Instagram", "href": "https://www.instagram.com/", "icon": "instagram" }
+    ]
+  },
+  {
+    "id": "adam-harber",
+    "name": "Adam Harber",
+    "role": "Global Head of Corporate",
+    "image": "../../assets/images/people/adam-harber.avif",
+    "order": 8,
+    "social": [
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/", "icon": "linkedin" },
+      { "label": "Facebook", "href": "https://www.facebook.com/", "icon": "facebook" }
+    ]
+  }
+]

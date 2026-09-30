@@ -1,0 +1,74 @@
+---
+import Media from '../ui/Media.astro';
+import type { CollectionEntry } from 'astro:content';
+
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import { ROUTES } from '../../config/site';
+
+/** Case studies from the sustainability program. */
+interface Props {
+  tag?: string;
+  title: string;
+  titleTail?: string;
+  stories: CollectionEntry<'stories'>[];
+}
+
+const { tag = 'Success Stories', title, titleTail, stories } = Astro.props;
+---
+
+<section class="stories-section">
+  <div class="section-gap">
+    <Container>
+      <div class="stories-block">
+        <div class="stories-text-block">
+          <SectionHeading {tag} {title} {titleTail} class="stories-text" />
+        </div>
+
+        <div class="stories-post-block">
+          <div class="stories-list">
+            {
+              stories.map((story, i) => (
+                <article class="stories-post" data-anim="fade-up" data-anim-delay={(i % 3) * 0.15}>
+                  <a
+                    href={ROUTES.story(story.id)}
+                    class="stories-image-post"
+                    tabindex="-1"
+                    aria-hidden="true"
+                  >
+                    <Media
+                      src={story.data.image}
+                      alt=""
+                      class="stories-image post-image"
+                      widths={[400, 800]}
+                      sizes="(max-width: 767px) 100vw, 33vw"
+                      loading="lazy"
+                    />
+                  </a>
+
+                  <div class="stories-details-post">
+                    <h3>
+                      <a href={ROUTES.story(story.id)} class="stories-name">
+                        {story.data.title}
+                      </a>
+                    </h3>
+                    <a
+                      href={ROUTES.story(story.id)}
+                      class="stories-wrap"
+                      tabindex="-1"
+                      aria-hidden="true"
+                    >
+                      <span class="stories-button">Read full story</span>
+                      <Icon name="arrow-up-right" class="stories-arrow" />
+                    </a>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

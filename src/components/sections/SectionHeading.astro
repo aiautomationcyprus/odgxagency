@@ -1,0 +1,126 @@
+---
+import Button from '../ui/Button.astro';
+
+/**
+ * The eyebrow + heading + intro + action block that opens most sections.
+ *
+ * `titleTail` is the part of the heading that starts muted and darkens word by
+ * word as the reader scrolls through it — the emphasis pattern the design uses
+ * throughout.
+ */
+export interface Breadcrumb {
+  label: string;
+  href?: string;
+}
+
+export interface Action {
+  label: string;
+  href: string;
+  variant?: 'dark' | 'light' | 'solid-light' | 'outline-light';
+}
+
+interface Props {
+  /** Small uppercase label above the heading. */
+  tag?: string;
+  /** Renders the eyebrow as a breadcrumb trail instead of a plain label. */
+  breadcrumb?: Breadcrumb[];
+  title: string;
+  /** Continues the heading in muted type, revealed on scroll. */
+  titleTail?: string;
+  excerpt?: string;
+  actions?: Action[];
+  /** Inverts the type for dark sections. */
+  invert?: boolean;
+  /** Heading level. Use `h1` when this is the page's main heading. */
+  as?: 'h1' | 'h2';
+  /**
+   * `cms-details` is the design's variant for content detail pages. It reveals
+   * the full breadcrumb trail — elsewhere only the final crumb shows — and
+   * widens the intro. The design also drops the actions in this variant, so
+   * any passed here are ignored rather than rendered invisibly.
+   */
+  variant?: 'default' | 'cms-details';
+  class?: string;
+}
+
+const {
+  tag,
+  breadcrumb,
+  title,
+  titleTail,
+  excerpt,
+  actions = [],
+  invert = false,
+  as: Heading = 'h2',
+  variant = 'default',
+  class: className,
+}: Props = Astro.props;
+
+const isDetail = variant === 'cms-details';
+---
+
+<div class:list={['section-text', className]}>
+  {
+    (tag || breadcrumb) && (
+      <div class="section-tag-block">
+        <div class:list={['section-tag', invert && 'is-gray']}>
+          {breadcrumb ? (
+            breadcrumb.map((crumb, i) => (
+              <>
+                {i > 0 && (
+                  <div class:list={['section-tag-slash', isDetail && 'is-cms-details']}>/</div>
+                )}
+                {crumb.href ? (
+                  <a
+                    href={crumb.href}
+                    class:list={['section-tag-link', isDetail && 'is-cms-details']}
+                  >
+                    {crumb.label}
+                  </a>
+                ) : (
+                  <div class="section-tag-text">{crumb.label}</div>
+                )}
+              </>
+            ))
+          ) : (
+            <div class="section-tag-text">{tag}</div>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  <div class="section-title-block">
+    <Heading
+      class:list={['section-title', invert && 'is-white']}
+      data-anim="title"
+      data-anim-value={invert ? 'white' : 'ink'}
+    >
+      {title}{titleTail && <> <span class="section-span">{titleTail}</span></>}
+    </Heading>
+  </div>
+
+  {
+    excerpt && (
+      <div class:list={['section-except-block', isDetail && 'is-cms-details']}>
+        <p class="section-except" data-anim="fade-up" data-anim-delay="0.15">
+          {excerpt}
+        </p>
+      </div>
+    )
+  }
+
+  {
+    actions.length > 0 && !isDetail && (
+      <div class="section-button-block" data-anim="fade-up" data-anim-delay="0.25">
+        {/* Each button needs its own wrapper: the block lays them out in a row
+            with a gap, while the wrapper caps each button's width. */}
+        {actions.map((action) => (
+          <div class="section-button">
+            <Button label={action.label} href={action.href} variant={action.variant} />
+          </div>
+        ))}
+      </div>
+    )
+  }
+</div>

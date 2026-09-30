@@ -1,0 +1,78 @@
+---
+/**
+ * Odometer counter.
+ *
+ * Pass the finished figure as a string — "40+", "$2.3B", "8,000+" — and each
+ * digit becomes a vertical strip of numerals inside a one-digit window, while
+ * everything else (currency symbols, separators, units) is rendered as-is.
+ * The motion layer rolls the strips so the number lands in view.
+ *
+ * Neighboring digits roll in opposite directions, which is what gives the
+ * counter its mechanical feel.
+ */
+interface Props {
+  /** The figure to display, exactly as it should read once settled. */
+  value: string;
+  /** Caption beneath the figure. */
+  label?: string;
+  /** Unit rendered inline after the figure, e.g. "Countries". */
+  unit?: string;
+  /**
+   * Class prefix. The design uses `count` in the stats row and `review` in the
+   * global-reach cards, with different type sizes.
+   */
+  variant?: 'count' | 'review';
+  class?: string;
+}
+
+const { value, label, unit, variant = 'count', class: className } = Astro.props;
+
+const NUMERALS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+/**
+ * A strip holds eleven cells with the target digit first, so the number reads
+ * correctly before — and without — any JavaScript. The motion layer starts each
+ * strip scrolled to its far end and rolls it back to the top; listing the
+ * numerals in opposite orders is what makes neighboring digits appear to
+ * travel in opposite directions.
+ */
+const strip = (digit: string, direction: 'forward' | 'reverse') =>
+  direction === 'forward'
+    ? [digit, ...NUMERALS]
+    : [digit, ...[...NUMERALS].reverse()];
+
+// Split the figure into rolling digits and fixed characters, alternating the
+// roll direction across digits only.
+let digitIndex = 0;
+const cells = [...value].map((char) => {
+  if (!/\d/.test(char)) return { type: 'literal' as const, char };
+  const direction = digitIndex++ % 2 === 0 ? ('forward' as const) : ('reverse' as const);
+  return { type: 'digit' as const, char, direction };
+});
+---
+
+<div class:list={[`${variant}-wrap`, className]} data-anim="counter">
+  <div class={`${variant}-num`}>
+    {
+      cells.map((cell) =>
+        cell.type === 'literal' ? (
+          <div class={`${variant}-title`}>{cell.char}</div>
+        ) : (
+          <div
+            class={`${variant}-${cell.direction}`}
+            {...{ [`data-count-${cell.direction}`]: '' }}
+            aria-hidden="true"
+          >
+            {strip(cell.char, cell.direction).map((n) => (
+              <div class={`${variant}-title`}>{n}</div>
+            ))}
+          </div>
+        )
+      )
+    }
+    {unit && <div class={`${variant}-title`}>{unit}</div>}
+    {/* The strips are decorative; this is what a screen reader announces. */}
+    <span class="sr-only">{`${value}${unit ? ` ${unit}` : ''}`}</span>
+  </div>
+  {label && <div class={`${variant}-text`}>{label}</div>}
+</div>

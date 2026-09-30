@@ -1,0 +1,127 @@
+---
+import { getCollection, render } from 'astro:content';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Cta from '../../components/sections/Cta.astro';
+import SectionHeading from '../../components/sections/SectionHeading.astro';
+import Button from '../../components/ui/Button.astro';
+import Container from '../../components/ui/Container.astro';
+import Media from '../../components/ui/Media.astro';
+import { ROUTES } from '../../config/site';
+
+export async function getStaticPaths() {
+  const solutions = await getCollection('solutions', ({ data }) => !data.draft);
+  return solutions.map((solution) => ({
+    params: { slug: solution.id },
+    props: { solution },
+  }));
+}
+
+const { solution } = Astro.props;
+const { Content } = await render(solution);
+const { title, excerpt, cover, thumbnail, seo } = solution.data;
+
+/**
+ * The design lays the body out as two bordered cards with an image between
+ * them. A thematic break (`---`) in the Markdown marks where one card ends and
+ * the next begins; without one the body renders as a single card.
+ */
+const rendered = solution.rendered?.html ?? '';
+const cards = rendered
+  .split(/<hr\s*\/?>/i)
+  .map((part) => part.trim())
+  .filter(Boolean);
+const useSplit = cards.length > 1;
+
+/* Shared by the visible eyebrow and the breadcrumb structured data. */
+const crumbs = [{ label: 'Solutions', href: ROUTES.solutions }, { label: title }];
+---
+
+<BaseLayout
+  title={seo?.title ?? title}
+  description={seo?.description ?? excerpt}
+  noindex={seo?.noindex}
+  breadcrumb={crumbs}
+>
+  <section class="global-section">
+    <div class="spacer"></div>
+
+    <div class="global">
+      <Container>
+        <div class="solution-details-block">
+          <div class="solution-details-text-block">
+            <SectionHeading
+              as="h1"
+              breadcrumb={crumbs}
+              {title}
+              {excerpt}
+              variant="cms-details"
+              class="solution-details-text"
+            />
+          </div>
+
+          {
+            cover && (
+              <div class="hero-image-block">
+                <Media
+                  src={cover}
+                  alt=""
+                  class="hero-image"
+                  widths={[800, 1200, 1800]}
+                  sizes="100vw"
+                  loading="eager"
+                  data-anim="hero-image"
+                />
+              </div>
+            )
+          }
+
+          <div class="solution-details-content-block">
+            <div class="solution-details-content">
+              {
+                useSplit ? (
+                  cards.map((card, i) => (
+                    <>
+                      <div class="solution-details-wrap" data-anim="fade-up" set:html={card} />
+                      {/* The design breaks the body with an image after the first card. */}
+                      {i === 0 && thumbnail && (
+                        <div class="solution-details-img" data-anim="fade-up">
+                          <Media
+                            src={thumbnail}
+                            alt=""
+                            class="solution-details-imgs"
+                            widths={[800, 1200]}
+                            sizes="(max-width: 991px) 100vw, 1010px"
+                            loading="lazy"
+                          />
+                        </div>
+                      )}
+                    </>
+                  ))
+                ) : (
+                  <div class="solution-details-wrap" data-anim="fade-up">
+                    <Content />
+                  </div>
+                )
+              }
+
+              <div class="solution-details-cta" data-anim="fade-up">
+                <h2 class="solution-details-cta-title">Your vision, powered by our expertise</h2>
+                <p class="solution-details-cta-except">
+                  See how our unified approach lifts your operations, connects with your
+                  customers, and accelerates growth.
+                </p>
+                <div class="solution-details-cta-line"></div>
+                <div class="solution-details-cta-button">
+                  <Button label="Talk to us" href={ROUTES.contact} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+  <Cta />
+</BaseLayout>

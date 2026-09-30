@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Cta from '../components/sections/Cta.astro';
+import Impact from '../components/sections/Impact.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import Stories from '../components/sections/Stories.astro';
+import Strategy from '../components/sections/Strategy.astro';
+import heroImage from '../assets/images/blog/post-01.webp';
+import { ROUTES } from '../config/site';
+
+const byOrder = (a: { data: { order: number } }, b: { data: { order: number } }) =>
+  a.data.order - b.data.order;
+
+const strategy = (await getCollection('strategy')).sort(byOrder);
+const impact = (await getCollection('impact')).sort(byOrder);
+const stories = (await getCollection('stories', ({ data }) => !data.draft)).sort(byOrder);
+---
+
+<BaseLayout
+  title="Sustainability"
+  description="Our commitments to renewable energy, ethical practice and responsible growth, and the results behind them."
+>
+  <PageHero
+    breadcrumb={[{ label: 'Home', href: ROUTES.home }, { label: 'Sustainability Report' }]}
+    title="Driving Sustainable Impact Across the Globe"
+    excerpt="Our commitments to renewable energy, ethical practice and responsible growth sit at the heart of everything we do."
+    actions={[
+      { label: 'Read the report', href: ROUTES.investors },
+      { label: 'Talk to us', href: ROUTES.contact, variant: 'light' },
+    ]}
+    image={heroImage}
+    imageAlt="A hand holding a globe beside recycling symbols"
+  />
+
+  <Strategy
+    title="Our approach to responsible business is built on ethics,"
+    titleTail="sustainability and accountability."
+    items={strategy}
+  />
+
+  <Impact
+    title="Sustainability in numbers"
+    excerpt="Measurable impact across our global operations."
+    items={impact}
+    video="sustainability-in-numbers"
+  />
+
+  <Stories
+    title="Our success stories highlight the projects that"
+    titleTail="deliver lasting change."
+    {stories}
+  />
+
+  <Cta white />
+</BaseLayout>

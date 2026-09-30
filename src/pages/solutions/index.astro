@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Cta from '../../components/sections/Cta.astro';
+import Faq from '../../components/sections/Faq.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import SolutionsList from '../../components/sections/SolutionsList.astro';
+import Testimonials from '../../components/sections/Testimonials.astro';
+import heroImage from '../../assets/images/home/offer-06.webp';
+import { ROUTES } from '../../config/site';
+
+const byOrder = (a: { data: { order: number } }, b: { data: { order: number } }) =>
+  a.data.order - b.data.order;
+
+const solutions = (await getCollection('solutions', ({ data }) => !data.draft)).sort(byOrder);
+const faqs = (await getCollection('faqs', ({ data }) => data.page === 'solutions')).sort(byOrder);
+const testimonials = (await getCollection('testimonials')).sort(byOrder);
+---
+
+<BaseLayout
+  title="Solutions"
+  description="Multi-sector solutions spanning technology, energy, finance, healthcare, logistics and real estate."
+>
+  <PageHero
+    breadcrumb={[{ label: 'Home', href: ROUTES.home }, { label: 'Solutions' }]}
+    title="Our Multipurpose Business Solutions"
+    excerpt="We craft customized, forward-thinking solutions that tackle challenges, inspire innovation, and turn your vision into reality — smoothly and successfully."
+    actions={[
+      { label: 'Start a Business', href: ROUTES.investors },
+      { label: 'Get Free Consulting', href: ROUTES.contact, variant: 'light' },
+    ]}
+    image={heroImage}
+    imageAlt="Colleagues planning a project together"
+  />
+
+  <SolutionsList tag="Our Solutions" title="Your Ambitions, Our Expertise" {solutions} />
+
+  <Faq title="The questions we are asked most," titleTail="answered." items={faqs} />
+
+  <Testimonials
+    breadcrumb={[{ label: 'Home', href: ROUTES.home }, { label: 'Testimonials' }]}
+    title="What our clients say about working with"
+    titleTail="us and achieving measurable business results."
+    items={testimonials}
+  />
+
+  <Cta />
+</BaseLayout>

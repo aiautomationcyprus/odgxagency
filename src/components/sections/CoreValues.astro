@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+
+/** The values grid on a dark ground. */
+interface Props {
+  tag?: string;
+  title: string;
+  titleTail?: string;
+  items: CollectionEntry<'values'>[];
+}
+
+const { tag = 'Core Values', title, titleTail, items } = Astro.props;
+---
+
+<section class="core-values-section">
+  <div class="section-gap">
+    <Container>
+      <div class="core-values-block">
+        <div class="core-values-text-block">
+          <SectionHeading {tag} {title} {titleTail} invert class="core-values-text" />
+        </div>
+
+        <div class="core-values-card-block">
+          {
+            items.map((item, i) => (
+              <article class="core-values-card" data-anim="fade-up" data-anim-delay={(i % 3) * 0.15}>
+                <Icon name={item.data.icon} class="core-values-icon" />
+                <h3 class="core-values-name">{item.data.title}</h3>
+                <p class="core-values-except">{item.data.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>

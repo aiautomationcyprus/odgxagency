@@ -1,0 +1,37 @@
+---
+import Media from '../ui/Media.astro';
+import type { CollectionEntry } from 'astro:content';
+
+import Container from '../ui/Container.astro';
+
+/** A second, wider logo belt used on the about page. */
+interface Props {
+  label?: string;
+  logos: CollectionEntry<'partners'>[];
+  duration?: number;
+}
+
+const { label = 'Trusted by', logos, duration = 45 } = Astro.props;
+---
+
+<section class="trusted-section">
+  <div class="trusted-text-block">
+    <Container>
+      <div class="trusted-text-wrap">
+        <p class="trusted-text">{label}</p>
+      </div>
+    </Container>
+  </div>
+
+  <div class="trusted-logo-block marquee" data-anim="marquee" data-anim-value={duration}>
+    <div class="trusted-wrap">
+      {
+        logos.map((logo) => (
+          <div class="trusted-logo">
+            <Media src={logo.data.logo} alt={logo.data.name} class="trusted-logo-icon" loading="lazy" />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

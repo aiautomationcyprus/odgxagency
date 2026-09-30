@@ -1,0 +1,88 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Cta from '../../../components/sections/Cta.astro';
+import SectionHeading from '../../../components/sections/SectionHeading.astro';
+import Container from '../../../components/ui/Container.astro';
+import InvestorCard from '../../../components/ui/InvestorCard.astro';
+import { ROUTES } from '../../../config/site';
+
+export async function getStaticPaths() {
+  const categories = await getCollection('investorCategories');
+  const all = await getCollection('investors', ({ data }) => !data.draft);
+
+  return categories.map((category) => ({
+    params: { slug: category.id },
+    props: {
+      category,
+      investors: all
+        .filter((investor) => investor.data.category === category.id)
+        .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()),
+    },
+  }));
+}
+
+const { category, investors } = Astro.props;
+const categories = (await getCollection('investorCategories')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<BaseLayout
+  title={category.data.title}
+  description={category.data.description ?? `Investor updates filed under ${category.data.title}.`}
+>
+  <section class="global-section">
+    <div class="spacer"></div>
+
+    <div class="global">
+      <Container>
+        <div class="investors-block">
+          <div class="investors-text-block">
+            <SectionHeading
+              as="h1"
+              breadcrumb={[
+                { label: 'Investors', href: ROUTES.investors },
+                { label: category.data.title },
+              ]}
+              title={category.data.title}
+              excerpt={category.data.description}
+              variant="cms-details"
+              class="investors-text"
+            />
+          </div>
+
+          <nav class="blog-tag-nav" aria-label="Investor categories">
+            <a href={ROUTES.investors} class="blog-tag">All</a>
+            {
+              categories.map((item) => (
+                <a
+                  href={ROUTES.investorCategory(item.id)}
+                  class:list={['blog-tag', item.id === category.id && 'is-current']}
+                  aria-current={item.id === category.id ? 'page' : undefined}
+                >
+                  {item.data.title}
+                </a>
+              ))
+            }
+          </nav>
+
+          <div class="investors-post-block">
+            <div class="investors-list">
+              {
+                investors.map((investor, i) => (
+                  <InvestorCard {investor} eager={i < 3} delay={(i % 3) * 0.15} />
+                ))
+              }
+            </div>
+
+            {investors.length === 0 && <p class="investors-text">Nothing filed here yet.</p>}
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+  <Cta white />
+</BaseLayout>
