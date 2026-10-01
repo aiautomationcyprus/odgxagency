@@ -60,22 +60,22 @@ const postproduktion = [
 
 const bestandteile = [
   {
-    icon: 'target',
+    icon: 'lightbulb',
     title: 'Konzeption & Format',
     text: 'Wir entwickeln gemeinsam Ihr Podcast-Format: Thema, Struktur, Tonalität, Länge und Frequenz. Passend zu Ihrer Marke und Zielgruppe.',
   },
   {
-    icon: 'support',
+    icon: 'mic-2',
     title: 'Aufnahme & Produktion',
     text: 'Studio in Frankfurt, Joe Rogan Setup oder Remote. Bis zu 4 Personen gleichzeitig, Video-Option inklusive.',
   },
   {
-    icon: 'strategy-02',
+    icon: 'sliders-horizontal',
     title: 'Schnitt & Mastering',
     text: 'Rohschnitt, Soundprocessing, EQ, Kompression, Rauschunterdrückung und Mastering nach Spotify & Apple Standard.',
   },
   {
-    icon: 'strategy-01',
+    icon: 'megaphone',
     title: 'Podcast Marketing',
     text: 'Audiogramme für Social Media, SEO-Shownotes, Spotify & Apple Optimierung, Cover Design und Content Repurposing.',
   },
@@ -400,9 +400,9 @@ const faqs = [
 
   <!-- 8. Referenzen – client grid (default bg) -->
   <section>
-    <div class="section-gap">
+    <div class="section-gap" style="padding-top: 0;">
       <Container>
-        <div class="faq-text-block">
+        <div class="faq-text-block" style="margin-bottom: 1.5rem;">
           <SectionHeading
             tag="Referenzen"
             title="Bereits produziert für"
@@ -412,7 +412,7 @@ const faqs = [
         </div>
         <ul class="podcast-clients-grid">
           {referenzen.map((client, i) => (
-            <li class="podcast-client-item" data-anim="fade-up" data-anim-delay={i * 0.04}>
+            <li class:list={['podcast-client-item', [1, 5, 11].includes(i) && 'is-highlight']} data-anim="fade-up" data-anim-delay={i * 0.04}>
               <span class="podcast-client-icon-wrap">
                 <Icon name="arrow-up-right-sm" class="podcast-client-icon" />
               </span>
@@ -512,6 +512,47 @@ const faqs = [
     max-width: 600px;
     line-height: var(--leading-l);
     margin-top: 1rem;
+  }
+
+  /* Referenzen — reduce gap between heading and list */
+  .podcast-clients-section-head {
+    margin-bottom: 1.5rem;
+  }
+
+  .podcast-client-item.is-highlight {
+    animation: clientHighlight 6s ease-in-out infinite;
+  }
+
+  .podcast-client-item.is-highlight::after {
+    content: "";
+    display: inline-block;
+    width: 0.8em;
+    height: 0.8em;
+    margin-left: 0.15em;
+    align-self: center;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B54D2C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m11 7.601-5.994 8.19a1 1 0 0 0 .1 1.298l.817.818a1 1 0 0 0 1.314.087L15.09 12'/><path d='M16.5 21.174C15.5 20.5 14.372 20 13 20c-2.058 0-3.928 2.356-6 2-2.072-.356-2.775-3.369-1.5-4.5'/><circle cx='16' cy='7' r='5'/></svg>");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+    animation: clientHighlightX 6s ease-in-out infinite;
+  }
+
+  .podcast-client-item:nth-child(2).is-highlight,
+  .podcast-client-item:nth-child(2).is-highlight::after  { animation-delay: 0s; }
+  .podcast-client-item:nth-child(6).is-highlight,
+  .podcast-client-item:nth-child(6).is-highlight::after  { animation-delay: 2s; }
+  .podcast-client-item:nth-child(12).is-highlight,
+  .podcast-client-item:nth-child(12).is-highlight::after { animation-delay: 4s; }
+
+  @keyframes clientHighlight {
+    0%, 28%, 100% { color: inherit; }
+    5%, 22%       { color: var(--color-accent); }
+  }
+
+  @keyframes clientHighlightX {
+    0%, 28%, 100% { opacity: 0; }
+    5%, 22%       { opacity: 1; }
   }
 
   .podcast-clients-grid {
