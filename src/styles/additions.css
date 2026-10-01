@@ -732,10 +732,13 @@
   background-color: var(--color-accent);
 }
 
-/* Podcast page — left-align the Joe Rogan section heading */
+/* Podcast page — left-align the Joe Rogan section heading, remove hero top padding */
 .journey-section .section-text {
   text-align: left;
   align-items: flex-start;
+  padding-top: 0;
+  padding-bottom: 0;
+  justify-content: flex-start;
 }
 
 /* Podcast page — bump section-excerpt and checklist text to match body size */
@@ -761,4 +764,15 @@
   height: 100%;
   margin-top: 0;
   min-height: 500px;
+}
+
+@media (max-width: 767px) {
+  .journey-section .company-image-block {
+    width: 90%;
+  }
+  .journey-section .company-image-wrap {
+    min-height: 380px;
+    height: 380px;
+    max-width: 100%;
+  }
 }
