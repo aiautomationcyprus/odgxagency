@@ -6,6 +6,74 @@
    Everything else is generated into components.css from the design itself.
    ========================================================================== */
 
+/* Hero button — red X appears on hover */
+.hero-btn-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.hero-btn-x {
+  position: absolute;
+  right: -32px;
+  width: 22px;
+  height: 20px;
+  opacity: 0;
+  transform: scale(0.4) rotate(-25deg);
+  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.hero-btn-wrap:hover .hero-btn-x {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* Mobile: show intro text before gallery */
+@media (max-width: 767px) {
+  .podcast-reorder-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+  .podcast-intro-section { order: 1; }
+  .podcast-gallery-section { order: 2; }
+}
+
+/* X watermark in featured pricing card */
+.pricing-x-mark {
+  position: absolute;
+  bottom: -10%;
+  right: -5%;
+  width: 60%;
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+/* Pricing cards — ODGX brand test */
+.pricing-card:hover {
+  border-color: var(--color-accent) !important;
+}
+
+.pricing-card.is-dark {
+  border-color: var(--color-accent) !important;
+  border-top-width: 4px;
+}
+
+.pricing-card.is-dark:hover {
+  border-color: var(--color-accent) !important;
+  opacity: 0.9;
+}
+
+.pricing-price-text:not(.is-light) {
+  color: var(--color-accent) !important;
+}
+
+.pricing-tag.is-dark {
+  background-color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: #fff !important;
+}
+
 /* ODGX link accent — hover states and active links in brand red */
 .header-menu-link:hover,
 .header-menu-link:hover {
@@ -28,6 +96,14 @@
   color: var(--color-accent) !important;
   -webkit-text-decoration-color: var(--color-accent) !important;
   text-decoration-color: var(--color-accent) !important;
+}
+
+/* Mobile: left-align section titles so the red underline matches the text */
+@media (max-width: 767px) {
+  .section-text {
+    text-align: left;
+    align-items: flex-start;
+  }
 }
 
 /* Orange-red accent line under section headings — ODGX brand signature */
@@ -669,12 +745,20 @@
   line-height: var(--leading-l);
 }
 
-/* Podcast page — larger studio photo */
-.journey-section .company-image-wrap {
-  max-width: 520px;
-  height: 600px;
+/* Podcast page — image fills full section height, no fixed height */
+.journey-section .company-text-block {
+  align-items: stretch;
 }
 
 .journey-section .company-image-block {
   width: 50%;
+  align-self: stretch;
+}
+
+.journey-section .company-image-wrap {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
+  min-height: 500px;
 }

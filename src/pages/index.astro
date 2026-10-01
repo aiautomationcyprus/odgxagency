@@ -14,7 +14,9 @@ import SectionHeading from '../components/sections/SectionHeading.astro';
 const plans = (await getCollection('plans')).sort((a, b) => a.data.order - b.data.order);
 
 import studioImage1 from '../assets/images/podcast/podcast-studio-1.webp';
+import studioImageCamera from '../assets/images/podcast/podcast-studio-camera.jpg';
 import studioImage2 from '../assets/images/podcast/podcast-studio-2.webp';
+import studioImage4 from '../assets/images/podcast/podcast-studio-4.jpg';
 import studioImage3 from '../assets/images/podcast/podcast-studio-3.jpg';
 
 const inAllenEnthalten = [
@@ -177,7 +179,7 @@ const faqs = [
   <!-- 1. Hero -->
   <Hero
     tag="Podcast Agentur aus Frankfurt"
-    title="Produktion von Podcasts inkl. Moderation und Interview"
+    title="Podcast-Produktion<br>von A bis Z"
     excerpt="Podcasts gehören zu den wachstumsstärksten Medienformaten im deutschsprachigen Raum und bieten Unternehmen, Marken und Persönlichkeiten eine einzigartige Möglichkeit, ihre Zielgruppe direkt anzusprechen."
     video="podcast-hero"
     actions={[
@@ -185,8 +187,11 @@ const faqs = [
     ]}
   />
 
+  <!-- 2+3 wrapped for mobile reorder -->
+  <div class="podcast-reorder-wrap">
+
   <!-- 2. Studio-Fotogalerie -->
-  <section>
+  <section class="podcast-gallery-section">
     <Container>
       <div class="podcast-gallery">
         <div class="podcast-gallery-item" data-anim="fade-up" data-anim-delay="0">
@@ -211,7 +216,7 @@ const faqs = [
         </div>
         <div class="podcast-gallery-item" data-anim="fade-up" data-anim-delay="0.2">
           <Image
-            src={studioImage2}
+            src={studioImage4}
             alt="Podcast Video Produktion"
             class="podcast-gallery-img"
             widths={[400, 800]}
@@ -224,10 +229,14 @@ const faqs = [
   </section>
 
   <!-- 3. Intro – Reichweite-Statement (word-reveal) -->
+  <div class="podcast-intro-section">
   <Intro
     tag="Podcast Produktion Frankfurt"
-    statement="Die 18- bis 49-Jährigen hören 3–4 Podcasts pro Woche – die über 49-Jährigen 1–2, mit steigender Tendenz. Als Full-Service-Agentur aus Frankfurt produzieren wir Ihren nächsten Podcast: Sie bringen das Thema, wir kümmern uns um den Rest."
+    statement="Als Full-Service-Agentur aus Frankfurt produzieren wir Ihren nächsten Podcast: Sie bringen das Thema, wir kümmern uns um den Rest."
   />
+  </div>
+
+  </div>{/* end podcast-reorder-wrap */}
 
   <!-- 4. Pakete – PricingTable (theme component, inline mode) -->
   <section id="pakete">
@@ -310,7 +319,7 @@ const faqs = [
           <div class="company-image-block">
             <div class="company-image-wrap" data-anim="fade-right">
               <Image
-                src={studioImage1}
+                src={studioImageCamera}
                 alt="Joe Rogan Setup – Podcast Studio Frankfurt"
                 class="company-image"
                 widths={[500, 900, 1400]}
@@ -486,7 +495,7 @@ const faqs = [
   }
 
 .podcast-body-text {
-    font-size: var(--size-h5);
+    font-size: var(--size-body);
     color: var(--color-muted);
     line-height: var(--leading-l);
   }

@@ -42,7 +42,7 @@ export function initBackgroundVideo(): void {
 
   /** Only spend the bytes on a video the reader can actually see. */
   const watch = (video: HTMLVideoElement) => {
-    if (still.matches || small.matches || frugal) return;
+    if (still.matches || frugal) return;
 
     const observer = new IntersectionObserver(
       (entries) => {

@@ -51,6 +51,11 @@ const price = (plan: CollectionEntry<'plans'>) =>
         const featured = plan.data.featured;
         return (
           <article class:list={['pricing-card', featured && 'is-dark']} data-anim="fade-up" data-anim-delay={i * 0.15}>
+            {featured && (
+              <svg aria-hidden="true" class="pricing-x-mark" viewBox="74.6 0 70.1 65" xmlns="http://www.w3.org/2000/svg">
+                <path d="M76.6289 0.576172H98.5576L109.983 20.3955L121.058 0.576172H142.767L122.728 31.7773L144.656 65H122.288L109.588 44.3018L96.8437 65H74.6074L96.8437 31.4258L76.6289 0.576172Z" fill="white"/>
+              </svg>
+            )}
             <div class="pricing-banner">
               <div class="pricing-name">
                 <div class="pricing-wrap">
@@ -112,6 +117,11 @@ const price = (plan: CollectionEntry<'plans'>) =>
               const featured = plan.data.featured;
               return (
                 <article class:list={['pricing-card', featured && 'is-dark']} data-anim="fade-up" data-anim-delay={i * 0.15}>
+                  {featured && (
+                    <svg aria-hidden="true" class="pricing-x-mark" viewBox="74.6 0 70.1 65" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M76.6289 0.576172H98.5576L109.983 20.3955L121.058 0.576172H142.767L122.728 31.7773L144.656 65H122.288L109.588 44.3018L96.8437 65H74.6074L96.8437 31.4258L76.6289 0.576172Z" fill="white"/>
+                    </svg>
+                  )}
                   <div class="pricing-banner">
                     <div class="pricing-name">
                       <div class="pricing-wrap">
