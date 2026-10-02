@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ROUTES } from '../config/site';
+---
+
+<BaseLayout
+  title="Vielen Dank – ODGX Podcast"
+  description="Ihre Anfrage ist bei uns eingegangen."
+>
+  <div class="spacer"></div>
+  <div class="danke-section">
+    <div class="danke-wrap">
+      <p class="danke-icon">✓</p>
+      <h1 class="danke-title">Vielen Dank!</h1>
+      <p class="danke-text">Ihre Anfrage ist bei uns eingegangen. Wir melden uns in der Regel innerhalb eines Werktages.</p>
+      <a href={ROUTES.home} class="danke-link">Zurück zur Startseite</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .danke-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    padding: 4rem 1rem;
+  }
+  .danke-wrap {
+    text-align: center;
+    max-width: 500px;
+  }
+  .danke-icon {
+    font-size: 3rem;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+  .danke-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .danke-text {
+    color: var(--color-muted, #666);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  .danke-link {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: var(--color-accent);
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .danke-link:hover {
+    opacity: 0.9;
+  }
+</style>

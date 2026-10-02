@@ -60,7 +60,7 @@ const {
           </div>
 
           <div class="contact-form-wrap" data-anim="fade-right">
-            <form class="contact-form" name="kontakt" action="/" method="post" data-netlify="true" novalidate>
+            <form class="contact-form" name="kontakt" action="/danke/" method="post" data-netlify="true">
               <input type="hidden" name="form-name" value="kontakt" />
               <p class="contact-title">{formTitle}</p>
               <div class="contact-line"></div>
@@ -162,31 +162,4 @@ const {
     if (select) select.value = paket;
   }
 
-  const form = document.querySelector<HTMLFormElement>('.contact-form[data-netlify]');
-  const successEl = document.querySelector<HTMLElement>('[data-form-success]');
-  const errorEl = document.querySelector<HTMLElement>('[data-form-error]');
-  const submitBtn = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
-
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (!form.reportValidity()) return;
-
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Bitte warten…'; }
-
-    try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(form) as any).toString(),
-      });
-      if (!res.ok) throw new Error();
-      form.reset();
-      form.hidden = true;
-      successEl?.removeAttribute('hidden');
-    } catch {
-      errorEl?.removeAttribute('hidden');
-    } finally {
-      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Anfrage senden'; }
-    }
-  });
 </script>
