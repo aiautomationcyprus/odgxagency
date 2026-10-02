@@ -68,7 +68,12 @@ const {
               <div class="contact-wrap is-full">
                 <div class="contact-wrapper">
                   <label class="contact-label" for="contact-paket">Paket</label>
-                  <input class="contact-field" id="contact-paket" name="paket" type="text" readonly value="Allgemeine Anfrage" />
+                  <select class="contact-field" id="contact-paket" name="paket">
+                    <option value="Allgemeine Anfrage">Allgemeine Anfrage</option>
+                    <option value="Basic">Basic – 390 €</option>
+                    <option value="Standard">Standard – 690 €</option>
+                    <option value="Professional">Professional – 990 €</option>
+                  </select>
                 </div>
               </div>
 
@@ -153,7 +158,7 @@ const {
 <script>
   const paket = new URLSearchParams(window.location.search).get('paket');
   if (paket) {
-    const input = document.getElementById('contact-paket') as HTMLInputElement;
-    if (input) input.value = paket;
+    const select = document.getElementById('contact-paket') as HTMLSelectElement;
+    if (select) select.value = paket;
   }
 </script>
