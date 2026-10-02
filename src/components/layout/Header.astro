@@ -53,7 +53,7 @@ const isCurrent = (href: string) => href === path;
       <nav class="header-menu-block" id="site-nav" data-nav-menu aria-label="Main">
         <div class="header-menu">
           <div class="header-button-wrap">
-            <Button label="Anfrage" href="/kontakt/" />
+            <Button label="Anfrage" href="/kontakt/" variant="dark" />
           </div>
         </div>
       </nav>
@@ -63,20 +63,6 @@ const isCurrent = (href: string) => href === path;
         <Button label="Anfrage" href="/kontakt/" />
       </div>
 
-      <button
-        type="button"
-        class="header-menu-button"
-        data-nav-toggle
-        aria-expanded="false"
-        aria-controls="site-nav"
-        aria-label="Open menu"
-      >
-        <span class="header-line-wrap">
-          <span class="top"></span>
-          <span class="middle"></span>
-          <span class="bottom"></span>
-        </span>
-      </button>
     </div>
   </Container>
 </header>
