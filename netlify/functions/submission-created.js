@@ -1,9 +1,10 @@
 exports.handler = async (event) => {
   const payload = JSON.parse(event.body).payload;
-  const { name, email, paket, nachricht } = payload.data;
+  const { name, email, paket, message } = payload.data;
 
   if (!email) return { statusCode: 200, body: 'No email' };
 
+  // Send notification to agency
   await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
@@ -11,19 +12,15 @@ exports.handler = async (event) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'ODGX Podcast <onboarding@resend.dev>',
-      to: email,
-      reply_to: 'info@online-digitalx.de',
-      subject: 'Ihre Anfrage bei ODGX – wir melden uns!',
+      from: 'ODGX Kontaktformular <onboarding@resend.dev>',
+      to: 'info@online-digitalx.de',
+      reply_to: email,
+      subject: `Neue Anfrage von ${name} – ${paket || 'Allgemeine Anfrage'}`,
       html: `
-        <p>Hallo ${name},</p>
-        <p>vielen Dank für Ihre Anfrage. Wir haben folgende Angaben erhalten:</p>
-        <ul>
-          <li><strong>Paket:</strong> ${paket || '–'}</li>
-          <li><strong>Nachricht:</strong> ${nachricht || '–'}</li>
-        </ul>
-        <p>Wir melden uns in der Regel innerhalb eines Werktages.</p>
-        <p>Beste Grüße<br>Das ODGX Team<br>online-digitalx.de</p>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>E-Mail:</strong> ${email}</p>
+        <p><strong>Paket:</strong> ${paket || '–'}</p>
+        <p><strong>Nachricht:</strong><br>${message || '–'}</p>
       `,
     }),
   });
