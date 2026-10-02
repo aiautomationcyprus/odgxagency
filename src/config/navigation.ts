@@ -14,7 +14,7 @@ export interface NavItem extends NavLink {
 const ODG = 'https://www.online-digitalx.de';
 
 export const primaryNav: NavItem[] = [
-  { label: 'Über die Agentur', href: ODG, external: true },
+  { label: 'Über die Agentur ↗', href: ODG, external: true },
 ];
 
 export const footerNav: { title: string; links: NavLink[] }[] = [
