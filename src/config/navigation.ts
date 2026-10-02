@@ -42,9 +42,9 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
   {
     title: 'Rechtliches',
     links: [
-      { label: 'Impressum', href: '/impressum/' },
-      { label: 'AGB', href: '/agb/' },
-      { label: 'Datenschutzerklärung', href: '/privacy-policy/' },
+      { label: 'Impressum', href: `${ODG}/impressum/`, external: true },
+      { label: 'AGB', href: `${ODG}/agb/`, external: true },
+      { label: 'Datenschutzerklärung', href: `${ODG}/datenschutzerklaerung/`, external: true },
     ],
   },
 ];
