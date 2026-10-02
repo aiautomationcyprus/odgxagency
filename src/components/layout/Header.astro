@@ -52,52 +52,6 @@ const isCurrent = (href: string) => href === path;
 
       <nav class="header-menu-block" id="site-nav" data-nav-menu aria-label="Main">
         <div class="header-menu">
-          <div class="header-menu-wrap">
-            {
-              nav.map((item) =>
-                item.columns?.length ? (
-                  <div class="header-dropdown" data-dropdown>
-                    <button
-                      type="button"
-                      class="header-toggle"
-                      aria-expanded="false"
-                      data-dropdown-toggle
-                    >
-                      <span class="header-dropdown-text">{item.label}</span>
-                      <Icon name="chevron-down" class="header-dropdown-icon" />
-                    </button>
-                    <div class="header-wrapp" data-dropdown-list>
-                      <div class:list={['header-megamenu', `is-${item.menu}`]}>
-                        {item.columns.map((column) => (
-                          <div class="header-mega-wrap">
-                            {column.map((link) => (
-                              <a
-                                href={link.href}
-                                class:list={['header-menu-link', isCurrent(link.href) && 'is-current']}
-                                {...link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
-                              >
-                                {link.label}
-                              </a>
-                            ))}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <a
-                    href={item.href}
-                    class:list={['header-menu-link', isCurrent(item.href) && 'is-current']}
-                    aria-current={isCurrent(item.href) ? 'page' : undefined}
-                    {...item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
-                  >
-                    {item.label}
-                  </a>
-                )
-              )
-            }
-          </div>
-
           <div class="header-button-wrap">
             <Button label="Anfrage stellen" href="https://www.online-digitalx.de/kontakt/" external />
           </div>
@@ -105,6 +59,7 @@ const isCurrent = (href: string) => href === path;
       </nav>
 
       <div class="header-button-block">
+        <a href="https://www.online-digitalx.de" class="header-menu-link" target="_blank" rel="noopener noreferrer">Über die Agentur</a>
         <Button label="Anfrage stellen" href="https://www.online-digitalx.de/kontakt/" external />
       </div>
 
