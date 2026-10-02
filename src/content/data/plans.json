@@ -12,7 +12,7 @@
       "Einweisung in die Technik durch unser Team",
       "Einzelaufnahmen: jede Kamera und Ton separat"
     ],
-    "cta": { "label": "Anfrage stellen", "href": "https://www.online-digitalx.de/kontakt/" },
+    "cta": { "label": "Anfrage", "href": "/kontakt/?paket=Basic" },
     "featured": false,
     "order": 1
   },
@@ -31,7 +31,7 @@
       "Mehrspur-Tonaufnahme: jede Person auf eigener Spur",
       "Übergabe am selben Tag"
     ],
-    "cta": { "label": "Anfrage stellen", "href": "https://www.online-digitalx.de/kontakt/" },
+    "cta": { "label": "Anfrage", "href": "/kontakt/?paket=Standard" },
     "featured": true,
     "order": 2
   },
@@ -50,7 +50,7 @@
       "Alle Kameraspuren einzeln für eigenen Nachschnitt",
       "Zusätzliche 4K-Aufnahmen als Rohmaterial, ideal für Social-Media-Clips im Hochformat"
     ],
-    "cta": { "label": "Anfrage stellen", "href": "https://www.online-digitalx.de/kontakt/" },
+    "cta": { "label": "Anfrage", "href": "/kontakt/?paket=Professional" },
     "featured": false,
     "order": 3
   }

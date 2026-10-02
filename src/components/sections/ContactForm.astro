@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 import Button from '../ui/Button.astro';
 import Container from '../ui/Container.astro';
 import SectionHeading, { type Breadcrumb } from './SectionHeading.astro';
-import contactImage from '../../assets/images/contact/contact.webp';
+import contactImage from '../../assets/images/podcast/podcast-studio-1.webp';
 import successIcon from '../../assets/images/contact/success.avif';
 import { SITE } from '../../config/site';
 
@@ -51,7 +51,7 @@ const {
           <div class="contact-image-wrap" data-anim="fade-left">
             <Image
               src={contactImage}
-              alt="A colleague on a support call at their desk"
+              alt="Podcast Studio Frankfurt"
               class="contact-image"
               widths={[500, 900, 1200]}
               sizes="(max-width: 991px) 100vw, 45vw"
@@ -60,9 +60,16 @@ const {
           </div>
 
           <div class="contact-form-wrap" data-anim="fade-right">
-            <form class="contact-form" {action} method="post" data-contact-form novalidate>
+            <form class="contact-form" name="kontakt" method="post" data-netlify="true" data-contact-form novalidate>
               <p class="contact-title">{formTitle}</p>
               <div class="contact-line"></div>
+
+              <div class="contact-wrap is-full" id="contact-paket-wrap" style="display:none">
+                <div class="contact-wrapper">
+                  <label class="contact-label" for="contact-paket">Gewähltes Paket</label>
+                  <input class="contact-field" id="contact-paket" name="paket" type="text" readonly />
+                </div>
+              </div>
 
               <div class="contact-wrap">
                 <div class="contact-wrapper">
@@ -149,3 +156,15 @@ const {
     </Container>
   </div>
 </section>
+
+<script>
+  const paket = new URLSearchParams(window.location.search).get('paket');
+  if (paket) {
+    const wrap = document.getElementById('contact-paket-wrap');
+    const input = document.getElementById('contact-paket') as HTMLInputElement;
+    if (wrap && input) {
+      input.value = paket;
+      wrap.style.display = '';
+    }
+  }
+</script>
