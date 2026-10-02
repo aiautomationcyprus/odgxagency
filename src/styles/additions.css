@@ -694,6 +694,10 @@
 }
 
 /* Contact page — ODGX brand overrides */
+.contact-field.is-contact-area {
+  height: 16rem;
+}
+
 .contact-icon {
   background-color: var(--color-accent);
 }
