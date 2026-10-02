@@ -693,6 +693,16 @@
   width: auto;
 }
 
+/* Contact page — ODGX brand overrides */
+.contact-icon {
+  background-color: var(--color-accent);
+}
+
+.contact-field:focus {
+  border-color: var(--color-accent) !important;
+  outline: none;
+}
+
 /* =============================================================================
    ODGX brand accent — #B54D2C
    Applied to CTA buttons, eyebrow labels, hero dot, and icon containers.

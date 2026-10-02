@@ -66,7 +66,7 @@ const {
 
               <div class="contact-wrap">
                 <div class="contact-wrapper">
-                  <label class="contact-label" for="contact-name">Name*</label>
+                  <label class="contact-label" for="contact-name">Name *</label>
                   <input
                     class="contact-field"
                     id="contact-name"
@@ -78,7 +78,7 @@ const {
                 </div>
 
                 <div class="contact-wrapper">
-                  <label class="contact-label" for="contact-email">Email*</label>
+                  <label class="contact-label" for="contact-email">E-Mail *</label>
                   <input
                     class="contact-field"
                     id="contact-email"
@@ -92,7 +92,7 @@ const {
 
               <div class="contact-wrap">
                 <div class="contact-wrapper">
-                  <label class="contact-label" for="contact-phone">Phone Number*</label>
+                  <label class="contact-label" for="contact-phone">Telefon *</label>
                   <input
                     class="contact-field"
                     id="contact-phone"
@@ -104,9 +104,9 @@ const {
                 </div>
 
                 <div class="contact-wrapper">
-                  <label class="contact-label" for="contact-topic">Select Topic*</label>
+                  <label class="contact-label" for="contact-topic">Thema *</label>
                   <select class="contact-field" id="contact-topic" name="topic" required>
-                    <option value="">Choose…</option>
+                    <option value="">Bitte wählen…</option>
                     {topics.map((topic) => <option value={topic}>{topic}</option>)}
                   </select>
                 </div>
@@ -114,7 +114,7 @@ const {
 
               <div class="contact-wrap is-full">
                 <div class="contact-wrapper">
-                  <label class="contact-label" for="contact-message">Message*</label>
+                  <label class="contact-label" for="contact-message">Nachricht *</label>
                   <textarea
                     class="contact-field contact-area"
                     id="contact-message"
@@ -125,21 +125,21 @@ const {
               </div>
 
               <div class="contact-button">
-                <Button label="Send message" type="submit" />
+                <Button label="Anfrage senden" type="submit" />
               </div>
             </form>
 
             <div class="contact-success" data-form-success hidden>
               <div class="contact-success-wrap">
                 <Image src={successIcon} alt="" class="contact-success-icon" loading="lazy" />
-                <p class="contact-success-title">Thanks — we have your message.</p>
-                <p class="contact-message">We usually reply within one working day.</p>
+                <p class="contact-success-title">Vielen Dank – Ihre Anfrage ist bei uns eingegangen.</p>
+                <p class="contact-message">Wir melden uns in der Regel innerhalb eines Werktages.</p>
               </div>
             </div>
 
             <div class="contact-error" data-form-error hidden>
               <p class="contact-message">
-                Something went wrong. Please try again, or email us directly at{' '}
+                Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt an{' '}
                 <a href={`mailto:${SITE.contact.email}`}>{SITE.contact.email}</a>.
               </p>
             </div>

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/sections/ContactForm.astro';
+import ContactInfo from '../components/sections/ContactInfo.astro';
+import { ROUTES } from '../config/site';
+---
+
+<BaseLayout
+  title="Kontakt – Podcast Produktion Frankfurt"
+  description="Sprechen Sie mit uns über Ihr Podcast-Projekt. Wir melden uns innerhalb eines Werktages."
+>
+  <ContactForm
+    breadcrumb={[{ label: 'Startseite', href: ROUTES.home }, { label: 'Kontakt' }]}
+    title="Ihr nächster Podcast beginnt hier"
+    excerpt="Erzählen Sie uns von Ihrem Projekt – wir melden uns innerhalb eines Werktages mit einem individuellen Angebot."
+    formTitle="Jetzt Anfrage stellen"
+    topics={['Podcast-Produktion', 'Angebot & Preise', 'Studio-Buchung', 'Podcast Marketing', 'Sonstiges']}
+  />
+
+  <ContactInfo />
+</BaseLayout>
