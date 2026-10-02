@@ -65,10 +65,10 @@ const {
               <p class="contact-title">{formTitle}</p>
               <div class="contact-line"></div>
 
-              <div class="contact-wrap is-full" id="contact-paket-wrap" style="display:none">
+              <div class="contact-wrap is-full">
                 <div class="contact-wrapper">
-                  <label class="contact-label" for="contact-paket">Gewähltes Paket</label>
-                  <input class="contact-field" id="contact-paket" name="paket" type="text" readonly />
+                  <label class="contact-label" for="contact-paket">Paket</label>
+                  <input class="contact-field" id="contact-paket" name="paket" type="text" readonly value="Allgemeine Anfrage" />
                 </div>
               </div>
 
@@ -98,7 +98,7 @@ const {
                 </div>
               </div>
 
-              <div class="contact-wrap">
+              <div class="contact-wrap is-full">
                 <div class="contact-wrapper">
                   <label class="contact-label" for="contact-phone">Telefon *</label>
                   <input
@@ -110,14 +110,6 @@ const {
                     required
                   />
                 </div>
-
-                <div class="contact-wrapper">
-                  <label class="contact-label" for="contact-topic">Thema *</label>
-                  <select class="contact-field" id="contact-topic" name="topic" required>
-                    <option value="">Bitte wählen…</option>
-                    {topics.map((topic) => <option value={topic}>{topic}</option>)}
-                  </select>
-                </div>
               </div>
 
               <div class="contact-wrap is-full">
@@ -127,7 +119,7 @@ const {
                     class="contact-field contact-area"
                     id="contact-message"
                     name="message"
-                    rows="5"
+                    rows="8"
                     required></textarea>
                 </div>
               </div>
@@ -161,11 +153,7 @@ const {
 <script>
   const paket = new URLSearchParams(window.location.search).get('paket');
   if (paket) {
-    const wrap = document.getElementById('contact-paket-wrap');
     const input = document.getElementById('contact-paket') as HTMLInputElement;
-    if (wrap && input) {
-      input.value = paket;
-      wrap.style.display = '';
-    }
+    if (input) input.value = paket;
   }
 </script>
