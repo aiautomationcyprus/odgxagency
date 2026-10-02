@@ -1,10 +1,9 @@
-exports.handler = async (event) => {
+export default async (event) => {
   const payload = JSON.parse(event.body).payload;
   const { name, email, paket, message } = payload.data;
 
-  if (!email) return { statusCode: 200, body: 'No email' };
+  if (!email) return new Response('No email', { status: 200 });
 
-  // Send notification to agency
   await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
@@ -25,5 +24,7 @@ exports.handler = async (event) => {
     }),
   });
 
-  return { statusCode: 200, body: 'OK' };
+  return new Response('OK', { status: 200 });
 };
+
+export const config = { path: '/api/submission-created' };
