@@ -27,4 +27,3 @@ export default async (event) => {
   return new Response('OK', { status: 200 });
 };
 
-export const config = { path: '/api/submission-created' };
