@@ -13,21 +13,6 @@ export default async (event) => {
     body: JSON.stringify(body),
   });
 
-  // Mail an Agentur
-  await resend({
-    from: 'ODGX Kontaktformular <onboarding@resend.dev>',
-    to: 'info@online-digitalx.de',
-    reply_to: email,
-    subject: `Neue Anfrage von ${name} – ${paket || 'Allgemeine Anfrage'}`,
-    html: `
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>E-Mail:</strong> ${email}</p>
-      <p><strong>Paket:</strong> ${paket || '–'}</p>
-      <p><strong>Nachricht:</strong><br>${message || '–'}</p>
-    `,
-  });
-
-  // Bestätigungsmail an Kunde (aktiv sobald Domain digital-x.agency verifiziert)
   await resend({
     from: 'ODGX Podcast <noreply@digital-x.agency>',
     to: email,
