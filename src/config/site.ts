@@ -3,7 +3,7 @@
  * Edit this file first when setting the theme up for a new project.
  */
 export const SITE = {
-  url: 'https://odgxagency.netlify.app',
+  url: 'https://digital-x.agency',
   name: 'ODGX',
   title: 'ODGX — Digital Marketing Agency Frankfurt',
   titleTemplate: '%s — ODGX',
