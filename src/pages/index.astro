@@ -553,6 +553,13 @@ const faqs = [
     margin: 0 auto;
   }
 
+  /* Intro statement: same whitespace below as above (desktop) */
+  @media (min-width: 768px) {
+    .podcast-intro-section :global(.section-gap) {
+      padding-bottom: 0;
+    }
+  }
+
   .podcast-gallery-head {
     margin-top: 0;
     margin-bottom: 0;
