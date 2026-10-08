@@ -27,7 +27,7 @@ export default async (req) => {
         <li><strong>Nachricht:</strong><br>${message || '–'}</li>
       </ul>
       <p>Wir melden uns in der Regel innerhalb eines Werktages.</p>
-      <p>Beste Grüße<br>Das ODGX Team<br>digital-x.agency</p>
+      <p>Beste Grüße<br>Das Digital X Team<br>digital-x.agency</p>
     `,
   });
 
