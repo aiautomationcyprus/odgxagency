@@ -1,5 +1,6 @@
-export default async (event) => {
-  const payload = JSON.parse(event.body).payload;
+export default async (req) => {
+  // Netlify passes a Request object to ESM functions (body is a stream, not a string)
+  const { payload } = await req.json();
   const { name, email, paket, message } = payload.data;
 
   if (!email) return new Response('No email', { status: 200 });
@@ -13,7 +14,7 @@ export default async (event) => {
     body: JSON.stringify(body),
   });
 
-  await resend({
+  const res = await resend({
     from: 'ODGX Podcast <noreply@digital-x.agency>',
     to: email,
     reply_to: 'info@online-digitalx.de',
@@ -29,6 +30,8 @@ export default async (event) => {
       <p>Beste Grüße<br>Das ODGX Team<br>digital-x.agency</p>
     `,
   });
+
+  if (!res.ok) console.error('Resend error', res.status, await res.text());
 
   return new Response('OK', { status: 200 });
 };
