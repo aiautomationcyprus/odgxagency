@@ -18,7 +18,7 @@ export default async (req) => {
     from: 'ODGX Podcast <noreply@digital-x.agency>',
     to: email,
     reply_to: 'info@online-digitalx.de',
-    subject: 'Ihre Anfrage bei ODGX – wir melden uns!',
+    subject: 'Ihre Anfrage bei Digital X',
     html: `
       <p>Hallo ${name},</p>
       <p>vielen Dank für Ihre Anfrage. Wir haben folgende Angaben erhalten:</p>
