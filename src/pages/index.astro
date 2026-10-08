@@ -14,10 +14,16 @@ import SectionHeading from '../components/sections/SectionHeading.astro';
 const plans = (await getCollection('plans')).sort((a, b) => a.data.order - b.data.order);
 
 import studioImage1 from '../assets/images/podcast/podcast-studio-1.webp';
+import studioImage3 from '../assets/images/podcast/podcast-studio-3.jpg';
+import studioImage4 from '../assets/images/podcast/podcast-studio-4.jpg';
 import studioImageCamera from '../assets/images/podcast/podcast-studio-camera.jpg';
 import studioImage2 from '../assets/images/podcast/podcast-studio-2.webp';
-import studioImage4 from '../assets/images/podcast/podcast-studio-4.jpg';
-import studioImage3 from '../assets/images/podcast/podcast-studio-3.jpg';
+
+const beispiele = [
+  { id: 't4Z2QYOprOo', title: 'Podcast-Beispiel 1' },
+  { id: 'Z9AGBMCttAU', title: 'Podcast-Beispiel 2' },
+  { id: 'jZDyqXw0qNk', title: 'Podcast-Beispiel 3' },
+];
 
 const inAllenEnthalten = [
   'Aufnahmezeit: 1 Stunde',
@@ -190,40 +196,41 @@ const faqs = [
   <!-- 2+3 wrapped for mobile reorder -->
   <div class="podcast-reorder-wrap">
 
-  <!-- 2. Studio-Fotogalerie -->
+  <!-- 2. Beispiele – YouTube Shorts -->
   <section class="podcast-gallery-section">
     <Container>
+      <div class="faq-text-block podcast-gallery-head">
+        <SectionHeading
+          tag="Beispiele"
+          title="So kann Ihr Podcast"
+          titleTail="aussehen"
+          excerpt="Kundenprojekt Consorsbank: Konzeption, Aufnahme und Schnitt aus einer Hand. Aufgenommen in unserem Frankfurter Studio, mit Video-Setup und professionellem Sound. Fahren Sie mit der Maus über die Clips und sehen Sie, wie Ihr Podcast aussehen kann."
+          class="faq-text"
+        />
+      </div>
       <div class="podcast-gallery">
-        <div class="podcast-gallery-item" data-anim="fade-up" data-anim-delay="0">
-          <Image
-            src={studioImage1}
-            alt="Podcast Studio Frankfurt"
-            class="podcast-gallery-img"
-            widths={[400, 800]}
-            sizes="(max-width: 991px) 100vw, 33vw"
-            loading="eager"
-          />
-        </div>
-        <div class="podcast-gallery-item" data-anim="fade-up" data-anim-delay="0.1">
-          <Image
-            src={studioImage3}
-            alt="Podcast Aufnahme Setup"
-            class="podcast-gallery-img"
-            widths={[400, 800]}
-            sizes="(max-width: 991px) 100vw, 33vw"
-            loading="eager"
-          />
-        </div>
-        <div class="podcast-gallery-item" data-anim="fade-up" data-anim-delay="0.2">
-          <Image
-            src={studioImage4}
-            alt="Podcast Video Produktion"
-            class="podcast-gallery-img"
-            widths={[400, 800]}
-            sizes="(max-width: 991px) 100vw, 33vw"
-            loading="eager"
-          />
-        </div>
+        {beispiele.map((b, i) => (
+          <a
+            class="podcast-short-card"
+            href={`https://www.youtube.com/shorts/${b.id}`}
+            target="_blank"
+            rel="noopener"
+            aria-label={`${b.title} auf YouTube ansehen`}
+            data-short={b.id}
+            data-anim="fade-up"
+            data-anim-delay={i * 0.1}
+          >
+            <img
+              class="podcast-short-thumb"
+              src={`https://i.ytimg.com/vi/${b.id}/maxresdefault.jpg`}
+              alt={b.title}
+              loading="lazy"
+            />
+            <span class="podcast-short-play" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </a>
+        ))}
       </div>
     </Container>
   </section>
@@ -278,6 +285,26 @@ const faqs = [
             </div>
           ))}
           <p class="podcast-postprod-note">Alle Preise netto zzgl. gesetzlicher MwSt. Hochformat-Clips in bester Bildqualität empfehlen wir in Kombination mit dem Professional-Paket (4K-Rohmaterial).</p>
+        </div>
+
+        <!-- Studio-Fotos -->
+        <div class="podcast-photos">
+          {[
+            { src: studioImage1, alt: 'Podcast Studio Frankfurt' },
+            { src: studioImage3, alt: 'Podcast Aufnahme Setup' },
+            { src: studioImage4, alt: 'Podcast Video Produktion' },
+          ].map((img, i) => (
+            <div class="podcast-photo-item" data-anim="fade-up" data-anim-delay={i * 0.1}>
+              <Image
+                src={img.src}
+                alt={img.alt}
+                class="podcast-photo-img"
+                widths={[400, 800]}
+                sizes="(max-width: 767px) 100vw, 33vw"
+                loading="lazy"
+              />
+            </div>
+          ))}
         </div>
       </Container>
     </div>
@@ -468,20 +495,87 @@ const faqs = [
 
 </BaseLayout>
 
+<script>
+  const cards = document.querySelectorAll<HTMLElement>('.podcast-short-card');
+  const canHover = window.matchMedia('(hover: hover)').matches;
+
+  const start = (card: HTMLElement) => {
+    if (card.querySelector('iframe')) return;
+    const id = card.dataset.short;
+    const iframe = document.createElement('iframe');
+    iframe.className = 'podcast-short-frame';
+    // Browsers only allow sound after a user gesture on the page, otherwise start muted
+    const mute = navigator.userActivation?.hasBeenActive ? 0 : 1;
+    iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=${mute}&controls=0&loop=1&playlist=${id}&playsinline=1&rel=0&modestbranding=1&enablejsapi=1&origin=${encodeURIComponent(location.origin)}`;
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+    iframe.title = card.getAttribute('aria-label') ?? 'Short';
+    iframe.tabIndex = -1;
+    // Fallback: explicitly ask the player to start once it has loaded
+    iframe.addEventListener('load', () => {
+      iframe.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
+    });
+    card.appendChild(iframe);
+    card.classList.add('is-playing');
+  };
+
+  const stop = (card: HTMLElement) => {
+    card.querySelector('iframe')?.remove();
+    card.classList.remove('is-playing');
+  };
+
+  cards.forEach((card) => {
+    if (canHover) {
+      card.addEventListener('mouseenter', () => start(card));
+      card.addEventListener('mouseleave', () => stop(card));
+      card.addEventListener('focus', () => start(card));
+      card.addEventListener('blur', () => stop(card));
+    } else {
+      // Touch: first tap plays inline, second tap opens on YouTube
+      card.addEventListener('click', (e) => {
+        if (!card.classList.contains('is-playing')) {
+          e.preventDefault();
+          cards.forEach((c) => c !== card && stop(c));
+          start(card);
+        }
+      });
+    }
+  });
+</script>
+
 <style>
   .podcast-gallery {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
-    padding: 2.5rem 0;
+    padding: 2rem 0 2.5rem;
+    max-width: 980px;
+    margin: 0 auto;
   }
 
-  .podcast-gallery-item {
+  .podcast-gallery-head {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .podcast-gallery-head :global(.section-text) {
+    padding-top: 3rem;
+    padding-bottom: 0;
+  }
+
+  .podcast-photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+
+  .podcast-photo-item {
     border-radius: var(--radius-xs);
     overflow: hidden;
   }
 
-  .podcast-gallery-img {
+  .podcast-photo-img {
     width: 100%;
     height: 18rem;
     object-fit: cover;
@@ -489,8 +583,71 @@ const faqs = [
   }
 
   @media (max-width: 767px) {
+    .podcast-photos {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .podcast-short-card {
+    position: relative;
+    display: block;
+    aspect-ratio: 9 / 16;
+    border-radius: var(--radius-xs);
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .podcast-short-card:hover,
+  .podcast-short-card:focus-visible {
+    transform: translateY(-0.375rem);
+    box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.22);
+  }
+
+  .podcast-short-thumb {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .podcast-short-play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: -1.75rem 0 0 -1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: #fff;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .podcast-short-card.is-playing .podcast-short-play {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  .podcast-short-card :global(.podcast-short-frame) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    pointer-events: none;
+  }
+
+  @media (max-width: 767px) {
     .podcast-gallery {
       grid-template-columns: 1fr;
+      max-width: 22rem;
     }
   }
 
