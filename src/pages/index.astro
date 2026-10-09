@@ -36,6 +36,9 @@ const inAllenEnthalten = [
   'Licht: 2 × 300 W und 2 × 100 W Bi-Color, 2 × Oktagon-Softbox 90 cm, 2 × Strip-Softbox 20 × 90 cm',
 ];
 
+// Postproduktion-Tabelle ausgeblendet (Test). Auf true setzen, um sie wieder anzuzeigen.
+const showPostproduktion = false;
+
 const postproduktion = [
   {
     category: 'Pro Folge',
@@ -61,29 +64,6 @@ const postproduktion = [
       { name: 'Intro und Outro', desc: 'Individuelles Intro und Outro mit Jingle, wiederverwendbar für alle Folgen', price: '390 €' },
       { name: 'Grafikpaket', desc: 'Namenseinblendungen, Logo, Titelkarten und Abspann im Design Ihres Podcasts', price: '349 €' },
     ],
-  },
-];
-
-const bestandteile = [
-  {
-    icon: 'lightbulb',
-    title: 'Konzeption & Format',
-    text: 'Wir entwickeln gemeinsam Ihr Podcast-Format: Thema, Struktur, Tonalität, Länge und Frequenz. Passend zu Ihrer Marke und Zielgruppe.',
-  },
-  {
-    icon: 'mic-2',
-    title: 'Aufnahme & Produktion',
-    text: 'Studio in Frankfurt, Joe Rogan Setup oder Remote. Bis zu 4 Personen gleichzeitig, Video-Option inklusive.',
-  },
-  {
-    icon: 'sliders-horizontal',
-    title: 'Schnitt & Mastering',
-    text: 'Rohschnitt, Soundprocessing, EQ, Kompression, Rauschunterdrückung und Mastering nach Spotify & Apple Standard.',
-  },
-  {
-    icon: 'megaphone',
-    title: 'Podcast Marketing',
-    text: 'Audiogramme für Social Media, SEO-Shownotes, Spotify & Apple Optimierung, Cover Design und Content Repurposing.',
   },
 ];
 
@@ -185,7 +165,7 @@ const faqs = [
   <!-- 1. Hero -->
   <Hero
     tag="Podcast Agentur aus Frankfurt"
-    title="Podcast-Produktion<br>von A bis Z"
+    title="Wir produzieren<br>Ihren Videopodcast"
     excerpt="Podcasts gehören zu den wachstumsstärksten Medienformaten im deutschsprachigen Raum und bieten Unternehmen, Marken und Persönlichkeiten eine einzigartige Möglichkeit, ihre Zielgruppe direkt anzusprechen."
     video="podcast-hero"
     actions={[
@@ -235,14 +215,6 @@ const faqs = [
     </Container>
   </section>
 
-  <!-- 3. Intro – Reichweite-Statement (word-reveal) -->
-  <div class="podcast-intro-section">
-  <Intro
-    tag="Podcast Produktion Frankfurt"
-    statement="Als Full-Service-Agentur aus Frankfurt produzieren wir Ihren nächsten Podcast: Sie bringen das Thema, wir kümmern uns um den Rest."
-  />
-  </div>
-
   </div>{/* end podcast-reorder-wrap */}
 
   <!-- 4. Pakete – PricingTable (theme component, inline mode) -->
@@ -252,7 +224,7 @@ const faqs = [
         <PricingTable
           {plans}
           title="Podcast-Produktion im Überblick"
-          excerpt="Drei Studiopakete, ergänzt um flexibel buchbare Postproduktion"
+          excerpt={showPostproduktion ? 'Drei Studiopakete, ergänzt um flexibel buchbare Postproduktion' : 'Drei Studiopakete für Ihren Podcast'}
           inline
         />
 
@@ -269,6 +241,7 @@ const faqs = [
   <section>
     <div class="section-gap" style="padding-top: 0;">
       <Container>
+        {showPostproduktion && (
         <div class="podcast-postprod-wrap" data-anim="fade-up">
           <p class="podcast-postprod-header">Postproduktion</p>
           <p class="podcast-postprod-sub">Zu jedem Paket buchbar. So zahlen Sie nur für den Schnitt, den Ihre Folge wirklich braucht.</p>
@@ -286,6 +259,7 @@ const faqs = [
           ))}
           <p class="podcast-postprod-note">Alle Preise netto zzgl. gesetzlicher MwSt. Hochformat-Clips in bester Bildqualität empfehlen wir in Kombination mit dem Professional-Paket (4K-Rohmaterial).</p>
         </div>
+        )}
 
         <!-- Studio-Fotos -->
         <div class="podcast-photos">
@@ -305,34 +279,6 @@ const faqs = [
               />
             </div>
           ))}
-        </div>
-      </Container>
-    </div>
-  </section>
-
-  <!-- 4. Podcast-Bestandteile – strategy cards (dark) -->
-  <section class="strategy-section" id="leistungen">
-    <div class="section-gap">
-      <Container>
-        <div class="strategy-block">
-          <div class="strategy-text-block">
-            <SectionHeading
-              tag="Ein Podcast besteht aus verschiedenen Bereichen"
-              title="Alles, was Ihr Podcast"
-              titleTail="wirklich braucht"
-              invert
-              class="strategy-text"
-            />
-          </div>
-          <div class="strategy-card-block">
-            {bestandteile.map((item, i) => (
-              <article class="strategy-card" data-anim="fade-up" data-anim-delay={i * 0.12}>
-                <Icon name={item.icon} class="strategy-icon" />
-                <h3 class="strategy-name">{item.title}</h3>
-                <p class="strategy-except">{item.text}</p>
-              </article>
-            ))}
-          </div>
         </div>
       </Container>
     </div>
