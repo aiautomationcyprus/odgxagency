@@ -13,7 +13,7 @@ function init(): void {
   initForms();
   initAnchors();
   initMotion();
-  initSmoothScroll();
+  // initSmoothScroll(); // Test: Momentum-Scrolling deaktiviert
   initBackgroundVideo();
 }
 
