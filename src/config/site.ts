@@ -4,9 +4,9 @@
  */
 export const SITE = {
   url: 'https://digital-x.agency',
-  name: 'ODGX',
-  title: 'ODGX — Digital Marketing Agency Frankfurt',
-  titleTemplate: '%s — ODGX',
+  name: 'Digital X',
+  title: 'Digital X — Digital Marketing Agency Frankfurt',
+  titleTemplate: '%s — Digital X',
   description:
     'Digital agency from Frankfurt specialising in SEO, Google Ads, web development and podcast production.',
   ogImage: '/og-image.jpg',
